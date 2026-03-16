@@ -1,10 +1,15 @@
+aid: oracle-platforms
 name: Oracle Platforms
 description: A collection of APIs and services provided by Oracle's cloud and enterprise platforms
-image: https://www.oracle.com/a/ocom/img/social-og-oracle-default.jpg
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 created: '2024-01-15'
-modified: '2024-01-15'
-specificationVersion: '0.18'
-url: https://apis.json/oracle-platforms
+modified: '2026-03-16'
+specificationVersion: '0.19'
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/oracle-platforms/refs/heads/main/apis.yml
 apis:
 - name: Oracle Cloud Infrastructure (OCI) REST API
   description: Comprehensive REST API for managing Oracle Cloud Infrastructure resources including compute, storage, networking, and databases
@@ -132,10 +137,8 @@ include:
 - name: Oracle Developer Portal
   url: https://developer.oracle.com/
 maintainers:
-- FN: Oracle Corporation
-  email: cloud-feedback_ww@oracle.com
-  X-twitter: Oracle
-  X-github: oracle
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 tags:
 - Cloud Computing
 - Database
