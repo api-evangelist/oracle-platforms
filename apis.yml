@@ -21,9 +21,9 @@ apis:
     baseURL: https://iaas.{region}.oraclecloud.com
     tags:
       - Cloud
-      - Infrastructure
-      - IaaS
       - Compute
+      - IaaS
+      - Infrastructure
       - Storage
     properties:
       - type: X-documentation
@@ -31,11 +31,9 @@ apis:
       - type: X-openapi
         url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
       - type: X-authentication
-        url: 
-          https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+        url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
       - type: X-rate-limits
-        url: 
-          https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apithrottling.htm
+        url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apithrottling.htm
       - type: X-sdk
         url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
   - name: Oracle Autonomous Database API
@@ -45,8 +43,8 @@ apis:
     humanURL: https://docs.oracle.com/en/cloud/paas/autonomous-database/
     baseURL: https://database.{region}.oraclecloud.com
     tags:
-      - Database
       - Autonomous
+      - Database
       - DBaaS
       - SQL
     properties:
@@ -63,16 +61,15 @@ apis:
     humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/
     baseURL: https://integration.ocp.oraclecloud.com
     tags:
-      - Integration
-      - iPaaS
       - API Management
       - Automation
+      - Integration
+      - iPaaS
     properties:
       - type: X-documentation
         url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
       - type: X-openapi
-        url: 
-          https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/api-integration-cloud.html
+        url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/api-integration-cloud.html
   - name: Oracle Content Management API
     description: >-
       RESTful API for Oracle Content Management providing digital asset management
@@ -80,14 +77,13 @@ apis:
     humanURL: https://docs.oracle.com/en/cloud/paas/content-cloud/
     baseURL: https://www.oraclecloud.com/content/api
     tags:
-      - Content Management
       - CMS
-      - Digital Assets
       - Collaboration
+      - Content Management
+      - Digital Assets
     properties:
       - type: X-documentation
-        url: 
-          https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+        url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
       - type: X-sdk
         url: https://github.com/oracle/content-management-sdk
   - name: Oracle Fusion Cloud ERP API
@@ -97,16 +93,15 @@ apis:
     humanURL: https://docs.oracle.com/en/cloud/saas/financials/
     baseURL: https://servername.fa.us2.oraclecloud.com
     tags:
+      - Cloud Applications
       - ERP
       - Finance
       - Procurement
-      - Cloud Applications
     properties:
       - type: X-documentation
         url: https://docs.oracle.com/en/cloud/saas/financials/farsw/
       - type: X-wadl
-        url: 
-          https://docs.oracle.com/en/cloud/saas/financials/farsw/rest-endpoints.html
+        url: https://docs.oracle.com/en/cloud/saas/financials/farsw/rest-endpoints.html
   - name: Oracle Analytics Cloud API
     description: >-
       RESTful API for Oracle Analytics Cloud enabling data visualization, analytics,
@@ -122,8 +117,7 @@ apis:
       - type: X-documentation
         url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
       - type: X-openapi
-        url: 
-          https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/api-rest.html
+        url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/api-rest.html
   - name: Oracle Cloud Infrastructure Data Science API
     description: >-
       API for managing machine learning models, notebook sessions, and data science
@@ -131,9 +125,9 @@ apis:
     humanURL: https://docs.oracle.com/en-us/iaas/data-science/
     baseURL: https://datascience.{region}.oraclecloud.com
     tags:
-      - Machine Learning
-      - Data Science
       - AI
+      - Data Science
+      - Machine Learning
       - MLOps
     properties:
       - type: X-documentation
@@ -147,9 +141,9 @@ apis:
     humanURL: https://apex.oracle.com/api
     baseURL: https://{instance}.adb.{region}.oraclecloudapps.com
     tags:
-      - Low-Code
-      - Application Development
       - APEX
+      - Application Development
+      - Low-Code
       - REST Services
     properties:
       - type: X-documentation
@@ -163,12 +157,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 tags:
+  - Analytics
   - Cloud Computing
   - Database
   - Enterprise Software
-  - Platform as a Service
   - Infrastructure as a Service
-  - SaaS
   - Integration
-  - Analytics
   - Machine Learning
+  - Platform as a Service
+  - SaaS
