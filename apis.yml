@@ -32,7 +32,7 @@ apis:
         url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
       - type: Authentication
         url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
-      - type: Rate Limits
+      - type: RateLimits
         url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apithrottling.htm
       - type: SDK
         url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
