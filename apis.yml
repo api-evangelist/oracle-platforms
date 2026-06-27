@@ -34,7 +34,7 @@ apis:
         url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
       - type: RateLimits
         url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apithrottling.htm
-      - type: SDK
+      - type: SDKs
         url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
   - name: Oracle Autonomous Database API
     description: >-
@@ -84,7 +84,7 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
-      - type: SDK
+      - type: SDKs
         url: https://github.com/oracle/content-management-sdk
   - name: Oracle Fusion Cloud ERP API
     description: >-
