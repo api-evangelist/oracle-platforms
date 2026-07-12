@@ -166,3 +166,6 @@ tags:
   - Machine Learning
   - Platform as a Service
   - SaaS
+common:
+- type: DomainSecurity
+  url: security/oracle-platforms-domain-security.yml
