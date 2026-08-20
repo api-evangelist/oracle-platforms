@@ -34,6 +34,12 @@ apis:
     tags:
       - Cloud
       - Compute
+      - Infrastructure-as-a-Service
+      - Infrastructure
+      - Storage
+    tags_raw:
+      - Cloud
+      - Compute
       - IaaS
       - Infrastructure
       - Storage
@@ -55,6 +61,11 @@ apis:
     humanURL: https://docs.oracle.com/en/cloud/paas/autonomous-database/
     baseURL: https://database.{region}.oraclecloud.com
     tags:
+      - Autonomous
+      - Database
+      - Database-as-a-Service
+      - SQL
+    tags_raw:
       - Autonomous
       - Database
       - DBaaS
@@ -137,6 +148,11 @@ apis:
     humanURL: https://docs.oracle.com/en-us/iaas/data-science/
     baseURL: https://datascience.{region}.oraclecloud.com
     tags:
+      - Artificial Intelligence
+      - Data Science
+      - Machine-Learning
+      - MLOps
+    tags_raw:
       - AI
       - Data Science
       - Machine Learning
@@ -169,6 +185,16 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 tags:
+  - Analytics
+  - Cloud Computing
+  - Database
+  - Enterprise Software
+  - Infrastructure-as-a-Service
+  - Integration
+  - Machine-Learning
+  - Platform-as-a-Service
+  - Software-as-a-Service
+tags_raw:
   - Analytics
   - Cloud Computing
   - Database
