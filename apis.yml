@@ -30,108 +30,10 @@ modified: '2026-08-27'
 specificationVersion: '0.23'
 url: https://raw.githubusercontent.com/api-evangelist/oracle-platforms/refs/heads/main/apis.yml
 apis:
-- name: Oracle Cloud Infrastructure (OCI) REST API
-  description: Comprehensive REST API for managing Oracle Cloud Infrastructure resources including compute,
-    storage, networking, and databases.
-  image: https://www.oracle.com/cloud/img/social-og-oracle-cloud.jpg
-  humanURL: https://docs.oracle.com/en-us/iaas/api/
-  baseURL: https://iaas.{region}.oraclecloud.com
-  tags:
-  - Cloud
-  - Compute
-  - Infrastructure-as-a-Service
-  - Infrastructure
-  - Storage
-  tags_raw:
-  - Cloud
-  - Compute
-  - IaaS
-  - Infrastructure
-  - Storage
-  properties:
-  - type: Documentation
-    url: https://docs.oracle.com/en-us/iaas/api/
-  - type: APIReference
-    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
-  - type: Authentication
-    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
-  - type: SDKs
-    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
-  - type: RateLimits
-    url: rate-limits/oracle-platforms-rate-limits.yml
-  - type: APIReference
-    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
-  - type: OpenAPI
-    url: openapi/oracle-platforms-core-openapi.yml
-  - type: Overlay
-    url: overlays/oracle-platforms-core-overlay.yaml
-- name: Oracle Autonomous Database API
-  description: API for managing Oracle Autonomous Database instances with self-driving, self-securing,
-    and self-repairing capabilities.
-  humanURL: https://docs.oracle.com/en/cloud/paas/autonomous-database/
-  baseURL: https://database.{region}.oraclecloud.com
-  tags:
-  - Autonomous
-  - Database
-  - Database-as-a-Service
-  - SQL
-  tags_raw:
-  - Autonomous
-  - Database
-  - DBaaS
-  - SQL
-  properties:
-  - type: Documentation
-    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
-  - type: APIReference
-    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
-  - type: Pricing
-    url: https://www.oracle.com/cloud/price-list.html
-  - type: OpenAPI
-    url: openapi/oracle-platforms-database-openapi.yml
-  - type: Overlay
-    url: overlays/oracle-platforms-database-overlay.yaml
-- name: Oracle Integration Cloud API
-  description: REST API for Oracle Integration Cloud enabling application integration, process automation,
-    and API management.
-  humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/
-  baseURL: https://integration.{region}.ocp.oraclecloud.com
-  tags:
-  - API Management
-  - Automation
-  - Integration
-  - iPaaS
-  properties:
-  - type: Documentation
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
-  - type: APIReference
-    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
-  - type: OpenAPI
-    url: openapi/oracle-platforms-integration-openapi.yml
-  - type: Overlay
-    url: overlays/oracle-platforms-integration-overlay.yaml
-- name: Oracle Content Management API
-  description: RESTful API for Oracle Content Management providing digital asset management and content
-    collaboration.
-  humanURL: https://docs.oracle.com/en/cloud/paas/content-cloud/
-  baseURL: https://cp.oce.{region}.ocp.oraclecloud.com
-  tags:
-  - CMS
-  - Collaboration
-  - Content Management
-  - Digital Assets
-  properties:
-  - type: Documentation
-    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
-  - type: SDKs
-    url: https://github.com/oracle/content-management-sdk
-  - type: OpenAPI
-    url: openapi/oracle-platforms-content-management-openapi.yml
-  - type: Overlay
-    url: overlays/oracle-platforms-content-management-overlay.yaml
 - name: Oracle Fusion Cloud ERP API
-  description: REST API for Oracle Fusion Cloud ERP providing access to financial management, procurement,
-    and project management capabilities.
+  description: >-
+    REST API for Oracle Fusion Cloud ERP providing access to financial management, procurement, and project
+    management capabilities.
   humanURL: https://docs.oracle.com/en/cloud/saas/financials/
   baseURL: https://{servername}.fa.{datacenter}.oraclecloud.com
   tags:
@@ -144,50 +46,9 @@ apis:
     url: https://docs.oracle.com/en/cloud/saas/financials/
   - type: APIReference
     url: https://docs.oracle.com/en/cloud/saas/financials/26c/farfa/index.html
-- name: Oracle Analytics Cloud API
-  description: RESTful API for Oracle Analytics Cloud enabling data visualization, analytics, and business
-    intelligence operations.
-  humanURL: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
-  baseURL: https://analytics.{region}.ocp.oraclecloud.com
-  tags:
-  - Analytics
-  - Business Intelligence
-  - Data Visualization
-  - Reporting
-  properties:
-  - type: Documentation
-    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
-  - type: APIReference
-    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
-  - type: OpenAPI
-    url: openapi/oracle-platforms-analytics-openapi.yml
-  - type: Overlay
-    url: overlays/oracle-platforms-analytics-overlay.yaml
-- name: Oracle Cloud Infrastructure Data Science API
-  description: API for managing machine learning models, notebook sessions, and data science projects.
-  humanURL: https://docs.oracle.com/en-us/iaas/data-science/
-  baseURL: https://datascience.{region}.oci.oraclecloud.com
-  tags:
-  - Artificial Intelligence
-  - Data Science
-  - Machine-Learning
-  - MLOps
-  tags_raw:
-  - AI
-  - Data Science
-  - Machine Learning
-  - MLOps
-  properties:
-  - type: Documentation
-    url: https://docs.oracle.com/en-us/iaas/data-science/
-  - type: APIReference
-    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
-  - type: OpenAPI
-    url: openapi/oracle-platforms-data-science-openapi.yml
-  - type: Overlay
-    url: overlays/oracle-platforms-data-science-overlay.yaml
 - name: Oracle APEX REST APIs
-  description: RESTful services for Oracle Application Express enabling low-code application development.
+  description: >-
+    RESTful services for Oracle Application Express enabling low-code application development.
   humanURL: https://apex.oracle.com/api
   baseURL: https://{instance}.adb.{region}.oraclecloudapps.com
   tags:
@@ -200,6 +61,403 @@ apis:
     url: https://apex.oracle.com/en/learn/tutorials/
   - type: Documentation
     url: https://docs.oracle.com/en/database/oracle/apex/
+- aid: oracle-platforms:oracle-platforms-analytics-api
+  name: Oracle Platforms Analytics API
+  description: The analytics API from Oracle Platforms — 19 operation(s) for analytics.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-blockstorage-api
+  name: Oracle Platforms Blockstorage API
+  description: The blockstorage API from Oracle Platforms — 33 operation(s) for blockstorage.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - blockstorage
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-blockstorage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-compute-api
+  name: Oracle Platforms Compute API
+  description: The compute API from Oracle Platforms — 82 operation(s) for compute.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - compute
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-compute-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-computemanagement-api
+  name: Oracle Platforms Compute Management API
+  description: The computeManagement API from Oracle Platforms — 23 operation(s) for computemanagement.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - computeManagement
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-computemanagement-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-database-api
+  name: Oracle Platforms Database API
+  description: The database API from Oracle Platforms — 319 operation(s) for database.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - database
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-database-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-datascience-api
+  name: Oracle Platforms Data Science API
+  description: The dataScience API from Oracle Platforms — 99 operation(s) for datascience.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - dataScience
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-datascience-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-integrationinstance-api
+  name: Oracle Platforms Integration Instance API
+  description: >-
+    The integrationInstance API from Oracle Platforms — 19 operation(s) for integrationinstance.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - integrationInstance
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-integrationinstance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-oceinstance-api
+  name: Oracle Platforms Oce Instance API
+  description: The oceInstance API from Oracle Platforms — 7 operation(s) for oceinstance.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - oceInstance
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-oceinstance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+- aid: oracle-platforms:oracle-platforms-virtualnetwork-api
+  name: Oracle Platforms Virtual Network API
+  description: The virtualNetwork API from Oracle Platforms — 176 operation(s) for virtualnetwork.
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - virtualNetwork
+  properties:
+  - type: OpenAPI
+    url: openapi/oracle-platforms-virtualnetwork-api-openapi.yml
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
 include:
 - name: Oracle Developer Portal
   url: https://developer.oracle.com/
@@ -228,6 +486,18 @@ tags_raw:
 - Platform as a Service
 - SaaS
 common:
+- type: Overlay
+  url: overlays/oracle-platforms-core-overlay.yaml
+- type: Overlay
+  url: overlays/oracle-platforms-database-overlay.yaml
+- type: Overlay
+  url: overlays/oracle-platforms-integration-overlay.yaml
+- type: Overlay
+  url: overlays/oracle-platforms-content-management-overlay.yaml
+- type: Overlay
+  url: overlays/oracle-platforms-analytics-overlay.yaml
+- type: Overlay
+  url: overlays/oracle-platforms-data-science-overlay.yaml
 - type: DomainSecurity
   url: security/oracle-platforms-domain-security.yml
 - type: Packages
