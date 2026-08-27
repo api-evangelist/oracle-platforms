@@ -1,0 +1,99 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm and
+  https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm and
+  https://docs.oracle.com/en-us/iaas/Content/API/Concepts/usingapi.htm
+provider: Oracle Platforms
+providerId: oracle-platforms
+derived_attempt:
+  tool: 0-working/derive-authentication.py
+  result: 0 auth profiles
+  reason: >-
+    None of the six harvested OCI specs declares a securityDefinitions block. The contract
+    is silent on authentication, so nothing could be derived and this artifact is sourced
+    from Oracle's documentation instead. That silence is itself the finding: a machine
+    reading only the OpenAPI cannot learn how to authenticate against a 1,154-operation
+    control plane.
+primary_scheme: request-signing
+schemes:
+  - id: oci-request-signature
+    type: http-signature
+    primary: true
+    description: >-
+      The OCI control-plane auth model. The caller holds an RSA private key (2048-bit
+      minimum, PEM); the matching public key is uploaded to the IAM user and identified by
+      its fingerprint. Every request carries an Authorization header built per the HTTP
+      Signatures draft, signing a defined set of headers — for GET/DELETE (request-target),
+      host, date or x-date; for POST/PUT additionally content-length, content-type and
+      x-content-sha256 over the body.
+    credentials:
+      - user OCID
+      - tenancy OCID
+      - API signing key fingerprint
+      - RSA private key (PEM)
+      - region
+    config_file: ~/.oci/config
+    docs: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+    note: >-
+      Because the body is hashed into the signature, a signed OCI request cannot be
+      replayed with modified content, and a leaked signature is not a leaked credential the
+      way a bearer token is. The cost is that no generic HTTP client can call this API
+      without a signing implementation — which is why the SDKs in packages/ are effectively
+      mandatory rather than a convenience.
+  - id: instance-principal
+    type: workload-identity
+    description: >-
+      A compute instance in OCI authenticates as itself, with no key material on disk. The
+      instance is placed in a dynamic group and IAM policy grants that group permissions.
+    docs: https://docs.oracle.com/en-us/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm
+  - id: resource-principal
+    type: workload-identity
+    description: >-
+      The equivalent for OCI resources such as Functions and Data Science notebook sessions,
+      which obtain a short-lived token from the resource-principal token service.
+  - id: oke-workload-identity
+    type: workload-identity
+    description: Kubernetes workload identity for pods running on OKE.
+  - id: security-token
+    type: session-token
+    description: >-
+      Short-lived session token obtained by browser-based login (`oci session authenticate`
+      in the CLI). Documented as not sufficient for every SDK/MCP path.
+    docs: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/clitoken.htm
+  - id: oauth2
+    type: oauth2
+    description: >-
+      OAuth 2.0 / OpenID Connect, served by an OCI IAM Identity Domain rather than by the
+      control-plane API. This is the scheme the managed Database Tools MCP Server uses, and
+      the one that fronts the identity-domain APIs whose rate limits are published in
+      rate-limits/.
+    discovery: 'https://idcs-<tenancy-id>.identity.oraclecloud.com/.well-known/openid-configuration'
+    discovery_note: >-
+      Tenancy-scoped. There is no anonymous, tenancy-independent OIDC discovery document to
+      fetch, which is why well-known/ records zero hits despite Oracle genuinely serving
+      OIDC discovery.
+    docs: https://docs.oracle.com/en-us/iaas/Content/Identity/api-getstarted/usingopenidconnect.htm
+  - id: personal-access-token
+    type: bearer
+    description: >-
+      Domain + username + PAT, accepted by the Database Tools MCP Server for MCP clients
+      that speak HTTP without OAuth.
+    docs: https://docs.oracle.com/en-us/iaas/Content/Identity/usersettings/generate-personal-access-tokens.htm
+authorization:
+  model: iam-policy
+  description: >-
+    Authorization is expressed in IAM policy statements scoped to compartments, in the form
+    "allow <subject> to <verb> <resource-type> in <compartment>". Verbs are the coarse
+    inspect/read/use/manage ladder. There is no OAuth scope surface on the control plane —
+    which is why scopes/ is intentionally absent from this repo rather than empty.
+  docs: https://docs.oracle.com/en-us/iaas/Content/Identity/Concepts/policies.htm
+error_on_failure:
+  status: 401
+  code: NotAuthenticated
+  also:
+    - status: 403
+      code: NotAuthorized
+    - status: 404
+      code: NotAuthorizedOrNotFound
+      note: Authorization failures are masked as 404 so existence is not leaked.

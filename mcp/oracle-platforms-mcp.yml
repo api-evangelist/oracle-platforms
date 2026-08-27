@@ -1,0 +1,128 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://github.com/oracle/mcp (Oracle's own MCP server repository, UPL-1.0, last pushed
+  2026-08-24) and https://docs.oracle.com/en-us/iaas/releasenotes/database-tools/mcp.htm
+  (OCI Database Tools MCP Server release note).
+provider: Oracle Platforms
+providerId: oracle-platforms
+status: published
+deployment:
+  mode: both
+  endpoint: null
+  endpoint_note: >-
+    Oracle DOES ship a remote MCP surface — the OCI Database Tools MCP Server, a managed
+    multi-tenant OCI service released 2026-05-12 — but it publishes NO static endpoint URL.
+    Oracle's own connection doc says the Server URL is issued per provisioned MCP server
+    and read from the OCI Console ("select the MCP server, then the Clients tab, then View
+    Registration Details"). There is therefore no address an agent can POST to without a
+    tenancy first provisioning one, and no URL is recorded here rather than guessing a
+    pattern. This is the honest shape of Oracle's remote MCP: real, managed, and
+    tenancy-issued.
+  install: uvx oracle.oci-cloud-mcp-server@latest
+  package: https://pypi.org/project/oracle.oci-cloud-mcp-server/
+  auth: oauth
+  verified: searched
+servers:
+  - name: OCI Database Tools MCP Server
+    kind: remote
+    managed: true
+    released: '2026-05-12'
+    docs: https://docs.oracle.com/en-us/iaas/database-tools/doc/working-database-tools-mcp-server.html
+    release_note: https://docs.oracle.com/en-us/iaas/releasenotes/database-tools/mcp.htm
+    description: >-
+      Managed, multi-tenant OCI service that lets MCP clients reach Oracle AI Database over
+      MCP. Supports built-in and custom SQL and PL/SQL tools.
+    auth:
+      - oauth2
+      - personal-access-token
+    auth_note: >-
+      OAuth 2.0 integrated with OCI IAM Identity Domains (for clients that speak OAuth, or
+      stdio clients fronted by an mcp-remote proxy), or a Personal Access Token (domain +
+      username + PAT) for clients that speak MCP over HTTP without OAuth.
+    endpoint: null
+  - name: Oracle Autonomous AI Database MCP Server
+    kind: remote
+    managed: true
+    docs: https://www.oracle.com/autonomous-database/mcp-server/
+    description: >-
+      Built-in, multi-tenant MCP endpoint of Autonomous AI Database Serverless (26ai and
+      19c). Exposes tools defined with the Select AI Agent framework to MCP clients.
+      ORDS customers get the equivalent built-in ORDS MCP endpoint on their own
+      ORDS Standalone deployment.
+    endpoint: null
+    endpoint_note: >-
+      Endpoint is the customer's own Autonomous Database / ORDS host; no shared address.
+      The provider page (www.oracle.com/autonomous-database/mcp-server/) returned HTTP 403
+      to this crawler (Oracle edge bot challenge), so this entry is sourced from Oracle's
+      docs.oracle.com pages and release notes rather than the marketing page itself.
+  - name: oci-cloud-mcp-server
+    kind: local-stdio
+    recommended: true
+    install: uvx oracle.oci-cloud-mcp-server@latest
+    package: https://pypi.org/project/oracle.oci-cloud-mcp-server/
+    version: 2.2.3
+    published: '2026-08-25'
+    repo: https://github.com/oracle/mcp/tree/main/src/oci-cloud-mcp-server
+    description: >-
+      Oracle's recommended general-purpose OCI entry point. Calls the official OCI Python
+      SDK directly (no OCI CLI subprocess). Reflective rather than per-service: five tools
+      that discover, describe and invoke ANY OCI SDK client method, which is how five tools
+      cover a 1,154-operation control plane.
+    auth: >-
+      OCI SDK principals — api-key config profile, instance_principal, resource_principal,
+      their delegation variants, oke_workload_identity, or identity_domain_upst.
+    tools:
+      - name: list_oci_clients
+        description: >-
+          List OCI SDK clients discoverable in the current environment; best for capability
+          discovery/debugging.
+      - name: find_oci_api
+        description: >-
+          Thin fallback keyword/resource-action search across OCI SDK client methods,
+          returning compact matches with client_fqn + operation.
+      - name: describe_oci_operation
+        description: >-
+          Describe a specific OCI SDK method, including required params, optional params,
+          pagination behavior, aliases, and request model hints.
+      - name: invoke_oci_api
+        description: >-
+          Invoke an OCI Python SDK client method via client_fqn + operation. Example:
+          client_fqn="oci.core.ComputeClient", operation="list_instances",
+          params={"compartment_id": "ocid1.compartment.oc1..."}
+      - name: list_client_operations
+        description: >-
+          List public callable operations for a given OCI client class (by fully-qualified
+          name), with optional filtering and compact mode.
+  - name: oci-api-mcp-server
+    kind: local-stdio
+    install: uvx oracle.oci-api-mcp-server@latest
+    package: https://pypi.org/project/oracle.oci-api-mcp-server/
+    version: 2.1.5
+    published: '2026-08-25'
+    repo: https://github.com/oracle/mcp/tree/main/src/oci-api-mcp-server
+    description: >-
+      OCI CLI-backed alternative to oci-cloud-mcp-server. Exposes tools for discovering and
+      running OCI CLI commands.
+repository:
+  url: https://github.com/oracle/mcp
+  license: UPL-1.0
+  stars: 428
+  last_pushed: '2026-08-24'
+  server_count: 32
+  note: >-
+    Oracle publishes 32 MCP server implementations in one polyglot repo, including
+    purpose-built servers for the API surfaces profiled here — oci-database-mcp-server,
+    oci-object-storage-mcp-server, oci-compute-mcp-server, oci-networking-mcp-server,
+    oci-identity-mcp-server, oci-monitoring-mcp-server, oci-logging-mcp-server,
+    oci-usage-mcp-server, oci-pricing-mcp-server, oracle-goldengate-mcp-server and
+    dbtools-mcp-server among them. Oracle's own README states the repository is
+    "not intended for production use; servers are provided as reference"; the managed
+    Database Tools and Autonomous AI Database MCP servers are the production path.
+live_introspection:
+  attempted: false
+  reason: >-
+    No anonymous MCP endpoint URL exists to POST tools/list against. The remote servers are
+    tenancy-provisioned and the reference servers are stdio-only, so the tool set above was
+    read from Oracle's own published README tables rather than from a live tools/list
+    response. Input schemas would require an authenticated, provisioned server.

@@ -1,0 +1,43 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://www.oracle.com/trust/ (HTTP 200) and
+  https://www.oracle.com/corporate/cloud-compliance/ (HTTP 200), both fetched 2026-08-27
+  with a browser User-Agent — Oracle's edge returns 403 to a default crawler UA, which is
+  an ordinary bot policy and not a dead page.
+provider: Oracle Platforms
+providerId: oracle-platforms
+trust_center:
+  published: true
+  name: Security, Privacy, and Compliance at Oracle
+  url: https://www.oracle.com/trust/
+  compliance_url: https://www.oracle.com/corporate/cloud-compliance/
+certifications:
+  - name: SOC 1
+  - name: SOC 2
+  - name: SOC 3
+  - name: ISO/IEC 27001
+  - name: ISO/IEC 27017
+  - name: ISO/IEC 27018
+  - name: ISO/IEC 27701
+  - name: PCI DSS
+  - name: HIPAA
+  - name: HITRUST
+  - name: FedRAMP
+  - name: DoD Impact Level authorizations
+  - name: IRAP
+    region: Australia
+  - name: C5
+    region: Germany
+  - name: CSA STAR
+frameworks:
+  - name: GDPR
+certification_count: 15
+evidence_note: >-
+  Each name above was matched in the rendered text of Oracle's own cloud-compliance page on
+  2026-08-27. Scope, level and attestation dates vary by service and region and were not
+  individually verified; Oracle's compliance page is the authority for which OCI service
+  carries which attestation in which realm.
+related:
+  vulnerability_disclosure: security/oracle-platforms-vulnerability-disclosure.yml
+  domain_security: security/oracle-platforms-domain-security.yml

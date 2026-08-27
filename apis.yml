@@ -1,7 +1,14 @@
 aid: oracle-platforms
 name: Oracle Platforms
-description: >-
-  A collection of APIs and services provided by Oracle's cloud and enterprise platforms.
+description: 'Oracle Platforms is the API Evangelist index of Oracle''s cloud and enterprise platform
+  APIs: the Oracle Cloud Infrastructure (OCI) control plane for compute, storage, networking and databases,
+  plus the PaaS and SaaS services layered on it — Autonomous Database, Integration Cloud, Content Management,
+  Fusion Cloud ERP, Analytics Cloud, Data Science and APEX. Oracle publishes a machine-readable index
+  of every OCI service specification at docs.oracle.com/en-us/iaas/api/specs/index.json, and six of those
+  contracts — 1,154 operations across Core Services, Database, Data Science, Analytics, Integration and
+  Content Management — are harvested verbatim into this repo. Authentication is RSA request signing rather
+  than a bearer token, idempotency is the opc-retry-token header, and Oracle ships both managed remote
+  MCP servers and 32 open-source reference MCP servers.'
 type: Index
 accessModel:
   pricing: freemium
@@ -19,191 +26,282 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/oracle-platforms.png
 created: '2024-01-15'
-modified: '2026-03-16'
+modified: '2026-08-27'
 specificationVersion: '0.23'
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/oracle-platforms/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/oracle-platforms/refs/heads/main/apis.yml
 apis:
-  - name: Oracle Cloud Infrastructure (OCI) REST API
-    description: >-
-      Comprehensive REST API for managing Oracle Cloud Infrastructure resources including
-      compute, storage, networking, and databases.
-    image: https://www.oracle.com/cloud/img/social-og-oracle-cloud.jpg
-    humanURL: https://docs.oracle.com/en-us/iaas/api/
-    baseURL: https://iaas.{region}.oraclecloud.com
-    tags:
-      - Cloud
-      - Compute
-      - Infrastructure-as-a-Service
-      - Infrastructure
-      - Storage
-    tags_raw:
-      - Cloud
-      - Compute
-      - IaaS
-      - Infrastructure
-      - Storage
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en-us/iaas/api/
-      - type: OpenAPI
-        url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
-      - type: Authentication
-        url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
-      - type: RateLimits
-        url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apithrottling.htm
-      - type: SDKs
-        url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
-  - name: Oracle Autonomous Database API
-    description: >-
-      API for managing Oracle Autonomous Database instances with self-driving, self-securing,
-      and self-repairing capabilities.
-    humanURL: https://docs.oracle.com/en/cloud/paas/autonomous-database/
-    baseURL: https://database.{region}.oraclecloud.com
-    tags:
-      - Autonomous
-      - Database
-      - Database-as-a-Service
-      - SQL
-    tags_raw:
-      - Autonomous
-      - Database
-      - DBaaS
-      - SQL
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
-      - type: OpenAPI
-        url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
-      - type: Pricing
-        url: https://www.oracle.com/cloud/price-list.html
-  - name: Oracle Integration Cloud API
-    description: >-
-      REST API for Oracle Integration Cloud enabling application integration, process
-      automation, and API management.
-    humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/
-    baseURL: https://integration.ocp.oraclecloud.com
-    tags:
-      - API Management
-      - Automation
-      - Integration
-      - iPaaS
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
-      - type: OpenAPI
-        url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/api-integration-cloud.html
-  - name: Oracle Content Management API
-    description: >-
-      RESTful API for Oracle Content Management providing digital asset management
-      and content collaboration.
-    humanURL: https://docs.oracle.com/en/cloud/paas/content-cloud/
-    baseURL: https://www.oraclecloud.com/content/api
-    tags:
-      - CMS
-      - Collaboration
-      - Content Management
-      - Digital Assets
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
-      - type: SDKs
-        url: https://github.com/oracle/content-management-sdk
-  - name: Oracle Fusion Cloud ERP API
-    description: >-
-      REST API for Oracle Fusion Cloud ERP providing access to financial management,
-      procurement, and project management capabilities.
-    humanURL: https://docs.oracle.com/en/cloud/saas/financials/
-    baseURL: https://servername.fa.us2.oraclecloud.com
-    tags:
-      - Cloud Applications
-      - ERP
-      - Finance
-      - Procurement
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/cloud/saas/financials/farsw/
-      - type: WADL
-        url: https://docs.oracle.com/en/cloud/saas/financials/farsw/rest-endpoints.html
-  - name: Oracle Analytics Cloud API
-    description: >-
-      RESTful API for Oracle Analytics Cloud enabling data visualization, analytics,
-      and business intelligence operations.
-    humanURL: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
-    baseURL: https://{instanceName}.analytics.ocp.oraclecloud.com
-    tags:
-      - Analytics
-      - Business Intelligence
-      - Data Visualization
-      - Reporting
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
-      - type: OpenAPI
-        url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/api-rest.html
-  - name: Oracle Cloud Infrastructure Data Science API
-    description: >-
-      API for managing machine learning models, notebook sessions, and data science
-      projects.
-    humanURL: https://docs.oracle.com/en-us/iaas/data-science/
-    baseURL: https://datascience.{region}.oraclecloud.com
-    tags:
-      - Artificial Intelligence
-      - Data Science
-      - Machine-Learning
-      - MLOps
-    tags_raw:
-      - AI
-      - Data Science
-      - Machine Learning
-      - MLOps
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
-      - type: OpenAPI
-        url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
-  - name: Oracle APEX REST APIs
-    description: >-
-      RESTful services for Oracle Application Express enabling low-code application
-      development.
-    humanURL: https://apex.oracle.com/api
-    baseURL: https://{instance}.adb.{region}.oraclecloudapps.com
-    tags:
-      - APEX
-      - Application Development
-      - Low-Code
-      - REST Services
-    properties:
-      - type: Documentation
-        url: https://docs.oracle.com/en/database/oracle/apex/latest/
-      - type: Tutorials
-        url: https://apex.oracle.com/en/learn/tutorials/
-include:
-  - name: Oracle Developer Portal
-    url: https://developer.oracle.com/
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
-tags:
-  - Analytics
-  - Cloud Computing
-  - Database
-  - Enterprise Software
+- name: Oracle Cloud Infrastructure (OCI) REST API
+  description: Comprehensive REST API for managing Oracle Cloud Infrastructure resources including compute,
+    storage, networking, and databases.
+  image: https://www.oracle.com/cloud/img/social-og-oracle-cloud.jpg
+  humanURL: https://docs.oracle.com/en-us/iaas/api/
+  baseURL: https://iaas.{region}.oraclecloud.com
+  tags:
+  - Cloud
+  - Compute
   - Infrastructure-as-a-Service
-  - Integration
-  - Machine-Learning
-  - Platform-as-a-Service
-  - Software-as-a-Service
-tags_raw:
-  - Analytics
-  - Cloud Computing
+  - Infrastructure
+  - Storage
+  tags_raw:
+  - Cloud
+  - Compute
+  - IaaS
+  - Infrastructure
+  - Storage
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/api/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/iaas/latest/
+  - type: Authentication
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm
+  - type: SDKs
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+  - type: RateLimits
+    url: rate-limits/oracle-platforms-rate-limits.yml
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+  - type: OpenAPI
+    url: openapi/oracle-platforms-core-openapi.yml
+  - type: Overlay
+    url: overlays/oracle-platforms-core-overlay.yaml
+- name: Oracle Autonomous Database API
+  description: API for managing Oracle Autonomous Database instances with self-driving, self-securing,
+    and self-repairing capabilities.
+  humanURL: https://docs.oracle.com/en/cloud/paas/autonomous-database/
+  baseURL: https://database.{region}.oraclecloud.com
+  tags:
+  - Autonomous
   - Database
-  - Enterprise Software
-  - Infrastructure as a Service
+  - Database-as-a-Service
+  - SQL
+  tags_raw:
+  - Autonomous
+  - Database
+  - DBaaS
+  - SQL
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/autonomous-database/adbsa/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/database/latest/
+  - type: Pricing
+    url: https://www.oracle.com/cloud/price-list.html
+  - type: OpenAPI
+    url: openapi/oracle-platforms-database-openapi.yml
+  - type: Overlay
+    url: overlays/oracle-platforms-database-overlay.yaml
+- name: Oracle Integration Cloud API
+  description: REST API for Oracle Integration Cloud enabling application integration, process automation,
+    and API management.
+  humanURL: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  baseURL: https://integration.{region}.ocp.oraclecloud.com
+  tags:
+  - API Management
+  - Automation
   - Integration
+  - iPaaS
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/integration-cloud/rest-api/
+  - type: OpenAPI
+    url: openapi/oracle-platforms-integration-openapi.yml
+  - type: Overlay
+    url: overlays/oracle-platforms-integration-overlay.yaml
+- name: Oracle Content Management API
+  description: RESTful API for Oracle Content Management providing digital asset management and content
+    collaboration.
+  humanURL: https://docs.oracle.com/en/cloud/paas/content-cloud/
+  baseURL: https://cp.oce.{region}.ocp.oraclecloud.com
+  tags:
+  - CMS
+  - Collaboration
+  - Content Management
+  - Digital Assets
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/content-cloud/rest-api-documents/
+  - type: SDKs
+    url: https://github.com/oracle/content-management-sdk
+  - type: OpenAPI
+    url: openapi/oracle-platforms-content-management-openapi.yml
+  - type: Overlay
+    url: overlays/oracle-platforms-content-management-overlay.yaml
+- name: Oracle Fusion Cloud ERP API
+  description: REST API for Oracle Fusion Cloud ERP providing access to financial management, procurement,
+    and project management capabilities.
+  humanURL: https://docs.oracle.com/en/cloud/saas/financials/
+  baseURL: https://{servername}.fa.{datacenter}.oraclecloud.com
+  tags:
+  - Cloud Applications
+  - ERP
+  - Finance
+  - Procurement
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/saas/financials/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/saas/financials/26c/farfa/index.html
+- name: Oracle Analytics Cloud API
+  description: RESTful API for Oracle Analytics Cloud enabling data visualization, analytics, and business
+    intelligence operations.
+  humanURL: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  baseURL: https://analytics.{region}.ocp.oraclecloud.com
+  tags:
+  - Analytics
+  - Business Intelligence
+  - Data Visualization
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/
+  - type: APIReference
+    url: https://docs.oracle.com/en/cloud/paas/analytics-cloud/acapi/
+  - type: OpenAPI
+    url: openapi/oracle-platforms-analytics-openapi.yml
+  - type: Overlay
+    url: overlays/oracle-platforms-analytics-overlay.yaml
+- name: Oracle Cloud Infrastructure Data Science API
+  description: API for managing machine learning models, notebook sessions, and data science projects.
+  humanURL: https://docs.oracle.com/en-us/iaas/data-science/
+  baseURL: https://datascience.{region}.oci.oraclecloud.com
+  tags:
+  - Artificial Intelligence
+  - Data Science
+  - Machine-Learning
+  - MLOps
+  tags_raw:
+  - AI
+  - Data Science
   - Machine Learning
-  - Platform as a Service
-  - SaaS
+  - MLOps
+  properties:
+  - type: Documentation
+    url: https://docs.oracle.com/en-us/iaas/data-science/
+  - type: APIReference
+    url: https://docs.oracle.com/en-us/iaas/api/#/en/data-science/latest/
+  - type: OpenAPI
+    url: openapi/oracle-platforms-data-science-openapi.yml
+  - type: Overlay
+    url: overlays/oracle-platforms-data-science-overlay.yaml
+- name: Oracle APEX REST APIs
+  description: RESTful services for Oracle Application Express enabling low-code application development.
+  humanURL: https://apex.oracle.com/api
+  baseURL: https://{instance}.adb.{region}.oraclecloudapps.com
+  tags:
+  - APEX
+  - Application Development
+  - Low-Code
+  - REST Services
+  properties:
+  - type: Tutorials
+    url: https://apex.oracle.com/en/learn/tutorials/
+  - type: Documentation
+    url: https://docs.oracle.com/en/database/oracle/apex/
+include:
+- name: Oracle Developer Portal
+  url: https://developer.oracle.com/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+tags:
+- Analytics
+- Artificial Intelligence
+- Cloud Computing
+- Database
+- Enterprise Software
+- Infrastructure-as-a-Service
+- Integration
+- Machine-Learning
+- Platform-as-a-Service
+- Software-as-a-Service
+tags_raw:
+- Analytics
+- Cloud Computing
+- Database
+- Enterprise Software
+- Infrastructure as a Service
+- Integration
+- Machine Learning
+- Platform as a Service
+- SaaS
 common:
 - type: DomainSecurity
   url: security/oracle-platforms-domain-security.yml
+- type: Packages
+  url: packages/oracle-platforms-packages.yml
+- type: SDKs
+  url: packages/oracle-platforms-packages.yml
+- type: MCPServer
+  url: mcp/oracle-platforms-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/oracle-platforms-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/oracle-platforms-llms.txt
+- type: Conformance
+  url: conformance/oracle-platforms-conformance.yml
+- type: Compliance
+  url: security/oracle-platforms-trust-center.yml
+- type: ErrorCatalog
+  url: errors/oracle-platforms-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/oracle-platforms-lifecycle.yml
+- type: StatusPage
+  url: https://ocistatus.oraclecloud.com/
+- type: Deprecation
+  url: https://docs.oracle.com/en-us/iaas/Content/servicechanges.htm
+- type: Authentication
+  url: authentication/oracle-platforms-authentication.yml
+- type: VulnerabilityDisclosure
+  url: security/oracle-platforms-vulnerability-disclosure.yml
+- type: Security
+  url: security/oracle-platforms-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/oracle-platforms-trust-center.yml
+- type: Sandbox
+  url: sandbox/oracle-platforms-sandbox.yml
+- type: Conventions
+  url: conventions/oracle-platforms-conventions.yml
+- type: Idempotency
+  url: conventions/oracle-platforms-conventions.yml
+- type: ChangeLog
+  url: changelog/oracle-platforms-changelog.yml
+- type: CLI
+  url: cli/oracle-platforms-cli.yml
+- type: DataModel
+  url: data-model/oracle-platforms-data-model.yml
+- type: Webhooks
+  url: asyncapi/oracle-platforms-events.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: RateLimits
+  url: rate-limits/oracle-platforms-rate-limits.yml
+- type: Plans
+  url: plans/oracle-platforms-plans-pricing.yml
+- type: DeveloperPortal
+  url: https://developer.oracle.com/
+- type: Documentation
+  url: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/usingapi.htm
+- type: APIReference
+  url: https://docs.oracle.com/en-us/iaas/api/
+- type: GettingStarted
+  url: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
+- type: Support
+  url: https://developer.oracle.com/community/
+- type: GitHubOrganization
+  url: https://github.com/oracle
+- type: Pricing
+  url: https://www.oracle.com/cloud/price-list.html
+- type: SignUp
+  url: https://signup.oraclecloud.com/
+- type: TermsOfService
+  url: https://www.oracle.com/legal/terms.html
+- type: PrivacyPolicy
+  url: https://www.oracle.com/legal/privacy/
+x-enrichment:
+  date: '2026-08-27'
+  status: enriched
+  artifacts_added: 36
+  pass: local-v1

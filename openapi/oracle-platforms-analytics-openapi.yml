@@ -1,0 +1,2949 @@
+basePath: /20190331
+consumes:
+- application/json
+definitions:
+  AccessControlServiceType:
+    description: 'Various types of Oracle Service categories that can be whitelisted
+      to access an Analytics instance.
+
+      '
+    enum: &id038
+    - ALL
+    type: string
+  AnalyticsInstance:
+    description: 'Analytics instance metadata.
+
+      '
+    properties:
+      capacity: &id002
+        $ref: '#/definitions/Capacity'
+      compartmentId: &id003
+        description: 'The OCID of the compartment.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      definedTags: &id004
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only the String type is supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing a defined tag key and value, scoped
+            to a namespace.
+
+
+            Example: `{"CostCenter": "42"}`
+
+            '
+          type: object
+        description: 'Defined tags for this resource. Each key is predefined and scoped
+          to a
+
+          namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
+
+
+          Example: `{"Operations": {"CostCenter": "42"}}`
+
+          '
+        type: object
+      description: &id005
+        description: 'Optional description.
+
+          '
+        maxLength: 512
+        minLength: 0
+        type: string
+      domainId:
+        description: 'Identity domain OCID.
+
+          '
+        type: string
+      emailNotification: &id006
+        description: 'Email address receiving notifications.
+
+          '
+        maxLength: 512
+        minLength: 0
+        type: string
+      featureBundle: &id019
+        description: 'The feature set of an Analytics instance.
+
+          '
+        enum: &id022
+        - FAW_PAID
+        - FAW_FREE
+        - FDI_BASE
+        - EE_EMBEDDED
+        - SE_EMBEDDED
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/FeatureBundle'
+      featureSet: &id007
+        description: 'The feature set. Either `SELF_SERVICE_ANALYTICS` (Professional
+          Edition) or `ENTERPRISE_ANALYTICS` (Enterprise Edition).
+
+          '
+        enum: &id023
+        - SELF_SERVICE_ANALYTICS
+        - ENTERPRISE_ANALYTICS
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/FeatureSet'
+      freeformTags: &id008
+        additionalProperties:
+          type: string
+        description: 'Free-form tags for this resource. Each tag is a simple key-value
+          pair with no
+
+          predefined name, type, or namespace. For more information, see [Resource
+          Tags](/Content/General/Concepts/resourcetags.htm).
+
+
+          Example: `{"Department": "Finance"}`
+
+          '
+        type: object
+      id: &id009
+        description: 'The resource OCID.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      kmsKeyId: &id020
+        description: 'OCID of the OCI Vault Key encrypting the customer data stored
+          in this Analytics instance. A null value indicates that the default Oracle-managed
+          encryption is used.
+
+          '
+        maxLength: 255
+        minLength: 0
+        type: string
+      licenseType: &id010
+        description: 'The license used for the service.
+
+          '
+        enum: &id030
+        - LICENSE_INCLUDED
+        - BRING_YOUR_OWN_LICENSE
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/LicenseType'
+      lifecycleState: &id011
+        description: 'The current state of the Analytics instance.
+
+          '
+        enum: &id001
+        - ACTIVE
+        - CREATING
+        - DELETED
+        - DELETING
+        - FAILED
+        - INACTIVE
+        - UPDATING
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/AnalyticsInstanceLifecycleState'
+      name: &id012
+        description: 'The name of the Analytics instance. This name must be unique
+          in the tenancy and can''t be changed.
+
+          The name must start with a letter and can contain only letters, numbers
+          and dash (-).
+
+          '
+        maxLength: 25
+        minLength: 1
+        pattern: ^[a-zA-Z](-?[a-zA-Z0-9])*$
+        type: string
+      networkEndpointDetails: &id013
+        $ref: '#/definitions/NetworkEndpointDetails'
+      privateAccessChannels:
+        additionalProperties:
+          $ref: '#/definitions/PrivateAccessChannel'
+        description: 'Map of PrivateAccessChannel unique identifier key as KEY and
+          PrivateAccessChannel Object as VALUE.
+
+          '
+        type: object
+      resourceGroups:
+        description: 'List of resource groups for this Analytics instance. The resource
+          group id must be unique within the instance.
+
+          '
+        items:
+          $ref: '#/definitions/InstanceResourceGroup'
+        type: array
+      serviceUrl: &id014
+        description: 'URL of the Analytics instance.
+
+          '
+        maxLength: 1024
+        minLength: 0
+        type: string
+      systemTags: &id015
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing system tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"key": "value"}`
+
+            '
+          type: object
+        description: 'System tags for this resource. These predefined keys are scoped
+          to namespaces.
+
+          Example: `{"orcl-cloud": {"key": "value"}}`
+
+          '
+        type: object
+      timeCreated: &id016
+        description: 'The date and time the Analytics instance was created, in the
+          format defined by RFC3339.
+
+
+          Example: `2016-08-25T21:10:29.600Z`
+
+          '
+        format: date-time
+        type: string
+      timeUpdated: &id017
+        description: 'The date and time the Analytics instance was last updated (in
+          the format defined by RFC3339).
+
+          This timestamp represents updates made through this API. External events
+          don''t
+
+          affect it.
+
+          '
+        format: date-time
+        type: string
+      updateChannel: &id021
+        description: 'The Analytics instance update cycle.
+
+          '
+        enum: &id039
+        - REGULAR
+        - EARLY
+        - PHASE_2
+        - PHASE_1
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/UpdateChannel'
+      vanityUrlDetails:
+        additionalProperties:
+          $ref: '#/definitions/VanityUrlDetails'
+        description: 'Map of VanityUrl unique identifier key as KEY and VanityUrl
+          Object as VALUE.
+
+          '
+        type: object
+    required:
+    - id
+    - name
+    - compartmentId
+    - lifecycleState
+    - capacity
+    - networkEndpointDetails
+    - featureSet
+    - timeCreated
+  AnalyticsInstanceLifecycleState:
+    description: 'The current state of an Analytics instance.
+
+      '
+    enum: *id001
+    type: string
+  AnalyticsInstanceSummary:
+    description: 'Analytics Instance metadata (summary view).
+
+      '
+    properties:
+      capacity: *id002
+      compartmentId: *id003
+      definedTags: *id004
+      description: *id005
+      emailNotification: *id006
+      featureSet: *id007
+      freeformTags: *id008
+      id: *id009
+      licenseType: *id010
+      lifecycleState: *id011
+      name: *id012
+      networkEndpointDetails: *id013
+      serviceUrl: *id014
+      systemTags: *id015
+      timeCreated: *id016
+      timeUpdated: *id017
+    required:
+    - id
+    - name
+    - compartmentId
+    - lifecycleState
+    - capacity
+    - networkEndpointDetails
+    - featureSet
+    - timeCreated
+  Capacity:
+    description: 'Service instance capacity metadata (for example, OLPU count, number
+      of users, and so on).
+
+      '
+    properties:
+      capacityType:
+        description: 'The capacity model to use.
+
+          Accepted values are:
+
+          OLPU_COUNT, USER_COUNT
+
+          '
+        enum: &id018
+        - OLPU_COUNT
+        - USER_COUNT
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/CapacityType'
+      capacityValue:
+        description: 'The capacity value selected, either the number of OCPUs (OLPU_COUNT)
+          or the number of users (USER_COUNT).
+
+          This parameter affects the number of OCPUs, amount of memory, and other
+          resources allocated to the Analytics instance.
+
+          '
+        minimum: 1
+        type: integer
+    required:
+    - capacityType
+    - capacityValue
+    type: object
+  CapacityType:
+    description: 'Supported capacity types.
+
+      '
+    enum: *id018
+    type: string
+  ChangeAnalyticsInstanceNetworkEndpointDetails:
+    description: 'Input payload to update endpoint details for an Analytics instance.
+
+      '
+    properties:
+      networkEndpointDetails: *id013
+    required:
+    - networkEndpointDetails
+  ChangeCompartmentDetails:
+    description: 'Input payload to change a resource''s compartment.
+
+      '
+    properties:
+      compartmentId:
+        description: 'The OCID of the new compartment.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+    required:
+    - compartmentId
+  CreateAnalyticsInstanceDetails:
+    description: 'Input payload to create an Anaytics instance.
+
+      '
+    properties:
+      adminUser:
+        description: 'The Analytics instance administrator user. This must be the
+          user name (not OCID) of a user in the nominated identity domain. For example:
+          john.smith@example.com.
+
+          '
+        maxLength: 255
+        type: string
+      capacity: *id002
+      compartmentId: *id003
+      definedTags: *id004
+      description: *id005
+      domainId:
+        description: 'The OCID of the identity domain to use for the new Analytics
+          instance. For example: ocid1.domain.oc1..ocid1.domain.oc1..aaaaaa111111bbbbbb222222cccccc333333dddddd444444eeeeee5555.
+
+          '
+        maxLength: 255
+        type: string
+      emailNotification: *id006
+      featureBundle: *id019
+      featureSet: *id007
+      freeformTags: *id008
+      idcsAccessToken:
+        description: 'IDCS access token identifying a stripe and service administrator
+          user.
+
+          '
+        maxLength: 8192
+        type: string
+      kmsKeyId: *id020
+      licenseType: *id010
+      name: *id012
+      networkEndpointDetails: *id013
+      updateChannel: *id021
+    required:
+    - name
+    - compartmentId
+    - capacity
+    - featureSet
+    - licenseType
+  CreatePrivateAccessChannelDetails:
+    description: 'Input payload to create a private access channel.
+
+      '
+    properties:
+      displayName: &id032
+        description: 'Display name of the private access channel.
+
+          '
+        maxLength: 32
+        minLength: 1
+        pattern: ^[a-zA-Z][a-zA-Z0-9_-]*$
+        type: string
+      networkSecurityGroupIds: &id033
+        description: 'Network Security Group OCIDs for the Analytics instance.
+
+          '
+        items:
+          maxLength: 255
+          minLength: 1
+          type: string
+        maxLength: 5
+        type: array
+      privateSourceDnsZones: &id034
+        description: "List of private source DNS zones registered with the private\
+          \ access channel. The\n datasource hostnames from these DNS zones / domains\
+          \ will be resolved in the peered VCN for access from  the Analytics instance.\n\
+          Minimum 1 private source is required. Maximum 30 private source DNS zones\
+          \ can be registered.\n"
+        items:
+          $ref: '#/definitions/PrivateSourceDnsZone'
+        maxLength: 30
+        minLength: 1
+        type: array
+      privateSourceScanHosts: &id035
+        description: 'List of private source database SCAN hosts registered with the
+          private access channel for access from the Analytics instance.
+
+          '
+        items:
+          $ref: '#/definitions/PrivateSourceScanHost'
+        maxLength: 15
+        type: array
+      subnetId: &id036
+        description: 'OCID of the customer subnet connected to the private access
+          channel.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      vcnId: &id037
+        description: 'OCID of the customer VCN peered with the private access channel.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+    required:
+    - displayName
+    - vcnId
+    - subnetId
+    - privateSourceDnsZones
+    type: object
+  CreateResourceGroupDetails:
+    description: 'Input payload to create resource group.
+
+      '
+    properties:
+      capacity: &id024
+        description: The capacity (in OCPU's) to be allocated for this resource.
+        minimum: 1
+        type: integer
+      description: &id025
+        description: Optional description of the resource group
+        maxLength: 512
+        minLength: 0
+        type: string
+      displayName: &id026
+        description: Meaningful name of resource group for end user
+        maxLength: 255
+        minLength: 1
+        type: string
+      resourceName: &id027
+        description: Meaningful name of resource group for end user
+        maxLength: 255
+        minLength: 1
+        type: string
+    required:
+    - resourceName
+    - capacity
+  CreateVanityUrlDetails:
+    description: 'Input payload to create a vanity URL.
+
+      '
+    properties:
+      caCertificate: &id040
+        description: 'PEM CA certificates for HTTPS connections. This may include
+          multiple PEM certificates.
+
+          '
+        minLength: 1
+        type: string
+      description: *id005
+      hosts: &id044
+        description: 'List of fully-qualified hostnames supported by this vanity URL
+          definition (maximum of 3).
+
+          '
+        items:
+          maxLength: 255
+          minLength: 1
+          type: string
+        maxItems: 3
+        minItems: 1
+        type: array
+      passphrase: &id041
+        description: 'Passphrase for the PEM private key (if any).
+
+          '
+        type: string
+      privateKey: &id042
+        description: 'PEM private key for HTTPS connections.
+
+          '
+        minLength: 1
+        type: string
+      publicCertificate: &id043
+        description: 'PEM certificate for HTTPS connections.
+
+          '
+        minLength: 1
+        type: string
+    required:
+    - hosts
+    - caCertificate
+    - privateKey
+    - publicCertificate
+  Error:
+    properties:
+      code:
+        description: 'A short error code that defines the error, for programmatic
+          parsing. See
+
+          [API Errors](/Content/API/References/apierrors.htm).
+
+          '
+        type: string
+      message:
+        description: 'A human-readable error string.
+
+          '
+        type: string
+    required:
+    - code
+    - message
+  FeatureBundle:
+    description: 'Feature Bundle Enum.
+
+      '
+    enum: *id022
+    type: string
+  FeatureSet:
+    description: 'Analytics feature set.
+
+      '
+    enum: *id023
+    type: string
+  InstanceResourceGroup:
+    description: 'Resource Groups for Instance
+
+      '
+    properties: &id028
+      capacity: *id024
+      description: *id025
+      displayName: *id026
+      id:
+        description: Unique identifier and name of resource group.  Must be unique
+          within the instance
+        maxLength: 255
+        minLength: 1
+        type: string
+      resourceName: *id027
+    required: &id029
+    - id
+    - resourceName
+    - capacity
+    type: object
+  InstanceResourceGroupSummary:
+    description: 'Resource Groups for Instance
+
+      '
+    properties: *id028
+    required: *id029
+    type: object
+  LicenseType:
+    description: 'The license type of the Analytics instance.
+
+      '
+    enum: *id030
+    type: string
+  NetworkEndpointDetails:
+    description: 'Base representation of a network endpoint.
+
+      '
+    discriminator: networkEndpointType
+    properties:
+      networkEndpointType:
+        description: 'The type of network endpoint.
+
+          '
+        enum: &id031
+        - PUBLIC
+        - PRIVATE
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/NetworkEndpointType'
+    required:
+    - networkEndpointType
+    type: object
+  NetworkEndpointType:
+    description: 'Public or private endpoint access type.
+
+      '
+    enum: *id031
+    type: string
+  PrivateAccessChannel:
+    description: 'Analytics instance private access channel model.
+
+      '
+    properties:
+      displayName: *id032
+      egressSourceIpAddresses:
+        description: 'List of IP addresses from the customer subnet connected to the
+          private access channel, used as a source IP by the private access channel
+
+          for network traffic from the Analytics instance to the private sources.
+
+          '
+        items:
+          maxLength: 46
+          minLength: 8
+          type: string
+        type: array
+      ipAddress:
+        description: 'IP address of the private access channel.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      key:
+        description: 'Private access channel unique identifier key.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      networkSecurityGroupIds: *id033
+      privateSourceDnsZones: *id034
+      privateSourceScanHosts: *id035
+      subnetId: *id036
+      vcnId: *id037
+    required:
+    - key
+    - displayName
+    - vcnId
+    - subnetId
+    - ipAddress
+    - egressSourceIpAddresses
+  PrivateEndpointDetails:
+    allOf:
+    - $ref: '#/definitions/NetworkEndpointDetails'
+    - discriminator: PRIVATE
+      properties:
+        networkSecurityGroupIds: *id033
+        subnetId:
+          description: 'The subnet OCID for the private endpoint.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        vcnId:
+          description: 'The VCN OCID for the private endpoint.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - vcnId
+      - subnetId
+    description: 'Private endpoint configuration details.
+
+      '
+  PrivateSourceDnsZone:
+    description: 'Private source DNS zone model.
+
+      '
+    properties:
+      description:
+        description: 'Description of the private source DNS zone.
+
+          '
+        maxLength: 255
+        minLength: 0
+        type: string
+      dnsZone:
+        description: 'Private source DNS zone. For example: example-vcn.oraclevcn.com,
+          corp.example.com.
+
+          '
+        maxLength: 253
+        minLength: 1
+        type: string
+    required:
+    - dnsZone
+  PrivateSourceScanHost:
+    description: 'Private source SCAN hostname model.
+
+      '
+    properties:
+      description:
+        description: 'Description of private source SCAN host zone.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      scanHostname:
+        description: 'Private source SCAN hostname. For example: db01-scan.corp.example.com,
+          prd-db01-scan.mycompany.com.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      scanPort:
+        description: 'Private source SCAN host port. This is the source port where
+          the SCAN protocol connects (for example, 1521).
+
+          '
+        minimum: 1
+        type: integer
+    required:
+    - scanHostname
+    - scanPort
+  PublicEndpointDetails:
+    allOf:
+    - $ref: '#/definitions/NetworkEndpointDetails'
+    - discriminator: PUBLIC
+      properties:
+        whitelistedIps: &id045
+          description: 'Source IP addresses or IP address ranges in ingress rules.
+
+            '
+          items:
+            maxLength: 255
+            minLength: 1
+            type: string
+          type: array
+        whitelistedServices:
+          description: 'Oracle Cloud services that are allowed to access this Analytics
+            instance.
+
+            '
+          items:
+            enum: *id038
+            type: string
+            x-obmcs-top-level-enum: '#/definitions/AccessControlServiceType'
+          type: array
+        whitelistedVcns:
+          description: 'Virtual Cloud Networks allowed to access this network endpoint.
+
+            '
+          items:
+            $ref: '#/definitions/VirtualCloudNetwork'
+          type: array
+    description: 'Public endpoint configuration details.
+
+      '
+  ResourceGroupSortBy:
+    description: 'The field to sort by (one column only). Default sort order is
+
+      default group first, then sort by resource name, ascending.
+
+      '
+    enum: &id057
+    - id
+    - resourceName
+    - displayName
+    - description
+    - capacity
+    - status
+    type: string
+  ScaleAnalyticsInstanceDetails:
+    description: 'Input payload to scale an Analytics instance up or down.
+
+      '
+    properties:
+      capacity: *id002
+    required:
+    - capacity
+  SetFeatureBundleDetails:
+    description: 'Input payload for the feature set of an Analytics instance.
+
+      '
+    properties:
+      featureBundle: *id019
+  SetKmsKeyDetails:
+    description: 'Input payload to reset the OCI vault encryption key.
+
+      '
+    properties:
+      kmsKeyId:
+        description: 'OCID of the OCI vault key encrypting the customer data stored
+          in this Analytics instance. An empty value indicates the default Oracle-managed
+          encryption (this API doesn''t support null).
+
+          '
+        maxLength: 255
+        minLength: 0
+        type: string
+    required:
+    - kmsKeyId
+  SortBy:
+    description: 'The field to sort by (one column only). Default sort order is
+
+      ascending, except for the `timeCreated` column which is descending.
+
+      '
+    enum: &id058
+    - capacityType
+    - capacityValue
+    - featureSet
+    - lifecycleState
+    - name
+    - timeCreated
+    type: string
+  SortOrder:
+    description: 'The sort order to use, either ascending (`ASC`) or descending (`DESC`).
+
+      '
+    enum: &id059
+    - ASC
+    - DESC
+    type: string
+  UpdateAnalyticsInstanceDetails:
+    description: 'Input payload to update an Analytics instance. Fields that aren''t
+      provided
+
+      won''t be updated.
+
+      '
+    properties:
+      definedTags: *id004
+      description: *id005
+      emailNotification: *id006
+      freeformTags: *id008
+      licenseType: *id010
+      updateChannel: *id021
+  UpdateChannel:
+    description: "EARLY - Early update cycle. Oracle delivers updates as soon as they're\
+      \ available. \nREGULAR - Regular update cycle. Oracle delivers updates a few\
+      \ weeks after completing the early update cycle. \nPHASE_1 - Reserved for future\
+      \ use. \nPHASE_2 - Reserved for future use.\n"
+    enum: *id039
+    type: string
+  UpdatePrivateAccessChannelDetails:
+    description: 'Input payload to update a private access channel.
+
+      '
+    properties:
+      displayName: *id032
+      networkSecurityGroupIds: *id033
+      privateSourceDnsZones: *id034
+      privateSourceScanHosts: *id035
+      subnetId: *id036
+      vcnId: *id037
+    type: object
+  UpdateResourceGroupDetails:
+    description: 'Input payload to update a resource group.
+
+      '
+    properties:
+      capacity: *id024
+      description: *id025
+      displayName: *id026
+      resourceName: *id027
+    required:
+    - resourceName
+    - capacity
+  UpdateVanityUrlDetails:
+    description: 'Input payload to update a vanity URL.
+
+      '
+    properties:
+      caCertificate: *id040
+      passphrase: *id041
+      privateKey: *id042
+      publicCertificate: *id043
+    required:
+    - caCertificate
+    - privateKey
+    - publicCertificate
+  VanityUrlDetails:
+    description: 'Vanity URL configuration details.
+
+      '
+    properties:
+      description:
+        description: 'Description of the vanity URL.
+
+          '
+        maxLength: 512
+        minLength: 1
+        type: string
+      hosts: *id044
+      key:
+        description: 'The vanity URL unique identifier key.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      publicCertificate: *id043
+      urls:
+        description: 'List of URLs supported by this vanity URL definition (maximum
+          of 3).
+
+          '
+        items:
+          maxLength: 255
+          minLength: 1
+          type: string
+        maxItems: 3
+        minItems: 1
+        type: array
+    type: object
+  VirtualCloudNetwork:
+    description: 'Virtual Cloud Network definition.
+
+      '
+    properties:
+      id:
+        description: 'The Virtual Cloud Network OCID.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      whitelistedIps: *id045
+    required:
+    - id
+    type: object
+  WorkRequest:
+    description: 'An asynchronous work request.
+
+      '
+    properties:
+      compartmentId: &id050
+        description: 'The compartment OCID of this work request.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+      id: *id009
+      operationType: &id051
+        description: 'The operation performed by the work request.
+
+          '
+        enum: &id046
+        - CREATE_ANALYTICS_INSTANCE
+        - DELETE_ANALYTICS_INSTANCE
+        - START_ANALYTICS_INSTANCE
+        - STOP_ANALYTICS_INSTANCE
+        - SCALE_ANALYTICS_INSTANCE
+        - CHANGE_ANALYTICS_INSTANCE_COMPARTMENT
+        - CHANGE_ANALYTICS_INSTANCE_NETWORK_ENDPOINT
+        - CREATE_VANITY_URL
+        - UPDATE_VANITY_URL
+        - DELETE_VANITY_URL
+        - CREATE_PRIVATE_ACCESS_CHANNEL
+        - UPDATE_PRIVATE_ACCESS_CHANNEL
+        - DELETE_PRIVATE_ACCESS_CHANNEL
+        - UPDATE_INSTANCE_ENCRYPTION_KEY
+        - CREATE_RESOURCE_GROUP
+        - UPDATE_RESOURCE_GROUP
+        - DELETE_RESOURCE_GROUP
+        - SET_FEATURE_SET
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/WorkRequestOperationType'
+      percentComplete:
+        description: 'Percentage of the request completed.
+
+          '
+        format: float
+        type: number
+      resources: &id052
+        description: 'The resources this work request affects.
+
+          '
+        items:
+          $ref: '#/definitions/WorkRequestResource'
+        type: array
+      status: &id053
+        description: 'The current status of the work request.
+
+          '
+        enum: &id049
+        - ACCEPTED
+        - IN_PROGRESS
+        - FAILED
+        - SUCCEEDED
+        - CANCELING
+        - CANCELED
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/WorkRequestStatus'
+      timeAccepted: &id054
+        description: 'The time the work request was accepted, in the format defined
+          by RFC3339.
+
+
+          Example: `2016-08-25T21:10:29.600Z`
+
+          '
+        format: date-time
+        type: string
+      timeFinished: &id055
+        description: 'The time the work request was finished, in the format defined
+          by RFC3339.
+
+
+          Example: `2016-08-25T21:10:29.600Z`
+
+          '
+        format: date-time
+        type: string
+      timeStarted: &id056
+        description: 'The time the work request was started, in the format defined
+          by RFC3339.
+
+
+          Example: `2016-08-25T21:10:29.600Z`
+
+          '
+        format: date-time
+        type: string
+    required:
+    - id
+    - operationType
+    - status
+    - compartmentId
+    - resources
+    - percentComplete
+    - timeAccepted
+    type: object
+  WorkRequestActionResult:
+    description: 'The way in which a resource was affected by a work request.
+
+      '
+    enum: &id047
+    - COMPARTMENT_CHANGED
+    - CREATED
+    - DELETED
+    - STARTED
+    - STOPPED
+    - SCALED
+    - NETWORK_ENDPOINT_CHANGED
+    - VANITY_URL_CREATED
+    - VANITY_URL_UPDATED
+    - VANITY_URL_DELETED
+    - PRIVATE_ACCESS_CHANNEL_CREATED
+    - PRIVATE_ACCESS_CHANNEL_UPDATED
+    - PRIVATE_ACCESS_CHANNEL_DELETED
+    - NONE
+    - RESOURCE_GROUP_CREATED
+    - RESOURCE_GROUP_UPDATED
+    - RESOURCE_GROUP_DELETED
+    type: string
+  WorkRequestError:
+    description: 'Error encountered during the execution of a work request.
+
+      '
+    properties:
+      code:
+        description: 'A short error code that defines the error, for programmatic
+          parsing.
+
+          '
+        type: string
+      message:
+        description: 'Error message.
+
+          '
+        type: string
+      timestamp:
+        description: 'The date and time the error occurred, in the format defined
+          by RFC3339.
+
+
+          Example: `2016-08-25T21:10:29.600Z`
+
+          '
+        format: date-time
+        type: string
+    required:
+    - code
+    - message
+    - timestamp
+    type: object
+  WorkRequestLog:
+    description: 'Log entries related to a specific work request.
+
+      '
+    properties:
+      message:
+        description: 'The description of the event that occurred.
+
+          '
+        type: string
+      timestamp:
+        description: 'The date and time the log entry occurred, in the format defined
+          by RFC3339.
+
+
+          Example: `2016-08-25T21:10:29.600Z`
+
+          '
+        format: date-time
+        type: string
+    required:
+    - message
+    - timestamp
+    type: object
+  WorkRequestOperationType:
+    description: 'The types of work request operations.
+
+      '
+    enum: *id046
+    type: string
+  WorkRequestResource:
+    properties:
+      actionResult:
+        description: 'The way this resource was affected by this work request.
+
+          '
+        enum: *id047
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/WorkRequestActionResult'
+      identifier:
+        description: The OCID of the resource the work request is affecting.
+        maxLength: 255
+        minLength: 1
+        type: string
+      metadata:
+        additionalProperties:
+          type: string
+        description: 'Additional metadata of the resource.
+
+          '
+        type: object
+      resourceType:
+        description: 'The type of the resource the work request is affecting.
+
+          '
+        enum: &id048
+        - ANALYTICS_INSTANCE
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/WorkRequestResourceType'
+      resourceUri:
+        description: 'The URI of the affected resource.
+
+          '
+        type: string
+    required:
+    - actionResult
+    - resourceType
+    - identifier
+    - resourceUri
+  WorkRequestResourceType:
+    description: 'Type of the resource associated with a work request.
+
+      '
+    enum: *id048
+    type: string
+  WorkRequestSortBy:
+    description: 'The supported work request `sort by` columns.
+
+      '
+    enum: &id060
+    - id
+    - operationType
+    - status
+    - timeAccepted
+    - timeStarted
+    - timeFinished
+    type: string
+  WorkRequestStatus:
+    description: 'The status of a work request.
+
+      '
+    enum: *id049
+    type: string
+  WorkRequestSummary:
+    description: An asynchronous work request.
+    properties:
+      compartmentId: *id050
+      id: *id009
+      operationType: *id051
+      resources: *id052
+      status: *id053
+      timeAccepted: *id054
+      timeFinished: *id055
+      timeStarted: *id056
+    required:
+    - id
+    - operationType
+    - status
+    - compartmentId
+    - resources
+    - timeAccepted
+    type: object
+info:
+  x-provenance:
+    method: harvested
+    first_party: true
+    publisher: Oracle
+    source: https://docs.oracle.com/en-us/iaas/api/specs/721a23ed8ae46334a8f98f8d7fc231acf5dfb7064b9f2dd38e2f0aa5d670e3eb.yaml
+    harvested: '2026-08-27'
+    note: >-
+      Published by Oracle as the contract for the Analytics API (analytics) OCI service and
+      stored verbatim; API Evangelist added only this provenance block. Wired to the
+      "Oracle Analytics Cloud API" entry in apis.yml.
+  x-evidence:
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/index.json
+    what: Oracle's own machine-readable index of every OCI service specification (HTTP 200)
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/721a23ed8ae46334a8f98f8d7fc231acf5dfb7064b9f2dd38e2f0aa5d670e3eb.yaml
+    what: the harvested document for Analytics API (HTTP 200)
+  description: 'Analytics API.
+
+    '
+  license:
+    name: Oracle Corporation
+  title: Analytics API
+  version: '20190331'
+parameters:
+  AnalyticsInstanceIdPathParam:
+    description: 'The OCID of the Analytics instance.
+
+      '
+    in: path
+    name: analyticsInstanceId
+    required: true
+    type: string
+  AnalyticsInstanceResourceGroupIdPathParam:
+    description: 'Specify unique id of a resource group within an Analytics instance.
+
+      '
+    in: path
+    name: analyticsInstanceResourceGroupId
+    required: true
+    type: string
+  CapacityTypeQueryParam:
+    description: 'A filter to only return resources matching the capacity type enum.
+      Values are
+
+      case-insensitive.
+
+      '
+    enum: *id018
+    in: query
+    name: capacityType
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/CapacityType'
+  CompartmentIdQueryParam:
+    description: 'The OCID of the compartment.
+
+      '
+    in: query
+    maxLength: 255
+    minLength: 1
+    name: compartmentId
+    required: true
+    type: string
+  FeatureSetQueryParam:
+    description: 'A filter to only return resources matching the feature set. Values
+      are
+
+      case-insensitive.
+
+      '
+    enum: *id023
+    in: query
+    name: featureSet
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/FeatureSet'
+  IfMatchHeader:
+    description: 'For optimistic concurrency control. In the PUT or DELETE call for
+      a resource, set the `if-match`
+
+      parameter to the value of the etag from a previous GET or POST response for
+      that resource.  The resource
+
+      will be updated or deleted only if the etag you provide matches the resource''s
+      current etag value.
+
+      '
+    in: header
+    name: if-match
+    required: false
+    type: string
+  LifecycleStateQueryParam:
+    description: 'A filter to only return resources matching the lifecycle state.
+      The state
+
+      value is case-insensitive.
+
+      '
+    enum: *id001
+    in: query
+    name: lifecycleState
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/AnalyticsInstanceLifecycleState'
+  PaginationLimitQueryParam:
+    description: 'For list pagination. The maximum number of results per page, or
+      items to return in a paginated
+
+      "List" call. For important details about how pagination works, see
+
+      [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+
+      Example: `50`
+
+      '
+    in: query
+    maximum: 1000
+    minimum: 1
+    name: limit
+    required: false
+    type: integer
+  PaginationTokenQueryParam:
+    description: 'For list pagination. The value of the `opc-next-page` response header
+      from the previous "List"
+
+      call. For important details about how pagination works, see
+
+      [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+      '
+    in: query
+    maxLength: 512
+    minLength: 1
+    name: page
+    required: false
+    type: string
+  PrivateAccessChannelKeyPathParam:
+    description: 'The unique identifier key of the private access channel.
+
+      '
+    in: path
+    maxLength: 255
+    minLength: 1
+    name: privateAccessChannelKey
+    required: true
+    type: string
+  RequestIdHeader:
+    description: 'Unique identifier for the request.
+
+      If you need to contact Oracle about a particular request, please provide the
+      request ID.
+
+      '
+    in: header
+    name: opc-request-id
+    pattern: ^[a-zA-Z0-9_./-]+$
+    required: false
+    type: string
+  ResourceGroupSortByQueryParam:
+    description: 'The field to sort by (one column only). Default sort order is
+
+      default group first, then sort by resource name, ascending.
+
+      '
+    enum: *id057
+    in: query
+    name: sortBy
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/ResourceGroupSortBy'
+  ResourceNameQueryParam:
+    description: 'A filter to return only resources that match the given name exactly.
+
+      '
+    in: query
+    maxLength: 255
+    minLength: 1
+    name: name
+    required: false
+    type: string
+  RetryTokenHeader:
+    description: 'A token that uniquely identifies a request so it can be retried
+      in case of a timeout or
+
+      server error without risk of executing that same action again. Retry tokens
+      expire after 24
+
+      hours, but can be invalidated before then due to conflicting operations (for
+      example, if a resource
+
+      has been deleted and purged from the system, then a retry of the original creation
+      request
+
+      may be rejected).
+
+      '
+    in: header
+    maxLength: 64
+    minLength: 1
+    name: opc-retry-token
+    required: false
+    type: string
+  SortByQueryParam:
+    description: 'The field to sort by (one column only). Default sort order is
+
+      ascending exception of `timeCreated` column (descending).
+
+      '
+    enum: *id058
+    in: query
+    name: sortBy
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/SortBy'
+  SortOrderQueryParam:
+    description: 'The sort order to use, either ascending (`ASC`) or descending (`DESC`).
+
+      '
+    enum: *id059
+    in: query
+    name: sortOrder
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/SortOrder'
+  VanityUrlKeyPathParam:
+    description: 'Specify unique identifier key of a vanity URL to update or delete.
+
+      '
+    in: path
+    name: vanityUrlKey
+    required: true
+    type: string
+  WorkRequestIdPathParam:
+    description: 'The OCID of the work request.
+
+      '
+    in: path
+    name: workRequestId
+    required: true
+    type: string
+  WorkRequestResourceIdQueryParam:
+    description: 'The OCID of the resource associated with a work request.
+
+      '
+    in: query
+    name: resourceId
+    required: false
+    type: string
+  WorkRequestResourceTypeQueryParam:
+    description: 'Type of the resource associated with a work request.
+
+      '
+    enum: *id048
+    in: query
+    name: resourceType
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/WorkRequestResourceType'
+  WorkRequestSortByQueryParam:
+    description: 'The field used for sorting work request results.
+
+      '
+    enum: *id060
+    in: query
+    name: sortBy
+    required: false
+    type: string
+    x-obmcs-top-level-enum: '#/definitions/WorkRequestSortBy'
+  WorkRequestStatusQueryParam:
+    collectionFormat: multi
+    description: 'One or more work request status values to filter on.
+
+      '
+    in: query
+    items:
+      enum: *id049
+      type: string
+      x-obmcs-top-level-enum: '#/definitions/WorkRequestStatus'
+    name: status
+    required: false
+    type: array
+paths:
+  /analyticsInstances:
+    get:
+      description: 'List Analytics instances.
+
+        '
+      operationId: ListAnalyticsInstances
+      parameters:
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/ResourceNameQueryParam'
+      - $ref: '#/parameters/CapacityTypeQueryParam'
+      - $ref: '#/parameters/FeatureSetQueryParam'
+      - $ref: '#/parameters/LifecycleStateQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/SortByQueryParam'
+      - $ref: '#/parameters/SortOrderQueryParam'
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 'List of Analytics instances (paginated, see page and limit
+            query parameters).
+
+            '
+          headers:
+            opc-next-page: &id064
+              description: 'For list pagination. When this header appears in the response,
+                additional pages
+
+                of results remain. For important details about how pagination works,
+                see
+
+                [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+                '
+              maxLength: 1024
+              minLength: 1
+              type: string
+            opc-request-id: &id061
+              description: 'Unique Oracle-assigned identifier for the request. If
+                you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/AnalyticsInstanceSummary'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: List Analytics instances.
+      tags:
+      - analytics
+    post:
+      description: 'Create a new Analytics instance in the specified compartment.
+        The operation is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: CreateAnalyticsInstance
+      parameters:
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Analytics instance details.
+
+          '
+        in: body
+        name: CreateAnalyticsInstanceDetails
+        required: true
+        schema:
+          $ref: '#/definitions/CreateAnalyticsInstanceDetails'
+      responses:
+        201:
+          description: 'The Analytics instance was created. A background task is configuring
+            various dependencies before the instance
+
+            becomes fully operational.
+
+            '
+          headers:
+            etag: &id063
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              type: string
+            location: &id065
+              description: 'The full URI of the resource.
+
+                '
+              type: string
+            opc-request-id: *id061
+            opc-work-request-id: &id062
+              description: 'The OCID of the work request. Use [GetWorkRequest](#/en/analytics/20190331/WorkRequest/GetWorkRequest)
+                with this ID to track the status
+
+                of the request.
+
+                '
+              type: string
+          schema:
+            $ref: '#/definitions/AnalyticsInstance'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Create an Analytics instance.
+      tags:
+      - analytics
+  /analyticsInstances/{analyticsInstanceId}:
+    delete:
+      description: 'Deletes the specified Analytics instance. The operation is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: DeleteAnalyticsInstance
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        204:
+          description: 'The Analytics instance is being deleted.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Delete an Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+    get:
+      description: 'Information about a specific Analytics instance.
+
+        '
+      operationId: GetAnalyticsInstance
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: 'Expected response for a valid request.
+
+            '
+          headers:
+            etag: *id063
+            opc-request-id: *id061
+          schema:
+            $ref: '#/definitions/AnalyticsInstance'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Retrieve Analytics instance metadata.
+      tags:
+      - analytics
+    put:
+      description: 'Updates certain fields of an Analytics instance. Fields that are
+        not provided in the
+
+        request will not be updated.
+
+        '
+      operationId: UpdateAnalyticsInstance
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - description: "Update specified fields for an Analytics instance. Fields that\
+          \ aren't provided\n won't be updated.\n"
+        in: body
+        name: UpdateAnalyticsInstanceDetails
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateAnalyticsInstanceDetails'
+      responses:
+        200:
+          description: 'The Analytics instance was updated.
+
+            '
+          headers:
+            etag: *id063
+            opc-request-id: *id061
+          schema:
+            $ref: '#/definitions/AnalyticsInstance'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Update an Analytics instance.
+      tags:
+      - analytics
+      x-obmcs-client-retries-enabled: false
+  /analyticsInstances/{analyticsInstanceId}/actions/changeCompartment:
+    post:
+      description: 'Change the compartment of an Analytics instance. The operation
+        is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: ChangeAnalyticsInstanceCompartment
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Input payload to move the resource to a different compartment.
+
+          '
+        in: body
+        name: ChangeCompartmentDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeCompartmentDetails'
+      responses:
+        202:
+          description: 'The request to move compartments was accepted.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Change the compartment of an Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/actions/changeNetworkEndpoint:
+    post:
+      description: 'Change the network endpoint for an Analytics instance. The operation
+        is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: ChangeAnalyticsInstanceNetworkEndpoint
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Input payload for changing a network endpoint for an Analytics
+          instance.
+
+          '
+        in: body
+        name: ChangeAnalyticsInstanceNetworkEndpointDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeAnalyticsInstanceNetworkEndpointDetails'
+      responses:
+        202:
+          description: 'The request was accepted and the Analytics instance network
+            endpoint will be updated.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Change the network endpoint for an Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/actions/scale:
+    post:
+      description: 'Scale an Analytics instance up or down. The operation is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: ScaleAnalyticsInstance
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Input payload for scaling an Analytics instance up or down.
+
+          '
+        in: body
+        name: ScaleAnalyticsInstanceDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ScaleAnalyticsInstanceDetails'
+      responses:
+        202:
+          description: 'The request was accepted and the Analytics instance will be
+            scaled up or down.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Scale an Analytics instance up or down.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/actions/setFeatureBundle:
+    post:
+      description: 'Set the external service properties of an Analytics instance.
+
+        '
+      operationId: SetFeatureBundle
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Input payload for the feature set of an Analytics instance.
+
+          '
+        in: body
+        name: SetFeatureBundleDetails
+        required: true
+        schema:
+          $ref: '#/definitions/SetFeatureBundleDetails'
+      responses:
+        202:
+          description: 'The request was accepted and the Analytics instance feature
+            bundle will be set.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Set the feature bundle of an Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/actions/setKmsKey:
+    post:
+      description: 'Encrypts the customer data of this Analytics instance using either
+        a customer OCI vault key or default Oracle-managed key.
+
+        '
+      operationId: SetKmsKey
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Input payload to reset the OCI vault encryption key.
+
+          '
+        in: body
+        name: SetKmsKeyDetails
+        required: true
+        schema:
+          $ref: '#/definitions/SetKmsKeyDetails'
+      responses:
+        202:
+          description: 'The request was accepted and re-encryption of the customer
+            data will begin.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Encrypts customer data with an OCI vault key or reverts back to an
+        Oracle-managed key.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/actions/start:
+    post:
+      description: 'Starts the specified Analytics instance. The operation is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: StartAnalyticsInstance
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: 'The request was accepted and the Analytics instance will be
+            started.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Starts the specified Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/actions/stop:
+    post:
+      description: 'Stop the specified Analytics instance. The operation is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: StopAnalyticsInstance
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: 'The request was accepted and the Analytics instance will be
+            stopped.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Stop the specified Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/privateAccessChannels:
+    post:
+      description: 'Create an private access channel for the Analytics instance. The
+        operation is long-running
+
+        and creates a new work request.
+
+        '
+      operationId: CreatePrivateAccessChannel
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Input payload for creating a private access channel for an Analytics
+          instance.
+
+          '
+        in: body
+        name: CreatePrivateAccessChannelDetails
+        required: true
+        schema:
+          $ref: '#/definitions/CreatePrivateAccessChannelDetails'
+      responses:
+        202:
+          description: 'The request was accepted and the private access channel for
+            the Analytics instance will be created.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Create a private access channel for the Analytics instance.
+      tags:
+      - analytics
+      x-example: "POST /20190331/analyticsInstances/<var>&lt;analytics_instance_OCID&gt;</var>/privateAccessChannels\n\
+        Host: analytics.<var>&lt;region&gt;</var>.ocp.oraclecloud.com\n<var>&lt;authorization\
+        \ and other headers&gt;</var>\n{\n  \"displayName\": \"example_private_access_channel\"\
+        ,\n  \"vcnId\": \"ocid1.vcn.<var>&lt;unique_part_vcn_id&gt;</var>\",\n  \"\
+        subnetId\": \"ocid1.subnet.<var>&lt;unique_part_subnet_id&gt;</var>\",\n \
+        \ \"privateSourceDnsZones\" : [\n    { \"dnsZone\" : \"example-vcn.oraclevcn.com\"\
+        , \"description\" : \"Example OCI VCN DNS label\" },\n    { \"dnsZone\" :\
+        \ \"example.com\", \"description\" : \"Example DNS Zone / Domain for On-Premise\"\
+        \ }\n  ]\n}\n"
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/privateAccessChannels/{privateAccessChannelKey}:
+    delete:
+      description: 'Delete a private access channel with a given unique identifier
+        key, for an Analytics instance.
+
+        '
+      operationId: DeletePrivateAccessChannel
+      parameters:
+      - $ref: '#/parameters/PrivateAccessChannelKeyPathParam'
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        204:
+          description: 'The private access channel for the Analytics instance is being
+            deleted.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Delete private access channel with given unique identifier key, for
+        an Analytics instance.
+      tags:
+      - analytics
+      x-example: 'DELETE /20190331/analyticsInstances/<var>&lt;analytics_instance_OCID&gt;</var>/privateAccessChannels/<var>&lt;private_access_channel_Key&gt;</var>
+
+        Host: analytics.<var>&lt;region&gt;</var>.ocp.oraclecloud.com
+
+        <var>&lt;authorization and other headers&gt;</var>
+
+        '
+      x-related-resource: '#/definitions/AnalyticsInstance'
+    get:
+      description: 'Retrieve private access channel for the specified Analytics Instance.
+
+        '
+      operationId: GetPrivateAccessChannel
+      parameters:
+      - $ref: '#/parameters/PrivateAccessChannelKeyPathParam'
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: 'Returns the name of the private access channel.
+
+            '
+          headers:
+            etag: *id063
+            opc-request-id: *id061
+          schema:
+            $ref: '#/definitions/PrivateAccessChannel'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Retrieve private access channel for the specified Analytics Instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+    put:
+      description: 'Update the private access channel with the given unique identifier
+        key in the specified Analytics instance.
+
+        '
+      operationId: UpdatePrivateAccessChannel
+      parameters:
+      - $ref: '#/parameters/PrivateAccessChannelKeyPathParam'
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Update the private access channel with the given unique identifier
+          key in the specified Analytics instance.
+
+          '
+        in: body
+        name: UpdatePrivateAccessChannelDetails
+        required: true
+        schema:
+          $ref: '#/definitions/UpdatePrivateAccessChannelDetails'
+      responses:
+        202:
+          description: 'The request was accepted and the private access channel will
+            be updated for the Analytics instance.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Update the private access channel.
+      tags:
+      - analytics
+      x-example: "PUT /20190331/analyticsInstances/<var>&lt;analytics_instance_OCID&gt;</var>/privateAccessChannels/<var>&lt;private_access_channel_Key&gt;</var>\n\
+        Host: analytics.<var>&lt;region&gt;</var>.ocp.oraclecloud.com\n<var>&lt;authorization\
+        \ and other headers&gt;</var>\n{\n  \"displayName\": \"example_private_access_channel\"\
+        ,\n  \"vcnId\": \"ocid1.vcn.<var>&lt;unique_part_vcn_id&gt;</var>\",\n  \"\
+        subnetId\": \"ocid1.subnet.<var>&lt;unique_part_subnet_id&gt;</var>\",\n \
+        \ \"privateSourceDnsZones\" : [\n    { \"dnsZone\" : \"example-vcn.oraclevcn.com\"\
+        , \"description\" : \"Example OCI VCN DNS label\" },\n    { \"dnsZone\" :\
+        \ \"example.com\", \"description\" : \"Example DNS Zone / Domain for On-Premise\"\
+        \ }\n  ]\n}\n"
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/resourceGroups:
+    get:
+      description: 'List resource groups associated with an instance.
+
+        '
+      operationId: ListResourceGroups
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/ResourceNameQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/ResourceGroupSortByQueryParam'
+      - $ref: '#/parameters/SortOrderQueryParam'
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 'List of resource properties for an instance.
+
+            '
+          headers:
+            opc-next-page: *id064
+            opc-request-id: *id061
+          schema:
+            items:
+              $ref: '#/definitions/InstanceResourceGroupSummary'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: List resource groups for an instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+    post:
+      description: 'Create a new resource group for the instance
+
+        '
+      operationId: CreateResourceGroup
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Resource group details
+
+          '
+        in: body
+        name: CreateResourceGroupDetails
+        required: true
+        schema:
+          $ref: '#/definitions/CreateResourceGroupDetails'
+      responses:
+        201:
+          description: 'The request was accepted and creation of the resource group
+            will begin.
+
+            '
+          headers:
+            child-resource-id: &id066
+              description: 'The id of the child object being created.  Child objects
+                are not top level objects, but
+
+                exist as part of a larger object (usually instance).
+
+                '
+              type: string
+            etag: *id063
+            location: *id065
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+          schema:
+            $ref: '#/definitions/InstanceResourceGroup'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Create a resource group for the Analytics Instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/resourceGroups/{analyticsInstanceResourceGroupId}:
+    delete:
+      description: 'Allows deleting a previously created resource group.
+
+        '
+      operationId: DeleteResourceGroup
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/AnalyticsInstanceResourceGroupIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        204:
+          description: 'The request was accepted and deletion of the resource group
+            will begin.
+
+            '
+          headers:
+            child-resource-id: *id066
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Delete a resource group for the Analytics Instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+    get:
+      description: 'Get details of a resource group for an instance
+
+        '
+      operationId: GetResourceGroup
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/AnalyticsInstanceResourceGroupIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      produces:
+      - application/json
+      responses:
+        200:
+          description: 'Details of resource group
+
+            '
+          headers:
+            etag: *id063
+            opc-request-id: *id061
+          schema:
+            $ref: '#/definitions/InstanceResourceGroup'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Gets one of the resource groups for an instance
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+    put:
+      description: 'Update any fields in a resource group
+
+        '
+      operationId: UpdateResourceGroup
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/AnalyticsInstanceResourceGroupIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Resource group details to update (certificate).
+
+          '
+        in: body
+        name: UpdateResourceGroupDetails
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateResourceGroupDetails'
+      responses:
+        202:
+          description: 'The request was accepted and update of the resource group
+            will begin.
+
+            '
+          headers:
+            child-resource-id: *id066
+            etag: *id063
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+          schema:
+            $ref: '#/definitions/InstanceResourceGroup'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Update a resource group for an instance
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/vanityUrls:
+    post:
+      description: 'Allows you to specify a custom host name to be used to access
+        the Analytics instance.  You must set up a DNS entry and certificate for this
+        host in advance.
+
+        '
+      operationId: CreateVanityUrl
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Vanity URL details.
+
+          '
+        in: body
+        name: CreateVanityUrlDetails
+        required: true
+        schema:
+          $ref: '#/definitions/CreateVanityUrlDetails'
+      responses:
+        202:
+          description: 'The request was accepted and creation of the vanity URL will
+            begin.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Create a vanity URL for the Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /analyticsInstances/{analyticsInstanceId}/vanityUrls/{vanityUrlKey}:
+    delete:
+      description: 'Deletes a previously created vanity URL.
+
+        '
+      operationId: DeleteVanityUrl
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/VanityUrlKeyPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: 'The request was accepted and deletion of the vanity URL will
+            begin.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Delete a vanity URL for the Analytics instance.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+    put:
+      description: 'Uploads a new certificate for a vanity URL. Required before the
+        current certificate expires.
+
+        '
+      operationId: UpdateVanityUrl
+      parameters:
+      - $ref: '#/parameters/AnalyticsInstanceIdPathParam'
+      - $ref: '#/parameters/VanityUrlKeyPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - description: 'Vanity URL details to update (certificate).
+
+          '
+        in: body
+        name: UpdateVanityUrlDetails
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateVanityUrlDetails'
+      responses:
+        202:
+          description: 'The request was accepted and update of the vanity URL will
+            begin.
+
+            '
+          headers:
+            opc-request-id: *id061
+            opc-work-request-id: *id062
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Upload a new certificate for a vanity URL.
+      tags:
+      - analytics
+      x-related-resource: '#/definitions/AnalyticsInstance'
+  /workRequests:
+    get:
+      description: 'List all work requests in a compartment.
+
+        '
+      operationId: ListWorkRequests
+      parameters:
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/WorkRequestResourceIdQueryParam'
+      - $ref: '#/parameters/WorkRequestResourceTypeQueryParam'
+      - $ref: '#/parameters/WorkRequestStatusQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/WorkRequestSortByQueryParam'
+      - $ref: '#/parameters/SortOrderQueryParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        '200':
+          description: 'The list of work request summary objects.
+
+            '
+          headers:
+            opc-next-page: *id064
+            opc-request-id: *id061
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestSummary'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: List all work requests.
+      tags:
+      - analytics
+  /workRequests/{workRequestId}:
+    delete:
+      description: 'Cancel a work request that hasn''t started yet.
+
+        '
+      operationId: DeleteWorkRequest
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        204:
+          description: The work request was cancelled.
+          headers:
+            opc-request-id: *id061
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Cancel a work request.
+      tags:
+      - analytics
+      x-obmcs-client-retries-enabled: false
+      x-related-resource: '#/definitions/WorkRequest'
+    get:
+      description: 'Get the details of a work request.
+
+        '
+      operationId: GetWorkRequest
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        '200':
+          description: 'Retrieve a work request resource.
+
+            '
+          headers:
+            etag: *id063
+            opc-request-id: *id061
+            retry-after:
+              description: 'The number of seconds a client waits before polling this
+                endpoint again.
+
+                '
+              type: integer
+          schema:
+            $ref: '#/definitions/WorkRequest'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Get work request details.
+      tags:
+      - analytics
+  /workRequests/{workRequestId}/errors:
+    get:
+      description: 'Get the errors of a work request.
+
+        '
+      operationId: ListWorkRequestErrors
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      responses:
+        200:
+          description: 'The list of errors for the work request.
+
+            '
+          headers:
+            opc-next-page: *id064
+            opc-request-id: *id061
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestError'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Get work request errors.
+      tags:
+      - analytics
+  /workRequests/{workRequestId}/logs:
+    get:
+      description: 'Get the logs of a work request.
+
+        '
+      operationId: ListWorkRequestLogs
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      responses:
+        200:
+          description: The list of logs for the work request.
+          headers:
+            opc-next-page: *id064
+            opc-request-id: *id061
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestLog'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/DefaultError'
+      summary: Get work request logs.
+      tags:
+      - analytics
+produces:
+- application/json
+responses:
+  400:
+    description: 'Bad Request (invalid query parameters, malformed headers, and so
+      on).
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  401:
+    description: 'Unauthorized (missing or expired credentials, and so on).
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  403:
+    description: 'Forbidden (missing permissions for operation, request denied for
+      unspecified reason, and so on).
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  404:
+    description: 'Not Found. The requested resource was not found or authorized.
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  409:
+    description: 'Conflict (the operation: results in constraint violation,
+
+      the operation is incompatible with current state, and so on).
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  412:
+    description: 'Precondition Failed. One or more preconditions are not satisfied
+      for
+
+      the operation to proceed.
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  429:
+    description: 'Too Many Requests.
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  500:
+    description: 'Internal Server Error. The server encountered an unexpected condition
+
+      preventing fulfilment of the request.
+
+      '
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+  DefaultError:
+    description: An error has occurred.
+    headers:
+      opc-request-id: *id061
+    schema:
+      $ref: '#/definitions/Error'
+swagger: '2.0'
+x-obmcs-client-circuit-breaker-enabled: true
+x-obmcs-client-retries-enabled: true
+x-oracle-package: com.oracle.bmc.analytics

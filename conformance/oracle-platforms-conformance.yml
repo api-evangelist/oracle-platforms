@@ -1,0 +1,128 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Derived from the six OpenAPI documents in openapi/ and cross-checked against
+  https://www.oracle.com/corporate/cloud-compliance/ ,
+  https://docs.oracle.com/en-us/iaas/Content/Events/Concepts/eventsoverview.htm and
+  https://docs.oracle.com/en-us/iaas/Content/Identity/api-getstarted/usingopenidconnect.htm
+provider: Oracle Platforms
+providerId: oracle-platforms
+standards:
+  - id: openapi
+    name: OpenAPI / Swagger
+    conforms: true
+    version: '2.0'
+    evidence: >-
+      All six harvested documents are Swagger 2.0 with a `swagger: "2.0"` key and a populated
+      paths object — 1,154 operations total. Oracle publishes them itself from a
+      machine-readable index at docs.oracle.com/en-us/iaas/api/specs/index.json. Note the
+      version: Oracle is still emitting Swagger 2.0 in 2026, not OpenAPI 3.x, which limits
+      what tooling can express (no callbacks, no oneOf, no per-server variables).
+  - id: http-signatures
+    name: HTTP Signatures (draft-cavage-http-signatures)
+    conforms: true
+    evidence: >-
+      OCI request signing implements the HTTP Signatures draft — RSA-SHA256 over
+      (request-target), host, date/x-date, and for bodied methods content-length,
+      content-type and x-content-sha256. Documented at
+      docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: true
+    scope: identity-domains
+    evidence: >-
+      OCI IAM Identity Domains are a full OAuth 2.0 authorization server; the managed
+      Database Tools MCP Server authenticates through it. NOT used by the control-plane APIs
+      profiled here, which use request signing instead.
+  - id: oidc
+    name: OpenID Connect
+    conforms: true
+    scope: identity-domains
+    evidence: >-
+      Identity Domains serve OIDC discovery at
+      https://idcs-<tenancy-id>.identity.oraclecloud.com/.well-known/openid-configuration.
+      Tenancy-scoped, so it could not be fetched anonymously in this pass.
+  - id: scim
+    name: SCIM 2.0
+    conforms: true
+    scope: identity-domains
+    evidence: >-
+      OCI IAM Identity Domains expose a SCIM 2.0 API, and Oracle's own rate-limit table for
+      identity domains is organised around SCIM operation classes (Bulk, Import/Export).
+      This is a DOMAIN-STANDARD signature for the identity market: a consumer who already
+      speaks SCIM provisions against Oracle with no bespoke connector.
+    domain_standard: true
+    confidence: medium
+    confidence_note: >-
+      Asserted from Oracle's identity-domain documentation and the SCIM-shaped rate-limit
+      taxonomy, NOT from a schema URN observed in a harvested contract. No
+      urn:ietf:params:scim:schemas:* URN appears in any of the six specs in openapi/,
+      because none of them is the identity-domains contract.
+  - id: cloudevents
+    name: CloudEvents
+    conforms: true
+    domain_standard: true
+    evidence: >-
+      Oracle's own Events documentation states OCI events are emitted "in the CloudEvents
+      industry standard format" hosted by the CNCF, and the event reference page shows a
+      cloudEventsVersion field on every event type. Delivery is to Notifications, Streaming
+      or Functions. Fetched at HTTP 200 on 2026-08-27:
+      docs.oracle.com/en-us/iaas/Content/Events/Concepts/eventsoverview.htm and
+      docs.oracle.com/en-us/iaas/Content/Events/Reference/eventsproducers.htm
+    confidence: high
+  - id: rfc9457
+    name: RFC 9457 Problem Details
+    conforms: false
+    evidence: >-
+      OCI uses its own {code, message} envelope served as application/json. No
+      application/problem+json media type appears in any of the 1,154 operations.
+  - id: idempotency
+    name: Idempotent retries
+    conforms: true
+    evidence: >-
+      opc-retry-token header, 24-hour token lifetime, offered on 396 of 1,150 operations,
+      with a dedicated 409 InvalidatedRetryToken failure code. See conventions/.
+  - id: pagination
+    name: Cursor pagination
+    conforms: true
+    evidence: >-
+      opc-next-page opaque cursor on 236 operations, paired with limit and page query
+      parameters. No offset pagination, no total count.
+  - id: rfc8594
+    name: RFC 8594 Sunset header
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation header in any harvested operation and none documented.
+      Deprecation is announced only in prose on the Service Change Announcements page.
+  - id: rfc9116
+    name: RFC 9116 security.txt
+    conforms: false
+    evidence: >-
+      No /.well-known/security.txt served on any host probed 2026-08-27, despite a real,
+      documented disclosure program at secalert_us@oracle.com.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >-
+      Oracle ships 32 reference MCP servers at github.com/oracle/mcp (UPL-1.0, pushed
+      2026-08-24) plus two managed remote MCP services — the OCI Database Tools MCP Server
+      (GA 2026-05-12) and the built-in Autonomous AI Database MCP endpoint.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json probed on seven Oracle hosts
+      on 2026-08-27; no host returned a JSON AgentCard. No a2a/ artifact is written.
+compliance:
+  published: true
+  see: security/oracle-platforms-trust-center.yml
+  certifications: 15
+  note: >-
+    SOC 1/2/3, ISO/IEC 27001/27017/27018/27701, PCI DSS, HIPAA, HITRUST, FedRAMP, DoD IL,
+    IRAP, C5, CSA STAR and GDPR alignment, published on Oracle's cloud-compliance page.
+regulatory_context:
+  note: >-
+    Oracle Platforms spans IaaS, PaaS and SaaS across regulated sectors. The certifications
+    above are the cross-cutting layer; sector-specific regimes (e.g. FedRAMP for US public
+    sector, IRAP for Australian government, C5 for Germany) are named by Oracle per realm
+    and region rather than globally.

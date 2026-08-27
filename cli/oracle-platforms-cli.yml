@@ -1,0 +1,56 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm ,
+  https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm ,
+  https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/ (all HTTP 200),
+  https://github.com/oracle/oci-cli
+provider: Oracle Platforms
+providerId: oracle-platforms
+name: OCI CLI
+binary: oci
+official: true
+repository: https://github.com/oracle/oci-cli
+docs: https://docs.oracle.com/en-us/iaas/tools/oci-cli/latest/oci_cli_docs/
+quickstart: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
+description: >-
+  Oracle's first-party command-line interface to Oracle Cloud Infrastructure. Built on the
+  OCI Python SDK, it covers the same control plane as the six OpenAPI documents in this
+  repo — the CLI command tree is generated from the same service definitions, so a command
+  exists for essentially every operation.
+install:
+  - method: script
+    command: 'bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"'
+    platforms: [linux, macos]
+  - method: pip
+    command: pip install oci-cli
+    platforms: [linux, macos, windows]
+  - method: package-manager
+    command: 'Homebrew, Oracle Linux yum, and Windows PowerShell installers are documented'
+configuration:
+  file: ~/.oci/config
+  setup_command: oci setup config
+  docs: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm
+  description: >-
+    Named profiles hold tenancy OCID, user OCID, signing-key fingerprint, private key path
+    and region. The same profile is what the local-stdio MCP servers read via
+    OCI_CONFIG_PROFILE, so CLI configuration is a prerequisite for Oracle's MCP path too.
+auth:
+  - api-key profile (oci setup config)
+  - session token (oci session authenticate)
+  - instance principal
+  - resource principal
+command_structure: 'oci <service> <resource> <action> [options]'
+command_examples:
+  - oci compute instance list --compartment-id <ocid>
+  - oci db autonomous-database list --compartment-id <ocid>
+  - oci data-science model list --compartment-id <ocid>
+  - oci analytics analytics-instance list --compartment-id <ocid>
+command_note: >-
+  Examples reflect the documented `oci <service> <resource> <action>` shape and map onto
+  operationIds verified in openapi/ (ListInstances, ListAutonomousDatabases, ListModels,
+  ListAnalyticsInstances). The exact flag set for each was not individually probed.
+related:
+  mcp: >-
+    oracle.oci-api-mcp-server wraps this CLI as an MCP server; oracle.oci-cloud-mcp-server
+    bypasses it and calls the Python SDK directly. See mcp/oracle-platforms-mcp.yml.

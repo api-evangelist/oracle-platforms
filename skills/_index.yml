@@ -1,0 +1,42 @@
+generated: '2026-08-27'
+method: generated
+provider: Oracle Platforms
+providerId: oracle-platforms
+description: >-
+  Packaged Agent Skills for the Oracle Platforms API surface. Every operationId referenced
+  in these skills was grepped out of the harvested contracts in openapi/ and verified to
+  exist before it was written down. One skill is the provider's own file, saved verbatim.
+skills:
+  - file: oracle-platforms-oracle-mcp-AGENTS.md
+    name: oracle-mcp-AGENTS
+    method: searched
+    source: https://raw.githubusercontent.com/oracle/mcp/main/AGENTS.md
+    description: >-
+      Oracle's OWN agent instructions for the oracle/mcp repository, saved verbatim (HTTP
+      200, 7,421 bytes, 2026-08-27). Repository layout, validation commands, editing rules
+      and changelog guidance for agents working on Oracle's MCP servers. This is a
+      provider-published agent surface, not something API Evangelist authored.
+  - file: oracle-platforms-launch-compute-instance.md
+    name: launch-compute-instance
+    method: generated
+    api: Oracle Cloud Infrastructure (OCI) REST API
+    operations: 8
+  - file: oracle-platforms-provision-autonomous-database.md
+    name: provision-autonomous-database
+    method: generated
+    api: Oracle Autonomous Database API
+    operations: 10
+  - file: oracle-platforms-deploy-data-science-model.md
+    name: deploy-data-science-model
+    method: generated
+    api: Oracle Cloud Infrastructure Data Science API
+    operations: 15
+  - file: oracle-platforms-track-work-requests.md
+    name: track-work-requests
+    method: generated
+    api: cross-cutting
+    operations: 5
+    note: >-
+      The platform-wide completion model. Worth reading before any of the others — a 2xx on
+      an OCI mutation is acceptance, not completion.
+skill_count: 5

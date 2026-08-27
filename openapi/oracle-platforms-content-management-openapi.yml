@@ -1,0 +1,1527 @@
+basePath: /20190912
+definitions:
+  ChangeOceInstanceCompartmentDetails:
+    description: The information about compartment details.
+    properties:
+      compartmentId:
+        description: 'The [OCID](/Content/General/Concepts/identifiers.htm) of the
+          compartment
+
+          into which the OceInstance should be moved.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+    required:
+    - compartmentId
+    type: object
+  CreateOceInstanceDetails:
+    description: The information about new OceInstance.
+    properties:
+      adminEmail:
+        description: Admin Email for Notification
+        type: string
+      compartmentId:
+        description: Compartment Identifier
+        type: string
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      description:
+        description: OceInstance description
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name, type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      idcsAccessToken:
+        description: Identity Cloud Service access token identifying a stripe and
+          service administrator user
+        type: string
+      identityStripe:
+        $ref: '#/definitions/IdentityStripeDetails'
+      instanceAccessType:
+        description: Flag indicating whether the instance access is private or public
+        enum:
+        - PUBLIC
+        - PRIVATE
+        type: string
+      instanceLicenseType:
+        description: Flag indicating whether the instance license is new cloud or
+          bring your own license
+        enum: &id001
+        - NEW
+        - BYOL
+        - PREMIUM
+        - STARTER
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/LicenseType'
+      instanceUsageType:
+        description: Instance type based on its usage
+        enum:
+        - PRIMARY
+        - NONPRIMARY
+        type: string
+      name:
+        description: OceInstance Name
+        type: string
+      objectStorageNamespace:
+        description: Object Storage Namespace of Tenancy
+        type: string
+      tenancyId:
+        description: Tenancy Identifier
+        type: string
+      tenancyName:
+        description: Tenancy Name
+        type: string
+      upgradeSchedule:
+        description: 'Upgrade schedule type representing service to be upgraded immediately
+          whenever latest version is released
+
+          or delay upgrade of the service to previous released version
+
+          '
+        type: string
+        x-obmcs-enumref: '#/definitions/OceInstance/upgradeSchedule'
+      wafPrimaryDomain:
+        description: Web Application Firewall(WAF) primary domain
+        type: string
+    required:
+    - compartmentId
+    - name
+    - tenancyId
+    - idcsAccessToken
+    - tenancyName
+    - objectStorageNamespace
+    - adminEmail
+    type: object
+  Error:
+    description: Error Information.
+    properties:
+      code:
+        description: A short error code that defines the error, meant for programmatic
+          parsing.
+        type: string
+      message:
+        description: A human-readable error string.
+        type: string
+    required:
+    - code
+    - message
+  IdentityStripeDetails:
+    description: Details of the identity stripe used for OceInstance
+    properties:
+      serviceName:
+        description: 'Name of the Identity Cloud Service instance in My Services to
+          be used.
+
+          Example: `secondstripe`
+
+          '
+        type: string
+      tenancy:
+        description: 'Value of the Identity Cloud Service tenancy.
+
+          Example: `idcs-8416ebdd0d674f84803f4193cce026e9`
+
+          '
+        type: string
+    required:
+    - serviceName
+    - tenancy
+  LicenseType:
+    description: 'license types can be NEW for new oracle content management cloud
+      license,
+
+      or BYOL for bring your own license
+
+      '
+    enum: *id001
+    type: string
+  OceInstance:
+    description: Details of OceInstance.
+    properties:
+      adminEmail:
+        description: Admin Email for Notification
+        type: string
+      compartmentId:
+        description: Compartment Identifier
+        type: string
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      description:
+        description: OceInstance description, can be updated
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name, type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      guid:
+        description: Unique GUID identifier that is immutable on creation
+        type: string
+      id:
+        description: Unique identifier that is immutable on creation
+        type: string
+      idcsTenancy:
+        description: IDCS Tenancy Identifier
+        type: string
+      identityStripe:
+        $ref: '#/definitions/IdentityStripeDetails'
+      instanceAccessType:
+        description: Flag indicating whether the instance access is private or public
+        enum:
+        - PUBLIC
+        - PRIVATE
+        type: string
+      instanceLicenseType:
+        description: Flag indicating whether the instance license is new cloud or
+          bring your own license
+        enum: *id001
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/LicenseType'
+      instanceUsageType:
+        description: Instance type based on its usage
+        enum:
+        - PRIMARY
+        - NONPRIMARY
+        type: string
+      lifecycleState:
+        description: The current state of the file system.
+        enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - DELETING
+        - DELETED
+        - FAILED
+        type: string
+      name:
+        description: OceInstance Name
+        type: string
+      objectStorageNamespace:
+        description: Object Storage Namespace of tenancy
+        type: string
+      service:
+        additionalProperties:
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"name": "value"}`
+
+            '
+          type: object
+        description: 'SERVICE data.
+
+          Example: `{"service": {"IDCS": "value"}}`
+
+          '
+        type: object
+      stateMessage:
+        description: An message describing the current state in more detail. For example,
+          can be used to provide actionable information for a resource in Failed state.
+        type: string
+      systemTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing system tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of system tag keys. These predefined keys are scoped to
+          namespaces.
+
+          Example: `{"orcl-cloud": {"free-tier-retained": "true"}}`
+
+          '
+        type: object
+      tenancyId:
+        description: Tenancy Identifier
+        type: string
+      tenancyName:
+        description: Tenancy Name
+        type: string
+      timeCreated:
+        description: The time the the OceInstance was created. An RFC3339 formatted
+          datetime string
+        format: date-time
+        type: string
+      timeUpdated:
+        description: The time the OceInstance was updated. An RFC3339 formatted datetime
+          string
+        format: date-time
+        type: string
+      upgradeSchedule:
+        description: 'Upgrade schedule type representing service to be upgraded immediately
+          whenever latest version is released
+
+          or delay upgrade of the service to previous released version
+
+          '
+        enum:
+        - UPGRADE_IMMEDIATELY
+        - DELAYED_UPGRADE
+        type: string
+      wafPrimaryDomain:
+        description: Web Application Firewall(WAF) primary domain
+        type: string
+    required:
+    - id
+    - guid
+    - compartmentId
+    - name
+    - tenancyId
+    - tenancyName
+    - objectStorageNamespace
+    - idcsTenancy
+    - adminEmail
+    type: object
+  OceInstanceSummary:
+    description: Summary of the OceInstance.
+    properties:
+      adminEmail:
+        description: Admin Email for Notification
+        type: string
+      compartmentId:
+        description: Compartment Identifier
+        type: string
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      description:
+        description: OceInstance description, can be updated
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name, type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      guid:
+        description: Unique GUID identifier that is immutable on creation
+        type: string
+      id:
+        description: Unique identifier that is immutable on creation
+        type: string
+      idcsTenancy:
+        description: IDCS Tenancy Identifier
+        type: string
+      instanceAccessType:
+        description: Flag indicating whether the instance access is private or public
+        enum:
+        - PUBLIC
+        - PRIVATE
+        type: string
+      instanceLicenseType:
+        description: Flag indicating whether the instance license is new cloud or
+          bring your own license
+        enum: *id001
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/LicenseType'
+      instanceUsageType:
+        description: Instance type based on its usage
+        enum:
+        - PRIMARY
+        - NONPRIMARY
+        type: string
+      lifecycleState:
+        description: The current state of the file system.
+        enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - DELETING
+        - DELETED
+        - FAILED
+        type: string
+      name:
+        description: OceInstance Name
+        type: string
+      objectStorageNamespace:
+        description: Object Storage Namespace of tenancy
+        type: string
+      service:
+        additionalProperties:
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"name": "value"}`
+
+            '
+          type: object
+        description: 'SERVICE data.
+
+          Example: `{"service": {"IDCS": "value"}}`
+
+          '
+        type: object
+      stateMessage:
+        description: An message describing the current state in more detail. For example,
+          can be used to provide actionable information for a resource in Failed state.
+        type: string
+      systemTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing system tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of system tag keys. These predefined keys are scoped to
+          namespaces.
+
+          Example: `{"orcl-cloud": {"free-tier-retained": "true"}}`
+
+          '
+        type: object
+      tenancyId:
+        description: Tenancy Identifier
+        type: string
+      tenancyName:
+        description: Tenancy Name
+        type: string
+      timeCreated:
+        description: The time the the OceInstance was created. An RFC3339 formatted
+          datetime string
+        format: date-time
+        type: string
+      timeUpdated:
+        description: The time the OceInstance was updated. An RFC3339 formatted datetime
+          string
+        format: date-time
+        type: string
+      upgradeSchedule:
+        description: 'Upgrade schedule type representing service to be upgraded immediately
+          whenever latest version is released
+
+          or delay upgrade of the service to previous released version
+
+          '
+        type: string
+        x-obmcs-enumref: '#/definitions/OceInstance/upgradeSchedule'
+      wafPrimaryDomain:
+        description: Web Application Firewall(WAF) primary domain
+        type: string
+    required:
+    - id
+    - guid
+    - compartmentId
+    - name
+    - tenancyId
+    - tenancyName
+    - idcsTenancy
+    - objectStorageNamespace
+    - adminEmail
+    type: object
+  UpdateOceInstanceDetails:
+    description: The information to be updated.
+    properties:
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      description:
+        description: OceInstance description
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name, type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      instanceLicenseType:
+        description: Flag indicating whether the instance license is new cloud or
+          bring your own license
+        enum: *id001
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/LicenseType'
+      instanceUsageType:
+        description: Instance type based on its usage
+        enum:
+        - PRIMARY
+        - NONPRIMARY
+        type: string
+      wafPrimaryDomain:
+        description: Web Application Firewall(WAF) primary domain
+        type: string
+    type: object
+  WorkRequest:
+    description: A description of workrequest status
+    properties:
+      compartmentId:
+        description: 'The ocid of the compartment that contains the work request.
+          Work requests should be scoped to
+
+          the same compartment as the resource the work request affects. If the work
+          request affects multiple resources,
+
+          and those resources are not in the same compartment, it is up to the service
+          team to pick the primary
+
+          resource whose compartment should be used
+
+          '
+        type: string
+      id:
+        description: The id of the work request.
+        type: string
+      operationType:
+        description: type of the work request
+        enum:
+        - CREATE_OCE_INSTANCE
+        - UPDATE_OCE_INSTANCE
+        - DELETE_OCE_INSTANCE
+        type: string
+      percentComplete:
+        description: Percentage of the request completed.
+        format: float
+        type: number
+      resources:
+        description: The resources affected by this work request.
+        items:
+          $ref: '#/definitions/WorkRequestResource'
+        type: array
+      status:
+        description: status of current work request.
+        enum:
+        - ACCEPTED
+        - IN_PROGRESS
+        - FAILED
+        - SUCCEEDED
+        - CANCELING
+        - CANCELED
+        type: string
+      timeAccepted:
+        description: 'The date and time the request was created, as described in
+
+          [RFC 3339](https://tools.ietf.org/rfc/rfc3339), section 14.29.
+
+          '
+        format: date-time
+        type: string
+      timeFinished:
+        description: 'The date and time the object was finished, as described in [RFC
+          3339](https://tools.ietf.org/rfc/rfc3339).
+
+          '
+        format: date-time
+        type: string
+      timeStarted:
+        description: 'The date and time the request was started, as described in [RFC
+          3339](https://tools.ietf.org/rfc/rfc3339),
+
+          section 14.29.
+
+          '
+        format: date-time
+        type: string
+      workflowMonitor:
+        $ref: '#/definitions/WorkflowMonitor'
+    required:
+    - operationType
+    - status
+    - id
+    - compartmentId
+    - resources
+    - percentComplete
+    - timeAccepted
+  WorkRequestError:
+    description: An error encountered while executing a work request.
+    properties:
+      code:
+        description: 'A machine-usable code for the error that occured. Error codes
+          are listed on
+
+          (https://docs.us-phoenix-1.oraclecloud.com/Content/API/References/apierrors.htm)
+
+          '
+        type: string
+      message:
+        description: A human readable description of the issue encountered.
+        type: string
+      timestamp:
+        description: The time the error occured. An RFC3339 formatted datetime string.
+        format: date-time
+        type: string
+    required:
+    - code
+    - message
+    - timestamp
+  WorkRequestLogEntry:
+    description: A log message from the execution of a work request.
+    properties:
+      message:
+        description: Human-readable log message.
+        type: string
+      timestamp:
+        description: The time the log message was written. An RFC3339 formatted datetime
+          string
+        format: date-time
+        type: string
+    required:
+    - message
+    - timestamp
+  WorkRequestResource:
+    description: A resource created or operated on by a work request.
+    properties:
+      actionType:
+        description: 'The way in which this resource is affected by the work tracked
+          in the work request.
+
+          A resource being created, updated, or deleted will remain in the IN_PROGRESS
+          state until
+
+          work is complete for that resource at which point it will transition to
+          CREATED, UPDATED,
+
+          or DELETED, respectively.
+
+          '
+        enum:
+        - CREATED
+        - UPDATED
+        - DELETED
+        - IN_PROGRESS
+        - FAILED
+        type: string
+      entityType:
+        description: The resource type the work request is affects.
+        type: string
+      entityUri:
+        description: The URI path that the user can do a GET on to access the resource
+          metadata
+        type: string
+      identifier:
+        description: The identifier of the resource the work request affects.
+        type: string
+    required:
+    - actionType
+    - entityType
+    - identifier
+  WorkflowMonitor:
+    description: The workflow monitor for this work request.
+    properties:
+      resourceName:
+        description: resource name for this work request
+        type: string
+      workflowName:
+        description: workflow name for this work request
+        type: string
+      workflowSteps:
+        description: Workflow step of workflow monitor.
+        items:
+          $ref: '#/definitions/WorkflowStep'
+        type: array
+  WorkflowStep:
+    description: Workflow step of workflow monitor.
+    properties:
+      status:
+        description: workflow step status
+        type: string
+      stepName:
+        description: workflow step name
+        type: string
+host: 127.0.0.1
+info:
+  x-provenance:
+    method: harvested
+    first_party: true
+    publisher: Oracle
+    source: https://docs.oracle.com/en-us/iaas/api/specs/e2f95e05ed80584945feff93d4c6a65dc7eabc98f95d08926e3ba270599fc590.yaml
+    harvested: '2026-08-27'
+    note: >-
+      Published by Oracle as the contract for the Oracle Content Management API (oce) OCI service and
+      stored verbatim; API Evangelist added only this provenance block. Wired to the
+      "Oracle Content Management API" entry in apis.yml.
+  x-evidence:
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/index.json
+    what: Oracle's own machine-readable index of every OCI service specification (HTTP 200)
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/e2f95e05ed80584945feff93d4c6a65dc7eabc98f95d08926e3ba270599fc590.yaml
+    what: the harvested document for Oracle Content Management API (HTTP 200)
+  description: Oracle Content Management is a cloud-based content hub to drive omni-channel
+    content management and accelerate experience delivery
+  title: Oracle Content Management API
+  version: '20190912'
+parameters:
+  CompartmentIdQueryParam:
+    description: The ID of the compartment in which to list resources.
+    in: query
+    name: compartmentId
+    required: true
+    type: string
+  DisplayNameQueryParam:
+    description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+
+      Example: `My new resource`
+
+      '
+    in: query
+    maxLength: 255
+    minLength: 1
+    name: displayName
+    type: string
+    x-default-description: 'null'
+  IfMatchHeader:
+    description: 'For optimistic concurrency control. In the PUT or DELETE call
+
+      for a resource, set the `if-match` parameter to the value of the
+
+      etag from a previous GET or POST response for that resource.
+
+      The resource will be updated or deleted only if the etag you
+
+      provide matches the resource''s current etag value.
+
+      '
+    in: header
+    name: if-match
+    required: false
+    type: string
+  LifecycleStateQueryParam:
+    default: ACTIVE
+    description: Filter results on lifecycleState.
+    enum:
+    - CREATING
+    - UPDATING
+    - ACTIVE
+    - DELETING
+    - DELETED
+    - FAILED
+    in: query
+    name: lifecycleState
+    type: string
+  OceInstanceIdentifierPathParam:
+    description: unique OceInstance identifier
+    in: path
+    name: oceInstanceId
+    required: true
+    type: string
+  PaginationLimitQueryParam:
+    default: 50
+    description: The maximum number of items to return.
+    in: query
+    maximum: 1000
+    minimum: 1
+    name: limit
+    type: integer
+  PaginationTokenQueryParam:
+    default: 'null'
+    description: The page token representing the page at which to start retrieving
+      results. This is usually retrieved from a previous list call.
+    in: query
+    maxLength: 1024
+    minLength: 1
+    name: page
+    type: string
+  RequestIdHeader:
+    description: The client request ID for tracing.
+    in: header
+    name: opc-request-id
+    type: string
+  ResourceIdQueryParam:
+    description: The resource Identifier for which to list resources.
+    in: query
+    name: resourceId
+    required: false
+    type: string
+    x-default-description: 'null'
+  RetryTokenHeader:
+    description: 'A token that uniquely identifies a request so it can be retried
+      in case of a timeout or
+
+      server error without risk of executing that same action again. Retry tokens
+      expire after 24
+
+      hours, but can be invalidated before then due to conflicting operations. For
+      example, if a resource
+
+      has been deleted and purged from the system, then a retry of the original creation
+      request
+
+      might be rejected.
+
+      '
+    in: header
+    maxLength: 64
+    minLength: 1
+    name: opc-retry-token
+    required: false
+    type: string
+  SortByQueryParam:
+    default: timeCreated
+    description: 'The field to sort by. Only one sort order may be provided. Default
+      order for timeCreated is descending. Default order for displayName is ascending.
+      If no value is specified timeCreated is default.
+
+      '
+    enum:
+    - timeCreated
+    - displayName
+    in: query
+    name: sortBy
+    type: string
+  SortOrderQueryParam:
+    default: ASC
+    description: The sort order to use, either 'asc' or 'desc'.
+    enum:
+    - ASC
+    - DESC
+    in: query
+    name: sortOrder
+    type: string
+  TenancyIdQueryParam:
+    description: The ID of the tenancy in which to list resources.
+    in: query
+    name: tenancyId
+    required: false
+    type: string
+  WorkRequestIdPathParam:
+    description: The ID of the asynchronous request.
+    in: path
+    name: workRequestId
+    required: true
+    type: string
+paths:
+  /oceInstances:
+    get:
+      description: 'Returns a list of OceInstances.
+
+        '
+      operationId: ListOceInstances
+      parameters:
+      - $ref: '#/parameters/TenancyIdQueryParam'
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/DisplayNameQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/SortOrderQueryParam'
+      - $ref: '#/parameters/SortByQueryParam'
+      - $ref: '#/parameters/LifecycleStateQueryParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: A page of OceInstanceSummary objects.
+          headers:
+            opc-next-page:
+              description: 'For pagination of a list of `OceInstance`s. If this header
+                appears in the response, then this
+
+                is a partial list of OceInstances. Include this value as the `page`
+                parameter in a subsequent
+
+                GET request to get the next batch of OceInstances.
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/OceInstanceSummary'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Gets a list of all OceInstances in a compartment
+      tags:
+      - oceInstance
+    post:
+      description: 'Creates a new OceInstance.
+
+        '
+      operationId: CreateOceInstance
+      parameters:
+      - description: Details for the new OceInstance.
+        in: body
+        name: CreateOceInstanceDetails
+        required: true
+        schema:
+          $ref: '#/definitions/CreateOceInstanceDetails'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        202:
+          description: Accepted the request. The OceInstance will be created.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request. You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Creates a new OceInstance
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/OceInstance'
+  /oceInstances/{oceInstanceId}:
+    delete:
+      description: Deletes a OceInstance resource by identifier
+      operationId: DeleteOceInstance
+      parameters:
+      - $ref: '#/parameters/OceInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        202:
+          description: Accepted the request. The OceInstance will be deleted.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request. You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Delete a provisioned OceInstance
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/OceInstance'
+    get:
+      description: Gets a OceInstance by identifier
+      operationId: GetOceInstance
+      parameters:
+      - $ref: '#/parameters/OceInstanceIdentifierPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: Retrieves the OceInstance with the given id
+          headers:
+            etag:
+              description: For optimistic concurrency control. See `if-match`.
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+          schema:
+            $ref: '#/definitions/OceInstance'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Get OceInstance
+      tags:
+      - oceInstance
+    put:
+      description: Updates the OceInstance
+      operationId: UpdateOceInstance
+      parameters:
+      - $ref: '#/parameters/OceInstanceIdentifierPathParam'
+      - description: The information to be updated.
+        in: body
+        name: UpdateOceInstanceDetails
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateOceInstanceDetails'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        202:
+          description: Accepted the request. The OceInstance will be updated.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request. You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Update the OceInstance identified by the id
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/OceInstance'
+  /oceInstances/{oceInstanceId}/actions/changeCompartment:
+    post:
+      description: Moves a OceInstance into a different compartment
+      operationId: ChangeOceInstanceCompartment
+      parameters:
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - $ref: '#/parameters/OceInstanceIdentifierPathParam'
+      - description: The information about compartment details to be moved.
+        in: body
+        name: ChangeOceInstanceCompartmentDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeOceInstanceCompartmentDetails'
+      responses:
+        202:
+          description: Accepted the request. The OceInstance will be updated.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request. You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Moves a OceInstance into a different compartment. When provided, If-Match
+        is checked against ETag values of the OceInstance.
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/OceInstance'
+  /workRequests:
+    get:
+      description: 'Lists the work requests in a compartment.
+
+        '
+      operationId: ListWorkRequests
+      parameters:
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/ResourceIdQueryParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      responses:
+        200:
+          description: The list is being retrieved.
+          headers:
+            opc-next-page:
+              description: 'For pagination of a list of items. When paging through
+                a list, if this header appears in the response,
+
+                then a partial list might have been returned. Include this value as
+                the `page` parameter for the
+
+                subsequent GET request to get the next batch of items.
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequest'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: List Work Requests
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/WorkRequest'
+  /workRequests/{workRequestId}:
+    get:
+      description: Gets the status of the work request with the given ID.
+      operationId: GetWorkRequest
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: The detail of the work request.
+          headers:
+            etag:
+              description: For optimistic concurrency control. See `if-match`.
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            retry-after:
+              description: some decimal number representing the number of seconds
+                the client should wait before polling this endpoint again
+              format: float
+              type: number
+          schema:
+            $ref: '#/definitions/WorkRequest'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: GET Work Request Status
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/WorkRequest'
+  /workRequests/{workRequestId}/errors:
+    get:
+      description: 'Return a (paginated) list of errors for a given work request.
+
+        '
+      operationId: ListWorkRequestErrors
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      responses:
+        200:
+          description: List of work request errors.
+          headers:
+            opc-next-page:
+              description: 'For pagination of a list of items. When paging through
+                a list, if this header appears in the response,
+
+                then there might be additional items still to get. Include this value
+                as the `page` parameter for the
+
+                subsequent GET request.
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+                you need to contact Oracle about a
+
+                particular request, please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestError'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Lists work request errors
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/WorkRequestError'
+  /workRequests/{workRequestId}/logs:
+    get:
+      description: 'Return a (paginated) list of logs for a given work request.
+
+        '
+      operationId: ListWorkRequestLogs
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      responses:
+        200:
+          description: List of work request logs.
+          headers:
+            opc-next-page:
+              description: 'For pagination of a list of items. When paging through
+                a list, if this header appears in the response,
+
+                then there might be additional items still to get. Include this value
+                as the `page` parameter for the
+
+                subsequent GET request.
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+                you need to contact Oracle about a
+
+                particular request, please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestLogEntry'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Lists work request logs
+      tags:
+      - oceInstance
+      x-related-resource: '#/definitions/WorkRequestLogEntry'
+produces:
+- application/json
+responses:
+  400:
+    description: Bad Request
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  401:
+    description: Unauthorized
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  404:
+    description: Not Found
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  409:
+    description: Conflict
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  412:
+    description: Precondition failed
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  429:
+    description: Too Many Requests
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  500:
+    description: Internal Server Error
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  default:
+    description: Unknown Error
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+schemes:
+- http
+- https
+swagger: '2.0'
+x-obmcs-client-circuit-breaker-enabled: true
+x-obmcs-client-retries-enabled: true
+x-oracle-package: com.oracle.cec.provisioning

@@ -1,0 +1,61 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://docs.oracle.com/en-us/iaas/Content/Events/Concepts/eventsoverview.htm (HTTP 200),
+  https://docs.oracle.com/en-us/iaas/Content/Events/Reference/eventsproducers.htm (HTTP 200),
+  https://docs.oracle.com/en-us/iaas/Content/Notification/Tasks/create-subscription.htm (HTTP 200)
+provider: Oracle Platforms
+providerId: oracle-platforms
+asyncapi_published: false
+asyncapi_note: >-
+  Oracle publishes NO AsyncAPI document for the OCI event surface, and none is authored
+  here. What Oracle does publish is a CloudEvents-formatted event stream with a documented
+  producer/event-type catalogue, captured below as a webhook + event surface rather than
+  fabricated into a spec.
+event_surface:
+  name: OCI Events
+  format: CloudEvents
+  format_evidence: >-
+    Oracle's overview states OCI events are emitted "in the CloudEvents industry standard
+    format" hosted by the CNCF, and every entry on the Services that Produce Events
+    reference carries a cloudEventsVersion field.
+  overview: https://docs.oracle.com/en-us/iaas/Content/Events/Concepts/eventsoverview.htm
+  event_catalog: https://docs.oracle.com/en-us/iaas/Content/Events/Reference/eventsproducers.htm
+  event_catalog_description: >-
+    "Services that Produce Events" — Oracle's own reference listing every OCI service that
+    emits events and the event types it emits. Example types documented include
+    backup.begin and backup.end for database backups, and create/update/delete events for
+    Object Storage buckets and objects.
+  model: rules-and-subscriptions
+  model_description: >-
+    An event Rule matches on event type and attributes and routes to an action. Events are
+    NOT delivered directly to an arbitrary URL — Oracle's Events service delivers only to
+    three OCI targets.
+delivery_targets:
+  - name: Notifications
+    docs: https://docs.oracle.com/en-us/iaas/Content/Notification/home.htm
+  - name: Streaming
+    docs: https://docs.oracle.com/en-us/iaas/Content/Streaming/home.htm
+  - name: Functions
+    docs: https://docs.oracle.com/en-us/iaas/Content/Functions/home.htm
+webhooks:
+  supported: true
+  mechanism: OCI Notifications — HTTPS (Custom URL) subscription
+  docs: https://docs.oracle.com/en-us/iaas/Content/Notification/Tasks/create-subscription.htm
+  description: >-
+    The webhook path is indirect and worth stating plainly: OCI Events cannot POST to a
+    customer URL. To receive an OCI event on your own endpoint you route the Rule to a
+    Notifications topic, then create a subscription on that topic with the HTTPS
+    (Custom URL) protocol — Oracle's own subscription doc names that protocol verbatim. Two
+    hops, two services, and a confirmation step, where most APIs offer one webhook
+    registration call.
+  confirmation_required: true
+  confirmation_note: >-
+    HTTPS subscriptions require confirmation before delivery begins, in the usual
+    subscribe/confirm pattern.
+control_plane_operations:
+  note: >-
+    The Events, Notifications, Streaming and Functions control planes each have their own
+    OCI OpenAPI contract in Oracle's spec index (services `events`, `notification`,
+    `streaming`, `functions`). None of the six documents harvested into this repo is one of
+    them, so no event-management operationIds are claimed here.

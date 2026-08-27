@@ -1,0 +1,80 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://ocistatus.oraclecloud.com/ ,
+  https://docs.oracle.com/en-us/iaas/Content/servicechanges.htm ,
+  https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apiref.htm
+provider: Oracle Platforms
+providerId: oracle-platforms
+status_page:
+  url: https://ocistatus.oraclecloud.com/
+  name: OCI Status
+  http_status: 200
+  verified: '2026-08-27'
+  description: >-
+    Oracle's own live status board for Oracle Cloud Infrastructure, broken out by region and
+    service. This is the operational surface behind all six APIs profiled here.
+deprecation_policy:
+  published: true
+  url: https://docs.oracle.com/en-us/iaas/Content/servicechanges.htm
+  name: Service Change Announcements
+  http_status: 200
+  verified: '2026-08-27'
+  description: >-
+    Oracle publishes dated, forward-looking Service Change Announcements for OCI —
+    deprecations, desupports and behaviour changes, each with an effective date. This is
+    how a consumer of these APIs learns that something is going away before it does.
+  headers:
+    sunset: false
+    deprecation: false
+    note: >-
+      No RFC 8594 Sunset header and no Deprecation header was found in any of the 1,154
+      operations in the six harvested specs, and none is documented. Deprecation is
+      announced in prose on a docs page, not signalled at runtime — so an agent cannot learn
+      from a response that the operation it just called is scheduled for removal.
+versioning:
+  scheme: date-in-basePath
+  description: >-
+    Each OCI service pins its own YYYYMMDD version segment in the base path, fixed at
+    service launch. There is no global API version, no version negotiation header, and no
+    documented policy for how a new version supersedes an old one.
+  current:
+    - api: Oracle Cloud Infrastructure (OCI) REST API
+      version: '20160918'
+    - api: Oracle Autonomous Database API
+      version: '20160918'
+    - api: Oracle Integration Cloud API
+      version: '20190131'
+    - api: Oracle Analytics Cloud API
+      version: '20190331'
+    - api: Oracle Cloud Infrastructure Data Science API
+      version: '20190101'
+    - api: Oracle Content Management API
+      version: '20190912'
+  note: >-
+    Two of the six are still on their 2016 version segment a decade later. Read that as
+    stability of the addressing scheme, not staleness of the API — the Core Services and
+    Database specs harvested on 2026-08-27 carry 490 and 444 live operations under those
+    2016 paths.
+deprecated_operations:
+  count: 0
+  note: >-
+    No operation in any of the six harvested documents carries `deprecated: true`. Oracle
+    does not mark deprecation in the contract, so an absence here is not evidence that
+    nothing is deprecated — it is evidence that the contract does not say.
+sla:
+  published: true
+  url: https://www.oracle.com/cloud/sla/
+  note: >-
+    Oracle publishes contractual OCI SLAs covering availability, manageability and
+    performance. Not fetched during this pass; recorded as a pointer to be verified, not as
+    a probed fact.
+  verified: false
+reference:
+  api_index: https://docs.oracle.com/en-us/iaas/api/specs/index.json
+  api_index_note: >-
+    Oracle maintains a machine-readable index of every OCI service specification — 159
+    services, each with a downloadable contract. Fetched at HTTP 200 (537 KB) on 2026-08-27
+    and it is the source of every spec in openapi/. This is a genuinely strong lifecycle
+    signal: the catalogue of contracts is itself a first-class, dated, machine-readable
+    document.

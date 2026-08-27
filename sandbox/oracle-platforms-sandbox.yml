@@ -1,0 +1,56 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://www.oracle.com/cloud/free/ (HTTP 200), https://signup.oraclecloud.com/ (HTTP 200),
+  https://cloud.oracle.com/ (OCI Console), https://apex.oracle.com/ 
+provider: Oracle Platforms
+providerId: oracle-platforms
+model: free-tier-and-console
+model_note: >-
+  Oracle does NOT ship a test/live key split. There is no test-mode credential, no sandbox
+  host, no test card, no fixture generator and no time simulation — the concepts do not
+  apply to an infrastructure control plane where every call provisions a real resource. What
+  Oracle offers instead is a permanently free slice of the real platform plus a console, and
+  that is recorded here rather than forcing a payments-shaped artifact onto a cloud API.
+test_mode: false
+test_credentials: none
+test_values: none
+surfaces:
+  - name: Oracle Cloud Free Tier — Always Free Services
+    url: https://www.oracle.com/cloud/free/
+    signup: https://signup.oraclecloud.com/
+    type: free-production-slice
+    expires: false
+    description: >-
+      A set of OCI services usable at no cost with no time limit, on the real API and the
+      real hosts. Calls made against Always Free resources exercise the same 1,154-operation
+      control plane as a paid tenancy.
+  - name: Oracle Cloud Free Tier — 30-day trial credit
+    url: https://www.oracle.com/cloud/free/
+    type: trial
+    credit: US$300
+    period_days: 30
+    description: >-
+      US$300 of credit usable across all OCI services for 30 days. After 30 days the account
+      converts to Always Free unless upgraded to Pay As You Go.
+  - name: OCI Console
+    url: https://cloud.oracle.com/
+    type: console
+    description: >-
+      The browser control plane over the same APIs. This is also where the remote MCP
+      server's registration details and Server URL are issued — see mcp/.
+  - name: Oracle APEX free workspace
+    url: https://apex.oracle.com/
+    type: hosted-evaluation
+    description: >-
+      Oracle hosts free APEX workspaces for evaluating low-code app development and the APEX
+      REST services listed in apis.yml. The host returned HTTP 403 to this crawler (edge bot
+      challenge), so the workspace surface is recorded from Oracle's documentation rather
+      than probed.
+    probe_status: 403
+safety_note: >-
+  The most important sandbox fact for an agent: there is none. Every write operation against
+  these APIs acts on real infrastructure and real cost. There is no dry-run parameter
+  (see conventions/), Terminate* is irreversible (see conventions/reversibility), and the
+  cheapest available rehearsal is a compartment created for the purpose plus IAM policy
+  scoped to it.

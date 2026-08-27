@@ -1,0 +1,190 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.oracle.com/en-us/iaas/Content/API/References/apierrors.htm
+derived_from:
+  - openapi/oracle-platforms-core-openapi.yml
+  - openapi/oracle-platforms-database-openapi.yml
+  - openapi/oracle-platforms-data-science-openapi.yml
+  - openapi/oracle-platforms-analytics-openapi.yml
+  - openapi/oracle-platforms-integration-openapi.yml
+  - openapi/oracle-platforms-content-management-openapi.yml
+provider: Oracle Platforms
+providerId: oracle-platforms
+format: oracle-oci-error
+format_note: >-
+  NOT RFC 9457. OCI predates problem+json and ships its own envelope: a JSON object with a
+  short machine-readable `code` string and a human `message`, served as application/json.
+  No `type` URI, no `title`, no `instance`. The observed live shape, seen unauthenticated
+  on https://iaas.us-ashburn-1.oraclecloud.com/.well-known/security.txt during this pass,
+  is {"code": "NotAuthorizedOrNotFound", "message": "..."}. Every one of the 1,154
+  operations in the harvested specs declares 400/401/404/429/500 responses, so the envelope
+  is uniform across the whole control plane.
+envelope:
+  media_type: application/json
+  fields:
+    - name: code
+      description: Short machine-readable error identifier, e.g. NotAuthorizedOrNotFound.
+    - name: message
+      description: Human-readable explanation of the failure.
+correlation:
+  header: opc-request-id
+  description: >-
+    Returned on requests and echoed on responses; Oracle's docs instruct callers to supply
+    it when contacting OCI support about a failed request. Present on 1,207 operation
+    definitions across the harvested specs — it is the tracing primitive for this API.
+  async_header: opc-work-request-id
+  async_description: >-
+    Long-running operations return a work-request OCID in opc-work-request-id (388
+    occurrences); the caller polls the Work Requests API for terminal state rather than
+    treating the 202 as completion.
+problem_types:
+  - code: CannotParseRequest
+    status: 400
+    title: Request is incorrectly formatted
+    retryable: false
+  - code: InvalidParameter
+    status: 400
+    title: A parameter is invalid or incorrectly formatted
+    retryable: false
+    note: Also returned at 404 when a dynamic path component is invalid or not allowed.
+  - code: LimitExceeded
+    status: 400
+    title: Request exceeds an Oracle-defined limit for the tenancy
+    retryable: false
+    remediation: Request a service-limit increase; see Limits by Service.
+  - code: MissingParameter
+    status: 400
+    title: A required parameter is missing
+    retryable: false
+  - code: QuotaExceeded
+    status: 400
+    title: Request exceeds an administrator-defined quota for the compartment
+    retryable: false
+  - code: RelatedResourceNotAuthorizedOrNotFound
+    status: 400
+    title: A related resource was not found, or the caller is not authorized to see it
+    retryable: false
+  - code: NotAuthenticated
+    status: 401
+    title: Authentication information is missing or incorrect
+    retryable: false
+    remediation: Check the request signature and the API signing key; see authentication/.
+  - code: NotAllowed
+    status: 403
+    title: The operation must be directed at the tenancy home region
+    retryable: false
+  - code: NotAuthorized
+    status: 403
+    title: The caller is not authorized to update fields in the request
+    retryable: false
+  - code: SignUpRequired
+    status: 403
+    title: The operation requires an opt-in before it can be called
+    retryable: false
+  - code: NotAuthorizedOrNotFound
+    status: 404
+    title: The resource at the URI was not found, or the caller is not authorized to see it
+    retryable: false
+    note: >-
+      Deliberately ambiguous — OCI collapses "does not exist" and "you may not see it" into
+      one code so the API does not leak resource existence to an unauthorized caller. An
+      agent must not treat this as proof of absence.
+  - code: NotFound
+    status: 404
+    title: No operation is supported at this URI path and method
+    retryable: false
+  - code: NamespaceNotFound
+    status: 404
+    title: The namespace was not found, or the caller is not authorized
+    retryable: false
+  - code: MethodNotAllowed
+    status: 405
+    title: The HTTP method is not supported for this resource
+    retryable: false
+  - code: Conflict
+    status: 409
+    title: Resource state conflicts with the current state and will not resolve on its own
+    retryable: false
+  - code: ExternalServerIncorrectState
+    status: 409
+    title: An external server is in an incorrect state, timed out, or is unreachable
+    retryable: true
+    retry: with backoff
+  - code: IncorrectState
+    status: 409
+    title: Resource state conflicts now but will resolve with time
+    retryable: true
+    retry: with backoff
+  - code: InvalidatedRetryToken
+    status: 409
+    title: The opc-retry-token was invalidated by a subsequent conflicting operation
+    retryable: false
+    note: >-
+      The idempotency failure mode. A retry token is invalidated when the resource it
+      referred to has been deleted and purged, so replaying the original create is rejected
+      rather than silently duplicating. See conventions/ for the 24-hour token lifetime.
+  - code: ResourceLocked
+    status: 409
+    title: The resource is locked or in use
+    retryable: false
+  - code: NotAuthorizedOrResourceAlreadyExists
+    status: 409
+    title: Not authorized, or the resource already exists (create operations)
+    retryable: false
+  - code: NoEtagMatch
+    status: 412
+    title: The etag supplied in if-match does not match the resource's current etag
+    retryable: false
+    remediation: Re-GET the resource, take the fresh etag, and retry the conditional write.
+  - code: PayloadTooLarge
+    status: 413
+    title: The request entity exceeds server size limits
+    retryable: false
+  - code: UnprocessableEntity
+    status: 422
+    title: The payload is syntactically correct but semantically invalid
+    retryable: false
+  - code: TooManyRequests
+    status: 429
+    title: Too many requests issued in too short a period
+    retryable: true
+    retry: with backoff
+    remediation: >-
+      Oracle's guidance is literally "add some delays between requests". No Retry-After
+      header and no backoff algorithm is documented for the OCI control plane — see
+      rate-limits/ for what IS published.
+  - code: RequestHeaderFieldsTooLarge
+    status: 431
+    title: HTTP headers are too long
+    retryable: false
+  - code: InternalServerError
+    status: 500
+    title: An internal server error occurred
+    retryable: true
+    retry: with backoff
+  - code: MethodNotImplemented
+    status: 501
+    title: The HTTP method was not recognized
+    retryable: false
+  - code: ServiceUnavailable
+    status: 503
+    title: The service is unavailable
+    retryable: true
+    retry: with backoff
+  - code: ExternalServerUnreachable
+    status: 503
+    title: Cannot connect to an external system
+    retryable: true
+    retry: with backoff
+  - code: ExternalServerTimeout
+    status: 503
+    title: The connection to an external system timed out
+    retryable: true
+    retry: with backoff
+  - code: ExternalServerInvalidResponse
+    status: 503
+    title: An external system returned an unacceptable response
+    retryable: true
+    retry: with backoff
+error_count: 31
+retryable_count: 10

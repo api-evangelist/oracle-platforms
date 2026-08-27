@@ -1,0 +1,215 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Derived by parsing the six OpenAPI documents in openapi/ (1,154 operations), enriched
+  from https://docs.oracle.com/en-us/iaas/Content/API/Concepts/usingapi.htm and
+  https://docs.oracle.com/en-us/iaas/Content/API/References/apierrors.htm
+provider: Oracle Platforms
+providerId: oracle-platforms
+auth:
+  style: request-signing
+  summary: >-
+    OCI does not use a bearer token on the control plane. Every request is SIGNED with an
+    RSA private key whose public half is uploaded to the calling user, following the HTTP
+    Signatures draft. See authentication/oracle-platforms-authentication.yml.
+  note: >-
+    None of the six harvested specs declares a securityDefinitions block at all — the auth
+    model is documented in prose and implemented in the SDKs, not in the contract. That is a
+    real contract gap, and it is why authentication/ is method:searched rather than derived.
+idempotency:
+  supported: true
+  mechanism: header
+  header: opc-retry-token
+  scope: per-request
+  retention: 24 hours
+  max_length: 64
+  min_length: 1
+  operations_supporting: 396
+  operations_total: 1150
+  coverage_note: >-
+    Counted by parsing every operation's parameter list for the RetryTokenHeader reference:
+    core 154/490, database 160/444, data-science 48/155, analytics 18/29, integration 14/22,
+    content-management 2/10. Coverage tracks the write surface — the token is offered on
+    creates and other non-idempotent mutations, not on reads.
+  description_verbatim: >-
+    A token that uniquely identifies a request so it can be retried in case of a timeout or
+    server error without risk of executing that same action again. Retry tokens expire after
+    24 hours, but can be invalidated before then due to conflicting operations (for example,
+    if a resource has been deleted and purged from the system, then a retry of the original
+    creation request may be rejected).
+  failure_mode:
+    status: 409
+    code: InvalidatedRetryToken
+    meaning: >-
+      The token was invalidated by a subsequent conflicting operation. The safe response is
+      to re-read state, not to reissue with a fresh token.
+concurrency:
+  supported: true
+  mechanism: etag + if-match
+  request_header: if-match
+  response_field: etag
+  operations_supporting: 489
+  description_verbatim: >-
+    For optimistic concurrency control. In the PUT or DELETE call for a resource, set the
+    if-match parameter to the value of the etag from a previous GET or POST response for
+    that resource. The resource will be updated or deleted only if the etag you provide
+    matches the resource's current etag value.
+  failure_mode:
+    status: 412
+    code: NoEtagMatch
+pagination:
+  style: opaque-cursor
+  request_params:
+    - name: limit
+      in: query
+      description: Maximum items to return per page.
+    - name: page
+      in: query
+      description: >-
+        The opaque page token from a previous response's opc-next-page header. Not an
+        offset — it must be echoed verbatim.
+  response_headers:
+    - name: opc-next-page
+      description: Opaque token for the next page; absent when the listing is exhausted.
+      occurrences: 243
+    - name: opc-prev-page
+      description: Opaque token for the previous page, where the service supports it.
+      occurrences: 24
+  operations_paginated: 236
+  agent_note: >-
+    Termination is signalled by ABSENCE of opc-next-page, not by an empty page or a total
+    count. There is no total-results field anywhere in the six specs, so an agent cannot
+    know the size of a listing before walking it.
+tracing:
+  request_id_header: opc-request-id
+  occurrences: 1207
+  behaviour: >-
+    Caller may supply it; the service echoes it on the response. Oracle's docs instruct
+    callers to quote it when opening a support request about a failure.
+async:
+  model: work-requests
+  header: opc-work-request-id
+  occurrences: 388
+  description: >-
+    Mutating operations that cannot complete synchronously return 202 with a work-request
+    OCID. The caller polls the Work Requests API for terminal status. A 202 is NOT success —
+    treating it as one is the most common agent error against this API.
+versioning:
+  style: date-in-basePath
+  examples:
+    - Core Services API — /20160918
+    - Database Service API — /20160918
+    - Oracle Integration API — /20190131
+    - Analytics API — /20190331
+    - Data Science API — /20190101
+    - Oracle Content Management API — /20190912
+  note: >-
+    Each OCI service pins its own YYYYMMDD version segment in the base path, set at service
+    launch. There is no global API version and no version negotiation header. Some of these
+    dates are a decade old and still current — the date is an identity, not a freshness
+    signal.
+errors:
+  envelope: '{ "code": "<MachineCode>", "message": "<human text>" }'
+  media_type: application/json
+  rfc9457: false
+  catalog: errors/oracle-platforms-problem-types.yml
+rate_limit_signaling:
+  status_on_exhaustion: 429
+  code: TooManyRequests
+  headers: none-documented
+  note: >-
+    No X-RateLimit-*, no RateLimit-*, no Retry-After is documented for the OCI control
+    plane. Oracle's published remediation is to "add some delays between requests". This is
+    the weakest link in an otherwise strong runtime-semantics story: an agent gets a 429
+    with no machine-readable hint of when to come back. See rate-limits/.
+identifiers:
+  scheme: OCID
+  format: 'ocid1.<resource-type>.<realm>.[region][.future use].<unique ID>'
+  docs: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm
+  note: >-
+    Every resource in every one of the six APIs is addressed by an OCID. The type segment
+    makes an identifier self-describing, so an agent can tell a compartment id from an
+    instance id without a lookup.
+reversibility:
+  applicable: true
+  grade: documented
+  grade_note: >-
+    Graded `documented` rather than `verified` for the surface as a whole. Real reversal
+    operations exist and are named below, and ONE of them (Autonomous Database restore) has
+    a window Oracle states in its own docs. The rest — instance and DB-system termination,
+    detach operations, work-request cancellation — publish a reversal path with no stated
+    window, so the surface-level grade is held at documented rather than promoted on the
+    strength of a single verified path. No window is asserted here that Oracle does not
+    state.
+  read_only: false
+  reversals:
+    - operation: RestoreAutonomousDatabase
+      spec: openapi/oracle-platforms-database-openapi.yml
+      reverses: Data loss / unwanted change to an Autonomous Database
+      window: >-
+        Point-in-time restore is bounded by the automatic backup retention period, which
+        Oracle states as "a retention period between 1 day and up to 60 days" (configurable
+        per database).
+      window_verified: true
+      docs: https://docs.oracle.com/en/cloud/paas/autonomous-database/serverless/adbsb/backup-restore.html
+    - operation: RestoreDatabase
+      spec: openapi/oracle-platforms-database-openapi.yml
+      reverses: Data loss / unwanted change to a Database Service database
+      window: not stated in the operation description
+      window_verified: false
+    - operation: RestoreArchivedModelArtifact
+      spec: openapi/oracle-platforms-data-science-openapi.yml
+      reverses: Archival of a model artifact
+      window: not stated
+      window_verified: false
+    - operation: RecoverMlApplicationInstanceView
+      spec: openapi/oracle-platforms-data-science-openapi.yml
+      reverses: A failed ML application instance view
+      window: not stated
+      window_verified: false
+    - operation: CancelWorkRequest
+      spec: openapi/oracle-platforms-core-openapi.yml
+      reverses: An in-flight asynchronous operation, before it completes
+      window: while the work request is still in a cancellable state
+      window_verified: false
+    - operation: CancelJobRun
+      spec: openapi/oracle-platforms-data-science-openapi.yml
+      reverses: An in-flight Data Science job run
+      window: while the run is in progress
+      window_verified: false
+    - operation: CancelPipelineRun
+      spec: openapi/oracle-platforms-data-science-openapi.yml
+      reverses: An in-flight Data Science pipeline run
+      window: while the run is in progress
+      window_verified: false
+  irreversible:
+    - operation: TerminateInstance
+      spec: openapi/oracle-platforms-core-openapi.yml
+      note: >-
+        No un-terminate operation exists. Boot-volume preservation is a parameter ON the
+        terminate call, decided BEFORE the action, not afterwards — which is exactly the
+        thing an agent needs to know before it acts.
+    - operation: TerminateDbSystem
+      spec: openapi/oracle-platforms-database-openapi.yml
+    - operation: TerminateAutonomousContainerDatabase
+      spec: openapi/oracle-platforms-database-openapi.yml
+    - operation: TerminateInstancePool
+      spec: openapi/oracle-platforms-core-openapi.yml
+  agent_guidance: >-
+    Before any Terminate* call, assume no undo. Before any Delete* call, check whether the
+    service offers a scheduled-deletion window (several OCI services do; none of the six
+    documents harvested here state one in the operation description). Cancellation of
+    asynchronous work is available through the work-request surface and is the cheapest
+    reversal in this API.
+dry_run_mode:
+  supported: false
+  note: >-
+    No dry-run, preview, validate-only or simulate parameter was found on any of the 1,154
+    operations. OCI's rehearsal surface is IAM policy simulation and quotas, not a
+    per-request dry run.
+cross_links:
+  errors: errors/oracle-platforms-problem-types.yml
+  lifecycle: lifecycle/oracle-platforms-lifecycle.yml
+  authentication: authentication/oracle-platforms-authentication.yml
+  rate_limits: rate-limits/oracle-platforms-rate-limits.yml
+  data_model: data-model/oracle-platforms-data-model.yml

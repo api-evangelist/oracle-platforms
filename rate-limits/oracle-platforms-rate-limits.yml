@@ -1,131 +1,151 @@
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+generated: '2026-08-27'
+method: searched
+source: >-
+  https://docs.oracle.com/en-us/iaas/Content/Identity/sku/api-rate-limiting.htm and
+  https://docs.oracle.com/en-us/iaas/Content/API/References/apierrors.htm and
+  https://docs.oracle.com/en-us/iaas/Content/General/Concepts/servicelimits.htm
 provider: Oracle Platforms
 providerId: oracle-platforms
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-04'
-tags:
-  - Analytics
-  - Cloud Computing
-  - Database
-  - Enterprise Software
-  - Infrastructure as a Service
-  - Integration
-  - Machine Learning
-  - Platform as a Service
-  - SaaS
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Oracle Platforms API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+modified: '2026-08-27'
+supersedes: >-
+  The 2026-05-04 bulk-sweep scaffold that previously occupied this file. That scaffold
+  asserted X-RateLimit-* response headers, free/professional/enterprise tiers, and 10/100/1000
+  requests-per-minute figures. NONE of that was Oracle's — Oracle publishes no rate-limit
+  response headers at all, and has no free/pro/enterprise API tiering. Replaced with what
+  Oracle actually documents.
+description: >-
+  Published rate limits for the Oracle Platforms API surface. Oracle's posture splits in
+  two: the OCI control plane throttles but publishes no numbers and no headers, while IAM
+  Identity Domains publish an exact per-second and per-minute table by domain type. Both
+  are recorded below with their source.
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+headers_note: >-
+  Oracle documents NO rate-limit response headers for the OCI control plane — no
+  X-RateLimit-*, no RateLimit-*, no Retry-After. The published remediation for a 429 is
+  literally "add some delays between requests". This is the runtime signal an agent needs
+  and it is absent: the caller learns it is throttled only by receiving the error, and gets
+  no machine-readable hint of when to retry. Recorded as null rather than omitted so the
+  absence is legible as a checked fact.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
+  throttledCode: TooManyRequests
+  quotaExceeded: 400
+  quotaExceededCode: QuotaExceeded
+  limitExceeded: 400
+  limitExceededCode: LimitExceeded
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: OCI control plane request throttling
+    scope: per-tenancy
+    surface: >-
+      Core Services, Database, Data Science, Analytics, Integration and Content Management
+      control-plane APIs
+    limit: null
+    window: null
+    documented: false
+    note: >-
+      Oracle states that OCI "applies throttling to many API requests to prevent accidental
+      or abusive use of resources" and returns 429 TooManyRequests, but publishes no numeric
+      ceiling, window, or burst for these services. An honest null, not an omission.
+    source: https://docs.oracle.com/en-us/iaas/Content/API/References/apierrors.htm
+  - name: IAM Identity Domains — AuthN (Free domain)
+    scope: per-identity-domain
+    metric: requests_per_second
     limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Oracle Cloud Infrastructure (OCI) REST API
-      - Oracle Autonomous Database API
-      - Oracle Integration Cloud API
-      - Oracle Content Management API
-      - Oracle Fusion Cloud ERP API
-      - Oracle Analytics Cloud API
-      - Oracle Cloud Infrastructure Data Science API
-      - Oracle APEX REST APIs
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Oracle Cloud Infrastructure (OCI) REST API
-      - Oracle Autonomous Database API
-      - Oracle Integration Cloud API
-      - Oracle Content Management API
-      - Oracle Fusion Cloud ERP API
-      - Oracle Analytics Cloud API
-      - Oracle Cloud Infrastructure Data Science API
-      - Oracle APEX REST APIs
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
+    window: second
+    source: https://docs.oracle.com/en-us/iaas/Content/Identity/sku/api-rate-limiting.htm
+  - name: IAM Identity Domains — AuthN (Free domain, per minute)
+    scope: per-identity-domain
     metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Oracle Cloud Infrastructure (OCI) REST API
-      - Oracle Autonomous Database API
-      - Oracle Integration Cloud API
-      - Oracle Content Management API
-      - Oracle Fusion Cloud ERP API
-      - Oracle Analytics Cloud API
-      - Oracle Cloud Infrastructure Data Science API
-      - Oracle APEX REST APIs
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Oracle Cloud Infrastructure (OCI) REST API
-      - Oracle Autonomous Database API
-      - Oracle Integration Cloud API
-      - Oracle Content Management API
-      - Oracle Fusion Cloud ERP API
-      - Oracle Analytics Cloud API
-      - Oracle Cloud Infrastructure Data Science API
-      - Oracle APEX REST APIs
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
+    limit: 150
+    window: minute
+  - name: IAM Identity Domains — AuthN (Premium domain)
+    scope: per-identity-domain
+    metric: requests_per_second
+    limit: 95
+    window: second
+  - name: IAM Identity Domains — AuthN (Premium domain, per minute)
+    scope: per-identity-domain
     metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Oracle Cloud Infrastructure (OCI) REST API
-      - Oracle Autonomous Database API
-      - Oracle Integration Cloud API
-      - Oracle Content Management API
-      - Oracle Fusion Cloud ERP API
-      - Oracle Analytics Cloud API
-      - Oracle Cloud Infrastructure Data Science API
-      - Oracle APEX REST APIs
+    limit: 4500
+    window: minute
+  - name: IAM Identity Domains — BasicAuthN (Oracle Apps Premium)
+    scope: per-identity-domain
+    metric: requests_per_second
+    limit: 160
+    window: second
+  - name: IAM Identity Domains — Token Management (Premium domain)
+    scope: per-identity-domain
+    metric: requests_per_second
+    limit: 65
+    window: second
+  - name: IAM Identity Domains — Token Management (Premium domain, per minute)
+    scope: per-identity-domain
+    metric: requests_per_minute
+    limit: 3400
+    window: minute
+  - name: IAM Identity Domains — Other endpoints (Premium domain)
+    scope: per-identity-domain
+    metric: requests_per_second
+    limit: 90
+    window: second
+  - name: IAM Identity Domains — Other endpoints (Premium domain, per minute)
+    scope: per-identity-domain
+    metric: requests_per_minute
+    limit: 5000
+    window: minute
+  - name: IAM Identity Domains — Bulk API
+    scope: per-identity-domain
+    metric: requests_per_second
+    limit: 5
+    window: second
+    note: Identical across every domain type, Free through Premium. 50 operations per bulk call.
+  - name: IAM Identity Domains — Bulk API (per minute)
+    scope: per-identity-domain
+    metric: requests_per_minute
+    limit: 200
+    window: minute
+  - name: IAM Identity Domains — Import/Export (Premium domain)
+    scope: per-identity-domain
+    metric: requests_per_day
+    limit: 10
+    window: day
+    note: >-
+      Also capped at 3 per hour. Only one of Import, full app sync, Bulk API or Export can
+      run at a time.
+payload_limits:
+  - name: Identity Domains request payload
+    limit: 1 MB
+  - name: CSV import
+    limit: 100,000 rows per file, 10 MB max file size
+  - name: CSV export
+    limit: 100,000 rows
+service_limits:
+  note: >-
+    Separate from request throttling, OCI enforces per-tenancy RESOURCE limits and
+    compartment quotas — exceeding them returns 400 LimitExceeded or 400 QuotaExceeded, not
+    429. The full per-service table is published.
+  docs: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/servicelimits.htm
+limit_count: 12
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Backoff
+    description: >-
+      Oracle marks 429, 500, 503 and the 409 IncorrectState family as "retry with backoff".
+      No algorithm, jitter guidance or Retry-After value is published, so clients must
+      choose their own.
+  - name: Dynamic throttling
+    description: >-
+      For OCI Generative AI specifically, Oracle states limits are adjusted dynamically per
+      tenancy based on demand and are therefore deliberately undocumented.
+    docs: https://docs.oracle.com/en-us/iaas/Content/generative-ai/dynamic-throttling.htm
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

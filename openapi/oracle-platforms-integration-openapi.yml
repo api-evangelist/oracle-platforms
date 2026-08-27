@@ -1,0 +1,2764 @@
+basePath: /20190131
+definitions:
+  AddLogAnalyticsLogGroupDetails:
+    description: 'Input payload to ADD Log Analytics Log Group for given IntegrationInstance.
+
+      Some actions may not be applicable to specific integration types.
+
+      '
+    properties:
+      logGroupId:
+        description: Log Group ocid.
+        type: string
+    required:
+    - logGroupId
+    type: object
+  AddOracleManagedCustomEndpointDetails:
+    description: Details for enabling Oracle Managed custom endpoint
+    properties:
+      dnsType: &id002
+        description: Type of DNS.
+        enum:
+        - OCI
+        type: string
+      dnsZoneName:
+        description: DNS Zone name
+        type: string
+      hostname:
+        description: Oracle managed custom hostname
+        type: string
+    required:
+    - hostname
+    type: object
+  AttachmentDetails:
+    description: Description of an attachments for this instance
+    properties:
+      isImplicit:
+        description: '* If role == `PARENT`, the attached instance was created by
+          this service instance
+
+          * If role == `CHILD`, this instance was created from attached instance on
+          behalf of a user
+
+          '
+        type: boolean
+      targetId:
+        description: The OCID of the target instance (which could be any other OCI
+          PaaS/SaaS resource), to which this instance is attached.
+        type: string
+      targetInstanceUrl:
+        description: The dataplane instance URL of the attached instance
+        type: string
+      targetRole:
+        description: "The role of the target attachment.\n   * `PARENT` - The target\
+          \ instance is the parent of this attachment.\n   * `CHILD` - The target\
+          \ instance is the child of this attachment.\n"
+        enum:
+        - PARENT
+        - CHILD
+        type: string
+      targetServiceType:
+        description: The type of the target instance, such as "FUSION".
+        type: string
+    required:
+    - targetRole
+    - isImplicit
+    - targetId
+    - targetInstanceUrl
+    - targetServiceType
+    type: object
+  ChangeIntegrationInstanceCompartmentDetails:
+    description: The information to be updated.
+    properties:
+      compartmentId:
+        description: Compartment Identifier.
+        maxLength: 255
+        minLength: 1
+        type: string
+    type: object
+  ChangeIntegrationInstanceNetworkEndpointDetails:
+    description: 'Input payload to update an Integration instance endpoint details.
+      An empty payload will clear out any existing configuration.
+
+
+      Some actions may not be applicable to specific integration types,
+
+      see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
+
+      for details.
+
+      '
+    properties:
+      networkEndpointDetails: &id001
+        $ref: '#/definitions/NetworkEndpointDetails'
+  ChangePrivateEndpointOutboundConnectionDetails:
+    description: 'Input payload to ADD/REMOVE Private Endpoint Outbound Connection
+      for given IntegrationInstance.
+
+
+      Some actions may not be applicable to specific integration types,
+
+      see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
+
+      for details.
+
+      '
+    properties:
+      privateEndpointOutboundConnection:
+        $ref: '#/definitions/OutboundConnection'
+  ComponentAllowListDetails:
+    description: 'A collection of AllowListedIps and AllowListedVcns for a specific
+      OIC component: global, RT, or DT
+
+      '
+    properties:
+      allowlistedHttpIps: &id012
+        description: 'Source IP addresses or IP address ranges ingress rules. (ex:
+          "168.122.59.5", "10.20.30.0/26")
+
+          An invalid IP or CIDR block will result in a 400 response.
+
+          '
+        items:
+          maxLength: 255
+          minLength: 1
+          type: string
+        type: array
+      allowlistedHttpVcns:
+        description: 'Virtual Cloud Networks allowed to access this network endpoint.
+
+          '
+        items:
+          $ref: '#/definitions/VirtualCloudNetwork'
+        type: array
+    type: object
+  CreateCustomEndpointDetails:
+    description: Details for a custom endpoint for the integration instance (update).
+    properties:
+      certificateSecretId:
+        description: 'Optional OCID of a vault/secret containing a private SSL certificate
+          bundle to be used for the custom hostname.
+
+          All certificates should be stored in a single base64 encoded secret
+
+          Note the update will fail if this is not a valid certificate.
+
+          '
+        type: string
+      hostname:
+        description: A custom hostname to be used for the integration instance URL,
+          in FQDN format.
+        format: hostname
+        type: string
+    required:
+    - hostname
+    type: object
+  CreateIntegrationInstanceDetails:
+    description: 'The information about new IntegrationInstance.
+
+      Some properties may not be applicable to specific integration types,
+
+      see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
+
+      for details.
+
+      '
+    properties:
+      alternateCustomEndpoints:
+        description: 'A list of alternate custom endpoints to be used for the integration
+          instance URL
+
+          (contact Oracle for alternateCustomEndpoints availability for a specific
+          instance).
+
+          '
+        items:
+          $ref: '#/definitions/CreateCustomEndpointDetails'
+        type: array
+      compartmentId:
+        description: Compartment Identifier.
+        maxLength: 255
+        minLength: 1
+        type: string
+      consumptionModel:
+        description: Optional parameter specifying which entitlement to use for billing
+          purposes. Only required if the account possesses more than one entitlement.
+        enum: &id004
+        - UCM
+        - GOV
+        - OIC4SAAS
+        type: string
+      customEndpoint:
+        $ref: '#/definitions/CreateCustomEndpointDetails'
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are
+
+              supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped
+
+            to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to
+
+          namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      displayName:
+        description: Integration Instance Identifier.
+        type: string
+      domainId:
+        description: 'The OCID of the identity domain, that will be used to determine
+          the
+
+          corresponding Idcs Stripe and create an Idcs application within the stripe.
+
+          This parameter is mutually exclusive with parameter: idcsAt, i.e only one
+          of
+
+          two parameters should be specified.
+
+          '
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name,
+
+          type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      idcsAt:
+        description: IDCS Authentication token. This is required for all realms with
+          IDCS. Its optional as its not required for non IDCS realms.
+        type: string
+      integrationInstanceType:
+        description: 'Standard or Enterprise type,
+
+          Oracle Integration Generation 2 uses ENTERPRISE and STANDARD,
+
+          Oracle Integration 3 uses ENTERPRISEX and STANDARDX
+
+          '
+        enum: &id006
+        - STANDARD
+        - ENTERPRISE
+        - STANDARDX
+        - ENTERPRISEX
+        - HEALTHCARE
+        type: string
+      isByol:
+        description: Bring your own license.
+        type: boolean
+      isDisasterRecoveryEnabled:
+        default: false
+        description: Is Disaster Recovery enabled or not.
+        type: boolean
+      isFileServerEnabled:
+        default: false
+        description: The file server is enabled or not.
+        type: boolean
+      isVisualBuilderEnabled:
+        description: Visual Builder is enabled or not.
+        type: boolean
+      messagePacks:
+        default: 1
+        description: The number of configured message packs
+        type: integer
+      networkEndpointDetails: *id001
+      securityAttributes: &id007
+        additionalProperties:
+          additionalProperties:
+            description: 'Attribute value and mode. Only the String type is supported
+              for value. Mode is currently always "enforce".
+
+              '
+            type: object
+          description: 'Key-value pair representing a security attribute key and value,
+            scoped to a namespace.
+
+
+            Example: `{"MaxEgressCount": {"value": "42", "mode": "enforce"}}`
+
+            '
+          type: object
+        description: 'Security attributes for this resource. Each key is predefined
+          and scoped to a namespace.
+
+          For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+          Example: `{"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}`
+
+          '
+        type: object
+      shape:
+        description: Shape
+        enum: &id008
+        - DEVELOPMENT
+        - PRODUCTION
+        type: string
+    required:
+    - displayName
+    - integrationInstanceType
+    - compartmentId
+    - isByol
+    - messagePacks
+    type: object
+  CrossRegionIntegrationInstanceDetails:
+    description: 'Details of integration instance created in cross region for disaster
+      recovery.
+
+      '
+    properties:
+      id:
+        description: Cross region integration instance identifier
+        type: string
+      region:
+        description: Cross region where integration instance is created
+        type: string
+      role: &id003
+        description: Role of the integration instance in the region
+        enum:
+        - PRIMARY
+        - SECONDARY
+        - UNKNOWN
+        type: string
+      timeRoleChanged:
+        description: Time when cross region integration instance role was changed
+        format: date-time
+        type: string
+    type: object
+  CustomEndpointDetails:
+    description: Details for a custom endpoint for the integration instance.
+    properties:
+      alias:
+        description: 'When creating the DNS CNAME record for the custom hostname,
+          this value must be specified in the rdata.
+
+          '
+        format: hostname
+        type: string
+      certificateSecretId:
+        description: 'Optional OCID of a vault/secret containing a private SSL certificate
+          bundle to be used for the custom hostname.
+
+          '
+        type: string
+      certificateSecretVersion:
+        description: 'The secret version used for the certificate-secret-id (if certificate-secret-id
+          is specified).
+
+          '
+        type: integer
+      dnsType: *id002
+      dnsZoneName:
+        description: DNS Zone name
+        type: string
+      hostname:
+        description: A custom hostname to be used for the integration instance URL,
+          in FQDN format.
+        format: hostname
+        type: string
+      managedType:
+        description: Indicates if custom endpoint is managed by oracle or customer.
+        enum:
+        - ORACLE_MANAGED
+        - CUSTOMER_MANAGED
+        type: string
+    required:
+    - hostname
+    type: object
+  DisasterRecoveryDetails:
+    description: 'Disaster recovery details for the integration instance created in
+      the region.
+
+      '
+    properties:
+      crossRegionIntegrationInstanceDetails:
+        $ref: '#/definitions/CrossRegionIntegrationInstanceDetails'
+      regionalInstanceUrl:
+        description: Region specific instance url for the integration instance in
+          the region
+        type: string
+      role: *id003
+    required:
+    - role
+    - regionalInstanceUrl
+    - crossRegionIntegrationInstanceDetails
+    type: object
+  Error:
+    description: Error Information.
+    properties:
+      code:
+        description: A short error code that defines the error, meant for programmatic
+          parsing.
+        type: string
+      message:
+        description: A human-readable error string.
+        type: string
+    required:
+    - code
+    - message
+  ExtendDataRetentionDetails:
+    description: Details for extending data retention for given integration instance
+    properties:
+      dataRetentionPeriod: &id005
+        description: Data retention period set for given integration instance
+        enum:
+        - MONTHS_1
+        - MONTHS_3
+        - MONTHS_6
+        type: string
+    required:
+    - dataRetentionPeriod
+    type: object
+  IdcsInfoDetails:
+    description: Information for IDCS access
+    properties:
+      idcsAppDisplayName:
+        description: The IDCS application display name associated with the instance
+        type: string
+      idcsAppId:
+        description: The IDCS application ID associated with the instance
+        type: string
+      idcsAppLocationUrl:
+        description: URL for the location of the IDCS Application (used by IDCS APIs)
+        type: string
+      idcsAppName:
+        description: The IDCS application name associated with the instance
+        type: string
+      instancePrimaryAudienceUrl:
+        description: 'The URL used as the primary audience for integration flows in
+          this instance
+
+          type: string
+
+          '
+        type: string
+    required:
+    - idcsAppLocationUrl
+    - idcsAppDisplayName
+    - idcsAppId
+    - idcsAppName
+    - instancePrimaryAudienceUrl
+    type: object
+  IntegrationInstance:
+    description: Description of Integration Instance.
+    properties:
+      alternateCustomEndpoints:
+        description: 'A list of alternate custom endpoints used for the integration
+          instance URL.
+
+          '
+        items:
+          $ref: '#/definitions/CustomEndpointDetails'
+        type: array
+      attachments:
+        description: 'A list of associated attachments to other services
+
+          '
+        items:
+          $ref: '#/definitions/AttachmentDetails'
+        type: array
+      compartmentId:
+        description: Compartment Identifier.
+        type: string
+      consumptionModel:
+        description: The entitlement used for billing purposes.
+        enum: *id004
+        type: string
+      customEndpoint:
+        $ref: '#/definitions/CustomEndpointDetails'
+      dataRetentionPeriod: *id005
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are
+
+              supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped
+
+            to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to
+
+          namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      disasterRecoveryDetails:
+        $ref: '#/definitions/DisasterRecoveryDetails'
+      displayName:
+        description: Integration Instance Identifier, can be renamed.
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name,
+
+          type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      id:
+        description: Unique identifier that is immutable on creation.
+        type: string
+      idcsInfo:
+        $ref: '#/definitions/IdcsInfoDetails'
+      instanceDesignTimeUrl:
+        description: The Integration Instance Design Time URL
+        type: string
+      instanceUrl:
+        description: The Integration Instance URL.
+        type: string
+      integrationInstanceType:
+        description: 'Standard or Enterprise type,
+
+          Oracle Integration Generation 2 uses ENTERPRISE and STANDARD,
+
+          Oracle Integration 3 uses ENTERPRISEX, STANDARDX and HEALTHCARE
+
+          '
+        enum: *id006
+        type: string
+      isByol:
+        description: Bring your own license.
+        type: boolean
+      isDisasterRecoveryEnabled: &id009
+        description: Is Disaster Recovery enabled for the integrationInstance
+        type: boolean
+      isFileServerEnabled:
+        description: The file server is enabled or not.
+        type: boolean
+      isVisualBuilderEnabled:
+        description: VisualBuilder is enabled or not.
+        type: boolean
+      lifecycleDetails:
+        description: Additional details of lifecycleState or substates
+        type: string
+      lifecycleState:
+        description: The current state of the integration instance.
+        enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - INACTIVE
+        - DELETING
+        - DELETED
+        - FAILED
+        type: string
+      logGroupId:
+        description: OCID of LogAnalytics LogGroup, enabled for given integration
+          instance
+        type: string
+      messagePacks:
+        description: The number of configured message packs (if any)
+        type: integer
+      networkEndpointDetails: *id001
+      privateEndpointOutboundConnection:
+        $ref: '#/definitions/OutboundConnection'
+      securityAttributes: *id007
+      shape:
+        description: Shape
+        enum: *id008
+        type: string
+      stateMessage:
+        description: An message describing the current state in more detail. For example,
+          can be used to provide actionable information for a resource in Failed state.
+        type: string
+      systemTags: &id010
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing system tags'' keys and values
+            scoped to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of system tag keys. These predefined keys are scoped to
+          namespaces.
+
+          Example: `{"orcl-cloud": {"free-tier-retained": "true"}}`
+
+          '
+        type: object
+      timeCreated:
+        description: The time the the IntegrationInstance was created. An RFC3339
+          formatted datetime string.
+        format: date-time
+        type: string
+      timeUpdated:
+        description: The time the IntegrationInstance was updated. An RFC3339 formatted
+          datetime string.
+        format: date-time
+        type: string
+    required:
+    - id
+    - displayName
+    - compartmentId
+    - integrationInstanceType
+    - isByol
+    - instanceUrl
+    - messagePacks
+    type: object
+  IntegrationInstanceSummary:
+    description: Summary of the Integration Instance.
+    properties:
+      alternateCustomEndpoints:
+        description: 'A list of alternate custom endpoints used for the integration
+          instance URL.
+
+          '
+        items:
+          $ref: '#/definitions/CustomEndpointDetails'
+        type: array
+      compartmentId:
+        description: Compartment Identifier.
+        type: string
+      consumptionModel:
+        description: The entitlement used for billing purposes.
+        enum: *id004
+        type: string
+      customEndpoint:
+        $ref: '#/definitions/CustomEndpointDetails'
+      dataRetentionPeriod: *id005
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are
+
+              supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped
+
+            to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to
+
+          namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      displayName:
+        description: Integration Instance Identifier, can be renamed.
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name,
+
+          type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      id:
+        description: Unique identifier that is immutable on creation.
+        type: string
+      instanceDesignTimeUrl:
+        description: The Integration Instance Design Time URL
+        type: string
+      instanceUrl:
+        description: The Integration Instance URL.
+        type: string
+      integrationInstanceType:
+        description: 'Standard or Enterprise type,
+
+          Oracle Integration Generation 2 uses ENTERPRISE and STANDARD,
+
+          Oracle Integration 3 uses ENTERPRISEX and STANDARDX
+
+          '
+        enum: *id006
+        type: string
+      isByol:
+        description: Bring your own license.
+        type: boolean
+      isDisasterRecoveryEnabled: *id009
+      isFileServerEnabled:
+        description: The file server is enabled or not.
+        type: boolean
+      isVisualBuilderEnabled:
+        description: Visual Builder is enabled or not.
+        type: boolean
+      lifecycleDetails:
+        description: Additional details of lifecycleState or substates
+        type: string
+      lifecycleState:
+        description: The current state of the Integration Instance.
+        enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - INACTIVE
+        - DELETING
+        - DELETED
+        - FAILED
+        type: string
+      logGroupId:
+        description: OCID of LogAnalytics LogGroup, enabled for given integration
+          instance
+        type: string
+      messagePacks:
+        description: The number of configured message packs (if any)
+        type: integer
+      networkEndpointDetails: *id001
+      privateEndpointOutboundConnection:
+        $ref: '#/definitions/OutboundConnection'
+      securityAttributes: *id007
+      shape:
+        description: Shape
+        enum: *id008
+        type: string
+      stateMessage:
+        description: An message describing the current state in more detail. For example,
+          can be used to provide actionable information for a resource in Failed state.
+        type: string
+      systemTags: *id010
+      timeCreated:
+        description: The time the the Integration Instance was created. An RFC3339
+          formatted datetime string.
+        format: date-time
+        type: string
+      timeUpdated:
+        description: The time the IntegrationInstance was updated. An RFC3339 formatted
+          datetime string.
+        format: date-time
+        type: string
+    required:
+    - id
+    - displayName
+    - compartmentId
+    - integrationInstanceType
+    - isByol
+    - instanceUrl
+    - messagePacks
+    type: object
+  NetworkEndpointDetails:
+    description: 'Base representation of a network endpoint.
+
+      '
+    discriminator: networkEndpointType
+    properties:
+      networkEndpointType:
+        description: 'The type of network endpoint.
+
+          '
+        enum: &id011
+        - PUBLIC
+        type: string
+        x-obmcs-top-level-enum: '#/definitions/NetworkEndpointType'
+    required:
+    - networkEndpointType
+    type: object
+  NetworkEndpointType:
+    description: 'Public endpoint access type.
+
+      '
+    enum: *id011
+    type: string
+  NoneOutboundConnection:
+    allOf:
+    - $ref: '#/definitions/OutboundConnection'
+    - discriminator: NONE
+    description: 'Details required for removing Private Endpoint Outbound Connection
+      (ReverseConnection).
+
+      '
+  OutboundConnection:
+    description: 'Base representation for Outbound Connection (Reverse Connection).
+
+      '
+    discriminator: outboundConnectionType
+    properties:
+      outboundConnectionType:
+        description: 'The type of Outbound Connection.
+
+          '
+        enum:
+        - PRIVATE_ENDPOINT
+        - NONE
+        type: string
+    required:
+    - outboundConnectionType
+    type: object
+  PrivateEndpointOutboundConnection:
+    allOf:
+    - $ref: '#/definitions/OutboundConnection'
+    - discriminator: PRIVATE_ENDPOINT
+      properties:
+        isAllOutboundTrafficPrivate:
+          description: Indicates if all traffic should go through configured outbound
+            connection
+          type: boolean
+        nsgIds:
+          description: One or more Network security group Ids. This is an optional
+            argument.
+          items:
+            maxLength: 255
+            minLength: 1
+            type: string
+          type: array
+        subnetId:
+          description: Customer Private Network VCN Subnet OCID. This is a required
+            argument.
+          type: string
+      required:
+      - subnetId
+    description: 'Details required for creating Private Endpoint Outbound Connection
+      (ReverseConnection).
+
+      '
+  PublicEndpointDetails:
+    allOf:
+    - $ref: '#/definitions/NetworkEndpointDetails'
+    - discriminator: PUBLIC
+      properties:
+        allowListedFileServerVcns:
+          description: 'Virtual Cloud Networks allowed to access this network endpoint.
+
+            '
+          items:
+            $ref: '#/definitions/VirtualCloudNetwork'
+          type: array
+        allowlistedFileServerIps: *id012
+        allowlistedHttpIps: *id012
+        allowlistedHttpVcns:
+          description: 'Virtual Cloud Networks allowed to access this network endpoint.
+
+            '
+          items:
+            $ref: '#/definitions/VirtualCloudNetwork'
+          type: array
+        designTime:
+          $ref: '#/definitions/ComponentAllowListDetails'
+        isIntegrationVcnAllowlisted:
+          default: false
+          description: The Integration service's VCN is allow-listed to allow integrations
+            to call back into other integrations
+          type: boolean
+        runtime:
+          $ref: '#/definitions/ComponentAllowListDetails'
+    description: 'Public endpoint configuration details.
+
+      '
+  UpdateCustomEndpointDetails:
+    description: Details for a custom endpoint for the integration instance (update).
+    properties:
+      certificateSecretId:
+        description: 'Optional OCID of a vault/secret containing a private SSL certificate
+          bundle to be used for the custom hostname.
+
+          All certificates should be stored in a single base64 encoded secret.
+
+          Note the update will fail if this is not a valid certificate.
+
+          '
+        type: string
+      hostname:
+        description: A custom hostname to be used for the integration instance URL,
+          in FQDN format.
+        format: hostname
+        type: string
+    required:
+    - hostname
+    type: object
+  UpdateIntegrationInstanceDetails:
+    description: 'The information to be updated.
+
+
+      Some properties may not be applicable to specific integration types,
+
+      see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
+
+      for details.
+
+      '
+    properties:
+      alternateCustomEndpoints:
+        description: 'A list of alternate custom endpoints to be used for the integration
+          instance URL
+
+          (contact Oracle for alternateCustomEndpoints availability for a specific
+          instance).
+
+          '
+        items:
+          $ref: '#/definitions/UpdateCustomEndpointDetails'
+        type: array
+      customEndpoint:
+        $ref: '#/definitions/UpdateCustomEndpointDetails'
+      definedTags:
+        additionalProperties:
+          additionalProperties:
+            description: 'The value of the tag. Only string, integer and boolean types
+              are
+
+              supported.
+
+              '
+            type: object
+          description: 'Key-value pair representing predefined tags'' keys and values
+            scoped
+
+            to a namespace.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        description: 'Usage of predefined tag keys. These predefined keys are scoped
+          to
+
+          namespaces.
+
+          Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+          '
+        type: object
+      displayName:
+        description: Integration Instance Identifier.
+        type: string
+      freeformTags:
+        additionalProperties:
+          type: string
+        description: 'Simple key-value pair that is applied without any predefined
+          name,
+
+          type or scope. Exists for cross-compatibility only.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      integrationInstanceType:
+        description: 'Standard or Enterprise type,
+
+          Oracle Integration Generation 2 uses ENTERPRISE and STANDARD,
+
+          Oracle Integration 3 uses ENTERPRISEX and STANDARDX
+
+          '
+        enum: *id006
+        type: string
+      isByol:
+        description: Bring your own license.
+        type: boolean
+      isFileServerEnabled:
+        default: false
+        description: The file server is enabled or not.
+        type: boolean
+      isVisualBuilderEnabled:
+        description: Visual Builder is enabled or not.
+        type: boolean
+      messagePacks:
+        default: 1
+        description: The number of configured message packs
+        type: integer
+      securityAttributes: *id007
+    type: object
+  VirtualCloudNetwork:
+    description: 'Virtual Cloud Network definition.
+
+      '
+    properties:
+      allowlistedIps: *id012
+      id:
+        description: 'The Virtual Cloud Network OCID.
+
+          '
+        maxLength: 255
+        minLength: 1
+        type: string
+    required:
+    - id
+    type: object
+  WorkRequest:
+    description: A description of work request status.
+    properties:
+      compartmentId:
+        description: 'The ocid of the compartment that contains the work request.
+          Work
+
+          requests should be scoped to the same compartment as the resource the
+
+          work request affects. If the work request affects multiple resources,
+
+          and those resources are not in the same compartment, it is up to the
+
+          service team to pick the primary resource whose compartment should be
+
+          used.
+
+          '
+        type: string
+      id:
+        description: The id of the work request.
+        type: string
+      operationType: &id013
+        description: Type of the work request.
+        enum:
+        - CREATE_INTEGRATION_INSTANCE
+        - UPDATE_INTEGRATION_INSTANCE
+        - STOP_INTEGRATION_INSTANCE
+        - START_INTEGRATION_INSTANCE
+        - DELETE_INTEGRATION_INSTANCE
+        - CHANGE_PRIVATE_ENDPOINT_OUTBOUND_CONNECTION
+        - ENABLE_PROCESS_AUTOMATION
+        - DISABLE_PROCESS_AUTOMATION
+        - ADD_LOG_ANALYTICS_LOG_GROUP
+        - DELETE_LOG_ANALYTICS_LOG_GROUP
+        - CONVERT_INSTANCE
+        - EXTEND_DATA_RETENTION
+        - DISASTER_RECOVERY_FAILOVER
+        - CREATE_CUSTOM_ENDPOINT
+        - DELETE_CUSTOM_ENDPOINT
+        type: string
+      percentComplete:
+        description: Percentage of the request completed.
+        format: float
+        type: number
+      resources:
+        description: The resources affected by this work request.
+        items:
+          $ref: '#/definitions/WorkRequestResource'
+        type: array
+      status:
+        description: Status of current work request.
+        enum:
+        - ACCEPTED
+        - IN_PROGRESS
+        - FAILED
+        - SUCCEEDED
+        - CANCELING
+        - CANCELED
+        type: string
+      timeAccepted:
+        description: 'The date and time the request was created, as described in
+
+          [RFC 3339](https://tools.ietf.org/rfc/rfc3339), section 14.29.
+
+          '
+        format: date-time
+        type: string
+      timeFinished:
+        description: 'The date and time the object was finished, as described in
+
+          [RFC 3339](https://tools.ietf.org/rfc/rfc3339).
+
+          '
+        format: date-time
+        type: string
+      timeStarted:
+        description: 'The date and time the request was started, as described in
+
+          [RFC 3339](https://tools.ietf.org/rfc/rfc3339),
+
+          section 14.29.
+
+          '
+        format: date-time
+        type: string
+    required:
+    - operationType
+    - status
+    - id
+    - compartmentId
+    - resources
+    - percentComplete
+    - timeAccepted
+  WorkRequestError:
+    description: Errors related to a specific work request.
+    properties:
+      code:
+        description: A short error code that defines the error, meant for programmatic
+          parsing
+        example: UnknownError
+        type: string
+      message:
+        description: A human-readable error string.
+        example: error validating payload
+        type: string
+      timestamp:
+        description: The date and time the error occurred.
+        example: '2017-07-21T16:11:29Z'
+        format: date-time
+        type: string
+    required:
+    - code
+    - message
+    - timestamp
+    type: object
+  WorkRequestLogEntry:
+    description: Log entries related to a specific work request.
+    properties:
+      message:
+        description: The description of an action that occurred.
+        example: error validating payload
+        type: string
+      timestamp:
+        description: The date and time the log entry occurred.
+        example: '2017-07-21T16:11:29Z'
+        format: date-time
+        type: string
+    required:
+    - message
+    - timestamp
+    type: object
+  WorkRequestResource:
+    description: A resource created or operated on by a work request.
+    properties:
+      actionType:
+        description: 'The way in which this resource is affected by the work tracked
+          in the
+
+          work request. A resource being created, updated, or deleted will
+
+          remain in the IN_PROGRESS state until work is complete for that
+
+          resource at which point it will transition to CREATED, UPDATED,
+
+          or DELETED, respectively.
+
+          '
+        enum:
+        - CREATED
+        - UPDATED
+        - STOPPED
+        - STARTED
+        - DELETED
+        - IN_PROGRESS
+        type: string
+      entityType:
+        description: The resource type the work request is affects.
+        type: string
+      entityUri:
+        description: The URI path that the user can do a GET on to access the resource
+          metadata.
+        type: string
+      identifier:
+        description: The identifier of the resource the work request affects.
+        type: string
+    required:
+    - actionType
+    - entityType
+    - identifier
+  WorkRequestSummary:
+    description: A description of work request status.
+    properties:
+      compartmentId:
+        description: 'The ocid of the compartment that contains the work request.
+          Work
+
+          requests should be scoped to the same compartment as the resource the
+
+          work request affects. If the work request affects multiple resources,
+
+          and those resources are not in the same compartment, it is up to the
+
+          service team to pick the primary resource whose compartment should be
+
+          used.
+
+          '
+        type: string
+      id:
+        description: The id of the work request.
+        type: string
+      operationType: *id013
+      percentComplete:
+        description: Percentage of the request completed.
+        format: float
+        type: number
+      resources:
+        description: The resources affected by this work request.
+        items:
+          $ref: '#/definitions/WorkRequestResource'
+        type: array
+      status:
+        description: Status of current work request.
+        enum:
+        - ACCEPTED
+        - IN_PROGRESS
+        - FAILED
+        - SUCCEEDED
+        - CANCELING
+        - CANCELED
+        type: string
+      timeAccepted:
+        description: 'The date and time the request was created, as described in
+
+          [RFC 3339](https://tools.ietf.org/rfc/rfc3339), section 14.29.
+
+          '
+        format: date-time
+        type: string
+      timeFinished:
+        description: 'The date and time the object was finished, as described in
+
+          [RFC 3339](https://tools.ietf.org/rfc/rfc3339).
+
+          '
+        format: date-time
+        type: string
+      timeStarted:
+        description: 'The date and time the request was started, as described in
+
+          [RFC 3339](https://tools.ietf.org/rfc/rfc3339),
+
+          section 14.29.
+
+          '
+        format: date-time
+        type: string
+    required:
+    - operationType
+    - status
+    - id
+    - compartmentId
+    - resources
+    - percentComplete
+    - timeAccepted
+host: 127.0.0.1
+info:
+  x-provenance:
+    method: harvested
+    first_party: true
+    publisher: Oracle
+    source: https://docs.oracle.com/en-us/iaas/api/specs/b0a290b484cb5a2598ce8a407804a32c2c0e43f06cd5b4f2d8b17ccb53c16665.yaml
+    harvested: '2026-08-27'
+    note: >-
+      Published by Oracle as the contract for the Oracle Integration API (integration) OCI service and
+      stored verbatim; API Evangelist added only this provenance block. Wired to the
+      "Oracle Integration Cloud API" entry in apis.yml.
+  x-evidence:
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/index.json
+    what: Oracle's own machine-readable index of every OCI service specification (HTTP 200)
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/b0a290b484cb5a2598ce8a407804a32c2c0e43f06cd5b4f2d8b17ccb53c16665.yaml
+    what: the harvested document for Oracle Integration API (HTTP 200)
+  description: Oracle Integration API.
+  title: Oracle Integration API
+  version: '20190131'
+parameters:
+  CompartmentIdQueryParam:
+    description: The ID of the compartment in which to list resources.
+    in: query
+    name: compartmentId
+    required: true
+    type: string
+  DisplayNameQueryParam:
+    description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+
+      Example: `My new resource`
+
+      '
+    in: query
+    maxLength: 255
+    minLength: 1
+    name: displayName
+    type: string
+  IfMatchHeader:
+    description: 'For optimistic concurrency control. In the PUT or DELETE call
+
+      for a resource, set the `if-match` parameter to the value of the
+
+      etag from a previous GET or POST response for that resource.
+
+      The resource will be updated or deleted only if the etag you
+
+      provide matches the resource''s current etag value.
+
+      '
+    in: header
+    name: if-match
+    required: false
+    type: string
+  IntegrationInstanceIdentifierPathParam:
+    description: Unique Integration Instance identifier.
+    in: path
+    name: integrationInstanceId
+    required: true
+    type: string
+  IntegrationInstanceIdentifierQueryParam:
+    description: The Integration Instance identifier to use to filter results
+    in: query
+    name: integrationInstanceId
+    type: string
+  LifecycleStateQueryParam:
+    description: Life cycle state to query on.
+    enum:
+    - CREATING
+    - UPDATING
+    - ACTIVE
+    - INACTIVE
+    - DELETING
+    - DELETED
+    - FAILED
+    in: query
+    name: lifecycleState
+    type: string
+  PaginationLimitQueryParam:
+    default: 10
+    description: The maximum number of items to return.
+    in: query
+    maximum: 1000
+    minimum: 1
+    name: limit
+    type: integer
+  PaginationTokenQueryParam:
+    description: The page token representing the page at which to start retrieving
+      results. This is usually retrieved from a previous list call.
+    in: query
+    maxLength: 1024
+    minLength: 1
+    name: page
+    type: string
+  RequestIdHeader:
+    description: The client request ID for tracing.
+    in: header
+    name: opc-request-id
+    type: string
+  RetryTokenHeader:
+    description: 'A token that uniquely identifies a request so it can be retried
+      in case
+
+      of a timeout or server error without risk of executing that same action
+
+      again. Retry tokens expire after 24 hours, but can be invalidated before
+
+      then due to conflicting operations. For example, if a resource has been
+
+      deleted and purged from the system, then a retry of the original creation
+
+      request might be rejected.
+
+      '
+    in: header
+    maxLength: 64
+    minLength: 1
+    name: opc-retry-token
+    required: false
+    type: string
+  SortByQueryParam:
+    default: TIMECREATED
+    description: 'The field to sort by. Only one sort order may be provided. Default
+      order
+
+      for TIMECREATED is descending. Default order for DISPLAYNAME is
+
+      ascending. If no value is specified TIMECREATED is default.
+
+      '
+    enum:
+    - TIMECREATED
+    - DISPLAYNAME
+    in: query
+    name: sortBy
+    type: string
+  SortOrderQueryParam:
+    default: ASC
+    description: The sort order to use, either 'asc' or 'desc'.
+    enum:
+    - ASC
+    - DESC
+    in: query
+    name: sortOrder
+    type: string
+  WorkRequestIdPathParam:
+    description: The ID of the asynchronous request.
+    in: path
+    name: workRequestId
+    required: true
+    type: string
+paths:
+  /integrationInstances:
+    get:
+      description: 'Returns a list of Integration Instances.
+
+        '
+      operationId: ListIntegrationInstances
+      parameters:
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/DisplayNameQueryParam'
+      - $ref: '#/parameters/LifecycleStateQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/SortOrderQueryParam'
+      - $ref: '#/parameters/SortByQueryParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: A page of Integration InstanceSummary objects.
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results remain
+
+                '
+              type: string
+            opc-previous-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results have been previously returned
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/IntegrationInstanceSummary'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Gets a list of all Integration Instances in a compartment
+      tags:
+      - integrationInstance
+    post:
+      description: 'Creates a new Integration Instance.
+
+        '
+      operationId: CreateIntegrationInstance
+      parameters:
+      - description: Details for the new Integration Instance.
+        in: body
+        name: CreateIntegrationInstanceDetails
+        required: true
+        schema:
+          $ref: '#/definitions/CreateIntegrationInstanceDetails'
+      - $ref: '#/parameters/RetryTokenHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        202:
+          description: Accepted the request. The Integration Instance will be created.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Creates a new Integration Instance
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}:
+    delete:
+      description: Deletes an Integration Instance resource by identifier.
+      operationId: DeleteIntegrationInstance
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        202:
+          description: Accepted the request. The Integration Instance will be deleted.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Delete a provisioned Integration Instance
+      tags:
+      - integrationInstance
+      x-related-resource: '#/definitions/IntegrationInstance'
+    get:
+      description: Gets a IntegrationInstance by identifier
+      operationId: GetIntegrationInstance
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: Retrieves the IntegrationInstance with the given id
+          headers:
+            etag:
+              description: For optimistic concurrency control. See `if-match`.
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+          schema:
+            $ref: '#/definitions/IntegrationInstance'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Get Integration Instance
+      tags:
+      - integrationInstance
+    put:
+      description: Updates the Integration Instance.
+      operationId: UpdateIntegrationInstance
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - description: The information to be updated.
+        in: body
+        name: UpdateIntegrationInstanceDetails
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateIntegrationInstanceDetails'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        202:
+          description: Accepted the request. The IntegrationInstance will be updated.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Update the Integration Instance identified by the id
+      tags:
+      - integrationInstance
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/addLogAnalyticsLogGroup:
+    post:
+      description: "Add LogGroup with specified ocid for Integration Instance to enable\
+        \ sending OIC Activity \nStream to OCI Logging Analytics.\n"
+      operationId: AddLogAnalyticsLogGroup
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - description: Details to Add Analytics Log Group for given integration instance.
+        in: body
+        name: AddLogAnalyticsLogGroupDetails
+        required: true
+        schema:
+          $ref: '#/definitions/AddLogAnalyticsLogGroupDetails'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to add LogAnalytics LogGroup for Integration
+            Instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Add Log Analytics LogGroup for given integration instance
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/addOracleManagedCustomEndpoint:
+    post:
+      description: 'Enable Oracle Managed Custom Endpoint for given integration instance.
+
+        '
+      operationId: AddOracleManagedCustomEndpoint
+      parameters:
+      - description: Details for enabling oracle managed custom endpoint.
+        in: body
+        name: AddOracleManagedCustomEndpointDetails
+        required: true
+        schema:
+          $ref: '#/definitions/AddOracleManagedCustomEndpointDetails'
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to enable oracle managed custom endpoint
+            for given integration instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: 'Enable Oracle Managed Custom Endpoint for integration instance
+
+        '
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/changeCompartment:
+    post:
+      description: 'Change the compartment for an integration instance
+
+        '
+      operationId: ChangeIntegrationInstanceCompartment
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - description: Details for the update integration instance
+        in: body
+        name: ChangeIntegrationInstanceCompartmentDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeIntegrationInstanceCompartmentDetails'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request. The Integration instance will be moved.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Change the compartment for an integration instance
+      tags:
+      - integrationInstance
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/changeNetworkEndpoint:
+    post:
+      description: 'Change an Integration instance network endpoint. The operation
+        is long-running
+
+        and creates a new WorkRequest.
+
+        '
+      operationId: ChangeIntegrationInstanceNetworkEndpoint
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - description: Details for the updated Integration instance network endpoint
+        in: body
+        name: ChangeIntegrationInstanceNetworkEndpointDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeIntegrationInstanceNetworkEndpointDetails'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request. The Integration instance will have the
+            network endpoint updated
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Change an Integration instance network endpoint.
+      tags:
+      - integrationInstance
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/changePrivateEndpointOutboundConnection:
+    post:
+      description: 'Change private endpoint outbound connection for given Integration
+        instance. The operation is long-running
+
+        and creates a new WorkRequest.
+
+        '
+      operationId: ChangePrivateEndpointOutboundConnection
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - description: Details for private endpoint outbound connection.
+        in: body
+        name: ChangePrivateEndpointOutboundConnectionDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ChangePrivateEndpointOutboundConnectionDetails'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to perform ADD/REMOVE Private Endpoint
+            Outbound Connection for given integration instance
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Create Integration instance private endpoint outbound connection.
+      tags:
+      - integrationInstance
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/disableProcessAutomation:
+    post:
+      description: 'Disable Process Automation for given Integration Instance
+
+        '
+      operationId: DisableProcessAutomation
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to disable Process Automation for Integration
+            Instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Disable Process Automation for given Integration Instance
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/enableProcessAutomation:
+    post:
+      description: 'Enable Process Automation for given Integration Instance
+
+        '
+      operationId: EnableProcessAutomation
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to enable Process Automation for Integration
+            Instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Enable Process Automation for given Integration Instance
+      tags:
+      - integrationInstance
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/extendDataRetention:
+    post:
+      description: 'Extend Data Retention period for given Integration Instance
+
+        '
+      operationId: ExtendDataRetention
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - description: Extend Data Retention period for integration instance.
+        in: body
+        name: ExtendDataRetentionDetails
+        required: true
+        schema:
+          $ref: '#/definitions/ExtendDataRetentionDetails'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to extend data retention for Integration
+            Instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Extend Data Retention period for given Integration Instance
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/failover:
+    post:
+      description: "Allows failover for disaster recovery. Called in the context of\
+        \ integration instance in that region.\nUpon calling the failover api in the\
+        \ region where given instance was created, \nthe intigration instance if primary\
+        \ will be switched to standby and crossRegion integration instance \nwill\
+        \ be switched to primary and vice-versa.\n"
+      operationId: DisasterRecoveryFailover
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the failovere request for Integration Instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: 'Failover of integration instance for the purpose of disaster recovery.
+
+        '
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/removeLogAnalyticsLogGroup:
+    post:
+      description: 'Removes Log Analytics logGroup, if enabled for given integrationInstance.
+        Since only single LogGroup can be enabled
+
+        for integration instance, no additional details are required to be includes
+        in the request.
+
+        '
+      operationId: RemoveLogAnalyticsLogGroup
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to remove LogAnalytics LogGroup for Integration
+            Instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Remove Log Analytics LogGroup for given integration instance
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/removeOracleManagedCustomEndpoint:
+    post:
+      description: 'Remove Oracle Managed Custom Endpoint for given integration instance
+        that was previously enabled.
+
+        '
+      operationId: RemoveOracleManagedCustomEndpoint
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request to remove oracle managed custom endpoint
+            for given integration instance.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: 'Remove Oracle Managed Custom Endpoint for integration instance.
+
+        '
+      tags:
+      - integrationInstance
+      x-obmcs-client-retries-enabled: true
+      x-obmcs-terraform:
+        actionType: SPECIAL_UPDATE
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/start:
+    post:
+      description: 'Start an integration instance that was previously in an INACTIVE
+        state
+
+        '
+      operationId: StartIntegrationInstance
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request. The Integration instance will be started.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Start an integration instance that was previously in an INACTIVE state
+      tags:
+      - integrationInstance
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /integrationInstances/{integrationInstanceId}/actions/stop:
+    post:
+      description: 'Stop an integration instance that was previously in an ACTIVE
+        state
+
+        '
+      operationId: StopIntegrationInstance
+      parameters:
+      - $ref: '#/parameters/IntegrationInstanceIdentifierPathParam'
+      - $ref: '#/parameters/IfMatchHeader'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: Accepted the request. The Integration instance will be stopped.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            opc-work-request-id:
+              description: 'Unique Oracle-assigned identifier for the asynchronous
+                request.
+
+                You can use this to query status of the asynchronous operation.
+
+                '
+              type: string
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        409:
+          $ref: '#/responses/409'
+        412:
+          $ref: '#/responses/412'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Stop an integration instance that was previously in an ACTIVE state
+      tags:
+      - integrationInstance
+      x-related-resource: '#/definitions/IntegrationInstance'
+  /workRequests:
+    get:
+      description: 'Lists the work requests in a compartment.
+
+        '
+      operationId: ListWorkRequests
+      parameters:
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/IntegrationInstanceIdentifierQueryParam'
+      responses:
+        200:
+          description: The list is being retrieved.
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results remain
+
+                '
+              type: string
+            opc-previous-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results have been previously returned
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestSummary'
+            type: array
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: List Work Requests
+      tags:
+      - integrationInstance
+  /workRequests/{workRequestId}:
+    get:
+      description: Gets the status of the work request with the given ID.
+      operationId: GetWorkRequest
+      parameters:
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      responses:
+        200:
+          description: The detail of the work request.
+          headers:
+            etag:
+              description: For optimistic concurrency control. See `if-match`.
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+
+                you need to contact Oracle about a particular request,
+
+                please provide the request ID.
+
+                '
+              type: string
+            retry-after:
+              description: some decimal number representing the number of seconds
+                the client should wait before polling this endpoint again.
+              format: float
+              type: number
+          schema:
+            $ref: '#/definitions/WorkRequest'
+        400:
+          $ref: '#/responses/400'
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Get Work Request Status
+      tags:
+      - integrationInstance
+  /workRequests/{workRequestId}/errors:
+    get:
+      description: Get the errors of a work request.
+      operationId: ListWorkRequestErrors
+      parameters:
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      responses:
+        200:
+          description: The list of errors for the work request.
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results remain
+
+                '
+              type: string
+            opc-previous-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results have been previously returned
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+                you need to contact Oracle about a
+
+                particular request, please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestError'
+            type: array
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Get work request errors.
+      tags:
+      - integrationInstance
+  /workRequests/{workRequestId}/logs:
+    get:
+      description: Get the logs of a work request.
+      operationId: ListWorkRequestLogs
+      parameters:
+      - $ref: '#/parameters/CompartmentIdQueryParam'
+      - $ref: '#/parameters/WorkRequestIdPathParam'
+      - $ref: '#/parameters/RequestIdHeader'
+      - $ref: '#/parameters/PaginationLimitQueryParam'
+      - $ref: '#/parameters/PaginationTokenQueryParam'
+      responses:
+        200:
+          description: The list of logs for the work request.
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results remain
+
+                '
+              type: string
+            opc-previous-page:
+              description: 'For list pagination. When this header appears in the response,
+                additional pages of results have been previously returned
+
+                '
+              type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If
+                you need to contact Oracle about a
+
+                particular request, please provide the request ID.
+
+                '
+              type: string
+          schema:
+            items:
+              $ref: '#/definitions/WorkRequestLogEntry'
+            type: array
+        401:
+          $ref: '#/responses/401'
+        404:
+          $ref: '#/responses/404'
+        429:
+          $ref: '#/responses/429'
+        500:
+          $ref: '#/responses/500'
+        default:
+          $ref: '#/responses/default'
+      summary: Get work request logs.
+      tags:
+      - integrationInstance
+produces:
+- application/json
+responses:
+  400:
+    description: Bad Request
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  401:
+    description: Unauthorized
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  404:
+    description: Not Found
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  409:
+    description: Conflict
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  412:
+    description: Precondition failed
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  429:
+    description: Too Many Requests
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  500:
+    description: Internal Server Error
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+  default:
+    description: Unknown Error
+    headers:
+      opc-request-id:
+        description: 'Unique Oracle-assigned identifier for the request. If
+
+          you need to contact Oracle about a particular request,
+
+          please provide the request ID.
+
+          '
+        type: string
+    schema:
+      $ref: '#/definitions/Error'
+schemes:
+- https
+swagger: '2.0'
+x-oracle-package: com.oracle.integration

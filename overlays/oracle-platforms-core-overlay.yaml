@@ -1,0 +1,71 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Core Services API
+  version: 1.0.0
+extends: openapi/oracle-platforms-core-openapi.yml
+x-provenance:
+  generated: '2026-08-27'
+  method: generated
+  source: API Evangelist enrichment pass over the verbatim Oracle contract; the original is never mutated.
+actions:
+- target: $.info
+  description: Record the real production host. Oracle publishes this contract with a placeholder host
+    (none) while its own spec index names the regional endpoints; the overlay carries the real base without
+    touching the harvested document.
+  update:
+    x-api-evangelist-base-url: https://iaas.{region}.oraclecloud.com
+    x-api-evangelist-base-url-source: https://docs.oracle.com/en-us/iaas/api/specs/index.json
+- target: $.info
+  description: Attach the runtime semantics an agent needs, derived from this document and Oracle docs.
+  update:
+    x-idempotency:
+      header: opc-retry-token
+      retention: 24 hours
+      failure: 409 InvalidatedRetryToken
+    x-concurrency:
+      request_header: if-match
+      response_field: etag
+      failure: 412 NoEtagMatch
+    x-pagination:
+      style: opaque-cursor
+      request:
+      - limit
+      - page
+      response_header: opc-next-page
+      termination: absence of opc-next-page
+    x-tracing:
+      header: opc-request-id
+    x-async:
+      model: work-requests
+      header: opc-work-request-id
+      note: 202 is not completion; poll the work request.
+    x-rate-limit-signal:
+      status: 429
+      code: TooManyRequests
+      headers: null
+      note: Oracle documents no rate-limit response headers.
+    x-error-envelope:
+      shape: '{code, message}'
+      media_type: application/json
+      rfc9457: false
+    x-identifier-scheme: OCID
+- target: $.info
+  description: Point at the derived API Evangelist artifacts for this contract.
+  update:
+    x-api-evangelist-artifacts:
+      conventions: conventions/oracle-platforms-conventions.yml
+      errors: errors/oracle-platforms-problem-types.yml
+      authentication: authentication/oracle-platforms-authentication.yml
+      data_model: data-model/oracle-platforms-data-model.yml
+      lifecycle: lifecycle/oracle-platforms-lifecycle.yml
+      rate_limits: rate-limits/oracle-platforms-rate-limits.yml
+      mcp: mcp/oracle-platforms-mcp.yml
+- target: $.info
+  description: Note the security model the contract itself omits.
+  update:
+    x-authentication:
+      style: request-signing
+      scheme: HTTP Signatures (draft-cavage)
+      note: This document declares no securityDefinitions; OCI auth is documented in prose and implemented
+        in the SDKs.
+      docs: https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm

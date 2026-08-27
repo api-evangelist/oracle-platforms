@@ -1,0 +1,162 @@
+generated: '2026-08-27'
+method: searched
+source: >-
+  Public registry metadata endpoints (registry.npmjs.org, pypi.org/pypi/*/json,
+  rubygems.org/api/v1/gems, api.nuget.org, search.maven.org, proxy.golang.org) plus
+  Oracle's own SDK index at https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdks.htm
+provider: Oracle Platforms
+providerId: oracle-platforms
+note: >-
+  Oracle ships first-party OCI SDKs in eight languages plus a first-party CLI. Every
+  version/date below was read from the registry's own metadata endpoint on 2026-08-27.
+  The OCI SDKs are released in lockstep with the service specs — npm, PyPI and Go all
+  published within 48 hours of this pass, which is the strongest currency signal in the
+  set. The Maven coordinate lags because search.maven.org's index does, not necessarily
+  the artifact; recorded as read.
+packages:
+  - language: python
+    registry: pypi
+    name: oci
+    url: https://pypi.org/project/oci/
+    install: pip install oci
+    official: true
+    version: 2.185.0
+    published: '2026-08-25'
+    repository: https://github.com/oracle/oci-python-sdk
+    note: The OCI Python SDK — the library the oracle/mcp servers build on.
+  - language: javascript
+    registry: npm
+    name: oci-sdk
+    url: https://www.npmjs.com/package/oci-sdk
+    install: npm install oci-sdk
+    official: true
+    version: 2.140.0
+    published: '2026-08-25'
+    repository: https://github.com/oracle/oci-typescript-sdk
+    note: >-
+      Umbrella package. Per-service packages (oci-common, oci-core, oci-database, ...)
+      are published from the same repo at the same version; oci-common and oci-core were
+      both read at 2.140.0 / 2026-08-25.
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/oracle/oci-go-sdk/v65
+    url: https://pkg.go.dev/github.com/oracle/oci-go-sdk/v65
+    install: go get github.com/oracle/oci-go-sdk/v65
+    official: true
+    version: v65.124.0
+    published: '2026-08-25'
+    repository: https://github.com/oracle/oci-go-sdk
+    note: >-
+      Read from proxy.golang.org/@latest. The unversioned module path
+      github.com/oracle/oci-go-sdk is frozen at v24.3.0+incompatible (2020-09-08) —
+      consumers on the bare path are five years behind; /v65 is the live line.
+  - language: java
+    registry: maven
+    name: com.oracle.oci.sdk:oci-java-sdk-core
+    url: https://central.sonatype.com/artifact/com.oracle.oci.sdk/oci-java-sdk-core
+    install: 'Maven dependency com.oracle.oci.sdk:oci-java-sdk-core'
+    official: true
+    version: 3.67.3
+    published: '2025-06-24'
+    repository: https://github.com/oracle/oci-java-sdk
+    note: >-
+      Read from search.maven.org/solrsearch. A companion query for
+      com.oracle.oci.sdk:oci-java-sdk-common timed out and was not retried per the
+      one-attempt probe rule; its version was not established.
+  - language: dotnet
+    registry: nuget
+    name: OCI.DotNetSDK.Core
+    url: https://www.nuget.org/packages/OCI.DotNetSDK.Core
+    install: dotnet add package OCI.DotNetSDK.Core
+    official: true
+    version: 145.0.0
+    published: null
+    repository: https://github.com/oracle/oci-dotnet-sdk
+    note: >-
+      Version read from api.nuget.org flat-container index (last entry). The flat
+      container carries no publish date, so `published` is null — checked, nothing to
+      record. OCI.DotNetSDK.Common reads the same 145.0.0.
+  - language: ruby
+    registry: rubygems
+    name: oci
+    url: https://rubygems.org/gems/oci
+    install: gem install oci
+    official: true
+    version: 2.24.0
+    published: '2026-07-28'
+    repository: https://github.com/oracle/oci-ruby-sdk
+  - language: python
+    registry: pypi
+    name: oracledb
+    url: https://pypi.org/project/oracledb/
+    install: pip install oracledb
+    official: true
+    version: 4.0.2
+    published: '2026-07-14'
+    repository: https://github.com/oracle/python-oracledb
+    note: Oracle Database driver for Python — the database client, not an OCI control-plane SDK.
+  - language: javascript
+    registry: npm
+    name: oracledb
+    url: https://www.npmjs.com/package/oracledb
+    install: npm install oracledb
+    official: true
+    version: 7.0.1
+    published: '2026-07-15'
+    repository: https://github.com/oracle/node-oracledb
+  - language: python
+    registry: pypi
+    name: oracle-ads
+    url: https://pypi.org/project/oracle-ads/
+    install: pip install oracle-ads
+    official: true
+    version: 2.15.3
+    published: '2026-07-27'
+    repository: https://github.com/oracle/accelerated-data-science
+    note: >-
+      Oracle Accelerated Data Science — the first-party SDK for the OCI Data Science API
+      wired in this repo.
+  - language: python
+    registry: pypi
+    name: oracle.oci-cloud-mcp-server
+    url: https://pypi.org/project/oracle.oci-cloud-mcp-server/
+    install: uvx oracle.oci-cloud-mcp-server@latest
+    official: true
+    version: 2.2.3
+    published: '2026-08-25'
+    repository: https://github.com/oracle/mcp
+    note: The local-stdio MCP server package; see mcp/oracle-platforms-mcp.yml.
+  - language: python
+    registry: pypi
+    name: oracle.oci-api-mcp-server
+    url: https://pypi.org/project/oracle.oci-api-mcp-server/
+    install: uvx oracle.oci-api-mcp-server@latest
+    official: true
+    version: 2.1.5
+    published: '2026-08-25'
+    repository: https://github.com/oracle/mcp
+  - language: javascript
+    registry: npm
+    name: '@oracle/oraclejet'
+    url: https://www.npmjs.com/package/@oracle/oraclejet
+    install: npm install @oracle/oraclejet
+    official: true
+    version: 21.0.0
+    published: '2026-08-17'
+    note: >-
+      Oracle JET — the first-party front-end component toolkit, not an API client. Listed
+      for completeness; it is not counted as an API SDK.
+  - language: javascript
+    registry: npm
+    name: content-management-sdk
+    url: https://github.com/oracle/content-management-sdk
+    install: 'see repo'
+    official: true
+    version: null
+    published: null
+    repository: https://github.com/oracle/content-management-sdk
+    note: >-
+      Oracle Content Management JavaScript SDK. The repo is live (HTTP 200) and is linked
+      from apis.yml, but no matching npm/PyPI coordinate was found, so no registry
+      metadata endpoint could be queried — checked, nothing to record.
+official_sdk_count: 12

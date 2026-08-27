@@ -1,0 +1,155 @@
+generated: '2026-08-27'
+method: probed
+source: >-
+  Direct HTTPS GET of each /.well-known/ path on every apis.yml host and the docs,
+  developer, console and regional API hosts, 2026-08-27, browser User-Agent.
+provider: Oracle Platforms
+providerId: oracle-platforms
+hit_count: 0
+note: >-
+  Oracle serves NO /.well-known/ discovery document on any host reachable in this
+  profile, and no common[] WellKnown or SecurityTxt pointer is emitted as a result.
+  Three distinct failure shapes were observed and are recorded verbatim below:
+  (1) www.oracle.com and developer.oracle.com 30x every /.well-known/* path back to the
+  site root — following the redirect lands on an edge bot-challenge page (fw_error_www,
+  HTTP 403), so the paths were never served, they were bounced;
+  (2) docs.oracle.com returns a real, identical 15,118-byte "Page not found" 404 for
+  every path — an honest absence;
+  (3) cloud.oracle.com is a SPA catch-all: /.well-known/openid-configuration,
+  /oauth-authorization-server and /api-catalog each return HTTP 200 with a byte-identical
+  22,935-byte HTML console shell, while /security.txt, /agent-card.json and /agent.json
+  on the same host return a genuine 404. Those three 200s are NOT documents and are
+  recorded as soft_404 with no file saved, per the catch-all rule.
+  The regional OCI API hosts (iaas./database..oraclecloud.com) answer every unauthenticated
+  path with the OCI control-plane error envelope {"code":"NotAuthorizedOrNotFound"} at 404.
+  Oracle DOES publish OIDC discovery, but only per-tenancy from an IAM identity domain
+  host (https://idcs-<tenancy-id>.identity.oraclecloud.com/.well-known/openid-configuration),
+  which has no anonymous, tenancy-independent address to probe. That is a real Oracle
+  surface this pipeline cannot reach, not an absence.
+soft_404_control:
+  host: https://cloud.oracle.com
+  observation: >-
+    Three different /.well-known/ paths returned HTTP 200 with the same 22,935-byte HTML
+    body (the OCI console SPA shell), which is the signature of a catch-all route rather
+    than three served documents.
+  byte_count: 22935
+hosts:
+  - host: https://www.oracle.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 302
+        note: 302 to https://www.oracle.com/, which then returns 403 (edge bot challenge).
+      - path: /.well-known/openid-configuration
+        status: 302
+      - path: /.well-known/oauth-authorization-server
+        status: 302
+      - path: /.well-known/api-catalog
+        status: 302
+      - path: /.well-known/ai-plugin.json
+        status: 302
+      - path: /.well-known/agent-card.json
+        status: 302
+      - path: /.well-known/agent.json
+        status: 302
+  - host: https://docs.oracle.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 302
+      - path: /.well-known/oauth-authorization-server
+        status: 302
+      - path: /.well-known/api-catalog
+        status: 302
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://developer.oracle.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 301
+      - path: /.well-known/openid-configuration
+        status: 301
+      - path: /.well-known/oauth-authorization-server
+        status: 301
+      - path: /.well-known/api-catalog
+        status: 301
+      - path: /.well-known/ai-plugin.json
+        status: 301
+      - path: /.well-known/agent-card.json
+        status: 301
+      - path: /.well-known/agent.json
+        status: 301
+  - host: https://apex.oracle.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        note: Edge bot challenge on every path; ~4.5KB fw_error page, not a document.
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/ai-plugin.json
+        status: 403
+      - path: /.well-known/agent-card.json
+        status: 403
+      - path: /.well-known/agent.json
+        status: 403
+  - host: https://cloud.oracle.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 200
+        soft_404: true
+        note: 22,935-byte SPA shell, byte-identical to two other paths. Not a document; nothing saved.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        soft_404: true
+      - path: /.well-known/api-catalog
+        status: 200
+        soft_404: true
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://iaas.us-ashburn-1.oraclecloud.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        note: OCI control-plane error envelope {"code":"NotAuthorizedOrNotFound"}.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://database.us-ashburn-1.oraclecloud.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404

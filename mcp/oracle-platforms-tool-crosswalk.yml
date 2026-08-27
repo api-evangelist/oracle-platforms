@@ -1,0 +1,138 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  mcp/oracle-platforms-mcp.yml (tool set read verbatim from Oracle's
+  src/oci-cloud-mcp-server/README.md) bound against the six OpenAPI documents in openapi/,
+  harvested the same day from https://docs.oracle.com/en-us/iaas/api/specs/index.json.
+provider: Oracle Platforms
+providerId: oracle-platforms
+surfaces:
+  openapi:
+    files:
+      - openapi/oracle-platforms-core-openapi.yml
+      - openapi/oracle-platforms-database-openapi.yml
+      - openapi/oracle-platforms-data-science-openapi.yml
+      - openapi/oracle-platforms-analytics-openapi.yml
+      - openapi/oracle-platforms-integration-openapi.yml
+      - openapi/oracle-platforms-content-management-openapi.yml
+    operations: 1154
+    gated: false
+    note: Published anonymously by Oracle; all six fetched at HTTP 200.
+  graphql:
+    present: false
+  mcp:
+    url: null
+    gated: true
+    note: >-
+      Tool names and descriptions are Oracle-published; the live inputSchema per tool
+      requires a provisioned, authenticated server, so no schema was introspected.
+binding_model: reflective
+binding_model_note: >-
+  This is NOT a per-resource crosswalk and it should not be read as one. Oracle's
+  recommended MCP server does not wrap operations one-to-one; it wraps the OCI Python SDK
+  itself. Five tools — discover clients, search methods, describe a method, list a client's
+  methods, invoke a method — reach the ENTIRE control plane through a client_fqn +
+  operation pair. So every one of the 1,154 REST operations is reachable through exactly
+  one tool (invoke_oci_api) and none has a dedicated tool of its own. The practical
+  consequence for an agent is real: there is no per-operation inputSchema to read ahead of
+  time. The agent must call describe_oci_operation at runtime to learn the parameters of
+  the operation it intends to invoke, which is why describe_oci_operation is a hard
+  prerequisite of invoke_oci_api rather than a convenience.
+crosswalk:
+  - tool: list_oci_clients
+    category: discovery
+    rest: []
+    binding: none
+    confidence: high
+    note: >-
+      Enumerates OCI SDK client classes available in the local environment. Has no REST
+      counterpart — it reads the installed SDK, not the API. The closest published analogue
+      is Oracle's own spec index at docs.oracle.com/en-us/iaas/api/specs/index.json.
+  - tool: find_oci_api
+    category: discovery
+    rest: []
+    binding: none
+    confidence: high
+    note: >-
+      Keyword search across SDK method names. Local reflection over the SDK; no REST
+      operation backs it.
+  - tool: describe_oci_operation
+    category: schema
+    rest: []
+    binding: none
+    confidence: high
+    note: >-
+      Returns required params, optional params, pagination behavior and request-model hints
+      for one SDK method. This tool IS the missing inputSchema — it is the runtime
+      substitute for the OpenAPI parameter block that a conventional MCP server would have
+      baked into its tool definition.
+  - tool: list_client_operations
+    category: schema
+    rest: []
+    binding: none
+    confidence: high
+    note: Lists callable operations on one OCI client class; local reflection.
+  - tool: invoke_oci_api
+    category: execute
+    binding: reflective-all
+    confidence: high
+    rest_operation_count: 1154
+    rest:
+      - ListInstances
+      - GetInstance
+      - LaunchInstance
+      - TerminateInstance
+      - ListVcns
+      - ListVolumes
+      - ListAutonomousDatabases
+      - GetAutonomousDatabase
+      - CreateAutonomousDatabase
+      - RestoreAutonomousDatabase
+      - StartAutonomousDatabase
+      - StopAutonomousDatabase
+      - ListModels
+      - CreateModel
+      - ListNotebookSessions
+      - CreateJobRun
+      - CancelJobRun
+      - ListAnalyticsInstances
+      - CreateAnalyticsInstance
+      - ListIntegrationInstances
+      - CreateIntegrationInstance
+      - ListOceInstances
+      - CreateOceInstance
+    note: >-
+      The rest[] list above is a VERIFIED SAMPLE, not the binding. Each of those 23
+      operationIds was grepped out of the harvested specs in this repo and exists. The real
+      binding is every operation in all six documents (1,154), reached as
+      client_fqn="oci.<service>.<Client>", operation="<snake_case_method>" — for example
+      the spec's ListInstances is invoked as
+      client_fqn="oci.core.ComputeClient", operation="list_instances", which is Oracle's
+      own worked example in the server README. The name transform is
+      PascalCase operationId -> snake_case SDK method, applied by the SDK, not by the tool.
+mcp_only:
+  - tool: list_oci_clients
+    reason: SDK-environment reflection; no public REST operation enumerates SDK clients.
+  - tool: find_oci_api
+    reason: SDK-method search; no public REST operation.
+  - tool: describe_oci_operation
+    reason: >-
+      Schema introspection over the local SDK. The equivalent information exists in the
+      OpenAPI documents but is not itself served by an OCI API operation.
+  - tool: list_client_operations
+    reason: SDK-class reflection; no public REST operation.
+rest_only:
+  count: 0
+  note: >-
+    No operation is excluded. Because invoke_oci_api is reflective over the whole SDK, every
+    REST operation in the six harvested documents is reachable, and there is no
+    REST-without-a-tool remainder to record. The gap is not coverage — it is
+    discoverability: an agent cannot see 1,154 typed tools, it sees five untyped ones and
+    must interrogate the server to find anything.
+coverage:
+  rest_operations: 1154
+  mcp_tools: 5
+  tools_bound_to_rest: 1
+  tools_mcp_only: 4
+  rest_operations_reachable: 1154
+  rest_operations_with_dedicated_tool: 0

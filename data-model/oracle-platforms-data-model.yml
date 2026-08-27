@@ -1,0 +1,222 @@
+generated: '2026-08-27'
+method: derived
+source: >-
+  Derived by parsing definitions[] and $ref graphs across the six OpenAPI documents in
+  openapi/ (1,698 schema definitions total), plus the OCID identifier scheme at
+  https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm
+provider: Oracle Platforms
+providerId: oracle-platforms
+identifier_scheme:
+  name: OCID
+  format: 'ocid1.<resource-type>.<realm>.[region][.future use].<unique ID>'
+  description: >-
+    Every entity in every one of these APIs is keyed by an OCID, and the identifier is
+    self-describing: the second segment names the resource type, so an agent holding an
+    opaque id already knows what kind of thing it points at without a lookup. This is the
+    single most useful structural fact about Oracle's data model.
+root_entity:
+  name: Compartment
+  description: >-
+    The organising entity of the entire estate. compartmentId is the most-referenced field
+    in every single document — 188 occurrences in Core Services, 95 in Database, 74 in Data
+    Science, 6 each in Analytics and Integration, 5 in Content Management. Nearly every list
+    operation is scoped by it and nearly every create operation places into it. IAM policy
+    is written against it. A model of this API that does not start with the compartment does
+    not model this API.
+schema_counts:
+  core: 692
+  database: 553
+  data_science: 360
+  analytics: 48
+  integration: 31
+  content_management: 14
+  total: 1698
+entities:
+  - name: Compartment
+    api: identity
+    role: container
+    note: Referenced by every service; defined in the IAM contract, not in the six harvested here.
+  - name: Instance
+    api: Oracle Cloud Infrastructure (OCI) REST API
+    spec: openapi/oracle-platforms-core-openapi.yml
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_many: Vnic
+        via: vnicId
+      - has_many: BootVolume
+        via: bootVolumeId
+  - name: InstancePool
+    api: Oracle Cloud Infrastructure (OCI) REST API
+    ref_count: 17
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_one: InstanceConfiguration
+        via: instanceConfigurationId
+      - has_many: Instance
+  - name: Vcn
+    api: Oracle Cloud Infrastructure (OCI) REST API
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_many: Subnet
+        via: subnetId
+      - has_many: RouteTable
+        via: routeTableId
+      - has_many: Drg
+        via: drgId
+  - name: Subnet
+    api: Oracle Cloud Infrastructure (OCI) REST API
+    relationships:
+      - belongs_to: Vcn
+        via: vcnId
+      - has_one: RouteTable
+        via: routeTableId
+  - name: Volume
+    api: Oracle Cloud Infrastructure (OCI) REST API
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_one: Key
+        via: kmsKeyId
+  - name: AutonomousDatabase
+    api: Oracle Autonomous Database API
+    spec: openapi/oracle-platforms-database-openapi.yml
+    ref_count: 47
+    note: The most-referenced entity in the Database contract.
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - belongs_to: AutonomousContainerDatabase
+        via: autonomousContainerDatabaseId
+      - has_one: Subnet
+        via: subnetId
+      - has_one: Vault
+        via: vaultId
+      - has_one: Key
+        via: kmsKeyId
+      - has_many: AutonomousDatabaseBackup
+  - name: AutonomousContainerDatabase
+    api: Oracle Autonomous Database API
+    ref_count: 25
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_one: CloudAutonomousVmCluster
+      - has_many: AutonomousDatabase
+      - has_one: MaintenanceWindow
+  - name: Database
+    api: Oracle Autonomous Database API
+    ref_count: 37
+    relationships:
+      - belongs_to: DbSystem
+        via: dbSystemId
+      - has_many: PluggableDatabase
+      - has_one: DatabaseSoftwareImage
+        via: databaseSoftwareImageId
+  - name: CloudVmCluster
+    api: Oracle Autonomous Database API
+    ref_count: 15
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_one: ExadataInfrastructure
+        via: exadataInfrastructureId
+      - has_many: DbNode
+        via: dbNodeId
+  - name: Model
+    api: Oracle Cloud Infrastructure Data Science API
+    spec: openapi/oracle-platforms-data-science-openapi.yml
+    ref_count: 19
+    relationships:
+      - belongs_to: Project
+        via: projectId
+      - belongs_to: Compartment
+        via: compartmentId
+      - belongs_to: ModelVersionSet
+        via: modelVersionSetId
+      - has_many: ModelDeployment
+        via: modelId
+  - name: ModelGroup
+    api: Oracle Cloud Infrastructure Data Science API
+    ref_count: 15
+    relationships:
+      - has_many: Model
+      - has_one: Model
+        via: latestModelGroupId
+  - name: Pipeline
+    api: Oracle Cloud Infrastructure Data Science API
+    ref_count: 10
+    relationships:
+      - belongs_to: Project
+        via: projectId
+      - has_many: PipelineRun
+  - name: MlApplicationInstanceView
+    api: Oracle Cloud Infrastructure Data Science API
+    ref_count: 11
+    relationships:
+      - belongs_to: MlApplication
+        via: mlApplicationId
+      - has_one: MlApplicationImplementation
+        via: mlApplicationImplementationId
+  - name: AnalyticsInstance
+    api: Oracle Analytics Cloud API
+    spec: openapi/oracle-platforms-analytics-openapi.yml
+    ref_count: 23
+    note: The Analytics contract is effectively single-entity — one instance type and its lifecycle.
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_one: NetworkEndpointDetails
+      - has_one: Capacity
+      - has_one: Vcn
+        via: vcnId
+      - has_one: Key
+        via: kmsKeyId
+  - name: IntegrationInstance
+    api: Oracle Integration Cloud API
+    spec: openapi/oracle-platforms-integration-openapi.yml
+    ref_count: 17
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - has_many: OutboundConnection
+      - has_one: CustomEndpointDetails
+      - has_one: LogGroup
+        via: logGroupId
+  - name: OceInstance
+    api: Oracle Content Management API
+    spec: openapi/oracle-platforms-content-management-openapi.yml
+    ref_count: 5
+    relationships:
+      - belongs_to: Compartment
+        via: compartmentId
+      - belongs_to: Tenancy
+        via: tenancyId
+      - has_one: IdentityStripeDetails
+  - name: WorkRequest
+    api: cross-cutting
+    note: >-
+      Present in every contract. Every asynchronous mutation returns a work-request OCID in
+      opc-work-request-id, and the work request carries WorkRequestError and
+      WorkRequestLogEntry children. It is the completion model for the whole platform, not a
+      per-service detail.
+    relationships:
+      - has_many: WorkRequestError
+      - has_many: WorkRequestLogEntry
+cross_cutting_shapes:
+  - name: Error
+    note: '{code, message} — appears as a definition in every contract.'
+  - name: freeformTags / definedTags
+    note: >-
+      Every taggable resource carries both. freeformTags is a flat string map; definedTags
+      is namespaced and governed by IAM. This is the allocation surface that FinOps work
+      against these APIs depends on.
+  - name: lifecycleState
+    note: >-
+      Nearly every entity carries a lifecycleState enum (CREATING / ACTIVE / UPDATING /
+      TERMINATING / TERMINATED / FAILED). An agent must poll it — a 200 on a create does not
+      mean the resource is usable.
+render: null
+render_note: No subway/ diagram exists in this repo; none was generated.

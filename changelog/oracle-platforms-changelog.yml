@@ -1,0 +1,32 @@
+generated: '2026-08-27'
+method: searched
+source: https://docs.oracle.com/en-us/iaas/Content/servicechanges.htm
+provider: Oracle Platforms
+providerId: oracle-platforms
+scheme: dated-service-change-announcements
+url: https://docs.oracle.com/en-us/iaas/Content/servicechanges.htm
+http_status: 200
+verified: '2026-08-27'
+description: >-
+  Oracle publishes OCI change communication as dated Service Change Announcements rather
+  than as a per-API release-notes feed. Each announcement names the affected service, the
+  change, and an effective date, and the page is Oracle's canonical forward-notice channel
+  for deprecations and behaviour changes across the services profiled here.
+also:
+  - name: OCI Release Notes
+    url: https://docs.oracle.com/en-us/iaas/releasenotes/
+    description: >-
+      Per-service dated release notes. The OCI Database Tools MCP Server release note used
+      elsewhere in this profile (release date 2026-05-12) comes from this surface, which
+      confirms it carries dated, per-service entries.
+  - name: Per-service spec version segment
+    description: >-
+      Each API's YYYYMMDD base-path segment is the closest thing to a machine-readable
+      version marker; see lifecycle/oracle-platforms-lifecycle.yml.
+entries: []
+entries_note: >-
+  No structured recent-entry list is recorded. The announcements page renders its entries
+  from a large client-side table (327 KB of HTML), and this pass did not extract dated rows
+  it could attribute individually with confidence. Recording an empty entries[] with the
+  verified page URL is the honest result — the changelog exists and is live; its rows were
+  not parsed.
