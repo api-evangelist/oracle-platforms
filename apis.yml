@@ -10,6 +10,17 @@ description: 'Oracle Platforms is the API Evangelist index of Oracle''s cloud an
   than a bearer token, idempotency is the opc-retry-token header, and Oracle ships both managed remote
   MCP servers and 32 open-source reference MCP servers.'
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
@@ -486,6 +497,9 @@ tags_raw:
 - Platform as a Service
 - SaaS
 common:
+- type: CapabilityMap
+  url: capabilities/oracle-platforms-capability-edges.yml
+  name: Oracle Platforms Business Capability Map
 - type: Overlay
   url: overlays/oracle-platforms-core-overlay.yaml
 - type: Overlay
