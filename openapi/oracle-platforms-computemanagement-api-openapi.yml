@@ -1,0 +1,5526 @@
+openapi: 3.2.0
+info:
+  x-provenance:
+    method: harvested
+    first_party: true
+    publisher: Oracle
+    source: https://docs.oracle.com/en-us/iaas/api/specs/8839cf1f6cfca996dd92bc573c2a7c14db20e7f5d6e244c7d62365fa9d770623.yaml
+    harvested: '2026-08-27'
+    note: Published by Oracle as the contract for the Core Services API (iaas) OCI service and stored verbatim; API Evangelist added only this provenance block. Wired to the "Oracle Cloud Infrastructure (OCI) REST API" entry in apis.yml.
+  x-evidence:
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/index.json
+    what: Oracle's own machine-readable index of every OCI service specification (HTTP 200)
+  - url: https://docs.oracle.com/en-us/iaas/api/specs/8839cf1f6cfca996dd92bc573c2a7c14db20e7f5d6e244c7d62365fa9d770623.yaml
+    what: the harvested document for Core Services API (HTTP 200)
+  description: 'Use the Core Services API to manage resources such as virtual cloud networks (VCNs),
+
+    compute instances, and block storage volumes. For more information, see the console
+
+    documentation for the [Networking](/iaas/Content/Network/Concepts/overview.htm),
+
+    [Compute](/iaas/Content/Compute/Concepts/computeoverview.htm), and
+
+    [Block Volume](/iaas/Content/Block/Concepts/overview.htm) services.
+
+    The required permissions are documented in the
+
+    [Details for the Core Services](/iaas/Content/Identity/Reference/corepolicyreference.htm) article.
+
+    '
+  license:
+    name: Oracle Corporation
+  title: Core Services Compute Management API
+  version: '20160918'
+servers:
+- url: /20160918
+tags:
+- name: computeManagement
+paths:
+  /clusterNetworks:
+    get:
+      description: 'Lists the [cluster networks with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm)
+
+        in the specified compartment.
+
+        '
+      operationId: ListClusterNetworks
+      parameters:
+      - $ref: '#/components/parameters/CompartmentIdQueryParam'
+      - $ref: '#/components/parameters/FilterByDisplayNameQueryParam'
+      - $ref: '#/components/parameters/PaginationLimitQueryParam'
+      - $ref: '#/components/parameters/PaginationTokenQueryParam'
+      - $ref: '#/components/parameters/SortByQueryParam'
+      - $ref: '#/components/parameters/SortOrderQueryParam'
+      - description: 'A filter to only return resources that match the given lifecycle
+
+          state. The state value is case-insensitive.
+
+          '
+        in: query
+        name: lifecycleState
+        required: false
+        x-obmcs-enumref: '#/definitions/ClusterNetworkSummary/lifecycleState'
+        schema:
+          type: string
+      responses:
+        200:
+          description: The list was retrieved.
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response, additional pages
+
+                of results remain. For important details about how pagination works, see
+
+                [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ClusterNetworkSummary'
+                type: array
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ListClusterNetworks
+      tags:
+      - computeManagement
+      x-example: "GET /20160918/clusterNetworks\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\"\n}\n"
+      x-related-resource: '#/definitions/ClusterNetwork'
+    post:
+      description: 'Creates a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+        A cluster network is a group of high performance computing (HPC), GPU, or optimized bare metal
+
+        instances that are connected with an ultra low-latency remote direct memory access (RDMA) network.
+
+        Cluster networks with instance pools use instance pools to manage groups of identical instances.
+
+
+        Use cluster networks with instance pools when you want predictable capacity for a specific number of identical
+
+        instances that are managed as a group.
+
+
+        If you want to manage instances in the RDMA network independently of each other or use different types of instances
+
+        in the network group, create a compute cluster by using the [CreateComputeCluster](#/en/iaas/latest/ComputeCluster/CreateComputeCluster)
+
+        operation.
+
+
+        To determine whether capacity is available for a specific shape before you create a cluster network,
+
+        use the [CreateComputeCapacityReport](#/en/iaas/latest/ComputeCapacityReport/CreateComputeCapacityReport)
+
+        operation.
+
+        '
+      operationId: CreateClusterNetwork
+      parameters:
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        200:
+          description: The cluster network.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+            opc-work-request-id:
+              description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the work request.
+
+                Use [GetWorkRequest](/api/#/en/workrequests/latest/WorkRequest/GetWorkRequest)
+
+                with this ID to track the status of the request.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNetwork'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: CreateClusterNetwork
+      tags:
+      - computeManagement
+      x-example: "POST /20160918/clusterNetworks\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"displayName\": \"hpc-cluster-network\",\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"instancePools\": [\n    {\n      \"displayName\": \"hpc-instance-pool-1\",\n      \"instanceConfigurationId\": \"ocid1.instanceconfiguration.oc1..<var>&lt;unique_ID&gt;</var>\",\n      \"size\": 10,\n    }\n  ],\n  \"placementConfiguration\":\n  {\n    \"availabilityDomain\": \"Uocm:PHX-AD-1\",\n    \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;unique_ID&gt;</var>\"\n  }\n}\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateClusterNetworkDetails'
+        description: Cluster network creation details
+        required: true
+  /clusterNetworks/{clusterNetworkId}:
+    delete:
+      description: 'Deletes (terminates) a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+
+        When you delete a cluster network, all of its resources are permanently deleted,
+
+        including associated instances and instance pools.
+
+        '
+      operationId: TerminateClusterNetwork
+      parameters:
+      - $ref: '#/components/parameters/ClusterNetworkIdPathParam'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        204:
+          description: The cluster network is being terminated.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+            opc-work-request-id:
+              description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the work request.
+
+                Use [GetWorkRequest](/api/#/en/workrequests/latest/WorkRequest/GetWorkRequest)
+
+                with this ID to track the status of the request.
+
+                '
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: TerminateClusterNetwork
+      tags:
+      - computeManagement
+      x-example: '​DELETE /20160918/clusterNetworks/<var>&lt;cluster_network_OCID&gt;</var>
+
+        Host: iaas.us-phoenix-1.oraclecloud.com
+
+        <var>&lt;authorization and other headers&gt;</var>
+
+        '
+      x-related-resource: '#/definitions/ClusterNetwork'
+    get:
+      description: 'Gets information about a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+        '
+      operationId: GetClusterNetwork
+      parameters:
+      - $ref: '#/components/parameters/ClusterNetworkIdPathParam'
+      responses:
+        200:
+          description: The cluster network was retrieved.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNetwork'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: GetClusterNetwork
+      tags:
+      - computeManagement
+      x-example: 'GET /20160918/clusterNetworks/<var>&lt;cluster_network_OCID&gt;</var>
+
+        Host: iaas.us-phoenix-1.oraclecloud.com
+
+        <var>&lt;authorization and other headers&gt;</var>
+
+        '
+    put:
+      description: 'Updates a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+        The OCID of the cluster network remains the same.
+
+        '
+      operationId: UpdateClusterNetwork
+      parameters:
+      - $ref: '#/components/parameters/ClusterNetworkIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The cluster network was updated.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterNetwork'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: UpdateClusterNetwork
+      tags:
+      - computeManagement
+      x-example: "PUT /20160918/clusterNetworks/<var>&lt;cluster_network_OCID&gt;</var>\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"displayName\": \"example_cluster_network\"\n}\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateClusterNetworkDetails'
+        description: Update cluster network
+        required: true
+  /clusterNetworks/{clusterNetworkId}/actions/changeCompartment:
+    post:
+      description: 'Moves a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm)
+
+        into a different compartment within the same tenancy. For
+
+        information about moving resources between compartments, see
+
+        [Moving Resources to a Different Compartment](/iaas/Content/Identity/Tasks/managingcompartments.htm#moveRes).
+
+
+        When you move a cluster network to a different compartment, associated resources such as the instances
+
+        in the cluster network, boot volumes, and VNICs are not moved.
+
+        '
+      operationId: ChangeClusterNetworkCompartment
+      parameters:
+      - $ref: '#/components/parameters/ClusterNetworkIdPathParam'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        204:
+          description: The Cluster Network Compartment Details is being changed.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ChangeClusterNetworkCompartment
+      tags:
+      - computeManagement
+      x-example: "​POST /20160918/clusterNetworks/<var>&lt;cluster_network_OCID&gt;</var>/actions/changeCompartment\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;cluster_network_OCID&gt;</var>\",\n}\n"
+      x-related-resource: '#/definitions/ClusterNetwork'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeClusterNetworkCompartmentDetails'
+        description: Request to change the compartment of given cluster network.
+        required: true
+  /clusterNetworks/{clusterNetworkId}/instances:
+    get:
+      description: 'Lists the instances in a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+        '
+      operationId: ListClusterNetworkInstances
+      parameters:
+      - $ref: '#/components/parameters/CompartmentIdQueryParam'
+      - $ref: '#/components/parameters/ClusterNetworkIdPathParam'
+      - $ref: '#/components/parameters/FilterByDisplayNameQueryParam'
+      - $ref: '#/components/parameters/PaginationLimitQueryParam'
+      - $ref: '#/components/parameters/PaginationTokenQueryParam'
+      - $ref: '#/components/parameters/SortByQueryParam'
+      - $ref: '#/components/parameters/SortOrderQueryParam'
+      responses:
+        200:
+          description: The list is being retrieved.
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response, additional pages
+
+                of results remain. For important details about how pagination works, see
+
+                [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/InstanceSummary'
+                type: array
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ListClusterNetworkInstances
+      tags:
+      - computeManagement
+      x-example: 'GET /20160918/clusterNetworks/<var>&lt;cluster_network_OCID&gt;</var>/instances?compartmentId=<var>&lt;compartment_OCID&gt;</var>
+
+        Host: iaas.us-phoenix-1.oraclecloud.com
+
+        <var>&lt;authorization and other headers&gt;</var>
+
+        '
+      x-related-resource: '#/definitions/ClusterNetwork'
+  /instanceConfigurations:
+    get:
+      description: 'Lists the instance configurations in the specified compartment.
+
+        '
+      operationId: ListInstanceConfigurations
+      parameters:
+      - $ref: '#/components/parameters/CompartmentIdQueryParam'
+      - $ref: '#/components/parameters/PaginationLimitQueryParam'
+      - $ref: '#/components/parameters/PaginationTokenQueryParam'
+      - $ref: '#/components/parameters/SortByQueryParam'
+      - $ref: '#/components/parameters/SortOrderQueryParam'
+      responses:
+        200:
+          description: The list is being retrieved.
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response, additional pages
+
+                of results remain. For important details about how pagination works, see
+
+                [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/InstanceConfigurationSummary'
+                type: array
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ListInstanceConfigurations
+      tags:
+      - computeManagement
+    post:
+      description: 'Creates an instance configuration. An instance configuration is a template that defines the
+
+        settings to use when creating Compute instances.
+
+        '
+      operationId: CreateInstanceConfiguration
+      parameters:
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        200:
+          description: The instance configuration.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceConfiguration'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: CreateInstanceConfiguration
+      tags:
+      - computeManagement
+      x-example: "Example 1: Create an instance configuration by providing a list of configuration settings\nPOST /20160918/instanceConfigurations\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"displayName\": \"example-instance-configuration\",\n  \"source\": \"NONE\",\n  \"instanceDetails\" : {\n    \"instanceType\": \"compute\",\n    \"blockVolumes\" : [ {\n      //Optional parameters for creating or attaching block volumes\n    } ],\n    \"launchDetails\" : {\n      \"compartmentId\":\"ocid1.tenancy.oc1..<var>&lt;unique_ID&gt;</var>\",\n      \"shape\":\"VM.Standard2.1\",\n      \"sourceDetails\": {\n          \"sourceType\": \"image\",\n          \"imageId\": \"oci.image.oc1.phx.<var>&lt;unique_ID&gt;</var>\"\n      },\n      //Optional parameters for configuring settings such as\n      //the availability domain, primary VNIC, and instance metadata\n    },\n    \"secondaryVnics\" : [ {\n      //Optional parameters for attaching secondary VNICs\n    } ]\n  }\n}\n\nExample 2: Create an instance configuration using an existing instance as a template\nPOST /20160918/instanceConfigurations\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"displayName\": \"example-instance-configuration\",\n  \"source\": \"INSTANCE\",\n  \"instanceId\" : \"ocid1.instance.oc1.phx.<var>&lt;unique_ID&gt;</var>\"\n}\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstanceConfigurationBase'
+        description: Instance configuration creation details
+        required: true
+  /instanceConfigurations/{instanceConfigurationId}:
+    delete:
+      description: Deletes an instance configuration.
+      operationId: DeleteInstanceConfiguration
+      parameters:
+      - $ref: '#/components/parameters/InstanceConfigurationIdPathParam'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        204:
+          description: The instance configuration is being deleted.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: DeleteInstanceConfiguration
+      tags:
+      - computeManagement
+    get:
+      description: Gets the specified instance configuration
+      operationId: GetInstanceConfiguration
+      parameters:
+      - $ref: '#/components/parameters/InstanceConfigurationIdPathParam'
+      responses:
+        200:
+          description: The instance configuration was retrieved.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceConfiguration'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: GetInstanceConfiguration
+      tags:
+      - computeManagement
+    put:
+      description: Updates the free-form tags, defined tags, and display name of an instance configuration.
+      operationId: UpdateInstanceConfiguration
+      parameters:
+      - $ref: '#/components/parameters/InstanceConfigurationIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The instance configuration was updated
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceConfiguration'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: UpdateInstanceConfiguration
+      tags:
+      - computeManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInstanceConfigurationDetails'
+        description: Updates the freeFormTags, definedTags, and display name of an instance configuration.
+        required: true
+  /instanceConfigurations/{instanceConfigurationId}/actions/changeCompartment:
+    post:
+      description: 'Moves an instance configuration into a different compartment within the same tenancy.
+
+        For information about moving resources between compartments, see
+
+        [Moving Resources to a Different Compartment](/iaas/Content/Identity/Tasks/managingcompartments.htm#moveRes).
+
+
+        When you move an instance configuration to a different compartment, associated resources such as
+
+        instance pools are not moved.
+
+
+        **Important:** Most of the properties for an existing instance configuration, including the compartment,
+
+        cannot be modified after you create the instance configuration. Although you can move an instance configuration
+
+        to a different compartment, you will not be able to use the instance configuration to manage instance pools
+
+        in the new compartment. If you want to update an instance configuration to point to a different compartment,
+
+        you should instead create a new instance configuration in the target compartment using
+
+        [CreateInstanceConfiguration](/iaas/api/#/en/iaas/20160918/InstanceConfiguration/CreateInstanceConfiguration).
+
+        '
+      operationId: ChangeInstanceConfigurationCompartment
+      parameters:
+      - $ref: '#/components/parameters/InstanceConfigurationIdPathParam'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        204:
+          description: The Instance Configuration Compartment Details is getting changed
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ChangeInstanceConfigurationCompartment
+      tags:
+      - computeManagement
+      x-example: "POST /20160918/instanceConfigurations/<var>&lt;instance_configuration_OCID&gt;</var>/actions/changeCompartment\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\"\n}\n"
+      x-related-resource: '#/definitions/InstanceConfiguration'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeInstanceConfigurationCompartmentDetails'
+        description: Request to change the compartment of given instance configuration.
+        required: true
+  /instanceConfigurations/{instanceConfigurationId}/actions/launch:
+    post:
+      description: 'Creates an instance from an instance configuration.
+
+
+        If the instance configuration does not include all of the parameters that are
+
+        required to create an instance, such as the availability domain and subnet ID, you must
+
+        provide these parameters when you create an instance from the instance configuration.
+
+        For more information, see the [InstanceConfiguration](#/en/iaas/latest/InstanceConfiguration/)
+
+        resource.
+
+
+        To determine whether capacity is available for a specific shape before you create an instance,
+
+        use the [CreateComputeCapacityReport](#/en/iaas/latest/ComputeCapacityReport/CreateComputeCapacityReport)
+
+        operation.
+
+        '
+      operationId: LaunchInstanceConfiguration
+      parameters:
+      - $ref: '#/components/parameters/InstanceConfigurationIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/OpcComputeClusterIdHeader'
+      responses:
+        200:
+          description: The instance that was launched.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+            opc-work-request-id:
+              description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the work request.
+
+                Use [GetWorkRequest](/api/#/en/workrequests/latest/WorkRequest/GetWorkRequest)
+
+                with this ID to track the status of the request.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Instance'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: LaunchInstanceConfiguration
+      tags:
+      - computeManagement
+      x-example: "POST /20160918/instanceConfigurations/<var>&lt;instance_configuration_OCID&gt;</var>/actions/launch\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"instanceType\" : \"compute\",\n  \"blockVolumes\" : [ {\n    //Optional parameters for creating or attaching block volumes\n  } ],\n  \"launchDetails\" : {\n    //Parameters for configuring settings such as\n    //the availability domain, primary VNIC, and instance metadata.\n    //If the instance configuration does not include all of the parameters\n    //that are required to create an instance, you must provide the\n    //required parameters here. Get a list of required parameters from the\n    //deferred fields attribute of the instance configuration.\n  },\n  \"secondaryVnics\" : [ {\n    //Optional parameters for attaching secondary VNICs\n  } ]\n}\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceConfigurationInstanceDetails'
+        description: Instance configuration Instance Details
+        required: true
+  /instancePools:
+    get:
+      description: Lists the instance pools in the specified compartment.
+      operationId: ListInstancePools
+      parameters:
+      - $ref: '#/components/parameters/CompartmentIdQueryParam'
+      - $ref: '#/components/parameters/FilterByDisplayNameQueryParam'
+      - $ref: '#/components/parameters/PaginationLimitQueryParam'
+      - $ref: '#/components/parameters/PaginationTokenQueryParam'
+      - $ref: '#/components/parameters/SortByQueryParam'
+      - $ref: '#/components/parameters/SortOrderQueryParam'
+      - description: 'A filter to only return resources that match the given lifecycle state. The state
+
+          value is case-insensitive.
+
+          '
+        in: query
+        name: lifecycleState
+        required: false
+        x-obmcs-enumref: '#/definitions/InstancePoolSummary/lifecycleState'
+        schema:
+          type: string
+      responses:
+        200:
+          description: The list is being retrieved
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response, additional pages
+
+                of results remain. For important details about how pagination works, see
+
+                [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/InstancePoolSummary'
+                type: array
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ListInstancePools
+      tags:
+      - computeManagement
+    post:
+      description: 'Creates an instance pool.
+
+
+        To determine whether capacity is available for a specific shape before you create an instance pool,
+
+        use the [CreateComputeCapacityReport](#/en/iaas/latest/ComputeCapacityReport/CreateComputeCapacityReport)
+
+        operation.
+
+        '
+      operationId: CreateInstancePool
+      parameters:
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        200:
+          description: The instance pool.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: CreateInstancePool
+      tags:
+      - computeManagement
+      x-example: "Example 1: Create an instance pool with a regional subnet (recommended) and an attached\nload balancer (optional)\nPOST /20160918/instancePools\n{\n  \"displayName\": \"autoscaling-instance-pool\",\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"instanceConfigurationId\": \"ocid1.instanceconfiguration.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"size\": 15,\n  \"placementConfigurations\": [\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-1\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;regional_subnet_unique_ID&gt;</var>\"\n    },\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-2\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;regional_subnet_unique_ID&gt;</var>\"\n    },\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-3\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;regional_subnet_unique_ID&gt;</var>\"\n    }\n  ],\n  \"loadBalancers\": [\n    {\n      \"loadBalancerId\": \"ocid1.loadbalancer.oc1.phx..<var>&lt;unique_ID&gt;</var>\",\n      \"backendSetName\": \"lb-20190410-1147-backend-set\",\n      \"port\": 80,\n      \"vnicSelection\": \"PrimaryVnic\"\n    }\n  ]\n}\n\nExample 2: Create an instance pool with AD-specific subnets\nPOST /20160918/instancePools\n{\n  \"displayName\": \"backend-servers-pool\",\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"instanceConfigurationId\": \"ocid1.instanceconfiguration.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"size\": 10,\n  \"placementConfigurations\": [\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-1\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;unique_ID_1&gt;</var>\"\n    },\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-2\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;unique_ID_2&gt;</var>\"\n    }\n  ]\n}\n\nExample 3: Create an instance pool with instances balanced evenly across the\nspecified fault domains\nPOST /20160918/instancePools\n{\n  \"displayName\": \"high-availability-pool\",\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"instanceConfigurationId\": \"ocid1.instanceconfiguration.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"size\": 20,\n  \"placementConfigurations\": [\n    {\n      \"availabilityDomain\": \"sOZD:AP-TOKYO-1-AD-1\",\n      \"faultDomains\": [\"FAULT-DOMAIN-1\", \"FAULT-DOMAIN-2\"]\n      \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;unique_ID_1&gt;</var>\",\n    }\n  ]\n}\n"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstancePoolDetails'
+        description: Instance pool creation details
+        required: true
+  /instancePools/{instancePoolId}:
+    delete:
+      description: 'Terminate the specified instance pool.
+
+
+        **Warning:** When you delete an instance pool, the resources that were created by the pool are permanently
+
+        deleted, including associated instances, attached boot volumes, and block volumes.
+
+
+        If an autoscaling configuration applies to the instance pool, the autoscaling configuration will be deleted
+
+        asynchronously after the pool is deleted. You can also manually delete the autoscaling configuration using
+
+        the `DeleteAutoScalingConfiguration` operation in the Autoscaling API.
+
+        '
+      operationId: TerminateInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        204:
+          description: The instance pool is being terminated.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: TerminateInstancePool
+      tags:
+      - computeManagement
+    get:
+      description: Gets the specified instance pool
+      operationId: GetInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      responses:
+        200:
+          description: The instance pool was retrieved.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: GetInstancePool
+      tags:
+      - computeManagement
+    put:
+      description: 'Update the specified instance pool.
+
+
+        The OCID of the instance pool remains the same.
+
+        '
+      operationId: UpdateInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The instance pool was updated.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: UpdateInstancePool
+      tags:
+      - computeManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInstancePoolDetails'
+        description: Update instance pool configuration
+        required: true
+  /instancePools/{instancePoolId}/actions/attachLoadBalancer:
+    post:
+      description: 'Attach a load balancer to the instance pool.
+
+        '
+      operationId: AttachLoadBalancer
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The load balancer is being attached.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: AttachLoadBalancer
+      tags:
+      - computeManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachLoadBalancerDetails'
+        description: Load balancer being attached
+        required: true
+  /instancePools/{instancePoolId}/actions/changeCompartment:
+    post:
+      description: 'Moves an instance pool into a different compartment within the same tenancy. For
+
+        information about moving resources between compartments, see
+
+        [Moving Resources to a Different Compartment](/iaas/Content/Identity/Tasks/managingcompartments.htm#moveRes).
+
+
+        When you move an instance pool to a different compartment, associated resources such as the instances in
+
+        the pool, boot volumes, VNICs, and autoscaling configurations are not moved.
+
+        '
+      operationId: ChangeInstancePoolCompartment
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      - $ref: '#/components/parameters/RequestIdHeader'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        204:
+          description: The Instance Pool Compartment Details is being changed.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ChangeInstancePoolCompartment
+      tags:
+      - computeManagement
+      x-example: "POST /20160918/instancePools/<var>&lt;instance_pool_OCID&gt;</var>/actions/changeCompartment\nHost: iaas.us-phoenix-1.oraclecloud.com\n<var>&lt;authorization and other headers&gt;</var>\n{\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\"\n}\n"
+      x-related-resource: '#/definitions/InstancePool'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeInstancePoolCompartmentDetails'
+        description: Request to change the compartment of given instance pool.
+        required: true
+  /instancePools/{instancePoolId}/actions/detachInstance:
+    post:
+      description: 'Detaches an instance from an instance pool.
+
+        '
+      operationId: DetachInstancePoolInstance
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: 'The instance is being detached from the pool.
+
+            '
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+            opc-work-request-id:
+              description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the work request.
+
+                Use [GetWorkRequest](/api/#/en/workrequests/latest/WorkRequest/GetWorkRequest)
+
+                with this ID to track the status of the request.
+
+                '
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        429:
+          $ref: '#/components/responses/429'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: DetachInstancePoolInstance
+      tags:
+      - computeManagement
+      x-related-resource: '#/definitions/InstancePoolInstance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachInstancePoolInstanceDetails'
+        description: Instance being detached
+        required: true
+  /instancePools/{instancePoolId}/actions/detachLoadBalancer:
+    post:
+      description: 'Detach a load balancer from the instance pool.
+
+        '
+      operationId: DetachLoadBalancer
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The load balancer is being detached.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: DetachLoadBalancer
+      tags:
+      - computeManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachLoadBalancerDetails'
+        description: Load balancer being detached
+        required: true
+  /instancePools/{instancePoolId}/actions/reset:
+    post:
+      description: 'Performs the reset (immediate power off and power on) action on the specified instance pool,
+
+        which performs the action on all the instances in the pool.
+
+        '
+      operationId: ResetInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The action is being performed.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ResetInstancePool
+      tags:
+      - computeManagement
+      x-related-resource: '#/definitions/InstancePool'
+  /instancePools/{instancePoolId}/actions/softreset:
+    post:
+      description: 'Performs the softreset (ACPI shutdown and power on) action on the specified instance pool,
+
+        which performs the action on all the instances in the pool.
+
+
+        Softreset gracefully reboots the instances by sending a shutdown command to the operating systems.
+
+        After waiting 15 minutes for the OS to shut down, the instances are powered off and then powered back on.
+
+        '
+      operationId: SoftresetInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The action is being performed.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: SoftresetInstancePool
+      tags:
+      - computeManagement
+      x-related-resource: '#/definitions/InstancePool'
+  /instancePools/{instancePoolId}/actions/softstop:
+    post:
+      description: 'Performs the softstop (ACPI shutdown and power on) action on the specified instance pool,
+
+        which performs the action on all the instances in the pool.
+
+
+        Softstop gracefully reboots the instances by sending a shutdown command to the operating systems.
+
+        After waiting 15 minutes for the OS to shutdown, the instances are powered off and then powered back on.
+
+        '
+      operationId: SoftstopInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The action is being performed.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: SoftstopInstancePool
+      tags:
+      - computeManagement
+      x-related-resource: '#/definitions/InstancePool'
+  /instancePools/{instancePoolId}/actions/start:
+    post:
+      description: 'Performs the start (power on) action on the specified instance pool,
+
+        which performs the action on all the instances in the pool.
+
+        '
+      operationId: StartInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The action is being performed.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: StartInstancePool
+      tags:
+      - computeManagement
+      x-related-resource: '#/definitions/InstancePool'
+  /instancePools/{instancePoolId}/actions/stop:
+    post:
+      description: 'Performs the stop (immediate power off) action on the specified instance pool,
+
+        which performs the action on all the instances in the pool.
+
+        '
+      operationId: StopInstancePool
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      - $ref: '#/components/parameters/IfMatchHeader'
+      responses:
+        200:
+          description: The action is being performed.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePool'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        412:
+          $ref: '#/components/responses/412'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: StopInstancePool
+      tags:
+      - computeManagement
+      x-related-resource: '#/definitions/InstancePool'
+  /instancePools/{instancePoolId}/actions/terminationProceed:
+    post:
+      description: 'Marks an instance in an instance pool to be ready for termination.
+
+        '
+      operationId: TerminationProceedInstancePoolInstance
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        202:
+          description: 'The instance is marked for termination.
+
+            '
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        429:
+          $ref: '#/components/responses/429'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: TerminationProceedInstancePoolInstance
+      tags:
+      - computeManagement
+      x-related-resource: '#/definitions/InstancePoolInstance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TerminationProceedInstancePoolInstanceDetails'
+        description: Instance to be marked for terminating.
+        required: true
+  /instancePools/{instancePoolId}/instances:
+    get:
+      description: List the instances in the specified instance pool.
+      operationId: ListInstancePoolInstances
+      parameters:
+      - $ref: '#/components/parameters/CompartmentIdQueryParam'
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/FilterByDisplayNameQueryParam'
+      - $ref: '#/components/parameters/PaginationLimitQueryParam'
+      - $ref: '#/components/parameters/PaginationTokenQueryParam'
+      - $ref: '#/components/parameters/SortByQueryParam'
+      - $ref: '#/components/parameters/SortOrderQueryParam'
+      responses:
+        200:
+          description: The list is being retrieved
+          headers:
+            opc-next-page:
+              description: 'For list pagination. When this header appears in the response, additional pages
+
+                of results remain. For important details about how pagination works, see
+
+                [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/InstanceSummary'
+                type: array
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: ListInstancePoolInstances
+      tags:
+      - computeManagement
+    post:
+      description: 'Attaches an instance to an instance pool. For information about the prerequisites
+
+        that an instance must meet before you can attach it to a pool, see
+
+        [Attaching an Instance to an Instance Pool](/iaas/Content/Compute/Tasks/updatinginstancepool.htm#attach-instance).
+
+        '
+      operationId: AttachInstancePoolInstance
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/RetryTokenHeader'
+      responses:
+        201:
+          description: 'The instance is being attached to the pool.
+
+            '
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            location:
+              description: 'Location of the resource.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+            opc-work-request-id:
+              description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the work request.
+
+                Use [GetWorkRequest](/api/#/en/workrequests/latest/WorkRequest/GetWorkRequest)
+
+                with this ID to track the status of the request.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePoolInstance'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        409:
+          $ref: '#/components/responses/409'
+        429:
+          $ref: '#/components/responses/429'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: AttachInstancePoolInstance
+      tags:
+      - computeManagement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachInstancePoolInstanceDetails'
+        description: Attach an instance to a pool
+        required: true
+  /instancePools/{instancePoolId}/instances/{instanceId}:
+    get:
+      description: Gets information about an instance that belongs to an instance pool.
+      operationId: GetInstancePoolInstance
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/InstanceIdPathParam'
+      responses:
+        200:
+          description: The instance was retrieved.
+          headers:
+            etag:
+              description: 'For optimistic concurrency control. See `if-match`.
+
+                '
+              schema:
+                type: string
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePoolInstance'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        429:
+          $ref: '#/components/responses/429'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: GetInstancePoolInstance
+      tags:
+      - computeManagement
+  /instancePools/{instancePoolId}/loadBalancerAttachments/{instancePoolLoadBalancerAttachmentId}:
+    get:
+      description: 'Gets information about a load balancer that is attached to the specified instance pool.
+
+        '
+      operationId: GetInstancePoolLoadBalancerAttachment
+      parameters:
+      - $ref: '#/components/parameters/InstancePoolIdPathParam'
+      - $ref: '#/components/parameters/InstancePoolLoadBalancerAttachmentIdPathParam'
+      responses:
+        200:
+          description: The load balancer attached to the instance pool was retrieved.
+          headers:
+            opc-request-id:
+              description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+                Oracle about a particular request, please provide the request ID.
+
+                '
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstancePoolLoadBalancerAttachment'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+        default:
+          $ref: '#/components/responses/DefaultError'
+      summary: GetLoadBalancerAttachment
+      tags:
+      - computeManagement
+components:
+  schemas:
+    InstanceShapeConfig:
+      description: 'The shape configuration for an instance. The shape configuration determines
+
+        the resources allocated to an instance.
+
+        '
+      properties:
+        baselineOcpuUtilization:
+          description: 'The baseline OCPU utilization for a subcore burstable VM instance. Leave this attribute blank for a
+
+            non-burstable instance, or explicitly specify non-burstable with `BASELINE_1_1`.
+
+
+            The following values are supported:
+
+            - `BASELINE_1_8` - baseline usage is 1/8 of an OCPU.
+
+            - `BASELINE_1_2` - baseline usage is 1/2 of an OCPU.
+
+            - `BASELINE_1_1` - baseline usage is the entire OCPU. This represents a non-burstable instance.
+
+            '
+          enum:
+          - BASELINE_1_8
+          - BASELINE_1_2
+          - BASELINE_1_1
+          type: string
+        gpuDescription:
+          description: 'A short description of the instance''s graphics processing unit (GPU).
+
+
+            If the instance does not have any GPUs, this field is `null`.
+
+            '
+          type: string
+        gpus:
+          description: 'The number of GPUs available to the instance.
+
+            '
+          minimum: 0
+          type: integer
+        localDiskDescription:
+          description: 'A short description of the local disks available to this instance.
+
+
+            If the instance does not have any local disks, this field is `null`.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        localDisks:
+          description: 'The number of local disks available to the instance.
+
+            '
+          minimum: 0
+          type: integer
+        localDisksTotalSizeInGBs:
+          description: 'The aggregate size of all local disks, in gigabytes.
+
+
+            If the instance does not have any local disks, this field is `null`.
+
+            '
+          format: float
+          minimum: 0.0
+          type: number
+        maxVnicAttachments:
+          description: 'The maximum number of VNIC attachments for the instance.
+
+            '
+          minimum: 0
+          type: integer
+        memoryInGBs:
+          description: 'The total amount of memory available to the instance, in gigabytes.
+
+            '
+          format: float
+          minimum: 0.0
+          type: number
+        networkingBandwidthInGbps:
+          description: 'The networking bandwidth available to the instance, in gigabits per second.
+
+            '
+          format: float
+          minimum: 0.0
+          type: number
+        ocpus:
+          description: 'The total number of OCPUs available to the instance.
+
+            '
+          format: float
+          minimum: 0.0
+          type: number
+        processorDescription:
+          description: 'A short description of the instance''s processor (CPU).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        resourceManagement:
+          description: 'This field is reserved for internal use.
+
+            '
+          enum:
+          - DYNAMIC
+          - STATIC
+          type: string
+        vcpus:
+          description: 'The total number of VCPUs available to the instance. This can be used instead of OCPUs,
+
+            in which case the actual number of OCPUs will be calculated based on this value
+
+            and the actual hardware. This must be a multiple of 2.
+
+            '
+          format: int32
+          minimum: 0
+          type: integer
+    LaunchOptions:
+      description: 'Options for tuning the compatibility and performance of VM shapes. The values that you specify override any
+
+        default values.
+
+        '
+      properties:
+        bootVolumeType:
+          description: 'Emulation type for the boot volume.
+
+            * `ISCSI` - ISCSI attached block storage device.
+
+            * `SCSI` - Emulated SCSI disk.
+
+            * `IDE` - Emulated IDE disk.
+
+            * `VFIO` - Direct attached Virtual Function storage. This is the default option for local data
+
+            volumes on platform images.
+
+            * `PARAVIRTUALIZED` - Paravirtualized disk. This is the default for boot volumes and remote block
+
+            storage volumes on platform images.
+
+            '
+          enum:
+          - ISCSI
+          - SCSI
+          - IDE
+          - VFIO
+          - PARAVIRTUALIZED
+          type: string
+        firmware:
+          description: 'Firmware used to boot VM. Select the option that matches your operating system.
+
+            * `BIOS` - Boot VM using BIOS style firmware. This is compatible with both 32 bit and 64 bit operating
+
+            systems that boot using MBR style bootloaders.
+
+            * `UEFI_64` - Boot VM using UEFI style firmware compatible with 64 bit operating systems. This is the
+
+            default for platform images.
+
+            '
+          enum:
+          - BIOS
+          - UEFI_64
+          type: string
+        isConsistentVolumeNamingEnabled:
+          description: Whether to enable consistent volume naming feature. Defaults to false.
+          type: boolean
+        isPvEncryptionInTransitEnabled:
+          description: 'Deprecated. Instead use `isPvEncryptionInTransitEnabled` in
+
+            [LaunchInstanceDetails](#/en/iaas/latest/datatypes/LaunchInstanceDetails).
+
+            '
+          type: boolean
+        networkType:
+          description: 'Emulation type for the physical network interface card (NIC).
+
+            * `E1000` - Emulated Gigabit ethernet controller. Compatible with Linux e1000 network driver.
+
+            * `VFIO` - Direct attached Virtual Function network controller. This is the networking type
+
+            when you launch an instance using hardware-assisted (SR-IOV) networking.
+
+            * `PARAVIRTUALIZED` - VM instances launch with paravirtualized devices using VirtIO drivers.
+
+            * `ACCELERATEDPV` - VM instances launch with accelerated paravirtualized networking type.
+
+            '
+          enum:
+          - E1000
+          - VFIO
+          - PARAVIRTUALIZED
+          - ACCELERATEDPV
+          type: string
+        remoteDataVolumeType:
+          description: 'Emulation type for volume.
+
+            * `ISCSI` - ISCSI attached block storage device.
+
+            * `SCSI` - Emulated SCSI disk.
+
+            * `IDE` - Emulated IDE disk.
+
+            * `VFIO` - Direct attached Virtual Function storage. This is the default option for local data
+
+            volumes on platform images.
+
+            * `PARAVIRTUALIZED` - Paravirtualized disk. This is the default for boot volumes and remote block
+
+            storage volumes on platform images.
+
+            '
+          enum:
+          - ISCSI
+          - SCSI
+          - IDE
+          - VFIO
+          - PARAVIRTUALIZED
+          type: string
+    ChangeClusterNetworkCompartmentDetails:
+      description: The configuration details for the move operation.
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment
+
+            into which the resource should be moved.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - compartmentId
+    InstancePool:
+      description: 'An instance pool is a set of instances within the same region that are managed as a group.
+
+        For more information about instance pools and instance configurations, see
+
+        [Managing Compute Instances](/iaas/Content/Compute/Concepts/instancemanagement.htm).
+
+        '
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment containing the instance
+
+            pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceConfigurationId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance configuration associated
+
+            with the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceDisplayNameFormatter:
+          description: 'A user-friendly formatter for the instance pool''s instances. Instance displaynames follow the format.
+
+            The formatter does not retroactively change instance''s displaynames, only instance displaynames in the future follow the format
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+          x-default-description: 'null'
+        instanceHostnameFormatter:
+          description: 'A user-friendly formatter for the instance pool''s instances. Instance hostnames follow the format.
+
+            The formatter does not retroactively change instance''s hostnames, only instance hostnames in the future follow the format
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+          x-default-description: 'null'
+        lifecycleManagement:
+          $ref: '#/components/schemas/InstancePoolLifecycleManagementDetails'
+        lifecycleState:
+          description: The current state of the instance pool.
+          enum:
+          - PROVISIONING
+          - SCALING
+          - STARTING
+          - STOPPING
+          - TERMINATING
+          - STOPPED
+          - TERMINATED
+          - RUNNING
+          type: string
+        loadBalancers:
+          description: 'The load balancers attached to the instance pool.
+
+            '
+          items:
+            $ref: '#/components/schemas/InstancePoolLoadBalancerAttachment'
+          type: array
+        placementConfigurations:
+          description: The placement configurations for the instance pool.
+          items:
+            $ref: '#/components/schemas/InstancePoolPlacementConfiguration'
+          type: array
+        size:
+          description: The number of instances that should be in the instance pool.
+          type: integer
+        timeCreated:
+          description: 'The date and time the instance pool was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - compartmentId
+      - instanceConfigurationId
+      - lifecycleState
+      - placementConfigurations
+      - size
+      - timeCreated
+      x-example: "{\n  \"id\": \"ocid1.instancepool.phx....&lt;unique_ID&gt;\",\n  \"displayName\": \"autoscaling-instance-pool\",\n  \"compartmentId\": \"ocid1.compartment.oc1..&lt;unique_ID&gt;\",\n  \"instanceConfigurationId\": \"ocid1.instanceconfiguration.oc1..&lt;unique_ID&gt;\",\n  \"lifecycleState\": \"PROVISIONING\",\n  \"placementConfigurations\": [\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-1\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..&lt;unique_ID&gt;\"\n    },\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-2\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..&lt;unique_ID&gt;\"\n    },\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-3\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..&lt;unique_ID&gt;\"\n    }\n  ],\n  \"size\": 15,\n  \"timeCreated\": \"2019-04-10T17:04:47.627Z\",\n  \"loadBalancers\": [\n    {\n      \"id\" : \"ocid1.loadbalancerattachment.oc1.phx.&lt;unique_ID&gt;\",\n      \"instancePoolId\" : \"ocid1.instancepool.oc1.phx.&lt;unique_ID&gt;\",\n      \"loadBalancerId\" : \"ocid1.loadbalancer.oc1.phx.&lt;unique_ID&gt;\",\n      \"backendSetName\" : \"lb-20190410-1147-backend-set\",\n      \"port\" : 80,\n      \"vnicSelection\" : \"PrimaryVnic\",\n      \"lifecycleState\" : \"ATTACHING\"\n    }\n  ]\n}\n"
+    InstanceAgentConfig:
+      description: Configuration options for the Oracle Cloud Agent software running on the instance.
+      properties:
+        areAllPluginsDisabled:
+          default: false
+          description: 'Whether Oracle Cloud Agent can run all of the available plugins.
+
+            This includes the management and monitoring plugins.
+
+
+            For more information about the available plugins, see
+
+            [Managing Plugins with Oracle Cloud Agent](/iaas/Content/Compute/Tasks/manage-plugins.htm).
+
+            '
+          type: boolean
+        isManagementDisabled:
+          default: false
+          description: 'Whether Oracle Cloud Agent can run all the available management plugins.
+
+
+            These are the management plugins: OS Management Service Agent and Compute Instance
+
+            Run Command.
+
+
+            The management plugins are controlled by this parameter and by the per-plugin
+
+            configuration in the `pluginsConfig` object.
+
+
+            - If `isManagementDisabled` is true, all of the management plugins are disabled, regardless of
+
+            the per-plugin configuration.
+
+            - If `isManagementDisabled` is false, all of the management plugins are enabled. You
+
+            can optionally disable individual management plugins by providing a value in the `pluginsConfig`
+
+            object.
+
+            '
+          type: boolean
+        isMonitoringDisabled:
+          default: false
+          description: 'Whether Oracle Cloud Agent can gather performance metrics and monitor the instance using the
+
+            monitoring plugins.
+
+
+            These are the monitoring plugins: Compute Instance Monitoring
+
+            and Custom Logs Monitoring.
+
+
+            The monitoring plugins are controlled by this parameter and by the per-plugin
+
+            configuration in the `pluginsConfig` object.
+
+
+            - If `isMonitoringDisabled` is true, all of the monitoring plugins are disabled, regardless of
+
+            the per-plugin configuration.
+
+            - If `isMonitoringDisabled` is false, all of the monitoring plugins are enabled. You
+
+            can optionally disable individual monitoring plugins by providing a value in the `pluginsConfig`
+
+            object.
+
+            '
+          type: boolean
+        pluginsConfig:
+          description: The configuration of plugins associated with this instance.
+          items:
+            $ref: '#/components/schemas/InstanceAgentPluginConfigDetails'
+          maxLength: 128
+          type: array
+    InstanceConfigurationSummary:
+      description: 'Summary information for an instance configuration.
+
+        '
+      properties:
+        compartmentId:
+          description: 'The OCID of the compartment containing the instance configuration.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The OCID of the instance configuration.
+          maxLength: 255
+          minLength: 1
+          type: string
+        timeCreated:
+          description: 'The date and time the instance configuration was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - compartmentId
+      - timeCreated
+    ChangeInstancePoolCompartmentDetails:
+      description: The configuration details for the move operation.
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to
+
+            move the instance pool to.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - compartmentId
+    PlacementConstraintDetails:
+      description: 'The details for providing placement constraints.
+
+        '
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          description: 'The type for the placement constraints.
+
+            Use `COMPUTE_BARE_METAL_HOST` when specifying the compute bare metal host OCID.
+
+            Use `HOST_GROUP` when specifying the compute host group OCID.
+
+            Use `COMPUTE_CLUSTER` when specifying compute cluster placement constraints.
+
+            '
+          type: string
+      required:
+      - type
+    UpdateInstancePoolPlacementConfigurationDetails:
+      description: The location for where an instance pool will place instances.
+      properties:
+        availabilityDomain:
+          description: 'The availability domain to place instances.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        faultDomains:
+          description: 'The fault domains to place instances.
+
+
+            If you don''t provide any values, the system makes a best effort to distribute
+
+            instances across all fault domains based on capacity.
+
+
+            To distribute the instances evenly across selected fault domains, provide a
+
+            set of fault domains. For example, you might want instances to be evenly
+
+            distributed if your applications require high availability.
+
+
+            To get a list of fault domains, use the
+
+            [ListFaultDomains](#/en/identity/20160918/FaultDomain/ListFaultDomains) operation
+
+            in the Identity and Access Management Service API.
+
+
+            Example: `[FAULT-DOMAIN-1, FAULT-DOMAIN-2, FAULT-DOMAIN-3]`
+
+            '
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        primarySubnetId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the primary subnet in which to place instances. This field is deprecated.
+
+            Use `primaryVnicSubnets` instead to set VNIC data for instances in the pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        primaryVnicSubnets:
+          $ref: '#/components/schemas/InstancePoolPlacementPrimarySubnet'
+        secondaryVnicSubnets:
+          description: The set of secondary VNIC data for instances in the pool.
+          items:
+            $ref: '#/components/schemas/InstancePoolPlacementSecondaryVnicSubnet'
+          type: array
+          uniqueItems: true
+      required:
+      - availabilityDomain
+    TerminationProceedInstancePoolInstanceDetails:
+      description: 'An instance to be marked for termination in an instance pool.
+
+        '
+      properties:
+        instanceId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - instanceId
+    ChangeInstanceConfigurationCompartmentDetails:
+      description: The configuration details for the move operation.
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to
+
+            move the instance configuration to.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - compartmentId
+    UpdateInstanceConfigurationDetails:
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+    InstanceConfigurationInstanceDetails:
+      discriminator:
+        propertyName: instanceType
+      properties:
+        instanceType:
+          default: compute
+          description: 'The type of instance details. Supported instanceType is compute
+
+            '
+          type: string
+      required:
+      - instanceType
+    InstanceOptions:
+      description: Optional mutable instance options
+      properties:
+        areLegacyImdsEndpointsDisabled:
+          description: 'Whether to disable the legacy (/v1) instance metadata service endpoints.
+
+            Customers who have migrated to /v2 should set this to true for added security.
+
+            Default is false.
+
+            '
+          type: boolean
+    InstancePoolLoadBalancerAttachment:
+      description: Represents a load balancer that is attached to an instance pool.
+      properties:
+        backendSetName:
+          description: The name of the backend set on the load balancer.
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the load balancer attachment.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instancePoolId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance pool of the load balancer attachment.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        lifecycleState:
+          description: The status of the interaction between the instance pool and the load balancer.
+          enum:
+          - ATTACHING
+          - ATTACHED
+          - DETACHING
+          - DETACHED
+          type: string
+        loadBalancerId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the load balancer attached to the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        port:
+          description: The port value used for the backends.
+          maximum: 65535
+          minimum: 1
+          type: integer
+        vnicSelection:
+          description: 'Indicates which VNIC on each instance in the instance pool should be used to associate with the load balancer.
+
+            Possible values are "PrimaryVnic" or the displayName of one of the secondary VNICs on the instance configuration
+
+            that is associated with the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - id
+      - instancePoolId
+      - loadBalancerId
+      - backendSetName
+      - port
+      - vnicSelection
+      - lifecycleState
+    InstanceAgentPluginConfigDetails:
+      description: The configuration of plugins associated with this instance.
+      properties:
+        desiredState:
+          description: 'Whether the plugin should be enabled or disabled.
+
+
+            To enable the monitoring and management plugins, the `isMonitoringDisabled` and
+
+            `isManagementDisabled` attributes must also be set to false.
+
+            '
+          enum:
+          - ENABLED
+          - DISABLED
+          type: string
+        name:
+          description: 'The plugin name. To get a list of available plugins, use the
+
+            [ListInstanceagentAvailablePlugins](#/en/instanceagent/20180530/Plugin/ListInstanceagentAvailablePlugins)
+
+            operation in the Oracle Cloud Agent API. For more information about the available plugins, see
+
+            [Managing Plugins with Oracle Cloud Agent](/iaas/Content/Compute/Tasks/manage-plugins.htm).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - name
+      - desiredState
+      type: object
+    InstancePoolPlacementSecondaryVnicSubnet:
+      allOf:
+      - $ref: '#/components/schemas/InstancePoolPlacementSubnetDetails'
+      - properties:
+          displayName:
+            description: 'The display name of the VNIC. This is also used to match against the instance configuration defined
+
+              secondary VNIC.
+
+              '
+            maxLength: 255
+            minItems: 1
+            minLength: 1
+            type: string
+        type: object
+      description: The secondary VNIC object for the placement configuration for an instance pool.
+    InstancePoolPreTerminationActionHandleTimeoutDetails:
+      description: 'Options to handle timeout for pre-termination action.
+
+        '
+      properties:
+        preserveBlockVolumeMode:
+          description: 'Whether the block volume should be preserved after termination.
+
+            '
+          enum:
+          - PRESERVE_ALWAYS
+          - PRESERVE_ON_TIMEOUT
+          - DELETE_ALWAYS
+          type: string
+        preserveBootVolumeMode:
+          description: 'Whether the boot volume should be preserved after termination.
+
+            '
+          enum:
+          - PRESERVE_ALWAYS
+          - PRESERVE_ON_TIMEOUT
+          - DELETE_ALWAYS
+          type: string
+      required:
+      - preserveBlockVolumeMode
+      - preserveBootVolumeMode
+    InstancePoolInstance:
+      description: Information about an instance that belongs to an instance pool.
+      properties:
+        availabilityDomain:
+          description: The availability domain the instance is running in.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment that contains the
+
+            instance.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        faultDomain:
+          description: The fault domain the instance is running in.
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceConfigurationId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance configuration
+
+            used to create the instance.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        instancePoolId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+        lifecycleState:
+          description: The attachment state of the instance in relation to the instance pool.
+          enum:
+          - ATTACHING
+          - ACTIVE
+          - DETACHING
+          - TERMINATION_AWAIT
+          - TERMINATION_PROCEED
+          type: string
+        loadBalancerBackends:
+          description: 'The load balancer backends that are configured for the instance.
+
+            '
+          items:
+            $ref: '#/components/schemas/InstancePoolInstanceLoadBalancerBackend'
+          type: array
+        region:
+          description: The region that contains the availability domain the instance is running in.
+          maxLength: 255
+          minLength: 1
+          type: string
+        shape:
+          description: 'The shape of the instance. The shape determines the number of CPUs, amount of memory,
+
+            and other resources allocated to the instance.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        state:
+          description: The lifecycle state of the instance. Refer to `lifecycleState` in the [Instance](#/en/iaas/latest/Instance) resource.
+          maxLength: 255
+          minLength: 1
+          type: string
+        timeCreated:
+          description: 'The date and time the instance pool instance was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - instancePoolId
+      - availabilityDomain
+      - lifecycleState
+      - compartmentId
+      - instanceConfigurationId
+      - region
+      - shape
+      - state
+      - timeCreated
+    Error:
+      properties:
+        code:
+          description: 'A short error code that defines the error, meant for programmatic parsing. See
+
+            [API Errors](/iaas/Content/API/References/apierrors.htm).
+
+            '
+          type: string
+        message:
+          description: A human-readable error message.
+          type: string
+        messageArguments:
+          additionalProperties:
+            type: string
+          description: 'The values to be substituted into the `originalMessageTemplate`, expressed as a string-to-string map.
+
+            '
+          type: object
+        originalMessage:
+          description: A human-readable error string in English. This value might be different from the `message` field.
+          type: string
+        originalMessageTemplate:
+          description: 'The template for the `originalMessage` in ICU message format, but without the values to be substituted.
+
+            '
+          type: string
+      required:
+      - code
+      - message
+    LicensingConfig:
+      description: Configuration of the Operating System license.
+      properties:
+        licenseType:
+          description: 'License Type for the OS license.
+
+            * `OCI_PROVIDED` - OCI provided license (e.g. metered $/OCPU-hour).
+
+            * `BRING_YOUR_OWN_LICENSE` - Bring your own license.
+
+            '
+          enum:
+          - OCI_PROVIDED
+          - BRING_YOUR_OWN_LICENSE
+          type: string
+        osVersion:
+          description: The Operating System version of the license config.
+          type: string
+        type:
+          description: Operating System type of the Configuration.
+          enum:
+          - WINDOWS
+          type: string
+    CreateClusterNetworkInstancePoolDetails:
+      description: The data to create an instance pool in a cluster network.
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        instanceConfigurationId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance configuration
+
+            associated with the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        size:
+          description: 'The number of instances that should be in the instance pool.
+
+            '
+          type: integer
+      required:
+      - instanceConfigurationId
+      - size
+    InstancePoolPlacementPrimarySubnet:
+      allOf:
+      - $ref: '#/components/schemas/InstancePoolPlacementSubnetDetails'
+      - type: object
+      description: Details about the IPv6 primary subnet.
+    DetachInstancePoolInstanceDetails:
+      description: 'An instance that is to be detached from an instance pool.
+
+        '
+      properties:
+        instanceId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        isAutoTerminate:
+          default: false
+          description: 'Whether to permanently terminate (delete) the instance and its attached boot volume
+
+            when detaching it from the instance pool. Default is `false`.
+
+            '
+          type: boolean
+        isDecrementSize:
+          default: true
+          description: 'Whether to decrease the size of the instance pool when the instance is detached. If `true`, the
+
+            pool size is decreased. If `false`, the pool will provision a new, replacement instance
+
+            using the pool''s instance configuration as a template. Default is `true`.
+
+            '
+          type: boolean
+      required:
+      - instanceId
+    PlatformConfig:
+      description: 'The platform configuration for the instance.
+
+        '
+      discriminator:
+        propertyName: type
+      properties:
+        isMeasuredBootEnabled:
+          default: false
+          description: 'Whether the Measured Boot feature is enabled on the instance.
+
+            '
+          type: boolean
+        isMemoryEncryptionEnabled:
+          default: false
+          description: 'Whether the instance is a confidential instance. If this value is `true`, the instance is a confidential instance. The default value is `false`.
+
+            '
+          type: boolean
+        isSecureBootEnabled:
+          default: false
+          description: 'Whether Secure Boot is enabled on the instance.
+
+            '
+          type: boolean
+        isTrustedPlatformModuleEnabled:
+          default: false
+          description: 'Whether the Trusted Platform Module (TPM) is enabled on the instance.
+
+            '
+          type: boolean
+        type:
+          description: 'The type of platform being configured.
+
+            '
+          enum:
+          - AMD_MILAN_BM
+          - AMD_MILAN_BM_GPU
+          - AMD_ROME_BM
+          - AMD_ROME_BM_GPU
+          - GENERIC_BM
+          - INTEL_ICELAKE_BM
+          - INTEL_SKYLAKE_BM
+          - AMD_VM
+          - INTEL_VM
+          type: string
+      required:
+      - type
+    InstanceConfiguration:
+      description: 'An instance configuration is a template that defines the settings to use when creating Compute instances.
+
+        '
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment
+
+            containing the instance configuration.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        deferredFields:
+          description: 'Parameters that were not specified when the instance configuration was created, but that
+
+            are required to launch an instance from the instance configuration. See the
+
+            [LaunchInstanceConfiguration](#/en/iaas/latest/Instance/LaunchInstanceConfiguration) operation.
+
+            '
+          items:
+            type: string
+          type: array
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance configuration.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceDetails:
+          $ref: '#/components/schemas/InstanceConfigurationInstanceDetails'
+        timeCreated:
+          description: 'The date and time the instance configuration was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - compartmentId
+      - timeCreated
+      x-example: "{\n  \"compartmentId\" : \"ocid1.tenancy.oc1..&lt;unique_ID&gt;\",\n  \"definedTags\":{},\n  \"displayName\" : \"example-instance-configuration\",\n  \"freeformTags\":{},\n  \"id\" : \"ocid1.instanceconfiguration.oc1.phx.&lt;unique_ID&gt;\",\n  \"instanceDetails\" : {\n    \"instanceType\" : \"compute\",\n    \"launchDetails\" : {\n      \"compartmentId\" : \"ocid1.tenancy.oc1..&lt;unique_ID&gt;\",\n      \"createVnicDetails\" : {\n        \"assignPublicIp\" : false,\n        \"displayName\" : \"example-vnic\",\n        \"skipSourceDestCheck\" : false\n      },\n      \"displayName\" : \"My instance\",\n      \"shape\" : \"VM.Standard2.1\",\n      \"sourceDetails\" : {\n        \"sourceType\" : \"image\",\n        \"imageId\" : \"ocid1.image.oc1.phx.&lt;unique_ID&gt;\"\n      }\n    }\n  },\n  \"deferredFields\" : [\n    \"instanceDetails.launchDetails.availabilityDomain\",\n    \"instanceDetails.launchDetails.createVnicDetails.subnetId\"\n  ],\n  \"timeCreated\" : \"2019-06-13T21:13:32.830Z\"\n}\n"
+    UpdateInstancePoolDetails:
+      description: 'The data to update an instance pool.
+
+        '
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        instanceConfigurationId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance configuration associated with the
+
+            instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceDisplayNameFormatter:
+          description: 'A user-friendly formatter for the instance pool''s instances. Instance displaynames follow the format.
+
+            The formatter does not retroactively change instance''s displaynames, only instance displaynames in the future follow the format
+
+            '
+          maxLength: 255
+          minLength: 0
+          type: string
+          x-default-description: 'null'
+        instanceHostnameFormatter:
+          description: 'A user-friendly formatter for the instance pool''s instances. Instance hostnames follow the format.
+
+            The formatter does not retroactively change instance''s hostnames, only instance hostnames in the future follow the format
+
+            '
+          maxLength: 255
+          minLength: 0
+          type: string
+          x-default-description: 'null'
+        lifecycleManagement:
+          $ref: '#/components/schemas/InstancePoolLifecycleManagementDetails'
+        placementConfigurations:
+          description: 'The placement configurations for the instance pool. Provide one placement configuration for
+
+            each availability domain.
+
+
+            To use the instance pool with a regional subnet, provide a placement configuration for
+
+            each availability domain, and include the regional subnet in each placement
+
+            configuration.
+
+            '
+          items:
+            $ref: '#/components/schemas/UpdateInstancePoolPlacementConfigurationDetails'
+          type: array
+        size:
+          description: 'The number of instances that should be in the instance pool.
+
+
+            To determine whether capacity is available for a specific shape before you resize an instance pool,
+
+            use the [CreateComputeCapacityReport](#/en/iaas/latest/ComputeCapacityReport/CreateComputeCapacityReport)
+
+            operation.
+
+            '
+          type: integer
+    InstancePoolLifecycleActionsDetails:
+      description: 'The lifecycle actions for the instance pool.
+
+        '
+      minProperties: 1
+      properties:
+        preTermination:
+          $ref: '#/components/schemas/InstancePoolPreTerminationActionDetails'
+    ClusterNetwork:
+      description: 'A cluster network is a group of high performance computing (HPC), GPU, or optimized bare metal
+
+        instances that are connected with an ultra low-latency remote direct memory access (RDMA)
+
+        network. [Cluster networks with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm)
+
+        use instance pools to manage groups of identical instances.
+
+
+        Use cluster networks with instance pools when you want predictable capacity for a specific number of identical
+
+        instances that are managed as a group.
+
+
+        If you want to manage instances in the RDMA network independently of each other or use different types of instances
+
+        in the network group, use compute clusters instead. For details, see [ComputeCluster](#/en/iaas/latest/ComputeCluster/).
+
+        '
+      properties:
+        compartmentId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment containing the cluster network.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        hpcIslandId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the HPC island used by the cluster network.
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the cluster network.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instancePools:
+          description: 'The instance pools in the cluster network.
+
+
+            Each cluster network can have one instance pool.
+
+            '
+          items:
+            $ref: '#/components/schemas/InstancePool'
+          type: array
+        lifecycleState:
+          description: The current state of the cluster network.
+          enum:
+          - PROVISIONING
+          - SCALING
+          - STARTING
+          - STOPPING
+          - TERMINATING
+          - STOPPED
+          - TERMINATED
+          - RUNNING
+          type: string
+        networkBlockIds:
+          description: The list of network block OCIDs of the HPC island.
+          items:
+            maxLength: 255
+            minLength: 1
+            type: string
+          type: array
+          uniqueItems: true
+        placementConfiguration:
+          $ref: '#/components/schemas/ClusterNetworkPlacementConfigurationDetails'
+        timeCreated:
+          description: 'The date and time the resource was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+        timeUpdated:
+          description: 'The date and time the resource was updated, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - compartmentId
+      - lifecycleState
+      - timeCreated
+      - timeUpdated
+      x-example: "{\n  \"id\": \"ocid1.clusternetwork.phx..<var>&lt;unique_ID&gt;</var>\",\n  \"displayName\": \"hpc-cluster-network\",\n  \"compartmentId\": \"ocid1.compartment.oc1..<var>&lt;unique_ID&gt;</var>\",\n  \"lifecycleState\": \"PROVISIONING\",\n  \"placementConfiguration\":\n    {\n      \"availabilityDomain\": \"Uocm:PHX-AD-1\",\n      \"primarySubnetId\": \"ocid1.subnet.oc1..<var>&lt;unique_ID&gt;</var>\"\n    },\n  \"timeCreated\": \"2019-04-17T17:04:47.627Z\"\n}\n"
+    PreemptionAction:
+      description: 'The action to run when the preemptible instance is interrupted for eviction.
+
+        '
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          description: The type of action to run when the instance is interrupted for eviction.
+          enum:
+          - TERMINATE
+          type: string
+      required:
+      - type
+    PreemptibleInstanceConfigDetails:
+      description: 'Configuration options for preemptible instances.
+
+        '
+      properties:
+        preemptionAction:
+          $ref: '#/components/schemas/PreemptionAction'
+      required:
+      - preemptionAction
+      type: object
+    AttachInstancePoolInstanceDetails:
+      description: 'An instance that is to be attached to an instance pool.
+
+        '
+      properties:
+        instanceId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - instanceId
+    InstanceSourceDetails:
+      discriminator:
+        propertyName: sourceType
+      properties:
+        sourceType:
+          description: 'The source type for the instance.
+
+            Use `image` when specifying the image OCID. Use `bootVolume` when specifying
+
+            the boot volume OCID.
+
+            '
+          type: string
+      required:
+      - sourceType
+    InstancePoolSummary:
+      description: Summary information for an instance pool.
+      properties:
+        availabilityDomains:
+          description: The availability domains for the instance pool.
+          items:
+            type: string
+          maxLength: 255
+          minItems: 1
+          minLength: 1
+          type: array
+        compartmentId:
+          description: The OCID of the compartment containing the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The OCID of the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceConfigurationId:
+          description: The OCID of the instance configuration associated with the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+        lifecycleState:
+          description: The current state of the instance pool.
+          enum:
+          - PROVISIONING
+          - SCALING
+          - STARTING
+          - STOPPING
+          - TERMINATING
+          - STOPPED
+          - TERMINATED
+          - RUNNING
+          type: string
+        size:
+          description: The number of instances that should be in the instance pool.
+          type: integer
+        timeCreated:
+          description: 'The date and time the instance pool was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - compartmentId
+      - instanceConfigurationId
+      - lifecycleState
+      - size
+      - timeCreated
+      - availabilityDomains
+    AttachLoadBalancerDetails:
+      description: Represents a load balancer that is to be attached to an instance pool.
+      properties:
+        backendSetName:
+          description: The name of the backend set on the load balancer to add instances to.
+          maxLength: 255
+          minLength: 1
+          type: string
+        loadBalancerId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the load balancer to attach to the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        port:
+          description: The port value to use when creating the backend set.
+          maximum: 65535
+          minimum: 1
+          type: integer
+        vnicSelection:
+          description: 'Indicates which VNIC on each instance in the pool should be used to associate with the load balancer.
+
+            Possible values are "PrimaryVnic" or the displayName of one of the secondary VNICs on the instance configuration
+
+            that is associated with the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - loadBalancerId
+      - backendSetName
+      - port
+      - vnicSelection
+    CreateClusterNetworkDetails:
+      description: 'The data to create a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+
+        Use cluster networks with instance pools when you want predictable capacity for a specific number of identical
+
+        instances that are managed as a group.
+
+
+        For details about creating compute clusters, which let you manage instances in the RDMA network independently
+
+        of each other or use different types of instances in the network group,
+
+        see [CreateComputeClusterDetails](#/en/iaas/latest/datatypes/CreateComputeClusterDetails).
+
+        '
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment
+
+            containing the cluster network.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        instancePools:
+          description: 'The data to create the instance pools in the cluster network.
+
+
+            Each cluster network can have one instance pool.
+
+            '
+          items:
+            $ref: '#/components/schemas/CreateClusterNetworkInstancePoolDetails'
+          type: array
+        placementConfiguration:
+          $ref: '#/components/schemas/ClusterNetworkPlacementConfigurationDetails'
+      required:
+      - compartmentId
+      - instancePools
+      - placementConfiguration
+    DetachLoadBalancerDetails:
+      description: Represents a load balancer that is to be detached from an instance pool.
+      properties:
+        backendSetName:
+          description: The name of the backend set on the load balancer to detach from the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+        loadBalancerId:
+          description: The OCID of the load balancer to detach from the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - loadBalancerId
+      - backendSetName
+    CreateInstancePoolDetails:
+      description: 'The data to create an instance pool.
+
+        '
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment containing the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        instanceConfigurationId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance configuration associated
+
+            with the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceDisplayNameFormatter:
+          description: 'A user-friendly formatter for the instance pool''s instances. Instance displaynames follow the format.
+
+            The formatter does not retroactively change instance''s displaynames, only instance displaynames in the future follow the format
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+          x-default-description: 'null'
+        instanceHostnameFormatter:
+          description: 'A user-friendly formatter for the instance pool''s instances. Instance hostnames follow the format.
+
+            The formatter does not retroactively change instance''s hostnames, only instance hostnames in the future follow the format
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+          x-default-description: 'null'
+        lifecycleManagement:
+          $ref: '#/components/schemas/InstancePoolLifecycleManagementDetails'
+        loadBalancers:
+          description: 'The load balancers to attach to the instance pool.
+
+            '
+          items:
+            $ref: '#/components/schemas/AttachLoadBalancerDetails'
+          type: array
+        placementConfigurations:
+          description: 'The placement configurations for the instance pool. Provide one placement configuration for
+
+            each availability domain.
+
+
+            To use the instance pool with a regional subnet, provide a placement configuration for
+
+            each availability domain, and include the regional subnet in each placement
+
+            configuration.
+
+            To use compute cluster with instance pool, provide a single placement configuration.
+
+            '
+          items:
+            $ref: '#/components/schemas/CreateInstancePoolPlacementConfigurationDetails'
+          type: array
+        size:
+          description: 'The number of instances that should be in the instance pool.
+
+            '
+          type: integer
+      required:
+      - compartmentId
+      - instanceConfigurationId
+      - placementConfigurations
+      - size
+    InstanceSummary:
+      description: Condensed instance data when listing instances in an instance pool.
+      properties:
+        availabilityDomain:
+          description: The availability domain the instance is running in.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        faultDomain:
+          description: The fault domain the instance is running in.
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: The OCID of the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceConfigurationId:
+          description: The OCID of the instance confgiuration used to create the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        loadBalancerBackends:
+          description: 'The load balancer backends that are configured for the instance pool instance.
+
+            '
+          items:
+            $ref: '#/components/schemas/InstancePoolInstanceLoadBalancerBackend'
+          type: array
+        region:
+          description: The region that contains the availability domain the instance is running in.
+          maxLength: 255
+          minLength: 1
+          type: string
+        shape:
+          description: 'The shape of an instance. The shape determines the number of CPUs, amount of memory,
+
+            and other resources allocated to the instance.
+
+
+            You can enumerate all available shapes by calling [ListShapes](#/en/iaas/latest/Shape/ListShapes).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        state:
+          description: The current state of the instance pool instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        timeCreated:
+          description: 'The date and time the instance pool instance was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - availabilityDomain
+      - compartmentId
+      - instanceConfigurationId
+      - region
+      - state
+      - timeCreated
+    CreateInstancePoolPlacementConfigurationDetails:
+      description: The location for where an instance pool will place instances.
+      properties:
+        availabilityDomain:
+          description: 'The availability domain to place instances.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        computeClusterId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the
+
+            [compute cluster](/iaas/Content/Compute/Tasks/compute-clusters.htm) that the instance will be created in.
+
+
+            Make sure the compute cluster belongs to the same availability domain as specified in placement configuration otherwise the request will be rejected with 400.
+
+            Once this field is set, it cannot be updated. Also any update to the availability domain in placement configuration will be blocked.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+          x-default-description: 'null'
+        faultDomains:
+          description: 'The fault domains to place instances.
+
+
+            If you don''t provide any values, the system makes a best effort to distribute
+
+            instances across all fault domains based on capacity.
+
+
+            To distribute the instances evenly across selected fault domains, provide a
+
+            set of fault domains. For example, you might want instances to be evenly
+
+            distributed if your applications require high availability.
+
+
+            To get a list of fault domains, use the
+
+            [ListFaultDomains](#/en/identity/20160918/FaultDomain/ListFaultDomains) operation
+
+            in the Identity and Access Management Service API.
+
+
+            Example: `[FAULT-DOMAIN-1, FAULT-DOMAIN-2, FAULT-DOMAIN-3]`
+
+            '
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        primarySubnetId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the primary subnet in which to place instances. This field is deprecated.
+
+            Use `primaryVnicSubnets` instead to set VNIC data for instances in the pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        primaryVnicSubnets:
+          $ref: '#/components/schemas/InstancePoolPlacementPrimarySubnet'
+        secondaryVnicSubnets:
+          description: The set of secondary VNIC data for instances in the pool.
+          items:
+            $ref: '#/components/schemas/InstancePoolPlacementSecondaryVnicSubnet'
+          type: array
+          uniqueItems: true
+      required:
+      - availabilityDomain
+    InstancePoolPlacementConfiguration:
+      description: The location for where an instance pool will place instances.
+      properties:
+        availabilityDomain:
+          description: 'The availability domain to place instances.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        computeClusterId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the
+
+            [compute cluster](/iaas/Content/Compute/Tasks/compute-clusters.htm) that the instance will be created in.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+          x-default-description: 'null'
+        faultDomains:
+          description: 'The fault domains to place instances.
+
+
+            If you don''t provide any values, the system makes a best effort to distribute
+
+            instances across all fault domains based on capacity.
+
+
+            To distribute the instances evenly across selected fault domains, provide a
+
+            set of fault domains. For example, you might want instances to be evenly
+
+            distributed if your applications require high availability.
+
+
+            To get a list of fault domains, use the
+
+            [ListFaultDomains](#/en/identity/20160918/FaultDomain/ListFaultDomains) operation
+
+            in the Identity and Access Management Service API.
+
+
+            Example: `[FAULT-DOMAIN-1, FAULT-DOMAIN-2, FAULT-DOMAIN-3]`
+
+            '
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        primarySubnetId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the primary subnet in which to place instances. This field is deprecated.
+
+            Use `primaryVnicSubnets` instead to set VNIC data for instances in the pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        primaryVnicSubnets:
+          $ref: '#/components/schemas/InstancePoolPlacementPrimarySubnet'
+        secondaryVnicSubnets:
+          description: The set of secondary VNIC data for instances in the pool.
+          items:
+            $ref: '#/components/schemas/InstancePoolPlacementSecondaryVnicSubnet'
+          type: array
+          uniqueItems: true
+      required:
+      - availabilityDomain
+    InstancePoolPlacementSubnetDetails:
+      description: Base details about the IPv6 subnet.
+      properties:
+        ipv6AddressIpv6SubnetCidrPairDetails:
+          description: 'A list of IPv6 prefix ranges from which the VNIC should be assigned an IPv6 address.
+
+            You can provide only the prefix ranges and OCI will select an available
+
+            address from the range. You can optionally choose to leave the prefix range empty
+
+            and instead provide the specific IPv6 address that should be used from within that range.
+
+            '
+          items:
+            $ref: '#/components/schemas/InstancePoolPlacementIpv6AddressIpv6SubnetCidrDetails'
+          type: array
+        isAssignIpv6Ip:
+          default: false
+          description: 'Whether to allocate an IPv6 address at instance and VNIC creation from an IPv6 enabled
+
+            subnet. Default: False. When provided you may optionally provide an IPv6 prefix
+
+            (`ipv6SubnetCidr`) of your choice to assign the IPv6 address from. If `ipv6SubnetCidr`
+
+            is not provided then an IPv6 prefix is chosen
+
+            for you.
+
+            '
+          type: boolean
+        subnetId:
+          description: The subnet [OCID](/iaas/Content/General/Concepts/identifiers.htm) for the secondary VNIC.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - subnetId
+    InstancePoolLifecycleManagementDetails:
+      description: 'The lifecycle management options for the instance pool.
+
+        '
+      properties:
+        lifecycleActions:
+          $ref: '#/components/schemas/InstancePoolLifecycleActionsDetails'
+      required:
+      - lifecycleActions
+    InstancePoolInstanceLoadBalancerBackend:
+      description: Represents the load balancer Backend that is configured for an instance pool instance.
+      properties:
+        backendHealthStatus:
+          description: The health of the backend as observed by the load balancer.
+          enum:
+          - OK
+          - WARNING
+          - CRITICAL
+          - UNKNOWN
+          type: string
+        backendName:
+          description: The name of the backend in the backend set.
+          maxLength: 255
+          minLength: 1
+          type: string
+        backendSetName:
+          description: The name of the backend set on the load balancer.
+          maxLength: 255
+          minLength: 1
+          type: string
+        loadBalancerId:
+          description: The OCID of the load balancer attached to the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - loadBalancerId
+      - backendSetName
+      - backendName
+      - backendHealthStatus
+    UpdateClusterNetworkInstancePoolDetails:
+      description: The data to update an instance pool within a cluster network.
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance pool.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceConfigurationId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance configuration associated with the instance pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        size:
+          description: 'The number of instances that should be in the instance pool.
+
+
+            To determine whether capacity is available for a specific shape before you resize an instance pool,
+
+            use the [CreateComputeCapacityReport](#/en/iaas/latest/ComputeCapacityReport/CreateComputeCapacityReport)
+
+            operation.
+
+            '
+          type: integer
+      required:
+      - id
+    ClusterNetworkSummary:
+      description: 'Summary information for a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+        '
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment containing the
+
+            cluster netowrk.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the cluster network.
+          maxLength: 255
+          minLength: 1
+          type: string
+        instancePools:
+          description: The instance pools in the cluster network.
+          items:
+            $ref: '#/components/schemas/InstancePoolSummary'
+          type: array
+        lifecycleState:
+          description: The current state of the cluster network.
+          enum:
+          - PROVISIONING
+          - SCALING
+          - STARTING
+          - STOPPING
+          - TERMINATING
+          - STOPPED
+          - TERMINATED
+          - RUNNING
+          type: string
+        timeCreated:
+          description: 'The date and time the resource was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+        timeUpdated:
+          description: 'The date and time the resource was updated, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - compartmentId
+      - lifecycleState
+      - timeCreated
+      - timeUpdated
+    ClusterNetworkPlacementConfigurationDetails:
+      description: The location for where the instance pools in a cluster network will place instances.
+      properties:
+        availabilityDomain:
+          description: 'The availability domain to place instances.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        primarySubnetId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the primary subnet to place instances. This field is deprecated.
+
+            Use `primaryVnicSubnets` instead to set VNIC data for instances in the pool.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        primaryVnicSubnets:
+          $ref: '#/components/schemas/InstancePoolPlacementPrimarySubnet'
+        secondaryVnicSubnets:
+          description: The set of secondary VNIC data for instances in the pool.
+          items:
+            $ref: '#/components/schemas/InstancePoolPlacementSecondaryVnicSubnet'
+          type: array
+          uniqueItems: true
+      required:
+      - availabilityDomain
+    UpdateClusterNetworkDetails:
+      description: 'The data to update a [cluster network with instance pools](/iaas/Content/Compute/Tasks/managingclusternetworks.htm).
+
+        '
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        instancePools:
+          description: 'The instance pools in the cluster network to update.
+
+            '
+          items:
+            $ref: '#/components/schemas/UpdateClusterNetworkInstancePoolDetails'
+          type: array
+          uniqueItems: true
+    InstancePoolPreTerminationActionDetails:
+      description: 'The data for pre-termination action for an instance pool
+
+        '
+      properties:
+        isEnabled:
+          description: 'Whether pre-termination action is enabled or not.
+
+            '
+          type: boolean
+        onTimeout:
+          $ref: '#/components/schemas/InstancePoolPreTerminationActionHandleTimeoutDetails'
+        timeout:
+          description: 'The timeout in seconds for pre-termination action for an instance pool.
+
+            '
+          type: integer
+      required:
+      - isEnabled
+      - timeout
+      - onTimeout
+    CreateInstanceConfigurationBase:
+      description: 'Creation details for an instance configuration.
+
+        '
+      discriminator:
+        propertyName: source
+      properties:
+        compartmentId:
+          description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment
+
+            containing the instance configuration.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        source:
+          default: NONE
+          description: 'The source of the instance configuration. An instance configuration defines the
+
+            settings to use when creating Compute instances, including details
+
+            such as the base image, shape, and metadata. You can also specify the associated resources for the
+
+            instance, such as block volume attachments and network configuration.
+
+
+            When you create an instance configuration using an existing instance as a template, the instance
+
+            configuration does not include any information from the source instance''s boot volume, such as installed
+
+            applications, binaries, and files on the instance. It also does not include the contents of
+
+            any block volumes that are attached to the instance.
+
+
+            To create an instance configuration that includes the custom setup from an instance''s boot volume, you
+
+            must first create a custom image from the instance (see [CreateImage](#/en/iaas/latest/Image/CreateImage)).
+
+            Then, use the custom image to launch a new instance
+
+            (see [LaunchInstance](#/en/iaas/latest/Instance/LaunchInstance)). Finally, create the instance
+
+            configuration based on the instance that you created from the custom image.
+
+
+            To include block volume contents with an instance configuration, first create a backup of the attached block volumes
+
+            (see [CreateVolumeBackup](#/en/iaas/latest/VolumeBackup/CreateVolumeBackup)). Then, create the instance
+
+            configuration by specifying the list of settings, using
+
+            [InstanceConfigurationVolumeSourceFromVolumeBackupDetails](#/en/iaas/latest/datatypes/InstanceConfigurationVolumeSourceFromVolumeBackupDetails)
+
+            to include the block volume backups in the list of settings.
+
+
+            The following values are supported:
+
+
+            * `NONE`: Creates an instance configuration using the list of settings that you specify.
+
+            * `INSTANCE`: Creates an instance configuration using an existing instance as a template.
+
+            '
+          enum:
+          - NONE
+          - INSTANCE
+          type: string
+      required:
+      - compartmentId
+    InstancePoolPlacementIpv6AddressIpv6SubnetCidrDetails:
+      description: 'Optional. Used to specify from which subnet prefixes an IPv6 address should be allocated, or to assign valid available IPv6 addresses.
+
+        '
+      properties:
+        ipv6SubnetCidr:
+          description: 'Optional. Used to disambiguate which subnet prefix should be used to create an IPv6 allocation.
+
+            '
+          maxLength: 45
+          minLength: 1
+          type: string
+    InstanceAvailabilityConfig:
+      description: 'Options for defining the availabiity of a VM instance after a maintenance event that impacts the underlying hardware.
+
+        '
+      properties:
+        isLiveMigrationPreferred:
+          description: 'Whether to live migrate supported VM instances to a healthy physical VM host without
+
+            disrupting running instances during infrastructure maintenance events. If null, Oracle
+
+            chooses the best option for migrating the VM during infrastructure maintenance events.
+
+            '
+          type: boolean
+        recoveryAction:
+          default: RESTORE_INSTANCE
+          description: 'The lifecycle state for an instance when it is recovered after infrastructure maintenance.
+
+            * `RESTORE_INSTANCE` - The instance is restored to the lifecycle state it was in before the maintenance event.
+
+            If the instance was running, it is automatically rebooted. This is the default action when a value is not set.
+
+            * `STOP_INSTANCE` - The instance is recovered in the stopped state.
+
+            '
+          enum:
+          - RESTORE_INSTANCE
+          - STOP_INSTANCE
+          type: string
+    Instance:
+      description: 'A compute host. The image used to launch the instance determines its operating system and other
+
+        software. The shape specified during the launch process determines the number of CPUs and memory
+
+        allocated to the instance.
+
+
+        When you launch an instance, it is automatically attached to a virtual
+
+        network interface card (VNIC), called the *primary VNIC*. The VNIC
+
+        has a private IP address from the subnet''s CIDR. You can either assign a
+
+        private IP address of your choice or let Oracle automatically assign one.
+
+        You can choose whether the instance has a public IP address. To retrieve the
+
+        addresses, use the [ListVnicAttachments](#/en/iaas/latest/VnicAttachment/ListVnicAttachments)
+
+        operation to get the VNIC ID for the instance, and then call
+
+        [GetVnic](#/en/iaas/latest/Vnic/GetVnic) with the VNIC ID.
+
+
+        For more information, see
+
+        [Overview of the Compute Service](/iaas/Content/Compute/Concepts/computeoverview.htm).
+
+
+        To use any of the API operations, you must be authorized in an IAM policy. If you''re not authorized,
+
+        talk to an administrator. If you''re an administrator who needs to write policies to give users access, see
+
+        [Getting Started with Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
+
+
+        **Warning:** Oracle recommends that you avoid using any confidential information when you
+
+        supply string values using the API.
+
+        '
+      properties:
+        agentConfig:
+          $ref: '#/components/schemas/InstanceAgentConfig'
+        availabilityConfig:
+          $ref: '#/components/schemas/InstanceAvailabilityConfig'
+        availabilityDomain:
+          description: 'The availability domain the instance is running in.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        capacityReservationId:
+          description: 'The OCID of the compute capacity reservation this instance is launched under.
+
+            When this field contains an empty string or is null, the instance is not currently in a capacity reservation.
+
+            For more information, see [Capacity Reservations](/iaas/Content/Compute/Tasks/reserve-capacity.htm#default).
+
+            '
+          maxLength: 255
+          minLength: 0
+          type: string
+          x-default-description: 'The default reservation here refers to the reservation which is enabled by default for your tenancy.
+
+            If the value of this field is empty that means you have opted out of the default reservation.
+
+            '
+        clusterPlacementGroupId:
+          description: The OCID of the cluster placement group of the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        dedicatedVmHostId:
+          description: 'The OCID of the dedicated virtual machine host that the instance is placed on.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        extendedMetadata:
+          additionalProperties:
+            type: object
+          description: 'Additional metadata key/value pairs that you provide. They serve the same purpose and functionality
+
+            as fields in the `metadata` object.
+
+
+            They are distinguished from `metadata` fields in that these can be nested JSON objects (whereas `metadata`
+
+            fields are string/string maps only).
+
+            '
+          type: object
+        faultDomain:
+          description: 'The name of the fault domain the instance is running in.
+
+
+            A fault domain is a grouping of hardware and infrastructure within an availability domain.
+
+            Each availability domain contains three fault domains. Fault domains let you distribute your
+
+            instances so that they are not on the same physical hardware within a single availability domain.
+
+            A hardware failure or Compute hardware maintenance that affects one fault domain does not affect
+
+            instances in other fault domains.
+
+
+            If you do not specify the fault domain, the system selects one for you.
+
+
+            Example: `FAULT-DOMAIN-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The OCID of the instance.
+          maxLength: 255
+          minLength: 1
+          type: string
+        imageId:
+          description: 'Deprecated. Use `sourceDetails` instead.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        instanceConfigurationId:
+          description: The OCID of the Instance Configuration used to source launch details for this instance. Any other fields supplied in the instance launch request override the details stored in the Instance Configuration for this instance launch.
+          type: string
+        instanceOptions:
+          $ref: '#/components/schemas/InstanceOptions'
+        ipxeScript:
+          description: 'When a bare metal or virtual machine
+
+            instance boots, the iPXE firmware that runs on the instance is
+
+            configured to run an iPXE script to continue the boot process.
+
+
+            If you want more control over the boot process, you can provide
+
+            your own custom iPXE script that will run when the instance boots.
+
+            Be aware that the same iPXE script will run
+
+            every time an instance boots, not only after the initial
+
+            LaunchInstance call.
+
+
+            The default iPXE script connects to the instance''s local boot
+
+            volume over iSCSI and performs a network boot. If you use a custom iPXE
+
+            script and want to network-boot from the instance''s local boot volume
+
+            over iSCSI the same way as the default iPXE script, use the
+
+            following iSCSI IP address: 169.254.0.2, and boot volume IQN:
+
+            iqn.2015-02.oracle.boot.
+
+
+            If your instance boot volume attachment type is paravirtualized,
+
+            the boot volume is attached to the instance through virtio-scsi and no iPXE script is used.
+
+            If your instance boot volume attachment type is paravirtualized
+
+            and you use custom iPXE to network boot into your instance,
+
+            the primary boot volume is attached as a data volume through virtio-scsi drive.
+
+
+            For more information about the Bring Your Own Image feature of
+
+            Oracle Cloud Infrastructure, see
+
+            [Bring Your Own Image](/iaas/Content/Compute/References/bringyourownimage.htm).
+
+
+            For more information about iPXE, see http://ipxe.org.
+
+            '
+          maxLength: 10240
+          minLength: 1
+          type: string
+        isAIEnterpriseEnabled:
+          default: false
+          description: 'Whether AI enterprise is enabled on the instance.
+
+            '
+          type: boolean
+        launchMode:
+          description: 'Specifies the configuration mode for launching virtual machine (VM) instances. The configuration modes are:
+
+            * `NATIVE` - VM instances launch with iSCSI boot and VFIO devices. The default value for platform images.
+
+            * `EMULATED` - VM instances launch with emulated devices, such as the E1000 network driver and emulated SCSI disk controller.
+
+            * `PARAVIRTUALIZED` - VM instances launch with paravirtualized devices using VirtIO drivers.
+
+            * `ACCELERATEDPV` - VM instances launch with accelerated paravirtualized networking type.
+
+            * `CUSTOM` - VM instances launch with custom configuration settings specified in the `LaunchOptions` parameter.
+
+            '
+          enum:
+          - NATIVE
+          - EMULATED
+          - PARAVIRTUALIZED
+          - ACCELERATEDPV
+          - CUSTOM
+          type: string
+          x-obmcs-resolve-component-ref: true
+        launchOptions:
+          $ref: '#/components/schemas/LaunchOptions'
+        licensingConfigs:
+          description: List of licensing configurations associated with the instance.
+          items:
+            $ref: '#/components/schemas/LicensingConfig'
+          type: array
+        lifecycleState:
+          description: The current state of the instance.
+          enum:
+          - MOVING
+          - PROVISIONING
+          - RUNNING
+          - STARTING
+          - STOPPING
+          - STOPPED
+          - CREATING_IMAGE
+          - TERMINATING
+          - TERMINATED
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: Custom metadata that you provide.
+          type: object
+        placementConstraintDetails:
+          $ref: '#/components/schemas/PlacementConstraintDetails'
+        platformConfig:
+          $ref: '#/components/schemas/PlatformConfig'
+        preemptibleInstanceConfig:
+          $ref: '#/components/schemas/PreemptibleInstanceConfigDetails'
+        region:
+          description: 'The region that contains the availability domain the instance is running in.
+
+
+            For the us-phoenix-1 and us-ashburn-1 regions, `phx` and `iad` are returned, respectively.
+
+            For all other regions, the full region name is returned.
+
+
+            Examples: `phx`, `eu-frankfurt-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        securityAttributes:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a [ZPR namespace](/iaas/Content/zero-trust-packet-routing/zpr-artifacts.htm#security-attribute-namespaces).
+
+              '
+            type: object
+          description: '[Security attributes](/iaas/Content/zero-trust-packet-routing/zpr-artifacts.htm#security-attributes) are labels
+
+            for a resource that can be referenced in a [Zero Trust Packet Routing](/iaas/Content/zero-trust-packet-routing/overview.htm)
+
+            (ZPR) policy to control access to ZPR-supported resources.
+
+
+            Example: `{"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}`
+
+            '
+          type: object
+        securityAttributesState:
+          description: The lifecycle state of the `securityAttributes`
+          enum:
+          - STABLE
+          - UPDATING
+          type: string
+        shape:
+          description: 'The shape of the instance. The shape determines the number of CPUs and the amount of memory
+
+            allocated to the instance. You can enumerate all available shapes by calling
+
+            [ListShapes](#/en/iaas/latest/Shape/ListShapes).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        shapeConfig:
+          $ref: '#/components/schemas/InstanceShapeConfig'
+        sourceDetails:
+          $ref: '#/components/schemas/InstanceSourceDetails'
+        timeCreated:
+          description: 'The date and time the instance was created, in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+        timeMaintenanceRebootDue:
+          description: 'The date and time the instance is expected to be stopped / started,  in the format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            After that time if instance hasn''t been rebooted, Oracle will reboot the instance within 24 hours of the due time.
+
+            Regardless of how the instance was stopped, the flag will be reset to empty as soon as instance reaches Stopped state.
+
+            Example: `2018-05-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - compartmentId
+      - shape
+      - region
+      - availabilityDomain
+      - lifecycleState
+      - timeCreated
+  parameters:
+    PaginationTokenQueryParam:
+      description: 'For list pagination. The value of the `opc-next-page` response header from the previous "List"
+
+        call. For important details about how pagination works, see
+
+        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+        '
+      in: query
+      name: page
+      schema:
+        type: string
+        maxLength: 4096
+        minLength: 1
+    RetryTokenHeader:
+      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
+
+        server error without risk of executing that same action again. Retry tokens expire after 24
+
+        hours, but can be invalidated before then due to conflicting operations (for example, if a resource
+
+        has been deleted and purged from the system, then a retry of the original creation request
+
+        may be rejected).
+
+        '
+      in: header
+      name: opc-retry-token
+      schema:
+        type: string
+        maxLength: 64
+        minLength: 1
+    SortOrderQueryParam:
+      description: 'The sort order to use, either ascending (`ASC`) or descending (`DESC`). The DISPLAYNAME sort order
+
+        is case sensitive.
+
+        '
+      in: query
+      name: sortOrder
+      required: false
+      x-default-description: The default sort order varies by API.
+      schema:
+        type: string
+        enum:
+        - ASC
+        - DESC
+        default: ASC
+    FilterByDisplayNameQueryParam:
+      description: 'A filter to return only resources that match the given display name exactly.
+
+        '
+      in: query
+      name: displayName
+      required: false
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    PaginationLimitQueryParam:
+      description: 'For list pagination. The maximum number of results per page, or items to return in a paginated
+
+        "List" call. For important details about how pagination works, see
+
+        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+
+        Example: `50`
+
+        '
+      in: query
+      name: limit
+      x-default-description: The default maximum results per page varies by API.
+      schema:
+        type: integer
+        maximum: 100
+        minimum: 1
+    SortByQueryParam:
+      description: 'The field to sort by. You can provide one sort order (`sortOrder`). Default order for
+
+        TIMECREATED is descending. Default order for DISPLAYNAME is ascending. The DISPLAYNAME
+
+        sort order is case sensitive.
+
+
+        **Note:** In general, some "List" operations (for example, `ListInstances`) let you
+
+        optionally filter by availability domain if the scope of the resource type is within a
+
+        single availability domain. If you call one of these "List" operations without specifying
+
+        an availability domain, the resources are grouped by availability domain, then sorted.
+
+        '
+      in: query
+      name: sortBy
+      required: false
+      x-default-description: The default field to sort by varies by API.
+      schema:
+        type: string
+        enum:
+        - TIMECREATED
+        - DISPLAYNAME
+    InstancePoolIdPathParam:
+      description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance pool.
+      in: path
+      name: instancePoolId
+      required: true
+      schema:
+        type: string
+    OpcComputeClusterIdHeader:
+      description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the
+
+        [compute cluster](/iaas/Content/Compute/Tasks/compute-clusters.htm) that the instance will be created in.
+
+        '
+      in: header
+      name: opc-compute-cluster-id
+      required: false
+      x-default-description: 'null'
+      schema:
+        type: string
+    CompartmentIdQueryParam:
+      description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment.
+      in: query
+      name: compartmentId
+      required: true
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    ClusterNetworkIdPathParam:
+      description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the cluster network.
+      in: path
+      name: clusterNetworkId
+      required: true
+      schema:
+        type: string
+    RequestIdHeader:
+      description: 'Unique identifier for the request.
+
+        If you need to contact Oracle about a particular request, please provide the request ID.
+
+        '
+      in: header
+      name: opc-request-id
+      schema:
+        type: string
+        pattern: '[A-Za-z0-9\-_\.]+'
+    InstanceIdPathParam:
+      description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the instance.
+      in: path
+      name: instanceId
+      required: true
+      schema:
+        type: string
+    InstanceConfigurationIdPathParam:
+      description: The OCID of the instance configuration.
+      in: path
+      name: instanceConfigurationId
+      required: true
+      schema:
+        type: string
+    InstancePoolLoadBalancerAttachmentIdPathParam:
+      description: The OCID of the load balancer attachment.
+      in: path
+      name: instancePoolLoadBalancerAttachmentId
+      required: true
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    IfMatchHeader:
+      description: 'For optimistic concurrency control. In the PUT or DELETE call for a resource, set the `if-match`
+
+        parameter to the value of the etag from a previous GET or POST response for that resource. The resource
+
+        will be updated or deleted only if the etag you provide matches the resource''s current etag value.
+
+        '
+      in: header
+      name: if-match
+      schema:
+        type: string
+  responses:
+    DefaultError:
+      description: An error has occurred.
+      headers:
+        opc-request-id:
+          description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+            Oracle about a particular request, please provide the request ID.
+
+            '
+          schema:
+            type: string
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+x-anchors:
+  x-headers:
+    data-request-id:
+      description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the resource.
+
+        Use [GetWorkRequest](/api/#/en/workrequests/latest/WorkRequest/GetWorkRequest)
+
+        with this ID to track the status of the resource.
+
+        '
+      type: string
+    displayName:
+      description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+        Avoid entering confidential information.
+
+        '
+      maxLength: 255
+      minLength: 1
+      type: string
+    etag:
+      description: 'For optimistic concurrency control. See `if-match`.
+
+        '
+      type: string
+    lifecycle-state:
+      description: The IpInventory API current state.
+      enum:
+      - IN_PROGRESS
+      - DONE
+      type: string
+    location:
+      description: 'Location of the resource.
+
+        '
+      type: string
+    opc-next-page:
+      description: 'For list pagination. When this header appears in the response, additional pages
+
+        of results remain. For important details about how pagination works, see
+
+        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+        '
+      type: string
+    opc-request-id:
+      description: 'Unique Oracle-assigned identifier for the request. If you need to contact
+
+        Oracle about a particular request, please provide the request ID.
+
+        '
+      type: string
+    opc-total-items:
+      description: 'For list pagination. A pagination token to get the total number of results available.
+
+        '
+      type: integer
+    opc-work-request-id:
+      description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the work request.
+
+        Use [GetWorkRequest](/api/#/en/workrequests/latest/WorkRequest/GetWorkRequest)
+
+        with this ID to track the status of the request.
+
+        '
+      type: string
+  x-platform-config-properties:
+    amdNumaNodesPerSocketNps1:
+      default: NPS1
+      description: 'The number of NUMA nodes per socket (NPS).
+
+        '
+      enum:
+      - NPS0
+      - NPS1
+      - NPS2
+      - NPS4
+      - NPS6
+      type: string
+    amdNumaNodesPerSocketNps4:
+      default: NPS4
+      description: 'The number of NUMA nodes per socket (NPS).
+
+        '
+      enum:
+      - NPS0
+      - NPS1
+      - NPS2
+      - NPS4
+      - NPS6
+      type: string
+    areVirtualInstructionsEnabledFalse:
+      default: false
+      description: 'Whether virtualization instructions are available. For example, Secure Virtual Machine for AMD shapes
+
+        or VT-x for Intel shapes.
+
+        '
+      type: boolean
+    areVirtualInstructionsEnabledTrue:
+      default: true
+      description: 'Whether virtualization instructions are available. For example, Secure Virtual Machine for AMD shapes
+
+        or VT-x for Intel shapes.
+
+        '
+      type: boolean
+    configMap:
+      additionalProperties:
+        type: string
+      description: 'Instance Platform Configuration Configuration Map for flexible setting input.
+
+        '
+      type: object
+    definedTagsFilter:
+      additionalProperties:
+        additionalProperties:
+          description: 'The value of the tag. Only the String type is supported.
+
+            '
+          type: object
+        description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+          Example: `{"CostCenter": "42"}`
+
+          '
+        type: object
+      description: 'Filter based on these defined tags. Each key is predefined and scoped to a
+
+        namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+        '
+      type: object
+    imageVolumeIndex:
+      description: 'When launching from a Compute Image, it is possible for more than one volume to be defined in the Image definition.
+
+        If the relative index of one of these volumes is provided in this field, then the provided createVolumeDetails
+
+        descriptor will be utilized to modify the default creation/attachment parameters for this volume rather than the
+
+        defaults.
+
+
+        If this field is provided, then CreateVolumeDetails must be specified.
+
+        '
+      minimum: 1
+      type: integer
+      x-default-description: 'null'
+    intelNumaNodesPerSocketNps1:
+      default: NPS1
+      description: 'The number of NUMA nodes per socket (NPS).
+
+        '
+      enum:
+      - NPS1
+      - NPS2
+      type: string
+    isAccessControlServiceEnabledFalse:
+      default: false
+      description: 'Whether the Access Control Service is enabled on the instance. When enabled,
+
+        the platform can enforce PCIe device isolation, required for VFIO device pass-through.
+
+        '
+      type: boolean
+    isAccessControlServiceEnabledTrue:
+      default: true
+      description: 'Whether the Access Control Service is enabled on the instance. When enabled,
+
+        the platform can enforce PCIe device isolation, required for VFIO device pass-through.
+
+        '
+      type: boolean
+    isInputOutputMemoryManagementUnitEnabledFalse:
+      default: false
+      description: 'Whether the input-output memory management unit is enabled.
+
+        '
+      type: boolean
+    isInputOutputMemoryManagementUnitEnabledTrue:
+      default: true
+      description: 'Whether the input-output memory management unit is enabled.
+
+        '
+      type: boolean
+    isSymmetricMultiThreadingEnabledTrue:
+      default: true
+      description: 'Whether symmetric multithreading is enabled on the instance. Symmetric multithreading is also
+
+        called simultaneous multithreading (SMT) or Intel Hyper-Threading.
+
+
+        Intel and AMD processors have two hardware execution threads per core (OCPU). SMT permits multiple
+
+        independent threads of execution, to better use the resources and increase the efficiency
+
+        of the CPU. When multithreading is disabled, only one thread is permitted to run on each core, which
+
+        can provide higher or more predictable performance for some workloads.
+
+        '
+      type: boolean
+    percentageOfCoresEnabled:
+      default: 100
+      description: 'The percentage of cores enabled. Value must be a multiple of 25%. If the requested percentage
+
+        results in a fractional number of cores, the system rounds up the number of cores across processors
+
+        and provisions an instance with a whole number of cores.
+
+
+        If the applications that you run on the instance use a core-based licensing model and need fewer cores
+
+        than the full size of the shape, you can disable cores to reduce your licensing costs. The instance
+
+        itself is billed for the full shape, regardless of whether all cores are enabled.
+
+        '
+      maximum: 100
+      minimum: 25
+      multipleOf: 25
+      type: integer
+  x-properties:
+    definedTags:
+      additionalProperties:
+        additionalProperties:
+          description: 'The value of the tag. Only the String type is supported.
+
+            '
+          type: object
+        description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+          Example: `{"CostCenter": "42"}`
+
+          '
+        type: object
+      description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+        namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+        Example: `{"Operations": {"CostCenter": "42"}}`
+
+        '
+      type: object
+    freeformTags:
+      additionalProperties:
+        type: string
+      description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+        predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+        Example: `{"Department": "Finance"}`
+
+        '
+      type: object
+    recycleLevel:
+      description: 'Preferred recycle level for hosts associated with the reservation config.
+
+        * `SKIP_RECYCLE` - Skips host wipe.
+
+        * `FULL_RECYCLE` - Does not skip host wipe. This is the default behavior.
+
+        '
+      enum:
+      - SKIP_RECYCLE
+      - FULL_RECYCLE
+      type: string
+    securityAttributes:
+      additionalProperties:
+        additionalProperties:
+          description: 'The value of the tag.
+
+            '
+          type: object
+        description: 'Key-value pair representing a defined tag key and value, scoped to a [ZPR namespace](/iaas/Content/zero-trust-packet-routing/zpr-artifacts.htm#security-attribute-namespaces).
+
+          '
+        type: object
+      description: '[Security attributes](/iaas/Content/zero-trust-packet-routing/zpr-artifacts.htm#security-attributes) are labels
+
+        for a resource that can be referenced in a [Zero Trust Packet Routing](/iaas/Content/zero-trust-packet-routing/overview.htm)
+
+        (ZPR) policy to control access to ZPR-supported resources.
+
+
+        Example: `{"Oracle-DataSecurity-ZPR": {"MaxEgressCount": {"value":"42","mode":"audit"}}}`
+
+        '
+      type: object
+    systemTags:
+      additionalProperties:
+        additionalProperties:
+          description: 'The value of the tag. Only string, integer and boolean types are supported.
+
+            '
+          type: object
+        description: 'Key-value pair representing system tags'' keys and values scoped to a namespace.
+
+          Example: `{"bar-key": "value"}`
+
+          '
+        type: object
+      description: 'Usage of system tag keys. These predefined keys are scoped to namespaces.
+
+        Example: `{ "orcl-cloud": { "free-tier-retained": "true" } }`
+
+        '
+      type: object
+x-network-ip-lifetime-default-properties:
+  lifetime:
+    default: EPHEMERAL
+    description: "Lifetime of the IP address.\nThere are two types of IPs:\n - Ephemeral\n - Reserved\n"
+    enum:
+    - EPHEMERAL
+    - RESERVED
+    type: string
+x-network-ip-lifetime-properties:
+  lifetime:
+    description: "Lifetime of the IP address.\nThere are two types of IPs:\n - Ephemeral\n - Reserved\n"
+    enum:
+    - EPHEMERAL
+    - RESERVED
+    type: string
+x-network-ip-state-properties:
+  ipState:
+    description: 'State of the IP address. If an IP address is assigned to a VNIC it is ASSIGNED, otherwise it is AVAILABLE.
+
+      '
+    enum:
+    - ASSIGNED
+    - AVAILABLE
+    type: string
+x-obmcs-client-circuit-breaker-table:
+  dummy:
+    enabled: false
+x-obmcs-client-retries-table:
+  blockStorage:
+    enabled: true
+  c3:
+    enabled: true
+  pnp:
+    enabled: true
+x-route-table-id-properties:
+  routeTableId:
+    description: 'The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the route table the IP address or VNIC will use. For more information, see
+
+      [Per-resource Routing](https://docs.oracle.com/iaas/Content/Network/Tasks/managingroutetables.htm#Overview_of_Routing_for_Your_VCN__source_routing).
+
+      '
+    maxLength: 255
+    minLength: 0
+    type: string
