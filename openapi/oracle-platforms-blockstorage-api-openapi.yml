@@ -3114,208 +3114,6 @@ paths:
         required: true
 components:
   parameters:
-    FilterByClusterPlacementGroupIdQueryParam:
-      description: 'A filter to return only resources that match the given cluster placement group Id exactly.
-
-        '
-      in: query
-      name: clusterPlacementGroupId
-      required: false
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    VolumeBackupIdPathParam:
-      description: The OCID of the volume backup.
-      in: path
-      name: volumeBackupId
-      required: true
-      schema:
-        type: string
-    AvailabilityDomainQueryParam:
-      description: 'The name of the availability domain.
-
-
-        Example: `Uocm:PHX-AD-1`
-
-        '
-      in: query
-      name: availabilityDomain
-      required: false
-      schema:
-        type: string
-    SortOrderQueryParam:
-      description: 'The sort order to use, either ascending (`ASC`) or descending (`DESC`). The DISPLAYNAME sort order
-
-        is case sensitive.
-
-        '
-      in: query
-      name: sortOrder
-      required: false
-      x-default-description: The default sort order varies by API.
-      schema:
-        type: string
-        enum:
-        - ASC
-        - DESC
-        default: ASC
-    BootVolumeReplicaIdPathParam:
-      description: The OCID of the boot volume replica.
-      in: path
-      name: bootVolumeReplicaId
-      required: true
-      schema:
-        type: string
-    BlockVolumeReplicaIdPathParam:
-      description: The OCID of the block volume replica.
-      in: path
-      name: blockVolumeReplicaId
-      required: true
-      schema:
-        type: string
-    CompartmentIdQueryParam:
-      description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment.
-      in: query
-      name: compartmentId
-      required: true
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    BootVolumeIdPathParam:
-      description: The OCID of the boot volume.
-      in: path
-      name: bootVolumeId
-      required: true
-      schema:
-        type: string
-    FilterBySourceVolumeBackupIdQueryParam:
-      description: 'A filter to return only resources that originated from the given source volume backup.
-
-        '
-      in: query
-      name: sourceVolumeBackupId
-      required: false
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    FilterByDisplayNameQueryParam:
-      description: 'A filter to return only resources that match the given display name exactly.
-
-        '
-      in: query
-      name: displayName
-      required: false
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    PaginationLimitQueryParam:
-      description: 'For list pagination. The maximum number of results per page, or items to return in a paginated
-
-        "List" call. For important details about how pagination works, see
-
-        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
-
-
-        Example: `50`
-
-        '
-      in: query
-      name: limit
-      x-default-description: The default maximum results per page varies by API.
-      schema:
-        type: integer
-        maximum: 100
-        minimum: 1
-    VolumeIdPathParam:
-      description: The OCID of the volume.
-      in: path
-      name: volumeId
-      required: true
-      schema:
-        type: string
-    IfMatchHeader:
-      description: 'For optimistic concurrency control. In the PUT or DELETE call for a resource, set the `if-match`
-
-        parameter to the value of the etag from a previous GET or POST response for that resource. The resource
-
-        will be updated or deleted only if the etag you provide matches the resource''s current etag value.
-
-        '
-      in: header
-      name: if-match
-      schema:
-        type: string
-    BootVolumeIdQueryParam:
-      description: The OCID of the boot volume.
-      in: query
-      name: bootVolumeId
-      schema:
-        type: string
-    VolumeGroupBackupIdPathParam:
-      description: 'The Oracle Cloud ID (OCID) that uniquely identifies the volume group backup.
-
-        '
-      in: path
-      name: volumeGroupBackupId
-      required: true
-      schema:
-        type: string
-    PreserveVolumeReplicaQueryParam:
-      description: 'Specifies whether to disable or preserve the individual volume replication when removing a volume from the
-
-        replication enabled volume group. When set to `true`, the individual volume replica is preserved. The default
-
-        value is `true`.
-
-        '
-      in: query
-      name: preserveVolumeReplica
-      required: false
-      schema:
-        type: boolean
-    PaginationTokenQueryParam:
-      description: 'For list pagination. The value of the `opc-next-page` response header from the previous "List"
-
-        call. For important details about how pagination works, see
-
-        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
-
-        '
-      in: query
-      name: page
-      schema:
-        type: string
-        maxLength: 4096
-        minLength: 1
-    VolumeGroupReplicaIdPathParam:
-      description: The OCID of the volume replica group.
-      in: path
-      name: volumeGroupReplicaId
-      required: true
-      schema:
-        type: string
-    RetryTokenHeader:
-      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
-
-        server error without risk of executing that same action again. Retry tokens expire after 24
-
-        hours, but can be invalidated before then due to conflicting operations (for example, if a resource
-
-        has been deleted and purged from the system, then a retry of the original creation request
-
-        may be rejected).
-
-        '
-      in: header
-      name: opc-retry-token
-      schema:
-        type: string
-        maxLength: 64
-        minLength: 1
     SortByQueryParam:
       description: 'The field to sort by. You can provide one sort order (`sortOrder`). Default order for
 
@@ -3342,20 +3140,68 @@ components:
         enum:
         - TIMECREATED
         - DISPLAYNAME
-    VolumeGroupIdPathParam:
-      description: The Oracle Cloud ID (OCID) that uniquely identifies the volume group.
+    VolumeBackupPolicyIdPathParam:
+      description: The OCID of the volume backup policy.
       in: path
-      name: volumeGroupId
+      name: policyId
       required: true
       schema:
         type: string
-    AssetIdQueryParam:
-      description: The OCID of an asset (e.g. a volume).
+    FilterByDisplayNameQueryParam:
+      description: 'A filter to return only resources that match the given display name exactly.
+
+        '
       in: query
-      name: assetId
+      name: displayName
+      required: false
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    VolumeGroupReplicaIdPathParam:
+      description: The OCID of the volume replica group.
+      in: path
+      name: volumeGroupReplicaId
       required: true
       schema:
         type: string
+    BootVolumeIdPathParam:
+      description: The OCID of the boot volume.
+      in: path
+      name: bootVolumeId
+      required: true
+      schema:
+        type: string
+    VolumeGroupIdQueryParam:
+      description: The OCID of the volume group.
+      in: query
+      name: volumeGroupId
+      schema:
+        type: string
+    PreserveVolumeReplicaQueryParam:
+      description: 'Specifies whether to disable or preserve the individual volume replication when removing a volume from the
+
+        replication enabled volume group. When set to `true`, the individual volume replica is preserved. The default
+
+        value is `true`.
+
+        '
+      in: query
+      name: preserveVolumeReplica
+      required: false
+      schema:
+        type: boolean
+    FilterByClusterPlacementGroupIdQueryParam:
+      description: 'A filter to return only resources that match the given cluster placement group Id exactly.
+
+        '
+      in: query
+      name: clusterPlacementGroupId
+      required: false
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
     FilterBySourceBootVolumeBackupIdQueryParam:
       description: 'A filter to return only resources that originated from the given source boot volume backup.
 
@@ -3367,6 +3213,13 @@ components:
         type: string
         maxLength: 255
         minLength: 1
+    AssetIdQueryParam:
+      description: The OCID of an asset (e.g. a volume).
+      in: query
+      name: assetId
+      required: true
+      schema:
+        type: string
     RequiredAvailabilityDomainQueryParam:
       description: 'The name of the availability domain.
 
@@ -3379,37 +3232,27 @@ components:
       required: true
       schema:
         type: string
-    VolumeBackupPolicyIdPathParam:
-      description: The OCID of the volume backup policy.
-      in: path
-      name: policyId
-      required: true
-      schema:
-        type: string
-    VolumeBackupPolicyAssignmentIdPathParam:
-      description: The OCID of the volume backup policy assignment.
-      in: path
-      name: policyAssignmentId
-      required: true
-      schema:
-        type: string
-    VolumeGroupIdQueryParam:
-      description: The OCID of the volume group.
+    SortOrderQueryParam:
+      description: 'The sort order to use, either ascending (`ASC`) or descending (`DESC`). The DISPLAYNAME sort order
+
+        is case sensitive.
+
+        '
       in: query
-      name: volumeGroupId
+      name: sortOrder
+      required: false
+      x-default-description: The default sort order varies by API.
       schema:
         type: string
+        enum:
+        - ASC
+        - DESC
+        default: ASC
     BootVolumeBackupIdPathParam:
       description: The OCID of the boot volume backup.
       in: path
       name: bootVolumeBackupId
       required: true
-      schema:
-        type: string
-    VolumeIdQueryParam:
-      description: The OCID of the volume.
-      in: query
-      name: volumeId
       schema:
         type: string
     RequestIdHeader:
@@ -3423,17 +3266,895 @@ components:
       schema:
         type: string
         pattern: '[A-Za-z0-9\-_\.]+'
+    PaginationTokenQueryParam:
+      description: 'For list pagination. The value of the `opc-next-page` response header from the previous "List"
+
+        call. For important details about how pagination works, see
+
+        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+        '
+      in: query
+      name: page
+      schema:
+        type: string
+        maxLength: 4096
+        minLength: 1
+    BlockVolumeReplicaIdPathParam:
+      description: The OCID of the block volume replica.
+      in: path
+      name: blockVolumeReplicaId
+      required: true
+      schema:
+        type: string
+    VolumeIdPathParam:
+      description: The OCID of the volume.
+      in: path
+      name: volumeId
+      required: true
+      schema:
+        type: string
+    BootVolumeReplicaIdPathParam:
+      description: The OCID of the boot volume replica.
+      in: path
+      name: bootVolumeReplicaId
+      required: true
+      schema:
+        type: string
+    VolumeBackupIdPathParam:
+      description: The OCID of the volume backup.
+      in: path
+      name: volumeBackupId
+      required: true
+      schema:
+        type: string
+    BootVolumeIdQueryParam:
+      description: The OCID of the boot volume.
+      in: query
+      name: bootVolumeId
+      schema:
+        type: string
+    VolumeGroupIdPathParam:
+      description: The Oracle Cloud ID (OCID) that uniquely identifies the volume group.
+      in: path
+      name: volumeGroupId
+      required: true
+      schema:
+        type: string
+    CompartmentIdQueryParam:
+      description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment.
+      in: query
+      name: compartmentId
+      required: true
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    IfMatchHeader:
+      description: 'For optimistic concurrency control. In the PUT or DELETE call for a resource, set the `if-match`
+
+        parameter to the value of the etag from a previous GET or POST response for that resource. The resource
+
+        will be updated or deleted only if the etag you provide matches the resource''s current etag value.
+
+        '
+      in: header
+      name: if-match
+      schema:
+        type: string
+    FilterBySourceVolumeBackupIdQueryParam:
+      description: 'A filter to return only resources that originated from the given source volume backup.
+
+        '
+      in: query
+      name: sourceVolumeBackupId
+      required: false
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    VolumeBackupPolicyAssignmentIdPathParam:
+      description: The OCID of the volume backup policy assignment.
+      in: path
+      name: policyAssignmentId
+      required: true
+      schema:
+        type: string
+    AvailabilityDomainQueryParam:
+      description: 'The name of the availability domain.
+
+
+        Example: `Uocm:PHX-AD-1`
+
+        '
+      in: query
+      name: availabilityDomain
+      required: false
+      schema:
+        type: string
+    VolumeGroupBackupIdPathParam:
+      description: 'The Oracle Cloud ID (OCID) that uniquely identifies the volume group backup.
+
+        '
+      in: path
+      name: volumeGroupBackupId
+      required: true
+      schema:
+        type: string
+    VolumeIdQueryParam:
+      description: The OCID of the volume.
+      in: query
+      name: volumeId
+      schema:
+        type: string
+    RetryTokenHeader:
+      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
+
+        server error without risk of executing that same action again. Retry tokens expire after 24
+
+        hours, but can be invalidated before then due to conflicting operations (for example, if a resource
+
+        has been deleted and purged from the system, then a retry of the original creation request
+
+        may be rejected).
+
+        '
+      in: header
+      name: opc-retry-token
+      schema:
+        type: string
+        maxLength: 64
+        minLength: 1
+    PaginationLimitQueryParam:
+      description: 'For list pagination. The maximum number of results per page, or items to return in a paginated
+
+        "List" call. For important details about how pagination works, see
+
+        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+
+        Example: `50`
+
+        '
+      in: query
+      name: limit
+      x-default-description: The default maximum results per page varies by API.
+      schema:
+        type: integer
+        maximum: 100
+        minimum: 1
   schemas:
-    ChangeBootVolumeBackupCompartmentDetails:
-      description: Contains the details for the compartment to move the boot volume backup to.
+    UpdateVolumeKmsKeyDetails:
+      properties:
+        kmsKeyId:
+          description: 'The OCID of the new Vault service key to assign to protect the specified volume.
+
+            This key has to be a valid Vault service key, and policies must exist to allow the user and the Block Volume service to access this key.
+
+            If you specify the same OCID as the previous key''s OCID, the Block Volume service will use it to regenerate a volume encryption key.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+    CreateVolumeDetails:
+      description: 'The details of the volume to create. For CreateVolume operation, this field is required in the request,
+
+        see [CreateVolume](#/en/iaas/latest/Volume/CreateVolume).
+
+        '
+      properties:
+        autotunePolicies:
+          description: The list of autotune policies to be enabled for this volume.
+          items:
+            $ref: '#/components/schemas/AutotunePolicy'
+          type: array
+          uniqueItems: true
+        availabilityDomain:
+          description: 'The availability domain of the volume. Omissible for cloning a volume. The new volume will be created in the availability domain of the source volume.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        backupPolicyId:
+          description: 'If provided, specifies the ID of the volume backup policy to assign to the newly
+
+            created volume. If omitted, no policy will be assigned.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        blockVolumeReplicas:
+          description: 'The list of block volume replicas to be enabled for this volume
+
+            in the specified destination availability domains.
+
+            '
+          items:
+            $ref: '#/components/schemas/BlockVolumeReplicaDetails'
+          maxItems: 1
+          type: array
+          uniqueItems: true
+        clusterPlacementGroupId:
+          description: The clusterPlacementGroup Id of the volume for volume placement.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the volume.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        isAutoTuneEnabled:
+          description: 'Specifies whether the auto-tune performance is enabled for this volume. This field is deprecated.
+
+            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
+
+            '
+          type: boolean
+        isReservationsEnabled:
+          description: 'When set to true, enables SCSI Persistent Reservation (SCSI PR) for the volume. For more information, see
+
+            [Persistent Reservations](/iaas/Content/Block/Concepts/persistent-reservations.htm).
+
+            '
+          type: boolean
+        kmsKeyId:
+          description: 'The OCID of the Vault service key to assign as the master encryption key
+
+            for the volume.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        sizeInGBs:
+          description: The size of the volume in GBs.
+          format: int64
+          type: integer
+        sizeInMBs:
+          description: 'The size of the volume in MBs. The value must be a multiple of 1024.
+
+            This field is deprecated. Use sizeInGBs instead.
+
+            '
+          format: int64
+          type: integer
+        sourceDetails:
+          $ref: '#/components/schemas/VolumeSourceDetails'
+        volumeBackupId:
+          description: 'The OCID of the volume backup from which the data should be restored on the newly created volume.
+
+            This field is deprecated. Use the sourceDetails field instead to specify the
+
+            backup for the volume.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        vpusPerGB:
+          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `0`: Represents Lower Cost option.\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
+          format: int64
+          type: integer
+      required:
+      - compartmentId
+    UpdateVolumeBackupDetails:
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        isIndefiniteRetentionEnabled:
+          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
+          type: boolean
+        isPreventDeletionEnabled:
+          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
+          type: boolean
+        isRetentionLockEnabled:
+          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
+          type: boolean
+        kmsKeyId:
+          description: 'The OCID of the Vault service key which is the master encryption key for the volume backup.
+
+            For more information about the Vault service and encryption keys, see
+
+            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
+
+            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        retentionPeriod:
+          $ref: '#/components/schemas/RetentionDuration'
+    UpdateVolumeBackupPolicyDetails:
+      description: 'Specifies the properties for updating a user defined backup policy.
+
+        For more information about user defined backup policies,
+
+        see [User Defined Policies](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#UserDefinedBackupPolicies) in
+
+        [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm).
+
+        '
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        destinationRegion:
+          description: 'The paired destination region for copying scheduled backups to. Example: `us-ashburn-1`.
+
+            Specify `none` to reset the `destinationRegion` parameter.
+
+            See [Region Pairs](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#RegionPairs) for details about paired regions.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        schedules:
+          description: 'The collection of schedules for the volume backup policy. See
+
+            see [Schedules](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#schedules) in
+
+            [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm) for more information.
+
+            '
+          items:
+            $ref: '#/components/schemas/VolumeBackupSchedule'
+          type: array
+    Volume:
+      description: 'A detachable block volume device that allows you to dynamically expand
+
+        the storage capacity of an instance. For more information, see
+
+        [Overview of Cloud Volume Storage](/iaas/Content/Block/Concepts/overview.htm).
+
+
+        To use any of the API operations, you must be authorized in an IAM policy. If you''re not authorized,
+
+        talk to an administrator. If you''re an administrator who needs to write policies to give users access, see
+
+        [Getting Started with Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
+
+
+        **Warning:** Oracle recommends that you avoid using any confidential information when you
+
+        supply string values using the API.
+
+        '
+      properties:
+        autoTunedVpusPerGB:
+          description: 'The number of Volume Performance Units per GB that this volume is effectively tuned to.
+
+            '
+          format: int64
+          type: integer
+        autotunePolicies:
+          description: The list of autotune policies enabled for this volume.
+          items:
+            $ref: '#/components/schemas/AutotunePolicy'
+          type: array
+          uniqueItems: true
+        availabilityDomain:
+          description: 'The availability domain of the volume.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        blockVolumeReplicas:
+          description: The list of block volume replicas of this volume.
+          items:
+            $ref: '#/components/schemas/BlockVolumeReplicaInfo'
+          type: array
+        clusterPlacementGroupId:
+          description: The clusterPlacementGroup Id of the volume for volume placement.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the volume.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The OCID of the volume.
+          maxLength: 255
+          minLength: 1
+          type: string
+        isAutoTuneEnabled:
+          description: 'Specifies whether the auto-tune performance is enabled for this volume. This field is deprecated.
+
+            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
+
+            '
+          type: boolean
+        isHydrated:
+          description: 'Specifies whether the cloned volume''s data has finished copying from the source volume or backup.
+
+            '
+          type: boolean
+        isReservationsEnabled:
+          description: 'When set to true, enables SCSI Persistent Reservation (SCSI PR) for the volume. For more information, see
+
+            [Persistent Reservations](/iaas/Content/Block/Concepts/persistent-reservations.htm).
+
+            '
+          type: boolean
+        kmsKeyId:
+          description: 'The OCID of the Vault service key which is the master encryption key for the volume.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        lifecycleState:
+          description: The current state of a volume.
+          enum:
+          - PROVISIONING
+          - RESTORING
+          - AVAILABLE
+          - TERMINATING
+          - TERMINATED
+          - FAULTY
+          type: string
+        sizeInGBs:
+          description: The size of the volume in GBs.
+          format: int64
+          type: integer
+        sizeInMBs:
+          description: 'The size of the volume in MBs. This field is deprecated. Use
+
+            sizeInGBs instead.
+
+            '
+          format: int64
+          type: integer
+        sourceDetails:
+          $ref: '#/components/schemas/VolumeSourceDetails'
+        timeCreated:
+          description: The date and time the volume was created. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+          format: date-time
+          type: string
+        volumeGroupId:
+          description: The OCID of the source volume group.
+          maxLength: 255
+          minLength: 1
+          type: string
+        vpusPerGB:
+          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `0`: Represents Lower Cost option.\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, It would be the Default(Minimum) VPUs/GB.\n"
+          format: int64
+          type: integer
+      required:
+      - id
+      - availabilityDomain
+      - displayName
+      - sizeInMBs
+      - compartmentId
+      - timeCreated
+      - lifecycleState
+    ChangeVolumeCompartmentDetails:
+      description: Contains the details for the compartment to move the volume to.
       properties:
         compartmentId:
-          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the boot volume backup to.
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume to.
           maxLength: 255
           minLength: 1
           type: string
       required:
       - compartmentId
+    CreateVolumeBackupPolicyDetails:
+      description: 'Specifies the properties for creating user defined backup policy.
+
+        For more information about user defined backup policies,
+
+        see [User Defined Policies](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#UserDefinedBackupPolicies) in
+
+        [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm).
+
+        '
+      properties:
+        compartmentId:
+          description: The OCID of the compartment.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        destinationRegion:
+          description: 'The paired destination region for copying scheduled backups to. Example: `us-ashburn-1`.
+
+            See [Region Pairs](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#RegionPairs) for details about paired regions.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        schedules:
+          description: 'The collection of schedules for the volume backup policy. See
+
+            see [Schedules](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#schedules) in
+
+            [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm) for more information.
+
+            '
+          items:
+            $ref: '#/components/schemas/VolumeBackupSchedule'
+          type: array
+      required:
+      - compartmentId
+    UpdateVolumeGroupDetails:
+      properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        volumeGroupReplicas:
+          description: 'The list of volume group replicas that this volume group will be updated to have
+
+            in the specified destination availability domains.
+
+            '
+          items:
+            $ref: '#/components/schemas/VolumeGroupReplicaDetails'
+          maxItems: 1
+          type: array
+          uniqueItems: true
+        volumeIds:
+          description: OCIDs for the volumes in this volume group.
+          items:
+            maxLength: 255
+            minLength: 1
+            type: string
+          maxItems: 64
+          type: array
+    UpdateVolumeDetails:
+      properties:
+        autotunePolicies:
+          description: The list of autotune policies enabled for this volume.
+          items:
+            $ref: '#/components/schemas/AutotunePolicy'
+          type: array
+          uniqueItems: true
+        blockVolumeReplicas:
+          description: 'The list of block volume replicas that this volume will be updated to have
+
+            in the specified destination availability domains.
+
+            '
+          items:
+            $ref: '#/components/schemas/BlockVolumeReplicaDetails'
+          maxItems: 1
+          type: array
+          uniqueItems: true
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        isAutoTuneEnabled:
+          description: 'Specifies whether the auto-tune performance is enabled for this volume. This field is deprecated.
+
+            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
+
+            '
+          type: boolean
+        isReservationsEnabled:
+          description: 'When set to true, enables SCSI Persistent Reservation (SCSI PR) for the volume. For more information, see
+
+            [Persistent Reservations](/iaas/Content/Block/Concepts/persistent-reservations.htm).
+
+            '
+          type: boolean
+        sizeInGBs:
+          description: The size to resize the volume to in GBs. Has to be larger than the current size.
+          format: int64
+          type: integer
+        vpusPerGB:
+          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `0`: Represents Lower Cost option.\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
+          format: int64
+          type: integer
     VolumeBackupSchedule:
       description: 'Defines the backup frequency and retention period for a volume backup policy. For more information,
 
@@ -3575,27 +4296,42 @@ components:
       - period
       - backupType
       - retentionSeconds
-    ChangeVolumeCompartmentDetails:
-      description: Contains the details for the compartment to move the volume to.
+    ChangeBootVolumeBackupCompartmentDetails:
+      description: Contains the details for the compartment to move the boot volume backup to.
       properties:
         compartmentId:
-          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume to.
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the boot volume backup to.
           maxLength: 255
           minLength: 1
           type: string
       required:
       - compartmentId
-    UpdateVolumeBackupPolicyDetails:
-      description: 'Specifies the properties for updating a user defined backup policy.
-
-        For more information about user defined backup policies,
-
-        see [User Defined Policies](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#UserDefinedBackupPolicies) in
-
-        [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm).
-
-        '
+    CreateVolumeGroupDetails:
       properties:
+        availabilityDomain:
+          description: The availability domain of the volume group.
+          maxLength: 255
+          minLength: 1
+          type: string
+        backupPolicyId:
+          description: 'If provided, specifies the ID of the volume backup policy to assign to the newly
+
+            created volume group. If omitted, no policy will be assigned.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        clusterPlacementGroupId:
+          description: The clusterPlacementGroup Id of the volume group for volume group placement.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the volume group.
+          maxLength: 255
+          minLength: 1
+          type: string
         definedTags:
           additionalProperties:
             additionalProperties:
@@ -3619,17 +4355,6 @@ components:
 
             '
           type: object
-        destinationRegion:
-          description: 'The paired destination region for copying scheduled backups to. Example: `us-ashburn-1`.
-
-            Specify `none` to reset the `destinationRegion` parameter.
-
-            See [Region Pairs](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#RegionPairs) for details about paired regions.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
         displayName:
           description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
 
@@ -3651,45 +4376,65 @@ components:
 
             '
           type: object
-        schedules:
-          description: 'The collection of schedules for the volume backup policy. See
+        sourceDetails:
+          $ref: '#/components/schemas/VolumeGroupSourceDetails'
+        volumeGroupReplicas:
+          description: 'The list of volume group replicas that this volume group will be enabled to have
 
-            see [Schedules](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#schedules) in
-
-            [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm) for more information.
+            in the specified destination availability domains.
 
             '
           items:
-            $ref: '#/components/schemas/VolumeBackupSchedule'
+            $ref: '#/components/schemas/VolumeGroupReplicaDetails'
+          maxItems: 1
           type: array
-    MemberReplica:
-      description: OCIDs for the volume replicas in this volume group replica.
-      properties:
-        volumeReplicaId:
-          description: The volume replica ID.
-          maxLength: 255
-          minLength: 1
-          type: string
+          uniqueItems: true
       required:
-      - volumeReplicaId
-    BootVolumeReplicaInfo:
-      description: Information about the boot volume replica in the destination availability domain.
+      - availabilityDomain
+      - compartmentId
+      - sourceDetails
+    UpdateBootVolumeDetails:
       properties:
-        availabilityDomain:
-          description: 'The availability domain of the boot volume replica.
+        autotunePolicies:
+          description: The list of autotune policies to be enabled for this volume.
+          items:
+            $ref: '#/components/schemas/AutotunePolicy'
+          type: array
+          uniqueItems: true
+        bootVolumeReplicas:
+          description: 'The list of boot volume replicas that this boot volume will be updated to have
 
-
-            Example: `Uocm:PHX-AD-1`
+            in the specified destination availability domains.
 
             '
-          maxLength: 255
-          minLength: 1
-          type: string
-        bootVolumeReplicaId:
-          description: The boot volume replica's Oracle ID (OCID).
-          maxLength: 255
-          minLength: 1
-          type: string
+          items:
+            $ref: '#/components/schemas/BootVolumeReplicaDetails'
+          maxItems: 1
+          type: array
+          uniqueItems: true
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
         displayName:
           description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
 
@@ -3699,16 +4444,49 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        isAutoTuneEnabled:
+          description: 'Specifies whether the auto-tune performance is enabled for this boot volume. This field is deprecated.
+
+            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
+
+            '
+          type: boolean
+        sizeInGBs:
+          description: The size to resize the volume to in GBs. Has to be larger than the current size.
+          format: int64
+          type: integer
+        vpusPerGB:
+          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
+          format: int64
+          type: integer
+    ChangeVolumeGroupBackupCompartmentDetails:
+      description: Contains the details for the compartment to move the volume group backup to.
+      properties:
+        compartmentId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume group backup to.
+          maxLength: 255
+          minLength: 1
+          type: string
       required:
-      - bootVolumeReplicaId
-      - availabilityDomain
-      - displayName
-    BlockVolumeReplica:
-      description: 'An asynchronous replica of a block volume that can then be used to create
+      - compartmentId
+    BootVolumeBackup:
+      description: 'A point-in-time copy of a boot volume that can then be used to create
 
-        a new block volume or recover a block volume. For more information, see [Overview
+        a new boot volume or recover a boot volume. For more information, see [Overview
 
-        of Cross-Region Volume Replication](/iaas/Content/Block/Concepts/volumereplication.htm)
+        of Boot Volume Backups](/iaas/Content/Block/Concepts/bootvolumebackups.htm)
 
         To use any of the API operations, you must be authorized in an IAM policy.
 
@@ -3725,440 +4503,13 @@ components:
 
         '
       properties:
-        availabilityDomain:
-          description: 'The availability domain of the block volume replica.
-
-
-            Example: `Uocm:PHX-AD-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        blockVolumeId:
-          description: The OCID of the source block volume.
-          maxLength: 255
-          minLength: 1
-          type: string
-        compartmentId:
-          description: The OCID of the compartment that contains the block volume replica.
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        id:
-          description: The block volume replica's Oracle ID (OCID).
-          maxLength: 255
-          minLength: 1
-          type: string
-        lifecycleState:
-          description: The current state of a block volume replica.
-          enum:
-          - PROVISIONING
-          - AVAILABLE
-          - ACTIVATING
-          - TERMINATING
-          - TERMINATED
-          - FAULTY
-          type: string
-        sizeInGBs:
-          description: 'The size of the source block volume, in GBs.
-
-            '
-          format: int64
-          maximum: 16384
-          minimum: 1
-          type: integer
-        timeCreated:
-          description: 'The date and time the block volume replica was created. Format defined
-
-            by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
-          format: date-time
-          type: string
-        timeLastSynced:
-          description: 'The date and time the block volume replica was last synced from the source block volume.
-
-            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
-          format: date-time
-          type: string
-        totalDataTransferredInGBs:
-          description: 'The total size of the data transferred from the source block volume to the block volume replica, in GBs.
-
-            '
-          format: int64
-          type: integer
-        volumeGroupReplicaId:
-          description: 'The OCID of the volume group replica.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - id
-      - availabilityDomain
-      - sizeInGBs
-      - compartmentId
-      - displayName
-      - timeCreated
-      - lifecycleState
-      - timeLastSynced
-      - blockVolumeId
-    BlockVolumeReplicaDetails:
-      description: Contains the details for the block volume replica
-      properties:
-        availabilityDomain:
-          description: 'The availability domain of the block volume replica.
-
-
-            Example: `Uocm:PHX-AD-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - availabilityDomain
-    CreateBootVolumeBackupDetails:
-      properties:
         bootVolumeId:
-          description: The OCID of the boot volume that needs to be backed up.
+          description: The OCID of the boot volume.
           maxLength: 255
           minLength: 1
           type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        isIndefiniteRetentionEnabled:
-          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
-          type: boolean
-        isPreventDeletionEnabled:
-          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
-          type: boolean
-        isRetentionLockEnabled:
-          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
-          type: boolean
-        kmsKeyId:
-          description: 'The OCID of the Vault service key which is the master encryption key for the volume backup.
-
-            For more information about the Vault service and encryption keys, see
-
-            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
-
-            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        retentionPeriod:
-          $ref: '#/components/schemas/RetentionDuration'
-        type:
-          description: The type of backup to create. If omitted, defaults to incremental.
-          enum:
-          - FULL
-          - INCREMENTAL
-          type: string
-      required:
-      - bootVolumeId
-    VolumeGroupReplicaInfo:
-      description: Information about the volume group replica in the destination availability domain.
-      properties:
-        availabilityDomain:
-          description: 'The availability domain of the boot volume replica replica.
-
-
-            Example: `Uocm:PHX-AD-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        volumeGroupReplicaId:
-          description: The volume group replica's Oracle ID (OCID).
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - volumeGroupReplicaId
-      - availabilityDomain
-      - displayName
-    ChangeVolumeGroupBackupCompartmentDetails:
-      description: Contains the details for the compartment to move the volume group backup to.
-      properties:
         compartmentId:
-          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume group backup to.
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - compartmentId
-    CreateVolumeBackupPolicyDetails:
-      description: 'Specifies the properties for creating user defined backup policy.
-
-        For more information about user defined backup policies,
-
-        see [User Defined Policies](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#UserDefinedBackupPolicies) in
-
-        [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm).
-
-        '
-      properties:
-        compartmentId:
-          description: The OCID of the compartment.
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        destinationRegion:
-          description: 'The paired destination region for copying scheduled backups to. Example: `us-ashburn-1`.
-
-            See [Region Pairs](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#RegionPairs) for details about paired regions.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        schedules:
-          description: 'The collection of schedules for the volume backup policy. See
-
-            see [Schedules](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#schedules) in
-
-            [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm) for more information.
-
-            '
-          items:
-            $ref: '#/components/schemas/VolumeBackupSchedule'
-          type: array
-      required:
-      - compartmentId
-    CopyBootVolumeBackupDetails:
-      properties:
-        destinationRegion:
-          description: 'The name of the destination region.
-
-
-            Example: `us-ashburn-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        kmsKeyId:
-          description: 'The OCID of the Vault service key in the destination region which will be the master encryption key
-
-            for the copied boot volume backup. If you do not specify this attribute the boot volume backup
-
-            will be encrypted with the Oracle-provided encryption key when it is copied to the destination region.
-
-
-
-            For more information about the Vault service and encryption keys, see
-
-            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
-
-            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - destinationRegion
-    RetentionDuration:
-      description: This field is used to define the retention period for backups. This is an optional field. If it is not specified, it is set to null, no retention period will be applied to the backups.
-      properties:
-        retentionTimeAmount:
-          description: The value to enter for the amount of retention time should be a numerical figure (such as 1, 7, 30, etc.) that corresponds to the period specified in the retention time unit property (such as YEARS, DAYS). The combination of these two properties determines the total length of the retention period.
-          type: integer
-        retentionTimeUnit:
-          description: The value you can assign to the Time Unit property for this Duration may be either "YEARS" or "DAYS".
-          enum:
-          - YEARS
-          - DAYS
-          type: string
-      required:
-      - retentionTimeUnit
-      - retentionTimeAmount
-    VolumeGroupBackup:
-      description: 'A point-in-time copy of a volume group that can then be used to create a new volume group
-
-        or restore a volume group. For more information, see [Volume Groups](/iaas/Content/Block/Concepts/volumegroups.htm).
-
-
-        To use any of the API operations, you must be authorized in an IAM policy. If you''re not authorized,
-
-        talk to an administrator. If you''re an administrator who needs to write policies to give users access, see
-
-        [Getting Started with Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
-
-
-        **Warning:** Oracle recommends that you avoid using any confidential information when you
-
-        supply string values using the API.
-
-        '
-      properties:
-        compartmentId:
-          description: The OCID of the compartment that contains the volume group backup.
+          description: The OCID of the compartment that contains the boot volume backup.
           maxLength: 255
           minLength: 1
           type: string
@@ -4195,15 +4546,15 @@ components:
           minLength: 1
           type: string
         expirationTime:
-          description: 'The date and time the volume group backup will expire and be automatically deleted.
+          description: 'The date and time the volume backup will expire and be automatically deleted.
 
-            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339). This parameter will always be present for volume group
+            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339). This parameter will always be present for backups that
 
-            backups that were created automatically by a scheduled-backup policy. For manually
+            were created automatically by a scheduled-backup policy. For manually created backups,
 
-            created volume group backups, it will be absent, signifying that there is no expiration
+            it will be absent, signifying that there is no expiration time and the backup will
 
-            time and the backup will last forever until manually deleted.
+            last forever until manually deleted.
 
             '
           format: date-time
@@ -4221,7 +4572,14 @@ components:
             '
           type: object
         id:
-          description: The OCID of the volume group backup.
+          description: The OCID of the boot volume backup.
+          maxLength: 255
+          minLength: 1
+          type: string
+        imageId:
+          description: 'The image OCID used to create the boot volume the backup is taken from.
+
+            '
           maxLength: 255
           minLength: 1
           type: string
@@ -4234,11 +4592,23 @@ components:
         isRetentionLockEnabled:
           description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
           type: boolean
+        kmsKeyId:
+          description: 'The OCID of the Vault service master encryption assigned to the boot volume backup.
+
+            For more information about the Vault service and encryption keys, see
+
+            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
+
+            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
         lifecycleState:
-          description: The current state of a volume group backup.
+          description: The current state of a boot volume backup.
           enum:
           - CREATING
-          - COMMITTED
           - AVAILABLE
           - TERMINATING
           - TERMINATED
@@ -4248,42 +4618,36 @@ components:
         retentionPeriod:
           $ref: '#/components/schemas/RetentionDuration'
         sizeInGBs:
-          description: 'The aggregate size of the volume group backup, in GBs.
+          description: 'The size of the boot volume, in GBs.
 
             '
           format: int64
+          maximum: 16384
+          minimum: 1
           type: integer
-        sizeInMBs:
-          description: 'The aggregate size of the volume group backup, in MBs.
-
-            '
-          format: int64
-          type: integer
+        sourceBootVolumeBackupId:
+          description: The OCID of the source boot volume backup.
+          maxLength: 255
+          minLength: 1
+          type: string
         sourceType:
-          description: 'Specifies whether the volume group backup was created manually, or via scheduled
-
-            backup policy.
+          description: 'Specifies whether the backup was created manually, or via scheduled backup policy.
 
             '
           enum:
           - MANUAL
           - SCHEDULED
           type: string
-        sourceVolumeGroupBackupId:
-          description: The OCID of the source volume group backup.
-          maxLength: 255
-          minLength: 1
-          type: string
         timeCreated:
-          description: 'The date and time the volume group backup was created. This is the time the actual point-in-time image
+          description: 'The date and time the boot volume backup was created. This is the time the actual point-in-time image
 
-            of the volume group data was taken. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+            of the volume data was taken. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
 
             '
           format: date-time
           type: string
         timeRequestReceived:
-          description: 'The date and time the request to create the volume group backup was received. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+          description: 'The date and time the request to create the boot volume backup was received. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
 
             '
           format: date-time
@@ -4293,188 +4657,61 @@ components:
           format: date-time
           type: string
         type:
-          description: The type of backup.
+          description: The type of a volume backup.
           enum:
           - FULL
           - INCREMENTAL
           type: string
-        uniqueSizeInGbs:
-          description: 'The aggregate size used by the volume group backup, in GBs.
+        uniqueSizeInGBs:
+          description: 'The size used by the backup, in GBs. It is typically smaller than sizeInGBs, depending on the space
 
-
-            It is typically smaller than sizeInGBs, depending on the spaceconsumed
-
-            on the volume group and whether the volume backup is full or incremental.
+            consumed on the boot volume and whether the backup is full or incremental.
 
             '
           format: int64
+          maximum: 16384
+          minimum: 0
           type: integer
-        uniqueSizeInMbs:
-          description: 'The aggregate size used by the volume group backup, in MBs.
-
-
-            It is typically smaller than sizeInMBs, depending on the spaceconsumed
-
-            on the volume group and whether the volume backup is full or incremental.
-
-            '
-          format: int64
-          type: integer
-        volumeBackupIds:
-          description: OCIDs for the volume backups in this volume group backup.
-          items:
-            maxLength: 255
-            minLength: 1
-            type: string
-          maxItems: 64
-          type: array
-        volumeGroupId:
-          description: The OCID of the source volume group.
+        volumeGroupBackupId:
+          description: The OCID of the volume group backup associated with the backup. This is an optional field. If it is not present in the response, the backup does not belong to a volume group.
           maxLength: 255
           minLength: 1
           type: string
       required:
       - id
-      - volumeBackupIds
       - displayName
       - compartmentId
       - timeCreated
-      - type
       - lifecycleState
-    Error:
+    RetentionDuration:
+      description: This field is used to define the retention period for backups. This is an optional field. If it is not specified, it is set to null, no retention period will be applied to the backups.
       properties:
-        code:
-          description: 'A short error code that defines the error, meant for programmatic parsing. See
-
-            [API Errors](/iaas/Content/API/References/apierrors.htm).
-
-            '
-          type: string
-        message:
-          description: A human-readable error message.
-          type: string
-        messageArguments:
-          additionalProperties:
-            type: string
-          description: 'The values to be substituted into the `originalMessageTemplate`, expressed as a string-to-string map.
-
-            '
-          type: object
-        originalMessage:
-          description: A human-readable error string in English. This value might be different from the `message` field.
-          type: string
-        originalMessageTemplate:
-          description: 'The template for the `originalMessage` in ICU message format, but without the values to be substituted.
-
-            '
+        retentionTimeAmount:
+          description: The value to enter for the amount of retention time should be a numerical figure (such as 1, 7, 30, etc.) that corresponds to the period specified in the retention time unit property (such as YEARS, DAYS). The combination of these two properties determines the total length of the retention period.
+          type: integer
+        retentionTimeUnit:
+          description: The value you can assign to the Time Unit property for this Duration may be either "YEARS" or "DAYS".
+          enum:
+          - YEARS
+          - DAYS
           type: string
       required:
-      - code
-      - message
-    VolumeBackupPolicy:
-      description: 'A policy for automatically creating volume backups according to a
+      - retentionTimeUnit
+      - retentionTimeAmount
+    BootVolumeReplica:
+      description: 'An asynchronous replica of a boot volume that can then be used to create
 
-        recurring schedule. Has a set of one or more schedules that control when and
+        a new boot volume or recover a boot volume. For more information, see [Overview
 
-        how backups are created.
+        of Cross-Region Volume Replication](/iaas/Content/Block/Concepts/volumereplication.htm)
 
+        To use any of the API operations, you must be authorized in an IAM policy.
 
-        **Warning:** Oracle recommends that you avoid using any confidential information when you
+        If you''re not authorized, talk to an administrator. If you''re an administrator
 
-        supply string values using the API.
+        who needs to write policies to give users access, see [Getting Started with
 
-        '
-      properties:
-        compartmentId:
-          description: The OCID of the compartment that contains the volume backup.
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        destinationRegion:
-          description: 'The paired destination region for copying scheduled backups to. Example `us-ashburn-1`.
-
-            See [Region Pairs](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#RegionPairs) for details about paired regions.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        id:
-          description: The OCID of the volume backup policy.
-          maxLength: 255
-          minLength: 1
-          type: string
-        schedules:
-          description: The collection of schedules that this policy will apply.
-          items:
-            $ref: '#/components/schemas/VolumeBackupSchedule'
-          type: array
-        timeCreated:
-          description: 'The date and time the volume backup policy was created. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
-          format: date-time
-          type: string
-      required:
-      - id
-      - displayName
-      - schedules
-      - timeCreated
-    VolumeGroupReplica:
-      description: 'An asynchronous replica of a volume group that can then be used to create a new volume group
-
-        or recover a volume group. For more information, see [Volume Group Replication](/iaas/Content/Block/Concepts/volumegroupreplication.htm).
-
-
-        To use any of the API operations, you must be authorized in an IAM policy. If you''re not authorized,
-
-        talk to an administrator. If you''re an administrator who needs to write policies to give users access, see
-
-        [Getting Started with Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
+        Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
 
 
         **Warning:** Oracle recommends that you avoid using any confidential information when you
@@ -4484,170 +4721,7 @@ components:
         '
       properties:
         availabilityDomain:
-          description: The availability domain of the volume group replica.
-          maxLength: 255
-          minLength: 1
-          type: string
-        compartmentId:
-          description: The OCID of the compartment that contains the volume group replica.
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        id:
-          description: The OCID for the volume group replica.
-          maxLength: 255
-          minLength: 1
-          type: string
-        lifecycleState:
-          description: The current state of a volume group.
-          enum:
-          - PROVISIONING
-          - AVAILABLE
-          - ACTIVATING
-          - TERMINATING
-          - TERMINATED
-          - FAULTY
-          type: string
-        memberReplicas:
-          description: Volume replicas within this volume group replica.
-          items:
-            $ref: '#/components/schemas/MemberReplica'
-          maxItems: 64
-          type: array
-        sizeInGBs:
-          description: The aggregate size of the volume group replica in GBs.
-          format: int64
-          type: integer
-        timeCreated:
-          description: The date and time the volume group replica was created. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-          format: date-time
-          type: string
-        timeLastSynced:
-          description: 'The date and time the volume group replica was last synced from the source volume group.
-
-            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
-          format: date-time
-          type: string
-        volumeGroupId:
-          description: The OCID of the source volume group.
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - id
-      - memberReplicas
-      - availabilityDomain
-      - displayName
-      - sizeInGBs
-      - compartmentId
-      - timeCreated
-      - lifecycleState
-      - volumeGroupId
-      - timeLastSynced
-    AutotunePolicy:
-      description: An autotune policy automatically tunes the volume's performace based on the type of the policy.
-      discriminator:
-        propertyName: autotuneType
-      properties:
-        autotuneType:
-          description: This specifies the type of autotunes supported by OCI.
-          enum:
-          - DETACHED_VOLUME
-          - PERFORMANCE_BASED
-          type: string
-      required:
-      - autotuneType
-    VolumeBackupPolicyAssignment:
-      description: 'Specifies the volume that the volume backup policy is assigned to.
-
-
-        For more information about Oracle defined backup policies and custom backup policies,
-
-        see [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm).
-
-        '
-      properties:
-        assetId:
-          description: The OCID of the volume the policy has been assigned to.
-          maxLength: 255
-          minLength: 1
-          type: string
-        id:
-          description: The OCID of the volume backup policy assignment.
-          maxLength: 255
-          minLength: 1
-          type: string
-        policyId:
-          description: 'The OCID of the volume backup policy that has been assigned to the volume.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        timeCreated:
-          description: 'The date and time the volume backup policy was assigned to the volume. The format is
-
-            defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
-          format: date-time
-          type: string
-      required:
-      - id
-      - policyId
-      - assetId
-      - timeCreated
-    BlockVolumeReplicaInfo:
-      description: Information about the block volume replica in the destination availability domain.
-      properties:
-        availabilityDomain:
-          description: 'The availability domain of the block volume replica.
+          description: 'The availability domain of the boot volume replica.
 
 
             Example: `Uocm:PHX-AD-1`
@@ -4656,11 +4730,39 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-        blockVolumeReplicaId:
-          description: The block volume replica's Oracle ID (OCID).
+        bootVolumeId:
+          description: The OCID of the source boot volume.
           maxLength: 255
           minLength: 1
           type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the boot volume replica.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
         displayName:
           description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
 
@@ -4670,25 +4772,87 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The boot volume replica's Oracle ID (OCID).
+          maxLength: 255
+          minLength: 1
+          type: string
+        imageId:
+          description: 'The image OCID used to create the boot volume the replica is replicated from.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        lifecycleState:
+          description: The current state of a boot volume replica.
+          enum:
+          - PROVISIONING
+          - AVAILABLE
+          - ACTIVATING
+          - TERMINATING
+          - TERMINATED
+          - FAULTY
+          type: string
+        sizeInGBs:
+          description: 'The size of the source boot volume, in GBs.
+
+            '
+          format: int64
+          maximum: 16384
+          minimum: 1
+          type: integer
+        timeCreated:
+          description: 'The date and time the boot volume replica was created. Format defined
+
+            by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        timeLastSynced:
+          description: 'The date and time the boot volume replica was last synced from the source boot volume.
+
+            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        totalDataTransferredInGBs:
+          description: 'The total size of the data transferred from the source boot volume to the boot volume replica, in GBs.
+
+            '
+          format: int64
+          type: integer
+        volumeGroupReplicaId:
+          description: 'The OCID of the volume group replica.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
       required:
-      - blockVolumeReplicaId
+      - id
       - availabilityDomain
+      - sizeInGBs
       - displayName
-    CreateVolumeBackupPolicyAssignmentDetails:
-      properties:
-        assetId:
-          description: The OCID of the volume to assign the policy to.
-          maxLength: 255
-          minLength: 1
-          type: string
-        policyId:
-          description: The OCID of the volume backup policy to assign to the volume.
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - policyId
-      - assetId
+      - compartmentId
+      - timeCreated
+      - lifecycleState
+      - timeLastSynced
+      - bootVolumeId
     VolumeGroup:
       description: 'Specifies a volume group which is a collection of
 
@@ -4812,30 +4976,13 @@ components:
       - compartmentId
       - timeCreated
       - lifecycleState
-    ChangeBootVolumeCompartmentDetails:
-      description: Contains the details for the compartment to move the boot volume to.
+    CreateBootVolumeBackupDetails:
       properties:
-        compartmentId:
-          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the boot volume to.
+        bootVolumeId:
+          description: The OCID of the boot volume that needs to be backed up.
           maxLength: 255
           minLength: 1
           type: string
-      required:
-      - compartmentId
-    BootVolumeKmsKey:
-      description: 'The Vault service master encryption key associated with this volume.
-
-        '
-      properties:
-        kmsKeyId:
-          description: 'The OCID of the Vault service key assigned to this volume. If the volume is not using Vault service, then the `kmsKeyId` will be a null string.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-    CreateVolumeBackupDetails:
-      properties:
         definedTags:
           additionalProperties:
             additionalProperties:
@@ -4905,23 +5052,18 @@ components:
         retentionPeriod:
           $ref: '#/components/schemas/RetentionDuration'
         type:
-          description: The type of backup to create. If omitted, defaults to INCREMENTAL.
+          description: The type of backup to create. If omitted, defaults to incremental.
           enum:
           - FULL
           - INCREMENTAL
           type: string
-        volumeId:
-          description: The OCID of the volume that needs to be backed up.
-          maxLength: 255
-          minLength: 1
-          type: string
       required:
-      - volumeId
-    BootVolumeReplicaDetails:
-      description: Contains the details for the boot volume replica
+      - bootVolumeId
+    VolumeGroupReplicaInfo:
+      description: Information about the volume group replica in the destination availability domain.
       properties:
         availabilityDomain:
-          description: 'The availability domain of the boot volume replica.
+          description: 'The availability domain of the boot volume replica replica.
 
 
             Example: `Uocm:PHX-AD-1`
@@ -4939,8 +5081,103 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        volumeGroupReplicaId:
+          description: The volume group replica's Oracle ID (OCID).
+          maxLength: 255
+          minLength: 1
+          type: string
       required:
+      - volumeGroupReplicaId
       - availabilityDomain
+      - displayName
+    UpdateBootVolumeKmsKeyDetails:
+      properties:
+        kmsKeyId:
+          description: 'The OCID of the new Vault service key to assign to protect the specified volume.
+
+            This key has to be a valid Vault service key, and policies must exist to allow the user and the Block Volume service to access this key.
+
+            If you specify the same OCID as the previous key''s OCID, the Block Volume service will use it to regenerate a volume encryption key.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+    ChangeBootVolumeCompartmentDetails:
+      description: Contains the details for the compartment to move the boot volume to.
+      properties:
+        compartmentId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the boot volume to.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - compartmentId
+    BootVolumeKmsKey:
+      description: 'The Vault service master encryption key associated with this volume.
+
+        '
+      properties:
+        kmsKeyId:
+          description: 'The OCID of the Vault service key assigned to this volume. If the volume is not using Vault service, then the `kmsKeyId` will be a null string.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+    BootVolumeReplicaInfo:
+      description: Information about the boot volume replica in the destination availability domain.
+      properties:
+        availabilityDomain:
+          description: 'The availability domain of the boot volume replica.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        bootVolumeReplicaId:
+          description: The boot volume replica's Oracle ID (OCID).
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - bootVolumeReplicaId
+      - availabilityDomain
+      - displayName
+    AutotunePolicy:
+      description: An autotune policy automatically tunes the volume's performace based on the type of the policy.
+      discriminator:
+        propertyName: autotuneType
+      properties:
+        autotuneType:
+          description: This specifies the type of autotunes supported by OCI.
+          enum:
+          - DETACHED_VOLUME
+          - PERFORMANCE_BASED
+          type: string
+      required:
+      - autotuneType
+    VolumeGroupSourceDetails:
+      description: Specifies the source for a volume group.
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+      - type
     VolumeBackup:
       description: 'A point-in-time copy of a volume that can then be used to create a new block volume
 
@@ -5158,31 +5395,18 @@ components:
       - compartmentId
       - timeCreated
       - lifecycleState
-    UpdateVolumeGroupBackupDetails:
+    CopyBootVolumeBackupDetails:
       properties:
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+        destinationRegion:
+          description: 'The name of the destination region.
 
 
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
+            Example: `us-ashburn-1`
 
             '
-          type: object
+          maxLength: 255
+          minLength: 1
+          type: string
         displayName:
           description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
 
@@ -5192,43 +5416,46 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+        kmsKeyId:
+          description: 'The OCID of the Vault service key in the destination region which will be the master encryption key
 
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+            for the copied boot volume backup. If you do not specify this attribute the boot volume backup
+
+            will be encrypted with the Oracle-provided encryption key when it is copied to the destination region.
 
 
-            Example: `{"Department": "Finance"}`
+
+            For more information about the Vault service and encryption keys, see
+
+            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
+
+            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
 
             '
-          type: object
-        isIndefiniteRetentionEnabled:
-          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
-          type: boolean
-        isPreventDeletionEnabled:
-          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
-          type: boolean
-        isRetentionLockEnabled:
-          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
-          type: boolean
-        retentionPeriod:
-          $ref: '#/components/schemas/RetentionDuration'
-    BootVolumeReplica:
-      description: 'An asynchronous replica of a boot volume that can then be used to create
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - destinationRegion
+    BootVolumeSourceDetails:
+      discriminator:
+        propertyName: type
+      properties:
+        type:
+          type: string
+      required:
+      - type
+    VolumeGroupReplica:
+      description: 'An asynchronous replica of a volume group that can then be used to create a new volume group
 
-        a new boot volume or recover a boot volume. For more information, see [Overview
+        or recover a volume group. For more information, see [Volume Group Replication](/iaas/Content/Block/Concepts/volumegroupreplication.htm).
 
-        of Cross-Region Volume Replication](/iaas/Content/Block/Concepts/volumereplication.htm)
 
-        To use any of the API operations, you must be authorized in an IAM policy.
+        To use any of the API operations, you must be authorized in an IAM policy. If you''re not authorized,
 
-        If you''re not authorized, talk to an administrator. If you''re an administrator
+        talk to an administrator. If you''re an administrator who needs to write policies to give users access, see
 
-        who needs to write policies to give users access, see [Getting Started with
-
-        Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
+        [Getting Started with Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
 
 
         **Warning:** Oracle recommends that you avoid using any confidential information when you
@@ -5238,22 +5465,12 @@ components:
         '
       properties:
         availabilityDomain:
-          description: 'The availability domain of the boot volume replica.
-
-
-            Example: `Uocm:PHX-AD-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        bootVolumeId:
-          description: The OCID of the source boot volume.
+          description: The availability domain of the volume group replica.
           maxLength: 255
           minLength: 1
           type: string
         compartmentId:
-          description: The OCID of the compartment that contains the boot volume replica.
+          description: The OCID of the compartment that contains the volume group replica.
           maxLength: 255
           minLength: 1
           type: string
@@ -5302,19 +5519,12 @@ components:
             '
           type: object
         id:
-          description: The boot volume replica's Oracle ID (OCID).
-          maxLength: 255
-          minLength: 1
-          type: string
-        imageId:
-          description: 'The image OCID used to create the boot volume the replica is replicated from.
-
-            '
+          description: The OCID for the volume group replica.
           maxLength: 255
           minLength: 1
           type: string
         lifecycleState:
-          description: The current state of a boot volume replica.
+          description: The current state of a volume group.
           enum:
           - PROVISIONING
           - AVAILABLE
@@ -5323,246 +5533,74 @@ components:
           - TERMINATED
           - FAULTY
           type: string
+        memberReplicas:
+          description: Volume replicas within this volume group replica.
+          items:
+            $ref: '#/components/schemas/MemberReplica'
+          maxItems: 64
+          type: array
         sizeInGBs:
-          description: 'The size of the source boot volume, in GBs.
-
-            '
+          description: The aggregate size of the volume group replica in GBs.
           format: int64
-          maximum: 16384
-          minimum: 1
           type: integer
         timeCreated:
-          description: 'The date and time the boot volume replica was created. Format defined
-
-            by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
+          description: The date and time the volume group replica was created. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
           format: date-time
           type: string
         timeLastSynced:
-          description: 'The date and time the boot volume replica was last synced from the source boot volume.
+          description: 'The date and time the volume group replica was last synced from the source volume group.
 
             Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
 
             '
           format: date-time
           type: string
-        totalDataTransferredInGBs:
-          description: 'The total size of the data transferred from the source boot volume to the boot volume replica, in GBs.
-
-            '
-          format: int64
-          type: integer
-        volumeGroupReplicaId:
-          description: 'The OCID of the volume group replica.
-
-            '
+        volumeGroupId:
+          description: The OCID of the source volume group.
           maxLength: 255
           minLength: 1
           type: string
       required:
       - id
+      - memberReplicas
       - availabilityDomain
-      - sizeInGBs
       - displayName
+      - sizeInGBs
       - compartmentId
       - timeCreated
       - lifecycleState
-      - timeLastSynced
-      - bootVolumeId
-    CreateVolumeGroupBackupDetails:
-      properties:
-        compartmentId:
-          description: 'The OCID of the compartment that will contain the volume group
-
-            backup. This parameter is optional, by default backup will be created in
-
-            the same compartment and source volume group.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        isIndefiniteRetentionEnabled:
-          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
-          type: boolean
-        isPreventDeletionEnabled:
-          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
-          type: boolean
-        isRetentionLockEnabled:
-          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
-          type: boolean
-        retentionPeriod:
-          $ref: '#/components/schemas/RetentionDuration'
-        type:
-          description: The type of backup to create. If omitted, defaults to incremental.
-          enum:
-          - FULL
-          - INCREMENTAL
-          type: string
-        volumeGroupId:
-          description: The OCID of the volume group that needs to be backed up.
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
       - volumeGroupId
-    CreateBootVolumeDetails:
+      - timeLastSynced
+    ChangeVolumeBackupCompartmentDetails:
+      description: Contains the details for the compartment to move the volume backup to.
       properties:
-        autotunePolicies:
-          description: The list of autotune policies to be enabled for this volume.
-          items:
-            $ref: '#/components/schemas/AutotunePolicy'
-          type: array
-          uniqueItems: true
-        availabilityDomain:
-          description: 'The availability domain of the volume. Omissible for cloning a volume. The new volume will be created in the availability domain of the source volume.
-
-
-            Example: `Uocm:PHX-AD-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        bootVolumeReplicas:
-          description: 'The list of boot volume replicas to be enabled for this boot volume
-
-            in the specified destination availability domains.
-
-            '
-          items:
-            $ref: '#/components/schemas/BootVolumeReplicaDetails'
-          maxItems: 1
-          type: array
-          uniqueItems: true
-        clusterPlacementGroupId:
-          description: The clusterPlacementGroup Id of the volume for volume placement.
-          maxLength: 255
-          minLength: 1
-          type: string
         compartmentId:
-          description: The OCID of the compartment that contains the boot volume.
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume backup to.
           maxLength: 255
           minLength: 1
           type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        isAutoTuneEnabled:
-          description: 'Specifies whether the auto-tune performance is enabled for this boot volume. This field is deprecated.
-
-            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
-
-            '
-          type: boolean
-        kmsKeyId:
-          description: 'The OCID of the Vault service key to assign as the master encryption key
-
-            for the boot volume.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        sizeInGBs:
-          description: The size of the volume in GBs.
-          format: int64
-          type: integer
-        sourceDetails:
-          $ref: '#/components/schemas/BootVolumeSourceDetails'
-        vpusPerGB:
-          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `10`: Represents the Balanced option.\n\n  * `20`: Represents the Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
-          format: int64
-          type: integer
       required:
       - compartmentId
-      - sourceDetails
+    MemberReplica:
+      description: OCIDs for the volume replicas in this volume group replica.
+      properties:
+        volumeReplicaId:
+          description: The volume replica ID.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - volumeReplicaId
+    ChangeVolumeGroupCompartmentDetails:
+      description: Contains the details for the compartment to move the volume group to.
+      properties:
+        compartmentId:
+          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume group to.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - compartmentId
     BootVolume:
       description: 'A detachable boot volume device that contains the image used to boot a Compute instance. For more information, see
 
@@ -5740,26 +5778,51 @@ components:
       - compartmentId
       - timeCreated
       - lifecycleState
-    VolumeSourceDetails:
-      description: 'Specifies the volume source details for a new Block volume. The volume source is either another Block volume in the same Availability Domain or a Block volume backup.
+    VolumeBackupPolicyAssignment:
+      description: 'Specifies the volume that the volume backup policy is assigned to.
 
-        This is an optional field. If not specified or set to null, the new Block volume will be empty.
 
-        When specified, the new Block volume will contain data from the source volume or backup.
+        For more information about Oracle defined backup policies and custom backup policies,
+
+        see [Policy-Based Backups](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm).
 
         '
-      discriminator:
-        propertyName: type
       properties:
-        type:
+        assetId:
+          description: The OCID of the volume the policy has been assigned to.
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: The OCID of the volume backup policy assignment.
+          maxLength: 255
+          minLength: 1
+          type: string
+        policyId:
+          description: 'The OCID of the volume backup policy that has been assigned to the volume.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        timeCreated:
+          description: 'The date and time the volume backup policy was assigned to the volume. The format is
+
+            defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            '
+          format: date-time
           type: string
       required:
-      - type
-    VolumeGroupReplicaDetails:
-      description: Contains the details for the volume group replica.
+      - id
+      - policyId
+      - assetId
+      - timeCreated
+    BlockVolumeReplicaDetails:
+      description: Contains the details for the block volume replica
       properties:
         availabilityDomain:
-          description: 'The availability domain of the volume group replica.
+          description: 'The availability domain of the block volume replica.
 
 
             Example: `Uocm:PHX-AD-1`
@@ -5779,13 +5842,82 @@ components:
           type: string
       required:
       - availabilityDomain
-    CopyVolumeGroupBackupDetails:
+    VolumeSourceDetails:
+      description: 'Specifies the volume source details for a new Block volume. The volume source is either another Block volume in the same Availability Domain or a Block volume backup.
+
+        This is an optional field. If not specified or set to null, the new Block volume will be empty.
+
+        When specified, the new Block volume will contain data from the source volume or backup.
+
+        '
+      discriminator:
+        propertyName: type
       properties:
+        type:
+          type: string
+      required:
+      - type
+    CreateVolumeBackupPolicyAssignmentDetails:
+      properties:
+        assetId:
+          description: The OCID of the volume to assign the policy to.
+          maxLength: 255
+          minLength: 1
+          type: string
+        policyId:
+          description: The OCID of the volume backup policy to assign to the volume.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - policyId
+      - assetId
+    VolumeBackupPolicy:
+      description: 'A policy for automatically creating volume backups according to a
+
+        recurring schedule. Has a set of one or more schedules that control when and
+
+        how backups are created.
+
+
+        **Warning:** Oracle recommends that you avoid using any confidential information when you
+
+        supply string values using the API.
+
+        '
+      properties:
+        compartmentId:
+          description: The OCID of the compartment that contains the volume backup.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
         destinationRegion:
-          description: 'The name of the destination region.
+          description: 'The paired destination region for copying scheduled backups to. Example `us-ashburn-1`.
 
-
-            Example: `us-ashburn-1`
+            See [Region Pairs](/iaas/Content/Block/Tasks/schedulingvolumebackups.htm#RegionPairs) for details about paired regions.
 
             '
           maxLength: 255
@@ -5800,48 +5932,63 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-        kmsKeyId:
-          description: 'The OCID of the Vault service key in the destination region which will be the master encryption key
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
 
-            for the copied volume group backup.
-
-            If you do not specify this attribute the volume group backup will be encrypted with the Oracle-provided encryption
-
-            key when it is copied to the destination region.
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
 
 
-
-            For more information about the Vault service and encryption keys, see
-
-            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
-
-            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
+            Example: `{"Department": "Finance"}`
 
             '
+          type: object
+        id:
+          description: The OCID of the volume backup policy.
           maxLength: 255
           minLength: 1
           type: string
-      required:
-      - destinationRegion
-    UpdateVolumeDetails:
-      properties:
-        autotunePolicies:
-          description: The list of autotune policies enabled for this volume.
+        schedules:
+          description: The collection of schedules that this policy will apply.
           items:
-            $ref: '#/components/schemas/AutotunePolicy'
+            $ref: '#/components/schemas/VolumeBackupSchedule'
           type: array
-          uniqueItems: true
-        blockVolumeReplicas:
-          description: 'The list of block volume replicas that this volume will be updated to have
-
-            in the specified destination availability domains.
+        timeCreated:
+          description: 'The date and time the volume backup policy was created. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
 
             '
-          items:
-            $ref: '#/components/schemas/BlockVolumeReplicaDetails'
-          maxItems: 1
-          type: array
-          uniqueItems: true
+          format: date-time
+          type: string
+      required:
+      - id
+      - displayName
+      - schedules
+      - timeCreated
+    VolumeGroupBackup:
+      description: 'A point-in-time copy of a volume group that can then be used to create a new volume group
+
+        or restore a volume group. For more information, see [Volume Groups](/iaas/Content/Block/Concepts/volumegroups.htm).
+
+
+        To use any of the API operations, you must be authorized in an IAM policy. If you''re not authorized,
+
+        talk to an administrator. If you''re an administrator who needs to write policies to give users access, see
+
+        [Getting Started with Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
+
+
+        **Warning:** Oracle recommends that you avoid using any confidential information when you
+
+        supply string values using the API.
+
+        '
+      properties:
+        compartmentId:
+          description: The OCID of the compartment that contains the volume group backup.
+          maxLength: 255
+          minLength: 1
+          type: string
         definedTags:
           additionalProperties:
             additionalProperties:
@@ -5874,6 +6021,20 @@ components:
           maxLength: 255
           minLength: 1
           type: string
+        expirationTime:
+          description: 'The date and time the volume group backup will expire and be automatically deleted.
+
+            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339). This parameter will always be present for volume group
+
+            backups that were created automatically by a scheduled-backup policy. For manually
+
+            created volume group backups, it will be absent, signifying that there is no expiration
+
+            time and the backup will last forever until manually deleted.
+
+            '
+          format: date-time
+          type: string
         freeformTags:
           additionalProperties:
             type: string
@@ -5886,29 +6047,128 @@ components:
 
             '
           type: object
-        isAutoTuneEnabled:
-          description: 'Specifies whether the auto-tune performance is enabled for this volume. This field is deprecated.
-
-            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
-
-            '
+        id:
+          description: The OCID of the volume group backup.
+          maxLength: 255
+          minLength: 1
+          type: string
+        isIndefiniteRetentionEnabled:
+          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
           type: boolean
-        isReservationsEnabled:
-          description: 'When set to true, enables SCSI Persistent Reservation (SCSI PR) for the volume. For more information, see
-
-            [Persistent Reservations](/iaas/Content/Block/Concepts/persistent-reservations.htm).
-
-            '
+        isPreventDeletionEnabled:
+          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
           type: boolean
+        isRetentionLockEnabled:
+          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
+          type: boolean
+        lifecycleState:
+          description: The current state of a volume group backup.
+          enum:
+          - CREATING
+          - COMMITTED
+          - AVAILABLE
+          - TERMINATING
+          - TERMINATED
+          - FAULTY
+          - REQUEST_RECEIVED
+          type: string
+        retentionPeriod:
+          $ref: '#/components/schemas/RetentionDuration'
         sizeInGBs:
-          description: The size to resize the volume to in GBs. Has to be larger than the current size.
+          description: 'The aggregate size of the volume group backup, in GBs.
+
+            '
           format: int64
           type: integer
-        vpusPerGB:
-          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `0`: Represents Lower Cost option.\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
+        sizeInMBs:
+          description: 'The aggregate size of the volume group backup, in MBs.
+
+            '
           format: int64
           type: integer
-    UpdateVolumeBackupDetails:
+        sourceType:
+          description: 'Specifies whether the volume group backup was created manually, or via scheduled
+
+            backup policy.
+
+            '
+          enum:
+          - MANUAL
+          - SCHEDULED
+          type: string
+        sourceVolumeGroupBackupId:
+          description: The OCID of the source volume group backup.
+          maxLength: 255
+          minLength: 1
+          type: string
+        timeCreated:
+          description: 'The date and time the volume group backup was created. This is the time the actual point-in-time image
+
+            of the volume group data was taken. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        timeRequestReceived:
+          description: 'The date and time the request to create the volume group backup was received. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        timeRetentionExpiresAt:
+          description: The date and time when a backup’s retention period ends and it is set to expire. This is an optional field. If it is not specified, it is set to null, no retention period will be applied to the backups.
+          format: date-time
+          type: string
+        type:
+          description: The type of backup.
+          enum:
+          - FULL
+          - INCREMENTAL
+          type: string
+        uniqueSizeInGbs:
+          description: 'The aggregate size used by the volume group backup, in GBs.
+
+
+            It is typically smaller than sizeInGBs, depending on the spaceconsumed
+
+            on the volume group and whether the volume backup is full or incremental.
+
+            '
+          format: int64
+          type: integer
+        uniqueSizeInMbs:
+          description: 'The aggregate size used by the volume group backup, in MBs.
+
+
+            It is typically smaller than sizeInMBs, depending on the spaceconsumed
+
+            on the volume group and whether the volume backup is full or incremental.
+
+            '
+          format: int64
+          type: integer
+        volumeBackupIds:
+          description: OCIDs for the volume backups in this volume group backup.
+          items:
+            maxLength: 255
+            minLength: 1
+            type: string
+          maxItems: 64
+          type: array
+        volumeGroupId:
+          description: The OCID of the source volume group.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - id
+      - volumeBackupIds
+      - displayName
+      - compartmentId
+      - timeCreated
+      - type
+      - lifecycleState
+    CreateVolumeBackupDetails:
       properties:
         definedTags:
           additionalProperties:
@@ -5978,6 +6238,445 @@ components:
           type: string
         retentionPeriod:
           $ref: '#/components/schemas/RetentionDuration'
+        type:
+          description: The type of backup to create. If omitted, defaults to INCREMENTAL.
+          enum:
+          - FULL
+          - INCREMENTAL
+          type: string
+        volumeId:
+          description: The OCID of the volume that needs to be backed up.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - volumeId
+    VolumeGroupReplicaDetails:
+      description: Contains the details for the volume group replica.
+      properties:
+        availabilityDomain:
+          description: 'The availability domain of the volume group replica.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - availabilityDomain
+    BootVolumeReplicaDetails:
+      description: Contains the details for the boot volume replica
+      properties:
+        availabilityDomain:
+          description: 'The availability domain of the boot volume replica.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - availabilityDomain
+    BlockVolumeReplica:
+      description: 'An asynchronous replica of a block volume that can then be used to create
+
+        a new block volume or recover a block volume. For more information, see [Overview
+
+        of Cross-Region Volume Replication](/iaas/Content/Block/Concepts/volumereplication.htm)
+
+        To use any of the API operations, you must be authorized in an IAM policy.
+
+        If you''re not authorized, talk to an administrator. If you''re an administrator
+
+        who needs to write policies to give users access, see [Getting Started with
+
+        Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
+
+
+        **Warning:** Oracle recommends that you avoid using any confidential information when you
+
+        supply string values using the API.
+
+        '
+      properties:
+        availabilityDomain:
+          description: 'The availability domain of the block volume replica.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        blockVolumeId:
+          description: The OCID of the source block volume.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the block volume replica.
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        id:
+          description: The block volume replica's Oracle ID (OCID).
+          maxLength: 255
+          minLength: 1
+          type: string
+        lifecycleState:
+          description: The current state of a block volume replica.
+          enum:
+          - PROVISIONING
+          - AVAILABLE
+          - ACTIVATING
+          - TERMINATING
+          - TERMINATED
+          - FAULTY
+          type: string
+        sizeInGBs:
+          description: 'The size of the source block volume, in GBs.
+
+            '
+          format: int64
+          maximum: 16384
+          minimum: 1
+          type: integer
+        timeCreated:
+          description: 'The date and time the block volume replica was created. Format defined
+
+            by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        timeLastSynced:
+          description: 'The date and time the block volume replica was last synced from the source block volume.
+
+            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        totalDataTransferredInGBs:
+          description: 'The total size of the data transferred from the source block volume to the block volume replica, in GBs.
+
+            '
+          format: int64
+          type: integer
+        volumeGroupReplicaId:
+          description: 'The OCID of the volume group replica.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - id
+      - availabilityDomain
+      - sizeInGBs
+      - compartmentId
+      - displayName
+      - timeCreated
+      - lifecycleState
+      - timeLastSynced
+      - blockVolumeId
+    CreateVolumeGroupBackupDetails:
+      properties:
+        compartmentId:
+          description: 'The OCID of the compartment that will contain the volume group
+
+            backup. This parameter is optional, by default backup will be created in
+
+            the same compartment and source volume group.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        isIndefiniteRetentionEnabled:
+          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
+          type: boolean
+        isPreventDeletionEnabled:
+          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
+          type: boolean
+        isRetentionLockEnabled:
+          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
+          type: boolean
+        retentionPeriod:
+          $ref: '#/components/schemas/RetentionDuration'
+        type:
+          description: The type of backup to create. If omitted, defaults to incremental.
+          enum:
+          - FULL
+          - INCREMENTAL
+          type: string
+        volumeGroupId:
+          description: The OCID of the volume group that needs to be backed up.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - volumeGroupId
+    BlockVolumeReplicaInfo:
+      description: Information about the block volume replica in the destination availability domain.
+      properties:
+        availabilityDomain:
+          description: 'The availability domain of the block volume replica.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        blockVolumeReplicaId:
+          description: The block volume replica's Oracle ID (OCID).
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - blockVolumeReplicaId
+      - availabilityDomain
+      - displayName
+    CopyVolumeBackupDetails:
+      properties:
+        destinationRegion:
+          description: 'The name of the destination region.
+
+
+            Example: `us-ashburn-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        kmsKeyId:
+          description: 'The OCID of the Vault service key in the destination region which will be the master encryption key
+
+            for the copied volume backup.
+
+            If you do not specify this attribute the volume backup will be encrypted with the Oracle-provided encryption
+
+            key when it is copied to the destination region.
+
+
+
+            For more information about the Vault service and encryption keys, see
+
+            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
+
+            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - destinationRegion
+    Error:
+      properties:
+        code:
+          description: 'A short error code that defines the error, meant for programmatic parsing. See
+
+            [API Errors](/iaas/Content/API/References/apierrors.htm).
+
+            '
+          type: string
+        message:
+          description: A human-readable error message.
+          type: string
+        messageArguments:
+          additionalProperties:
+            type: string
+          description: 'The values to be substituted into the `originalMessageTemplate`, expressed as a string-to-string map.
+
+            '
+          type: object
+        originalMessage:
+          description: A human-readable error string in English. This value might be different from the `message` field.
+          type: string
+        originalMessageTemplate:
+          description: 'The template for the `originalMessage` in ICU message format, but without the values to be substituted.
+
+            '
+          type: string
+      required:
+      - code
+      - message
+    CopyVolumeGroupBackupDetails:
+      properties:
+        destinationRegion:
+          description: 'The name of the destination region.
+
+
+            Example: `us-ashburn-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        displayName:
+          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+            Avoid entering confidential information.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        kmsKeyId:
+          description: 'The OCID of the Vault service key in the destination region which will be the master encryption key
+
+            for the copied volume group backup.
+
+            If you do not specify this attribute the volume group backup will be encrypted with the Oracle-provided encryption
+
+            key when it is copied to the destination region.
+
+
+
+            For more information about the Vault service and encryption keys, see
+
+            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
+
+            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - destinationRegion
     UpdateBootVolumeBackupDetails:
       properties:
         definedTags:
@@ -6048,338 +6747,6 @@ components:
           type: string
         retentionPeriod:
           $ref: '#/components/schemas/RetentionDuration'
-    BootVolumeBackup:
-      description: 'A point-in-time copy of a boot volume that can then be used to create
-
-        a new boot volume or recover a boot volume. For more information, see [Overview
-
-        of Boot Volume Backups](/iaas/Content/Block/Concepts/bootvolumebackups.htm)
-
-        To use any of the API operations, you must be authorized in an IAM policy.
-
-        If you''re not authorized, talk to an administrator. If you''re an administrator
-
-        who needs to write policies to give users access, see [Getting Started with
-
-        Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
-
-
-        **Warning:** Oracle recommends that you avoid using any confidential information when you
-
-        supply string values using the API.
-
-        '
-      properties:
-        bootVolumeId:
-          description: The OCID of the boot volume.
-          maxLength: 255
-          minLength: 1
-          type: string
-        compartmentId:
-          description: The OCID of the compartment that contains the boot volume backup.
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        expirationTime:
-          description: 'The date and time the volume backup will expire and be automatically deleted.
-
-            Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339). This parameter will always be present for backups that
-
-            were created automatically by a scheduled-backup policy. For manually created backups,
-
-            it will be absent, signifying that there is no expiration time and the backup will
-
-            last forever until manually deleted.
-
-            '
-          format: date-time
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        id:
-          description: The OCID of the boot volume backup.
-          maxLength: 255
-          minLength: 1
-          type: string
-        imageId:
-          description: 'The image OCID used to create the boot volume the backup is taken from.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        isIndefiniteRetentionEnabled:
-          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
-          type: boolean
-        isPreventDeletionEnabled:
-          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
-          type: boolean
-        isRetentionLockEnabled:
-          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
-          type: boolean
-        kmsKeyId:
-          description: 'The OCID of the Vault service master encryption assigned to the boot volume backup.
-
-            For more information about the Vault service and encryption keys, see
-
-            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
-
-            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        lifecycleState:
-          description: The current state of a boot volume backup.
-          enum:
-          - CREATING
-          - AVAILABLE
-          - TERMINATING
-          - TERMINATED
-          - FAULTY
-          - REQUEST_RECEIVED
-          type: string
-        retentionPeriod:
-          $ref: '#/components/schemas/RetentionDuration'
-        sizeInGBs:
-          description: 'The size of the boot volume, in GBs.
-
-            '
-          format: int64
-          maximum: 16384
-          minimum: 1
-          type: integer
-        sourceBootVolumeBackupId:
-          description: The OCID of the source boot volume backup.
-          maxLength: 255
-          minLength: 1
-          type: string
-        sourceType:
-          description: 'Specifies whether the backup was created manually, or via scheduled backup policy.
-
-            '
-          enum:
-          - MANUAL
-          - SCHEDULED
-          type: string
-        timeCreated:
-          description: 'The date and time the boot volume backup was created. This is the time the actual point-in-time image
-
-            of the volume data was taken. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
-          format: date-time
-          type: string
-        timeRequestReceived:
-          description: 'The date and time the request to create the boot volume backup was received. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-
-            '
-          format: date-time
-          type: string
-        timeRetentionExpiresAt:
-          description: The date and time when a backup’s retention period ends and it is set to expire. This is an optional field. If it is not specified, it is set to null, no retention period will be applied to the backups.
-          format: date-time
-          type: string
-        type:
-          description: The type of a volume backup.
-          enum:
-          - FULL
-          - INCREMENTAL
-          type: string
-        uniqueSizeInGBs:
-          description: 'The size used by the backup, in GBs. It is typically smaller than sizeInGBs, depending on the space
-
-            consumed on the boot volume and whether the backup is full or incremental.
-
-            '
-          format: int64
-          maximum: 16384
-          minimum: 0
-          type: integer
-        volumeGroupBackupId:
-          description: The OCID of the volume group backup associated with the backup. This is an optional field. If it is not present in the response, the backup does not belong to a volume group.
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - id
-      - displayName
-      - compartmentId
-      - timeCreated
-      - lifecycleState
-    BootVolumeSourceDetails:
-      discriminator:
-        propertyName: type
-      properties:
-        type:
-          type: string
-      required:
-      - type
-    UpdateVolumeGroupDetails:
-      properties:
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        volumeGroupReplicas:
-          description: 'The list of volume group replicas that this volume group will be updated to have
-
-            in the specified destination availability domains.
-
-            '
-          items:
-            $ref: '#/components/schemas/VolumeGroupReplicaDetails'
-          maxItems: 1
-          type: array
-          uniqueItems: true
-        volumeIds:
-          description: OCIDs for the volumes in this volume group.
-          items:
-            maxLength: 255
-            minLength: 1
-            type: string
-          maxItems: 64
-          type: array
-    UpdateVolumeKmsKeyDetails:
-      properties:
-        kmsKeyId:
-          description: 'The OCID of the new Vault service key to assign to protect the specified volume.
-
-            This key has to be a valid Vault service key, and policies must exist to allow the user and the Block Volume service to access this key.
-
-            If you specify the same OCID as the previous key''s OCID, the Block Volume service will use it to regenerate a volume encryption key.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-    CopyVolumeBackupDetails:
-      properties:
-        destinationRegion:
-          description: 'The name of the destination region.
-
-
-            Example: `us-ashburn-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        kmsKeyId:
-          description: 'The OCID of the Vault service key in the destination region which will be the master encryption key
-
-            for the copied volume backup.
-
-            If you do not specify this attribute the volume backup will be encrypted with the Oracle-provided encryption
-
-            key when it is copied to the destination region.
-
-
-
-            For more information about the Vault service and encryption keys, see
-
-            [Overview of Vault service](/iaas/Content/KeyManagement/Concepts/keyoverview.htm) and
-
-            [Using Keys](/iaas/Content/KeyManagement/Tasks/usingkeys.htm).
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - destinationRegion
     VolumeKmsKey:
       description: 'The Vault service master encryption key associated with this volume.
 
@@ -6392,17 +6759,7 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-    ChangeVolumeGroupCompartmentDetails:
-      description: Contains the details for the compartment to move the volume group to.
-      properties:
-        compartmentId:
-          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume group to.
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - compartmentId
-    UpdateBootVolumeDetails:
+    CreateBootVolumeDetails:
       properties:
         autotunePolicies:
           description: The list of autotune policies to be enabled for this volume.
@@ -6410,8 +6767,18 @@ components:
             $ref: '#/components/schemas/AutotunePolicy'
           type: array
           uniqueItems: true
+        availabilityDomain:
+          description: 'The availability domain of the volume. Omissible for cloning a volume. The new volume will be created in the availability domain of the source volume.
+
+
+            Example: `Uocm:PHX-AD-1`
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
         bootVolumeReplicas:
-          description: 'The list of boot volume replicas that this boot volume will be updated to have
+          description: 'The list of boot volume replicas to be enabled for this boot volume
 
             in the specified destination availability domains.
 
@@ -6421,6 +6788,16 @@ components:
           maxItems: 1
           type: array
           uniqueItems: true
+        clusterPlacementGroupId:
+          description: The clusterPlacementGroup Id of the volume for volume placement.
+          maxLength: 255
+          minLength: 1
+          type: string
+        compartmentId:
+          description: The OCID of the compartment that contains the boot volume.
+          maxLength: 255
+          minLength: 1
+          type: string
         definedTags:
           additionalProperties:
             additionalProperties:
@@ -6472,307 +6849,10 @@ components:
 
             '
           type: boolean
-        sizeInGBs:
-          description: The size to resize the volume to in GBs. Has to be larger than the current size.
-          format: int64
-          type: integer
-        vpusPerGB:
-          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
-          format: int64
-          type: integer
-    Volume:
-      description: 'A detachable block volume device that allows you to dynamically expand
-
-        the storage capacity of an instance. For more information, see
-
-        [Overview of Cloud Volume Storage](/iaas/Content/Block/Concepts/overview.htm).
-
-
-        To use any of the API operations, you must be authorized in an IAM policy. If you''re not authorized,
-
-        talk to an administrator. If you''re an administrator who needs to write policies to give users access, see
-
-        [Getting Started with Policies](/iaas/Content/Identity/Concepts/policygetstarted.htm).
-
-
-        **Warning:** Oracle recommends that you avoid using any confidential information when you
-
-        supply string values using the API.
-
-        '
-      properties:
-        autoTunedVpusPerGB:
-          description: 'The number of Volume Performance Units per GB that this volume is effectively tuned to.
-
-            '
-          format: int64
-          type: integer
-        autotunePolicies:
-          description: The list of autotune policies enabled for this volume.
-          items:
-            $ref: '#/components/schemas/AutotunePolicy'
-          type: array
-          uniqueItems: true
-        availabilityDomain:
-          description: 'The availability domain of the volume.
-
-
-            Example: `Uocm:PHX-AD-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        blockVolumeReplicas:
-          description: The list of block volume replicas of this volume.
-          items:
-            $ref: '#/components/schemas/BlockVolumeReplicaInfo'
-          type: array
-        clusterPlacementGroupId:
-          description: The clusterPlacementGroup Id of the volume for volume placement.
-          maxLength: 255
-          minLength: 1
-          type: string
-        compartmentId:
-          description: The OCID of the compartment that contains the volume.
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        id:
-          description: The OCID of the volume.
-          maxLength: 255
-          minLength: 1
-          type: string
-        isAutoTuneEnabled:
-          description: 'Specifies whether the auto-tune performance is enabled for this volume. This field is deprecated.
-
-            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
-
-            '
-          type: boolean
-        isHydrated:
-          description: 'Specifies whether the cloned volume''s data has finished copying from the source volume or backup.
-
-            '
-          type: boolean
-        isReservationsEnabled:
-          description: 'When set to true, enables SCSI Persistent Reservation (SCSI PR) for the volume. For more information, see
-
-            [Persistent Reservations](/iaas/Content/Block/Concepts/persistent-reservations.htm).
-
-            '
-          type: boolean
-        kmsKeyId:
-          description: 'The OCID of the Vault service key which is the master encryption key for the volume.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        lifecycleState:
-          description: The current state of a volume.
-          enum:
-          - PROVISIONING
-          - RESTORING
-          - AVAILABLE
-          - TERMINATING
-          - TERMINATED
-          - FAULTY
-          type: string
-        sizeInGBs:
-          description: The size of the volume in GBs.
-          format: int64
-          type: integer
-        sizeInMBs:
-          description: 'The size of the volume in MBs. This field is deprecated. Use
-
-            sizeInGBs instead.
-
-            '
-          format: int64
-          type: integer
-        sourceDetails:
-          $ref: '#/components/schemas/VolumeSourceDetails'
-        timeCreated:
-          description: The date and time the volume was created. Format defined by [RFC3339](https://tools.ietf.org/html/rfc3339).
-          format: date-time
-          type: string
-        volumeGroupId:
-          description: The OCID of the source volume group.
-          maxLength: 255
-          minLength: 1
-          type: string
-        vpusPerGB:
-          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `0`: Represents Lower Cost option.\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, It would be the Default(Minimum) VPUs/GB.\n"
-          format: int64
-          type: integer
-      required:
-      - id
-      - availabilityDomain
-      - displayName
-      - sizeInMBs
-      - compartmentId
-      - timeCreated
-      - lifecycleState
-    CreateVolumeDetails:
-      description: 'The details of the volume to create. For CreateVolume operation, this field is required in the request,
-
-        see [CreateVolume](#/en/iaas/latest/Volume/CreateVolume).
-
-        '
-      properties:
-        autotunePolicies:
-          description: The list of autotune policies to be enabled for this volume.
-          items:
-            $ref: '#/components/schemas/AutotunePolicy'
-          type: array
-          uniqueItems: true
-        availabilityDomain:
-          description: 'The availability domain of the volume. Omissible for cloning a volume. The new volume will be created in the availability domain of the source volume.
-
-
-            Example: `Uocm:PHX-AD-1`
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        backupPolicyId:
-          description: 'If provided, specifies the ID of the volume backup policy to assign to the newly
-
-            created volume. If omitted, no policy will be assigned.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        blockVolumeReplicas:
-          description: 'The list of block volume replicas to be enabled for this volume
-
-            in the specified destination availability domains.
-
-            '
-          items:
-            $ref: '#/components/schemas/BlockVolumeReplicaDetails'
-          maxItems: 1
-          type: array
-          uniqueItems: true
-        clusterPlacementGroupId:
-          description: The clusterPlacementGroup Id of the volume for volume placement.
-          maxLength: 255
-          minLength: 1
-          type: string
-        compartmentId:
-          description: The OCID of the compartment that contains the volume.
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        displayName:
-          description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-            Avoid entering confidential information.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        isAutoTuneEnabled:
-          description: 'Specifies whether the auto-tune performance is enabled for this volume. This field is deprecated.
-
-            Use the `DetachedVolumeAutotunePolicy` instead to enable the volume for detached autotune.
-
-            '
-          type: boolean
-        isReservationsEnabled:
-          description: 'When set to true, enables SCSI Persistent Reservation (SCSI PR) for the volume. For more information, see
-
-            [Persistent Reservations](/iaas/Content/Block/Concepts/persistent-reservations.htm).
-
-            '
-          type: boolean
         kmsKeyId:
           description: 'The OCID of the Vault service key to assign as the master encryption key
 
-            for the volume.
+            for the boot volume.
 
             '
           maxLength: 255
@@ -6782,91 +6862,17 @@ components:
           description: The size of the volume in GBs.
           format: int64
           type: integer
-        sizeInMBs:
-          description: 'The size of the volume in MBs. The value must be a multiple of 1024.
-
-            This field is deprecated. Use sizeInGBs instead.
-
-            '
-          format: int64
-          type: integer
         sourceDetails:
-          $ref: '#/components/schemas/VolumeSourceDetails'
-        volumeBackupId:
-          description: 'The OCID of the volume backup from which the data should be restored on the newly created volume.
-
-            This field is deprecated. Use the sourceDetails field instead to specify the
-
-            backup for the volume.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
+          $ref: '#/components/schemas/BootVolumeSourceDetails'
         vpusPerGB:
-          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `0`: Represents Lower Cost option.\n\n  * `10`: Represents Balanced option.\n\n  * `20`: Represents Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
+          description: "The number of volume performance units (VPUs) that will be applied to this volume per GB,\nrepresenting the Block Volume service's elastic performance options.\nSee [Block Volume Performance Levels](/iaas/Content/Block/Concepts/blockvolumeperformance.htm#perf_levels) for more information.\n\nAllowed values:\n\n  * `10`: Represents the Balanced option.\n\n  * `20`: Represents the Higher Performance option.\n\n  * `30`-`120`: Represents the Ultra High Performance option.\n\nFor performance autotune enabled volumes, it would be the Default(Minimum) VPUs/GB.\n"
           format: int64
           type: integer
       required:
       - compartmentId
-    UpdateBootVolumeKmsKeyDetails:
+      - sourceDetails
+    UpdateVolumeGroupBackupDetails:
       properties:
-        kmsKeyId:
-          description: 'The OCID of the new Vault service key to assign to protect the specified volume.
-
-            This key has to be a valid Vault service key, and policies must exist to allow the user and the Block Volume service to access this key.
-
-            If you specify the same OCID as the previous key''s OCID, the Block Volume service will use it to regenerate a volume encryption key.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-    ChangeVolumeBackupCompartmentDetails:
-      description: Contains the details for the compartment to move the volume backup to.
-      properties:
-        compartmentId:
-          description: The [OCID](/iaas/Content/General/Concepts/identifiers.htm) of the compartment to move the volume backup to.
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - compartmentId
-    VolumeGroupSourceDetails:
-      description: Specifies the source for a volume group.
-      discriminator:
-        propertyName: type
-      properties:
-        type:
-          type: string
-      required:
-      - type
-    CreateVolumeGroupDetails:
-      properties:
-        availabilityDomain:
-          description: The availability domain of the volume group.
-          maxLength: 255
-          minLength: 1
-          type: string
-        backupPolicyId:
-          description: 'If provided, specifies the ID of the volume backup policy to assign to the newly
-
-            created volume group. If omitted, no policy will be assigned.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        clusterPlacementGroupId:
-          description: The clusterPlacementGroup Id of the volume group for volume group placement.
-          maxLength: 255
-          minLength: 1
-          type: string
-        compartmentId:
-          description: The OCID of the compartment that contains the volume group.
-          maxLength: 255
-          minLength: 1
-          type: string
         definedTags:
           additionalProperties:
             additionalProperties:
@@ -6911,23 +6917,17 @@ components:
 
             '
           type: object
-        sourceDetails:
-          $ref: '#/components/schemas/VolumeGroupSourceDetails'
-        volumeGroupReplicas:
-          description: 'The list of volume group replicas that this volume group will be enabled to have
-
-            in the specified destination availability domains.
-
-            '
-          items:
-            $ref: '#/components/schemas/VolumeGroupReplicaDetails'
-          maxItems: 1
-          type: array
-          uniqueItems: true
-      required:
-      - availabilityDomain
-      - compartmentId
-      - sourceDetails
+        isIndefiniteRetentionEnabled:
+          description: feature that preserves backup data from modification or deletion to ensure it remains available for legal or regulatory investigations or litigation, regardless of standard retention policies. This is an optional field. If it is not specified, it is set to null, no legal hold will be applied to the backups.
+          type: boolean
+        isPreventDeletionEnabled:
+          description: Prevent backups from being deleted during the configured retention period. This is an optional field. If it is not specified, it is set to null, prevent deletion will not be applied to the backups.
+          type: boolean
+        isRetentionLockEnabled:
+          description: feature that prevents deletion or alteration of backup data for a specified period to ensure data protection and regulatory compliance. This is an optional field. If it is not specified, it is set to null, no retention lock will be applied to the backups. This feature should be used in conjunction with the retention-period field.
+          type: boolean
+        retentionPeriod:
+          $ref: '#/components/schemas/RetentionDuration'
   responses:
     DefaultError:
       description: An error has occurred.

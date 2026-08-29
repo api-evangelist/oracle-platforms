@@ -551,372 +551,37 @@ paths:
       - oceInstance
       x-related-resource: '#/definitions/WorkRequestLogEntry'
 components:
-  parameters:
-    OceInstanceIdentifierPathParam:
-      description: unique OceInstance identifier
-      in: path
-      name: oceInstanceId
-      required: true
-      schema:
-        type: string
-    PaginationTokenQueryParam:
-      description: The page token representing the page at which to start retrieving results. This is usually retrieved from a previous list call.
-      in: query
-      name: page
-      schema:
-        type: string
-        default: 'null'
-        maxLength: 1024
-        minLength: 1
-    WorkRequestIdPathParam:
-      description: The ID of the asynchronous request.
-      in: path
-      name: workRequestId
-      required: true
-      schema:
-        type: string
-    RetryTokenHeader:
-      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
-
-        server error without risk of executing that same action again. Retry tokens expire after 24
-
-        hours, but can be invalidated before then due to conflicting operations. For example, if a resource
-
-        has been deleted and purged from the system, then a retry of the original creation request
-
-        might be rejected.
-
-        '
-      in: header
-      name: opc-retry-token
-      required: false
-      schema:
-        type: string
-        maxLength: 64
-        minLength: 1
-    DisplayNameQueryParam:
-      description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
-
-
-        Example: `My new resource`
-
-        '
-      in: query
-      name: displayName
-      x-default-description: 'null'
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    SortOrderQueryParam:
-      description: The sort order to use, either 'asc' or 'desc'.
-      in: query
-      name: sortOrder
-      schema:
-        type: string
-        enum:
-        - ASC
-        - DESC
-        default: ASC
-    PaginationLimitQueryParam:
-      description: The maximum number of items to return.
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 50
-        maximum: 1000
-        minimum: 1
-    SortByQueryParam:
-      description: 'The field to sort by. Only one sort order may be provided. Default order for timeCreated is descending. Default order for displayName is ascending. If no value is specified timeCreated is default.
-
-        '
-      in: query
-      name: sortBy
-      schema:
-        type: string
-        enum:
-        - timeCreated
-        - displayName
-        default: timeCreated
-    TenancyIdQueryParam:
-      description: The ID of the tenancy in which to list resources.
-      in: query
-      name: tenancyId
-      required: false
-      schema:
-        type: string
-    CompartmentIdQueryParam:
-      description: The ID of the compartment in which to list resources.
-      in: query
-      name: compartmentId
-      required: true
-      schema:
-        type: string
-    RequestIdHeader:
-      description: The client request ID for tracing.
-      in: header
-      name: opc-request-id
-      schema:
-        type: string
-    LifecycleStateQueryParam:
-      description: Filter results on lifecycleState.
-      in: query
-      name: lifecycleState
-      schema:
-        type: string
-        enum:
-        - CREATING
-        - UPDATING
-        - ACTIVE
-        - DELETING
-        - DELETED
-        - FAILED
-        default: ACTIVE
-    ResourceIdQueryParam:
-      description: The resource Identifier for which to list resources.
-      in: query
-      name: resourceId
-      required: false
-      x-default-description: 'null'
-      schema:
-        type: string
-    IfMatchHeader:
-      description: 'For optimistic concurrency control. In the PUT or DELETE call
-
-        for a resource, set the `if-match` parameter to the value of the
-
-        etag from a previous GET or POST response for that resource.
-
-        The resource will be updated or deleted only if the etag you
-
-        provide matches the resource''s current etag value.
-
-        '
-      in: header
-      name: if-match
-      required: false
-      schema:
-        type: string
   schemas:
-    OceInstanceSummary:
-      description: Summary of the OceInstance.
+    WorkflowStep:
+      description: Workflow step of workflow monitor.
       properties:
-        adminEmail:
-          description: Admin Email for Notification
+        status:
+          description: workflow step status
           type: string
-        compartmentId:
-          description: Compartment Identifier
+        stepName:
+          description: workflow step name
           type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only string, integer and boolean types are supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing predefined tags'' keys and values scoped to a namespace.
-
-              Example: `{"bar-key": "value"}`
-
-              '
-            type: object
-          description: 'Usage of predefined tag keys. These predefined keys are scoped to namespaces.
-
-            Example: `{"foo-namespace": {"bar-key": "value"}}`
-
-            '
-          type: object
-        description:
-          description: OceInstance description, can be updated
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only.
-
-            Example: `{"bar-key": "value"}`
-
-            '
-          type: object
-        guid:
-          description: Unique GUID identifier that is immutable on creation
-          type: string
-        id:
-          description: Unique identifier that is immutable on creation
-          type: string
-        idcsTenancy:
-          description: IDCS Tenancy Identifier
-          type: string
-        instanceAccessType:
-          description: Flag indicating whether the instance access is private or public
-          enum:
-          - PUBLIC
-          - PRIVATE
-          type: string
-        instanceLicenseType:
-          description: Flag indicating whether the instance license is new cloud or bring your own license
-          enum:
-          - NEW
-          - BYOL
-          - PREMIUM
-          - STARTER
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/LicenseType'
-        instanceUsageType:
-          description: Instance type based on its usage
-          enum:
-          - PRIMARY
-          - NONPRIMARY
-          type: string
-        lifecycleState:
-          description: The current state of the file system.
-          enum:
-          - CREATING
-          - UPDATING
-          - ACTIVE
-          - DELETING
-          - DELETED
-          - FAILED
-          type: string
-        name:
-          description: OceInstance Name
-          type: string
-        objectStorageNamespace:
-          description: Object Storage Namespace of tenancy
-          type: string
-        service:
-          additionalProperties:
-            description: 'Key-value pair representing predefined tags'' keys and values scoped to a namespace.
-
-              Example: `{"name": "value"}`
-
-              '
-            type: object
-          description: 'SERVICE data.
-
-            Example: `{"service": {"IDCS": "value"}}`
-
-            '
-          type: object
-        stateMessage:
-          description: An message describing the current state in more detail. For example, can be used to provide actionable information for a resource in Failed state.
-          type: string
-        systemTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only string, integer and boolean types are supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing system tags'' keys and values scoped to a namespace.
-
-              Example: `{"bar-key": "value"}`
-
-              '
-            type: object
-          description: 'Usage of system tag keys. These predefined keys are scoped to namespaces.
-
-            Example: `{"orcl-cloud": {"free-tier-retained": "true"}}`
-
-            '
-          type: object
-        tenancyId:
-          description: Tenancy Identifier
-          type: string
-        tenancyName:
-          description: Tenancy Name
-          type: string
-        timeCreated:
-          description: The time the the OceInstance was created. An RFC3339 formatted datetime string
-          format: date-time
-          type: string
-        timeUpdated:
-          description: The time the OceInstance was updated. An RFC3339 formatted datetime string
-          format: date-time
-          type: string
-        upgradeSchedule:
-          description: 'Upgrade schedule type representing service to be upgraded immediately whenever latest version is released
-
-            or delay upgrade of the service to previous released version
-
-            '
-          type: string
-          x-obmcs-enumref: '#/definitions/OceInstance/upgradeSchedule'
-        wafPrimaryDomain:
-          description: Web Application Firewall(WAF) primary domain
-          type: string
-      required:
-      - id
-      - guid
-      - compartmentId
-      - name
-      - tenancyId
-      - tenancyName
-      - idcsTenancy
-      - objectStorageNamespace
-      - adminEmail
-      type: object
-    IdentityStripeDetails:
-      description: Details of the identity stripe used for OceInstance
-      properties:
-        serviceName:
-          description: 'Name of the Identity Cloud Service instance in My Services to be used.
-
-            Example: `secondstripe`
-
-            '
-          type: string
-        tenancy:
-          description: 'Value of the Identity Cloud Service tenancy.
-
-            Example: `idcs-8416ebdd0d674f84803f4193cce026e9`
-
-            '
-          type: string
-      required:
-      - serviceName
-      - tenancy
-    Error:
-      description: Error Information.
+    WorkRequestError:
+      description: An error encountered while executing a work request.
       properties:
         code:
-          description: A short error code that defines the error, meant for programmatic parsing.
+          description: 'A machine-usable code for the error that occured. Error codes are listed on
+
+            (https://docs.us-phoenix-1.oraclecloud.com/Content/API/References/apierrors.htm)
+
+            '
           type: string
         message:
-          description: A human-readable error string.
+          description: A human readable description of the issue encountered.
+          type: string
+        timestamp:
+          description: The time the error occured. An RFC3339 formatted datetime string.
+          format: date-time
           type: string
       required:
       - code
       - message
-    WorkRequestLogEntry:
-      description: A log message from the execution of a work request.
-      properties:
-        message:
-          description: Human-readable log message.
-          type: string
-        timestamp:
-          description: The time the log message was written. An RFC3339 formatted datetime string
-          format: date-time
-          type: string
-      required:
-      - message
       - timestamp
-    ChangeOceInstanceCompartmentDetails:
-      description: The information about compartment details.
-      properties:
-        compartmentId:
-          description: 'The [OCID](/Content/General/Concepts/identifiers.htm) of the compartment
-
-            into which the OceInstance should be moved.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - compartmentId
-      type: object
     WorkRequest:
       description: A description of workrequest status
       properties:
@@ -1090,20 +755,6 @@ components:
       - objectStorageNamespace
       - adminEmail
       type: object
-    WorkflowMonitor:
-      description: The workflow monitor for this work request.
-      properties:
-        resourceName:
-          description: resource name for this work request
-          type: string
-        workflowName:
-          description: workflow name for this work request
-          type: string
-        workflowSteps:
-          description: Workflow step of workflow monitor.
-          items:
-            $ref: '#/components/schemas/WorkflowStep'
-          type: array
     UpdateOceInstanceDetails:
       description: The information to be updated.
       properties:
@@ -1157,6 +808,223 @@ components:
           description: Web Application Firewall(WAF) primary domain
           type: string
       type: object
+    IdentityStripeDetails:
+      description: Details of the identity stripe used for OceInstance
+      properties:
+        serviceName:
+          description: 'Name of the Identity Cloud Service instance in My Services to be used.
+
+            Example: `secondstripe`
+
+            '
+          type: string
+        tenancy:
+          description: 'Value of the Identity Cloud Service tenancy.
+
+            Example: `idcs-8416ebdd0d674f84803f4193cce026e9`
+
+            '
+          type: string
+      required:
+      - serviceName
+      - tenancy
+    OceInstanceSummary:
+      description: Summary of the OceInstance.
+      properties:
+        adminEmail:
+          description: Admin Email for Notification
+          type: string
+        compartmentId:
+          description: Compartment Identifier
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only string, integer and boolean types are supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing predefined tags'' keys and values scoped to a namespace.
+
+              Example: `{"bar-key": "value"}`
+
+              '
+            type: object
+          description: 'Usage of predefined tag keys. These predefined keys are scoped to namespaces.
+
+            Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+            '
+          type: object
+        description:
+          description: OceInstance description, can be updated
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Simple key-value pair that is applied without any predefined name, type or scope. Exists for cross-compatibility only.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        guid:
+          description: Unique GUID identifier that is immutable on creation
+          type: string
+        id:
+          description: Unique identifier that is immutable on creation
+          type: string
+        idcsTenancy:
+          description: IDCS Tenancy Identifier
+          type: string
+        instanceAccessType:
+          description: Flag indicating whether the instance access is private or public
+          enum:
+          - PUBLIC
+          - PRIVATE
+          type: string
+        instanceLicenseType:
+          description: Flag indicating whether the instance license is new cloud or bring your own license
+          enum:
+          - NEW
+          - BYOL
+          - PREMIUM
+          - STARTER
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/LicenseType'
+        instanceUsageType:
+          description: Instance type based on its usage
+          enum:
+          - PRIMARY
+          - NONPRIMARY
+          type: string
+        lifecycleState:
+          description: The current state of the file system.
+          enum:
+          - CREATING
+          - UPDATING
+          - ACTIVE
+          - DELETING
+          - DELETED
+          - FAILED
+          type: string
+        name:
+          description: OceInstance Name
+          type: string
+        objectStorageNamespace:
+          description: Object Storage Namespace of tenancy
+          type: string
+        service:
+          additionalProperties:
+            description: 'Key-value pair representing predefined tags'' keys and values scoped to a namespace.
+
+              Example: `{"name": "value"}`
+
+              '
+            type: object
+          description: 'SERVICE data.
+
+            Example: `{"service": {"IDCS": "value"}}`
+
+            '
+          type: object
+        stateMessage:
+          description: An message describing the current state in more detail. For example, can be used to provide actionable information for a resource in Failed state.
+          type: string
+        systemTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only string, integer and boolean types are supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing system tags'' keys and values scoped to a namespace.
+
+              Example: `{"bar-key": "value"}`
+
+              '
+            type: object
+          description: 'Usage of system tag keys. These predefined keys are scoped to namespaces.
+
+            Example: `{"orcl-cloud": {"free-tier-retained": "true"}}`
+
+            '
+          type: object
+        tenancyId:
+          description: Tenancy Identifier
+          type: string
+        tenancyName:
+          description: Tenancy Name
+          type: string
+        timeCreated:
+          description: The time the the OceInstance was created. An RFC3339 formatted datetime string
+          format: date-time
+          type: string
+        timeUpdated:
+          description: The time the OceInstance was updated. An RFC3339 formatted datetime string
+          format: date-time
+          type: string
+        upgradeSchedule:
+          description: 'Upgrade schedule type representing service to be upgraded immediately whenever latest version is released
+
+            or delay upgrade of the service to previous released version
+
+            '
+          type: string
+          x-obmcs-enumref: '#/definitions/OceInstance/upgradeSchedule'
+        wafPrimaryDomain:
+          description: Web Application Firewall(WAF) primary domain
+          type: string
+      required:
+      - id
+      - guid
+      - compartmentId
+      - name
+      - tenancyId
+      - tenancyName
+      - idcsTenancy
+      - objectStorageNamespace
+      - adminEmail
+      type: object
+    Error:
+      description: Error Information.
+      properties:
+        code:
+          description: A short error code that defines the error, meant for programmatic parsing.
+          type: string
+        message:
+          description: A human-readable error string.
+          type: string
+      required:
+      - code
+      - message
+    WorkRequestLogEntry:
+      description: A log message from the execution of a work request.
+      properties:
+        message:
+          description: Human-readable log message.
+          type: string
+        timestamp:
+          description: The time the log message was written. An RFC3339 formatted datetime string
+          format: date-time
+          type: string
+      required:
+      - message
+      - timestamp
+    WorkflowMonitor:
+      description: The workflow monitor for this work request.
+      properties:
+        resourceName:
+          description: resource name for this work request
+          type: string
+        workflowName:
+          description: workflow name for this work request
+          type: string
+        workflowSteps:
+          description: Workflow step of workflow monitor.
+          items:
+            $ref: '#/components/schemas/WorkflowStep'
+          type: array
     OceInstance:
       description: Details of OceInstance.
       properties:
@@ -1352,36 +1220,168 @@ components:
       - actionType
       - entityType
       - identifier
-    WorkRequestError:
-      description: An error encountered while executing a work request.
+    ChangeOceInstanceCompartmentDetails:
+      description: The information about compartment details.
       properties:
-        code:
-          description: 'A machine-usable code for the error that occured. Error codes are listed on
+        compartmentId:
+          description: 'The [OCID](/Content/General/Concepts/identifiers.htm) of the compartment
 
-            (https://docs.us-phoenix-1.oraclecloud.com/Content/API/References/apierrors.htm)
+            into which the OceInstance should be moved.
 
             '
-          type: string
-        message:
-          description: A human readable description of the issue encountered.
-          type: string
-        timestamp:
-          description: The time the error occured. An RFC3339 formatted datetime string.
-          format: date-time
+          maxLength: 255
+          minLength: 1
           type: string
       required:
-      - code
-      - message
-      - timestamp
-    WorkflowStep:
-      description: Workflow step of workflow monitor.
-      properties:
-        status:
-          description: workflow step status
-          type: string
-        stepName:
-          description: workflow step name
-          type: string
+      - compartmentId
+      type: object
+  parameters:
+    OceInstanceIdentifierPathParam:
+      description: unique OceInstance identifier
+      in: path
+      name: oceInstanceId
+      required: true
+      schema:
+        type: string
+    SortByQueryParam:
+      description: 'The field to sort by. Only one sort order may be provided. Default order for timeCreated is descending. Default order for displayName is ascending. If no value is specified timeCreated is default.
+
+        '
+      in: query
+      name: sortBy
+      schema:
+        type: string
+        enum:
+        - timeCreated
+        - displayName
+        default: timeCreated
+    LifecycleStateQueryParam:
+      description: Filter results on lifecycleState.
+      in: query
+      name: lifecycleState
+      schema:
+        type: string
+        enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - DELETING
+        - DELETED
+        - FAILED
+        default: ACTIVE
+    TenancyIdQueryParam:
+      description: The ID of the tenancy in which to list resources.
+      in: query
+      name: tenancyId
+      required: false
+      schema:
+        type: string
+    SortOrderQueryParam:
+      description: The sort order to use, either 'asc' or 'desc'.
+      in: query
+      name: sortOrder
+      schema:
+        type: string
+        enum:
+        - ASC
+        - DESC
+        default: ASC
+    ResourceIdQueryParam:
+      description: The resource Identifier for which to list resources.
+      in: query
+      name: resourceId
+      required: false
+      x-default-description: 'null'
+      schema:
+        type: string
+    WorkRequestIdPathParam:
+      description: The ID of the asynchronous request.
+      in: path
+      name: workRequestId
+      required: true
+      schema:
+        type: string
+    RequestIdHeader:
+      description: The client request ID for tracing.
+      in: header
+      name: opc-request-id
+      schema:
+        type: string
+    PaginationTokenQueryParam:
+      description: The page token representing the page at which to start retrieving results. This is usually retrieved from a previous list call.
+      in: query
+      name: page
+      schema:
+        type: string
+        default: 'null'
+        maxLength: 1024
+        minLength: 1
+    DisplayNameQueryParam:
+      description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+
+        Example: `My new resource`
+
+        '
+      in: query
+      name: displayName
+      x-default-description: 'null'
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    RetryTokenHeader:
+      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
+
+        server error without risk of executing that same action again. Retry tokens expire after 24
+
+        hours, but can be invalidated before then due to conflicting operations. For example, if a resource
+
+        has been deleted and purged from the system, then a retry of the original creation request
+
+        might be rejected.
+
+        '
+      in: header
+      name: opc-retry-token
+      required: false
+      schema:
+        type: string
+        maxLength: 64
+        minLength: 1
+    PaginationLimitQueryParam:
+      description: The maximum number of items to return.
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 50
+        maximum: 1000
+        minimum: 1
+    CompartmentIdQueryParam:
+      description: The ID of the compartment in which to list resources.
+      in: query
+      name: compartmentId
+      required: true
+      schema:
+        type: string
+    IfMatchHeader:
+      description: 'For optimistic concurrency control. In the PUT or DELETE call
+
+        for a resource, set the `if-match` parameter to the value of the
+
+        etag from a previous GET or POST response for that resource.
+
+        The resource will be updated or deleted only if the etag you
+
+        provide matches the resource''s current etag value.
+
+        '
+      in: header
+      name: if-match
+      required: false
+      schema:
+        type: string
   responses:
     default:
       description: Unknown Error

@@ -1781,120 +1781,319 @@ paths:
       tags:
       - analytics
 components:
-  schemas:
-    UpdatePrivateAccessChannelDetails:
-      description: 'Input payload to update a private access channel.
+  parameters:
+    AnalyticsInstanceResourceGroupIdPathParam:
+      description: 'Specify unique id of a resource group within an Analytics instance.
 
         '
-      properties:
-        displayName:
-          description: 'Display name of the private access channel.
+      in: path
+      name: analyticsInstanceResourceGroupId
+      required: true
+      schema:
+        type: string
+    SortByQueryParam:
+      description: 'The field to sort by (one column only). Default sort order is
 
-            '
-          maxLength: 32
-          minLength: 1
-          pattern: ^[a-zA-Z][a-zA-Z0-9_-]*$
-          type: string
-        networkSecurityGroupIds:
-          description: 'Network Security Group OCIDs for the Analytics instance.
-
-            '
-          items:
-            maxLength: 255
-            minLength: 1
-            type: string
-          maxLength: 5
-          type: array
-        privateSourceDnsZones:
-          description: "List of private source DNS zones registered with the private access channel. The\n datasource hostnames from these DNS zones / domains will be resolved in the peered VCN for access from  the Analytics instance.\nMinimum 1 private source is required. Maximum 30 private source DNS zones can be registered.\n"
-          items:
-            $ref: '#/components/schemas/PrivateSourceDnsZone'
-          maxLength: 30
-          minLength: 1
-          type: array
-        privateSourceScanHosts:
-          description: 'List of private source database SCAN hosts registered with the private access channel for access from the Analytics instance.
-
-            '
-          items:
-            $ref: '#/components/schemas/PrivateSourceScanHost'
-          maxLength: 15
-          type: array
-        subnetId:
-          description: 'OCID of the customer subnet connected to the private access channel.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        vcnId:
-          description: 'OCID of the customer VCN peered with the private access channel.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      type: object
-    SetFeatureBundleDetails:
-      description: 'Input payload for the feature set of an Analytics instance.
+        ascending exception of `timeCreated` column (descending).
 
         '
-      properties:
-        featureBundle:
-          description: 'The feature set of an Analytics instance.
+      in: query
+      name: sortBy
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/SortBy'
+      schema:
+        type: string
+        enum:
+        - capacityType
+        - capacityValue
+        - featureSet
+        - lifecycleState
+        - name
+        - timeCreated
+    CapacityTypeQueryParam:
+      description: 'A filter to only return resources matching the capacity type enum. Values are
 
-            '
+        case-insensitive.
+
+        '
+      in: query
+      name: capacityType
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/CapacityType'
+      schema:
+        type: string
+        enum:
+        - OLPU_COUNT
+        - USER_COUNT
+    LifecycleStateQueryParam:
+      description: 'A filter to only return resources matching the lifecycle state. The state
+
+        value is case-insensitive.
+
+        '
+      in: query
+      name: lifecycleState
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/AnalyticsInstanceLifecycleState'
+      schema:
+        type: string
+        enum:
+        - ACTIVE
+        - CREATING
+        - DELETED
+        - DELETING
+        - FAILED
+        - INACTIVE
+        - UPDATING
+    PrivateAccessChannelKeyPathParam:
+      description: 'The unique identifier key of the private access channel.
+
+        '
+      in: path
+      name: privateAccessChannelKey
+      required: true
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    AnalyticsInstanceIdPathParam:
+      description: 'The OCID of the Analytics instance.
+
+        '
+      in: path
+      name: analyticsInstanceId
+      required: true
+      schema:
+        type: string
+    WorkRequestSortByQueryParam:
+      description: 'The field used for sorting work request results.
+
+        '
+      in: query
+      name: sortBy
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/WorkRequestSortBy'
+      schema:
+        type: string
+        enum:
+        - id
+        - operationType
+        - status
+        - timeAccepted
+        - timeStarted
+        - timeFinished
+    SortOrderQueryParam:
+      description: 'The sort order to use, either ascending (`ASC`) or descending (`DESC`).
+
+        '
+      in: query
+      name: sortOrder
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/SortOrder'
+      schema:
+        type: string
+        enum:
+        - ASC
+        - DESC
+    WorkRequestIdPathParam:
+      description: 'The OCID of the work request.
+
+        '
+      in: path
+      name: workRequestId
+      required: true
+      schema:
+        type: string
+    WorkRequestStatusQueryParam:
+      description: 'One or more work request status values to filter on.
+
+        '
+      in: query
+      name: status
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: array
+        items:
           enum:
-          - FAW_PAID
-          - FAW_FREE
-          - FDI_BASE
-          - EE_EMBEDDED
-          - SE_EMBEDDED
+          - ACCEPTED
+          - IN_PROGRESS
+          - FAILED
+          - SUCCEEDED
+          - CANCELING
+          - CANCELED
           type: string
-          x-obmcs-top-level-enum: '#/definitions/FeatureBundle'
-    SetKmsKeyDetails:
-      description: 'Input payload to reset the OCI vault encryption key.
+          x-obmcs-top-level-enum: '#/definitions/WorkRequestStatus'
+    FeatureSetQueryParam:
+      description: 'A filter to only return resources matching the feature set. Values are
+
+        case-insensitive.
+
+        '
+      in: query
+      name: featureSet
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/FeatureSet'
+      schema:
+        type: string
+        enum:
+        - SELF_SERVICE_ANALYTICS
+        - ENTERPRISE_ANALYTICS
+    RequestIdHeader:
+      description: 'Unique identifier for the request.
+
+        If you need to contact Oracle about a particular request, please provide the request ID.
+
+        '
+      in: header
+      name: opc-request-id
+      required: false
+      schema:
+        type: string
+        pattern: ^[a-zA-Z0-9_./-]+$
+    VanityUrlKeyPathParam:
+      description: 'Specify unique identifier key of a vanity URL to update or delete.
+
+        '
+      in: path
+      name: vanityUrlKey
+      required: true
+      schema:
+        type: string
+    ResourceNameQueryParam:
+      description: 'A filter to return only resources that match the given name exactly.
+
+        '
+      in: query
+      name: name
+      required: false
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    PaginationTokenQueryParam:
+      description: 'For list pagination. The value of the `opc-next-page` response header from the previous "List"
+
+        call. For important details about how pagination works, see
+
+        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+        '
+      in: query
+      name: page
+      required: false
+      schema:
+        type: string
+        maxLength: 512
+        minLength: 1
+    WorkRequestResourceIdQueryParam:
+      description: 'The OCID of the resource associated with a work request.
+
+        '
+      in: query
+      name: resourceId
+      required: false
+      schema:
+        type: string
+    WorkRequestResourceTypeQueryParam:
+      description: 'Type of the resource associated with a work request.
+
+        '
+      in: query
+      name: resourceType
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/WorkRequestResourceType'
+      schema:
+        type: string
+        enum:
+        - ANALYTICS_INSTANCE
+    RetryTokenHeader:
+      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
+
+        server error without risk of executing that same action again. Retry tokens expire after 24
+
+        hours, but can be invalidated before then due to conflicting operations (for example, if a resource
+
+        has been deleted and purged from the system, then a retry of the original creation request
+
+        may be rejected).
+
+        '
+      in: header
+      name: opc-retry-token
+      required: false
+      schema:
+        type: string
+        maxLength: 64
+        minLength: 1
+    ResourceGroupSortByQueryParam:
+      description: 'The field to sort by (one column only). Default sort order is
+
+        default group first, then sort by resource name, ascending.
+
+        '
+      in: query
+      name: sortBy
+      required: false
+      x-obmcs-top-level-enum: '#/definitions/ResourceGroupSortBy'
+      schema:
+        type: string
+        enum:
+        - id
+        - resourceName
+        - displayName
+        - description
+        - capacity
+        - status
+    CompartmentIdQueryParam:
+      description: 'The OCID of the compartment.
+
+        '
+      in: query
+      name: compartmentId
+      required: true
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
+    PaginationLimitQueryParam:
+      description: 'For list pagination. The maximum number of results per page, or items to return in a paginated
+
+        "List" call. For important details about how pagination works, see
+
+        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+
+
+        Example: `50`
+
+        '
+      in: query
+      name: limit
+      required: false
+      schema:
+        type: integer
+        maximum: 1000
+        minimum: 1
+    IfMatchHeader:
+      description: 'For optimistic concurrency control. In the PUT or DELETE call for a resource, set the `if-match`
+
+        parameter to the value of the etag from a previous GET or POST response for that resource.  The resource
+
+        will be updated or deleted only if the etag you provide matches the resource''s current etag value.
+
+        '
+      in: header
+      name: if-match
+      required: false
+      schema:
+        type: string
+  schemas:
+    AnalyticsInstanceSummary:
+      description: 'Analytics Instance metadata (summary view).
 
         '
       properties:
-        kmsKeyId:
-          description: 'OCID of the OCI vault key encrypting the customer data stored in this Analytics instance. An empty value indicates the default Oracle-managed encryption (this API doesn''t support null).
-
-            '
-          maxLength: 255
-          minLength: 0
-          type: string
-      required:
-      - kmsKeyId
-    ScaleAnalyticsInstanceDetails:
-      description: 'Input payload to scale an Analytics instance up or down.
-
-        '
-      properties:
-        capacity:
-          $ref: '#/components/schemas/Capacity'
-      required:
-      - capacity
-    ChangeAnalyticsInstanceNetworkEndpointDetails:
-      description: 'Input payload to update endpoint details for an Analytics instance.
-
-        '
-      properties:
-        networkEndpointDetails:
-          $ref: '#/components/schemas/NetworkEndpointDetails'
-      required:
-      - networkEndpointDetails
-    CreateAnalyticsInstanceDetails:
-      description: 'Input payload to create an Anaytics instance.
-
-        '
-      properties:
-        adminUser:
-          description: 'The Analytics instance administrator user. This must be the user name (not OCID) of a user in the nominated identity domain. For example: john.smith@example.com.
-
-            '
-          maxLength: 255
-          type: string
         capacity:
           $ref: '#/components/schemas/Capacity'
         compartmentId:
@@ -1934,12 +2133,6 @@ components:
           maxLength: 512
           minLength: 0
           type: string
-        domainId:
-          description: 'The OCID of the identity domain to use for the new Analytics instance. For example: ocid1.domain.oc1..ocid1.domain.oc1..aaaaaa111111bbbbbb222222cccccc333333dddddd444444eeeeee5555.
-
-            '
-          maxLength: 255
-          type: string
         emailNotification:
           description: 'Email address receiving notifications.
 
@@ -1947,18 +2140,6 @@ components:
           maxLength: 512
           minLength: 0
           type: string
-        featureBundle:
-          description: 'The feature set of an Analytics instance.
-
-            '
-          enum:
-          - FAW_PAID
-          - FAW_FREE
-          - FDI_BASE
-          - EE_EMBEDDED
-          - SE_EMBEDDED
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/FeatureBundle'
         featureSet:
           description: 'The feature set. Either `SELF_SERVICE_ANALYTICS` (Professional Edition) or `ENTERPRISE_ANALYTICS` (Enterprise Edition).
 
@@ -1980,18 +2161,12 @@ components:
 
             '
           type: object
-        idcsAccessToken:
-          description: 'IDCS access token identifying a stripe and service administrator user.
-
-            '
-          maxLength: 8192
-          type: string
-        kmsKeyId:
-          description: 'OCID of the OCI Vault Key encrypting the customer data stored in this Analytics instance. A null value indicates that the default Oracle-managed encryption is used.
+        id:
+          description: 'The resource OCID.
 
             '
           maxLength: 255
-          minLength: 0
+          minLength: 1
           type: string
         licenseType:
           description: 'The license used for the service.
@@ -2002,6 +2177,20 @@ components:
           - BRING_YOUR_OWN_LICENSE
           type: string
           x-obmcs-top-level-enum: '#/definitions/LicenseType'
+        lifecycleState:
+          description: 'The current state of the Analytics instance.
+
+            '
+          enum:
+          - ACTIVE
+          - CREATING
+          - DELETED
+          - DELETING
+          - FAILED
+          - INACTIVE
+          - UPDATING
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/AnalyticsInstanceLifecycleState'
         name:
           description: 'The name of the Analytics instance. This name must be unique in the tenancy and can''t be changed.
 
@@ -2014,158 +2203,34 @@ components:
           type: string
         networkEndpointDetails:
           $ref: '#/components/schemas/NetworkEndpointDetails'
-        updateChannel:
-          description: 'The Analytics instance update cycle.
+        serviceUrl:
+          description: 'URL of the Analytics instance.
 
             '
-          enum:
-          - REGULAR
-          - EARLY
-          - PHASE_2
-          - PHASE_1
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/UpdateChannel'
-      required:
-      - name
-      - compartmentId
-      - capacity
-      - featureSet
-      - licenseType
-    Error:
-      properties:
-        code:
-          description: 'A short error code that defines the error, for programmatic parsing. See
-
-            [API Errors](/Content/API/References/apierrors.htm).
-
-            '
-          type: string
-        message:
-          description: 'A human-readable error string.
-
-            '
-          type: string
-      required:
-      - code
-      - message
-    CreateResourceGroupDetails:
-      description: 'Input payload to create resource group.
-
-        '
-      properties:
-        capacity:
-          description: The capacity (in OCPU's) to be allocated for this resource.
-          minimum: 1
-          type: integer
-        description:
-          description: Optional description of the resource group
-          maxLength: 512
+          maxLength: 1024
           minLength: 0
           type: string
-        displayName:
-          description: Meaningful name of resource group for end user
-          maxLength: 255
-          minLength: 1
-          type: string
-        resourceName:
-          description: Meaningful name of resource group for end user
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - resourceName
-      - capacity
-    NetworkEndpointDetails:
-      description: 'Base representation of a network endpoint.
+        systemTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only string, integer and boolean types are supported.
 
-        '
-      discriminator:
-        propertyName: networkEndpointType
-      properties:
-        networkEndpointType:
-          description: 'The type of network endpoint.
+                '
+              type: object
+            description: 'Key-value pair representing system tags'' keys and values scoped to a namespace.
+
+              Example: `{"key": "value"}`
+
+              '
+            type: object
+          description: 'System tags for this resource. These predefined keys are scoped to namespaces.
+
+            Example: `{"orcl-cloud": {"key": "value"}}`
 
             '
-          enum:
-          - PUBLIC
-          - PRIVATE
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/NetworkEndpointType'
-      required:
-      - networkEndpointType
-      type: object
-    WorkRequest:
-      description: 'An asynchronous work request.
-
-        '
-      properties:
-        compartmentId:
-          description: 'The compartment OCID of this work request.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        id:
-          description: 'The resource OCID.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        operationType:
-          description: 'The operation performed by the work request.
-
-            '
-          enum:
-          - CREATE_ANALYTICS_INSTANCE
-          - DELETE_ANALYTICS_INSTANCE
-          - START_ANALYTICS_INSTANCE
-          - STOP_ANALYTICS_INSTANCE
-          - SCALE_ANALYTICS_INSTANCE
-          - CHANGE_ANALYTICS_INSTANCE_COMPARTMENT
-          - CHANGE_ANALYTICS_INSTANCE_NETWORK_ENDPOINT
-          - CREATE_VANITY_URL
-          - UPDATE_VANITY_URL
-          - DELETE_VANITY_URL
-          - CREATE_PRIVATE_ACCESS_CHANNEL
-          - UPDATE_PRIVATE_ACCESS_CHANNEL
-          - DELETE_PRIVATE_ACCESS_CHANNEL
-          - UPDATE_INSTANCE_ENCRYPTION_KEY
-          - CREATE_RESOURCE_GROUP
-          - UPDATE_RESOURCE_GROUP
-          - DELETE_RESOURCE_GROUP
-          - SET_FEATURE_SET
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/WorkRequestOperationType'
-        percentComplete:
-          description: 'Percentage of the request completed.
-
-            '
-          format: float
-          type: number
-        resources:
-          description: 'The resources this work request affects.
-
-            '
-          items:
-            $ref: '#/components/schemas/WorkRequestResource'
-          type: array
-        status:
-          description: 'The current status of the work request.
-
-            '
-          enum:
-          - ACCEPTED
-          - IN_PROGRESS
-          - FAILED
-          - SUCCEEDED
-          - CANCELING
-          - CANCELED
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/WorkRequestStatus'
-        timeAccepted:
-          description: 'The time the work request was accepted, in the format defined by RFC3339.
+          type: object
+        timeCreated:
+          description: 'The date and time the Analytics instance was created, in the format defined by RFC3339.
 
 
             Example: `2016-08-25T21:10:29.600Z`
@@ -2173,33 +2238,53 @@ components:
             '
           format: date-time
           type: string
-        timeFinished:
-          description: 'The time the work request was finished, in the format defined by RFC3339.
+        timeUpdated:
+          description: 'The date and time the Analytics instance was last updated (in the format defined by RFC3339).
 
+            This timestamp represents updates made through this API. External events don''t
 
-            Example: `2016-08-25T21:10:29.600Z`
-
-            '
-          format: date-time
-          type: string
-        timeStarted:
-          description: 'The time the work request was started, in the format defined by RFC3339.
-
-
-            Example: `2016-08-25T21:10:29.600Z`
+            affect it.
 
             '
           format: date-time
           type: string
       required:
       - id
-      - operationType
-      - status
+      - name
       - compartmentId
-      - resources
-      - percentComplete
-      - timeAccepted
-      type: object
+      - lifecycleState
+      - capacity
+      - networkEndpointDetails
+      - featureSet
+      - timeCreated
+    PrivateSourceScanHost:
+      description: 'Private source SCAN hostname model.
+
+        '
+      properties:
+        description:
+          description: 'Description of private source SCAN host zone.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        scanHostname:
+          description: 'Private source SCAN hostname. For example: db01-scan.corp.example.com, prd-db01-scan.mycompany.com.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        scanPort:
+          description: 'Private source SCAN host port. This is the source port where the SCAN protocol connects (for example, 1521).
+
+            '
+          minimum: 1
+          type: integer
+      required:
+      - scanHostname
+      - scanPort
     CreateVanityUrlDetails:
       description: 'Input payload to create a vanity URL.
 
@@ -2251,123 +2336,119 @@ components:
       - caCertificate
       - privateKey
       - publicCertificate
-    ChangeCompartmentDetails:
-      description: 'Input payload to change a resource''s compartment.
+    PrivateAccessChannel:
+      description: 'Analytics instance private access channel model.
 
         '
       properties:
-        compartmentId:
-          description: 'The OCID of the new compartment.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - compartmentId
-    UpdateAnalyticsInstanceDetails:
-      description: 'Input payload to update an Analytics instance. Fields that aren''t provided
-
-        won''t be updated.
-
-        '
-      properties:
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        description:
-          description: 'Optional description.
-
-            '
-          maxLength: 512
-          minLength: 0
-          type: string
-        emailNotification:
-          description: 'Email address receiving notifications.
-
-            '
-          maxLength: 512
-          minLength: 0
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        licenseType:
-          description: 'The license used for the service.
-
-            '
-          enum:
-          - LICENSE_INCLUDED
-          - BRING_YOUR_OWN_LICENSE
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/LicenseType'
-        updateChannel:
-          description: 'The Analytics instance update cycle.
-
-            '
-          enum:
-          - REGULAR
-          - EARLY
-          - PHASE_2
-          - PHASE_1
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/UpdateChannel'
-    UpdateResourceGroupDetails:
-      description: 'Input payload to update a resource group.
-
-        '
-      properties:
-        capacity:
-          description: The capacity (in OCPU's) to be allocated for this resource.
-          minimum: 1
-          type: integer
-        description:
-          description: Optional description of the resource group
-          maxLength: 512
-          minLength: 0
-          type: string
         displayName:
-          description: Meaningful name of resource group for end user
+          description: 'Display name of the private access channel.
+
+            '
+          maxLength: 32
+          minLength: 1
+          pattern: ^[a-zA-Z][a-zA-Z0-9_-]*$
+          type: string
+        egressSourceIpAddresses:
+          description: 'List of IP addresses from the customer subnet connected to the private access channel, used as a source IP by the private access channel
+
+            for network traffic from the Analytics instance to the private sources.
+
+            '
+          items:
+            maxLength: 46
+            minLength: 8
+            type: string
+          type: array
+        ipAddress:
+          description: 'IP address of the private access channel.
+
+            '
           maxLength: 255
           minLength: 1
           type: string
-        resourceName:
-          description: Meaningful name of resource group for end user
+        key:
+          description: 'Private access channel unique identifier key.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        networkSecurityGroupIds:
+          description: 'Network Security Group OCIDs for the Analytics instance.
+
+            '
+          items:
+            maxLength: 255
+            minLength: 1
+            type: string
+          maxLength: 5
+          type: array
+        privateSourceDnsZones:
+          description: "List of private source DNS zones registered with the private access channel. The\n datasource hostnames from these DNS zones / domains will be resolved in the peered VCN for access from  the Analytics instance.\nMinimum 1 private source is required. Maximum 30 private source DNS zones can be registered.\n"
+          items:
+            $ref: '#/components/schemas/PrivateSourceDnsZone'
+          maxLength: 30
+          minLength: 1
+          type: array
+        privateSourceScanHosts:
+          description: 'List of private source database SCAN hosts registered with the private access channel for access from the Analytics instance.
+
+            '
+          items:
+            $ref: '#/components/schemas/PrivateSourceScanHost'
+          maxLength: 15
+          type: array
+        subnetId:
+          description: 'OCID of the customer subnet connected to the private access channel.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        vcnId:
+          description: 'OCID of the customer VCN peered with the private access channel.
+
+            '
           maxLength: 255
           minLength: 1
           type: string
       required:
-      - resourceName
-      - capacity
+      - key
+      - displayName
+      - vcnId
+      - subnetId
+      - ipAddress
+      - egressSourceIpAddresses
+    WorkRequestError:
+      description: 'Error encountered during the execution of a work request.
+
+        '
+      properties:
+        code:
+          description: 'A short error code that defines the error, for programmatic parsing.
+
+            '
+          type: string
+        message:
+          description: 'Error message.
+
+            '
+          type: string
+        timestamp:
+          description: 'The date and time the error occurred, in the format defined by RFC3339.
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - code
+      - message
+      - timestamp
+      type: object
     AnalyticsInstance:
       description: 'Analytics instance metadata.
 
@@ -2689,8 +2770,402 @@ components:
       - resources
       - timeAccepted
       type: object
-    PrivateAccessChannel:
-      description: 'Analytics instance private access channel model.
+    WorkRequest:
+      description: 'An asynchronous work request.
+
+        '
+      properties:
+        compartmentId:
+          description: 'The compartment OCID of this work request.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: 'The resource OCID.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        operationType:
+          description: 'The operation performed by the work request.
+
+            '
+          enum:
+          - CREATE_ANALYTICS_INSTANCE
+          - DELETE_ANALYTICS_INSTANCE
+          - START_ANALYTICS_INSTANCE
+          - STOP_ANALYTICS_INSTANCE
+          - SCALE_ANALYTICS_INSTANCE
+          - CHANGE_ANALYTICS_INSTANCE_COMPARTMENT
+          - CHANGE_ANALYTICS_INSTANCE_NETWORK_ENDPOINT
+          - CREATE_VANITY_URL
+          - UPDATE_VANITY_URL
+          - DELETE_VANITY_URL
+          - CREATE_PRIVATE_ACCESS_CHANNEL
+          - UPDATE_PRIVATE_ACCESS_CHANNEL
+          - DELETE_PRIVATE_ACCESS_CHANNEL
+          - UPDATE_INSTANCE_ENCRYPTION_KEY
+          - CREATE_RESOURCE_GROUP
+          - UPDATE_RESOURCE_GROUP
+          - DELETE_RESOURCE_GROUP
+          - SET_FEATURE_SET
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/WorkRequestOperationType'
+        percentComplete:
+          description: 'Percentage of the request completed.
+
+            '
+          format: float
+          type: number
+        resources:
+          description: 'The resources this work request affects.
+
+            '
+          items:
+            $ref: '#/components/schemas/WorkRequestResource'
+          type: array
+        status:
+          description: 'The current status of the work request.
+
+            '
+          enum:
+          - ACCEPTED
+          - IN_PROGRESS
+          - FAILED
+          - SUCCEEDED
+          - CANCELING
+          - CANCELED
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/WorkRequestStatus'
+        timeAccepted:
+          description: 'The time the work request was accepted, in the format defined by RFC3339.
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+        timeFinished:
+          description: 'The time the work request was finished, in the format defined by RFC3339.
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+        timeStarted:
+          description: 'The time the work request was started, in the format defined by RFC3339.
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - id
+      - operationType
+      - status
+      - compartmentId
+      - resources
+      - percentComplete
+      - timeAccepted
+      type: object
+    SetKmsKeyDetails:
+      description: 'Input payload to reset the OCI vault encryption key.
+
+        '
+      properties:
+        kmsKeyId:
+          description: 'OCID of the OCI vault key encrypting the customer data stored in this Analytics instance. An empty value indicates the default Oracle-managed encryption (this API doesn''t support null).
+
+            '
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+      - kmsKeyId
+    ScaleAnalyticsInstanceDetails:
+      description: 'Input payload to scale an Analytics instance up or down.
+
+        '
+      properties:
+        capacity:
+          $ref: '#/components/schemas/Capacity'
+      required:
+      - capacity
+    InstanceResourceGroup:
+      description: 'Resource Groups for Instance
+
+        '
+      properties:
+        capacity:
+          description: The capacity (in OCPU's) to be allocated for this resource.
+          minimum: 1
+          type: integer
+        description:
+          description: Optional description of the resource group
+          maxLength: 512
+          minLength: 0
+          type: string
+        displayName:
+          description: Meaningful name of resource group for end user
+          maxLength: 255
+          minLength: 1
+          type: string
+        id:
+          description: Unique identifier and name of resource group.  Must be unique within the instance
+          maxLength: 255
+          minLength: 1
+          type: string
+        resourceName:
+          description: Meaningful name of resource group for end user
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - id
+      - resourceName
+      - capacity
+      type: object
+    SetFeatureBundleDetails:
+      description: 'Input payload for the feature set of an Analytics instance.
+
+        '
+      properties:
+        featureBundle:
+          description: 'The feature set of an Analytics instance.
+
+            '
+          enum:
+          - FAW_PAID
+          - FAW_FREE
+          - FDI_BASE
+          - EE_EMBEDDED
+          - SE_EMBEDDED
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/FeatureBundle'
+    ChangeCompartmentDetails:
+      description: 'Input payload to change a resource''s compartment.
+
+        '
+      properties:
+        compartmentId:
+          description: 'The OCID of the new compartment.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - compartmentId
+    WorkRequestLog:
+      description: 'Log entries related to a specific work request.
+
+        '
+      properties:
+        message:
+          description: 'The description of the event that occurred.
+
+            '
+          type: string
+        timestamp:
+          description: 'The date and time the log entry occurred, in the format defined by RFC3339.
+
+
+            Example: `2016-08-25T21:10:29.600Z`
+
+            '
+          format: date-time
+          type: string
+      required:
+      - message
+      - timestamp
+      type: object
+    Capacity:
+      description: 'Service instance capacity metadata (for example, OLPU count, number of users, and so on).
+
+        '
+      properties:
+        capacityType:
+          description: 'The capacity model to use.
+
+            Accepted values are:
+
+            OLPU_COUNT, USER_COUNT
+
+            '
+          enum:
+          - OLPU_COUNT
+          - USER_COUNT
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/CapacityType'
+        capacityValue:
+          description: 'The capacity value selected, either the number of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT).
+
+            This parameter affects the number of OCPUs, amount of memory, and other resources allocated to the Analytics instance.
+
+            '
+          minimum: 1
+          type: integer
+      required:
+      - capacityType
+      - capacityValue
+      type: object
+    CreateAnalyticsInstanceDetails:
+      description: 'Input payload to create an Anaytics instance.
+
+        '
+      properties:
+        adminUser:
+          description: 'The Analytics instance administrator user. This must be the user name (not OCID) of a user in the nominated identity domain. For example: john.smith@example.com.
+
+            '
+          maxLength: 255
+          type: string
+        capacity:
+          $ref: '#/components/schemas/Capacity'
+        compartmentId:
+          description: 'The OCID of the compartment.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
+        description:
+          description: 'Optional description.
+
+            '
+          maxLength: 512
+          minLength: 0
+          type: string
+        domainId:
+          description: 'The OCID of the identity domain to use for the new Analytics instance. For example: ocid1.domain.oc1..ocid1.domain.oc1..aaaaaa111111bbbbbb222222cccccc333333dddddd444444eeeeee5555.
+
+            '
+          maxLength: 255
+          type: string
+        emailNotification:
+          description: 'Email address receiving notifications.
+
+            '
+          maxLength: 512
+          minLength: 0
+          type: string
+        featureBundle:
+          description: 'The feature set of an Analytics instance.
+
+            '
+          enum:
+          - FAW_PAID
+          - FAW_FREE
+          - FDI_BASE
+          - EE_EMBEDDED
+          - SE_EMBEDDED
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/FeatureBundle'
+        featureSet:
+          description: 'The feature set. Either `SELF_SERVICE_ANALYTICS` (Professional Edition) or `ENTERPRISE_ANALYTICS` (Enterprise Edition).
+
+            '
+          enum:
+          - SELF_SERVICE_ANALYTICS
+          - ENTERPRISE_ANALYTICS
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/FeatureSet'
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
+
+            '
+          type: object
+        idcsAccessToken:
+          description: 'IDCS access token identifying a stripe and service administrator user.
+
+            '
+          maxLength: 8192
+          type: string
+        kmsKeyId:
+          description: 'OCID of the OCI Vault Key encrypting the customer data stored in this Analytics instance. A null value indicates that the default Oracle-managed encryption is used.
+
+            '
+          maxLength: 255
+          minLength: 0
+          type: string
+        licenseType:
+          description: 'The license used for the service.
+
+            '
+          enum:
+          - LICENSE_INCLUDED
+          - BRING_YOUR_OWN_LICENSE
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/LicenseType'
+        name:
+          description: 'The name of the Analytics instance. This name must be unique in the tenancy and can''t be changed.
+
+            The name must start with a letter and can contain only letters, numbers and dash (-).
+
+            '
+          maxLength: 25
+          minLength: 1
+          pattern: ^[a-zA-Z](-?[a-zA-Z0-9])*$
+          type: string
+        networkEndpointDetails:
+          $ref: '#/components/schemas/NetworkEndpointDetails'
+        updateChannel:
+          description: 'The Analytics instance update cycle.
+
+            '
+          enum:
+          - REGULAR
+          - EARLY
+          - PHASE_2
+          - PHASE_1
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/UpdateChannel'
+      required:
+      - name
+      - compartmentId
+      - capacity
+      - featureSet
+      - licenseType
+    UpdatePrivateAccessChannelDetails:
+      description: 'Input payload to update a private access channel.
 
         '
       properties:
@@ -2701,31 +3176,6 @@ components:
           maxLength: 32
           minLength: 1
           pattern: ^[a-zA-Z][a-zA-Z0-9_-]*$
-          type: string
-        egressSourceIpAddresses:
-          description: 'List of IP addresses from the customer subnet connected to the private access channel, used as a source IP by the private access channel
-
-            for network traffic from the Analytics instance to the private sources.
-
-            '
-          items:
-            maxLength: 46
-            minLength: 8
-            type: string
-          type: array
-        ipAddress:
-          description: 'IP address of the private access channel.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        key:
-          description: 'Private access channel unique identifier key.
-
-            '
-          maxLength: 255
-          minLength: 1
           type: string
         networkSecurityGroupIds:
           description: 'Network Security Group OCIDs for the Analytics instance.
@@ -2766,41 +3216,119 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-      required:
-      - key
-      - displayName
-      - vcnId
-      - subnetId
-      - ipAddress
-      - egressSourceIpAddresses
-    PrivateSourceScanHost:
-      description: 'Private source SCAN hostname model.
+      type: object
+    UpdateAnalyticsInstanceDetails:
+      description: 'Input payload to update an Analytics instance. Fields that aren''t provided
+
+        won''t be updated.
 
         '
       properties:
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only the String type is supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
+
+
+              Example: `{"CostCenter": "42"}`
+
+              '
+            type: object
+          description: 'Defined tags for this resource. Each key is predefined and scoped to a
+
+            namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Operations": {"CostCenter": "42"}}`
+
+            '
+          type: object
         description:
-          description: 'Description of private source SCAN host zone.
+          description: 'Optional description.
 
             '
-          maxLength: 255
-          minLength: 1
+          maxLength: 512
+          minLength: 0
           type: string
-        scanHostname:
-          description: 'Private source SCAN hostname. For example: db01-scan.corp.example.com, prd-db01-scan.mycompany.com.
+        emailNotification:
+          description: 'Email address receiving notifications.
 
             '
-          maxLength: 255
-          minLength: 1
+          maxLength: 512
+          minLength: 0
           type: string
-        scanPort:
-          description: 'Private source SCAN host port. This is the source port where the SCAN protocol connects (for example, 1521).
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
+
+            predefined name, type, or namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Department": "Finance"}`
 
             '
-          minimum: 1
-          type: integer
+          type: object
+        licenseType:
+          description: 'The license used for the service.
+
+            '
+          enum:
+          - LICENSE_INCLUDED
+          - BRING_YOUR_OWN_LICENSE
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/LicenseType'
+        updateChannel:
+          description: 'The Analytics instance update cycle.
+
+            '
+          enum:
+          - REGULAR
+          - EARLY
+          - PHASE_2
+          - PHASE_1
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/UpdateChannel'
+    Error:
+      properties:
+        code:
+          description: 'A short error code that defines the error, for programmatic parsing. See
+
+            [API Errors](/Content/API/References/apierrors.htm).
+
+            '
+          type: string
+        message:
+          description: 'A human-readable error string.
+
+            '
+          type: string
       required:
-      - scanHostname
-      - scanPort
+      - code
+      - message
+    NetworkEndpointDetails:
+      description: 'Base representation of a network endpoint.
+
+        '
+      discriminator:
+        propertyName: networkEndpointType
+      properties:
+        networkEndpointType:
+          description: 'The type of network endpoint.
+
+            '
+          enum:
+          - PUBLIC
+          - PRIVATE
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/NetworkEndpointType'
+      required:
+      - networkEndpointType
+      type: object
     InstanceResourceGroupSummary:
       description: 'Resource Groups for Instance
 
@@ -2835,82 +3363,8 @@ components:
       - resourceName
       - capacity
       type: object
-    WorkRequestLog:
-      description: 'Log entries related to a specific work request.
-
-        '
-      properties:
-        message:
-          description: 'The description of the event that occurred.
-
-            '
-          type: string
-        timestamp:
-          description: 'The date and time the log entry occurred, in the format defined by RFC3339.
-
-
-            Example: `2016-08-25T21:10:29.600Z`
-
-            '
-          format: date-time
-          type: string
-      required:
-      - message
-      - timestamp
-      type: object
-    PrivateSourceDnsZone:
-      description: 'Private source DNS zone model.
-
-        '
-      properties:
-        description:
-          description: 'Description of the private source DNS zone.
-
-            '
-          maxLength: 255
-          minLength: 0
-          type: string
-        dnsZone:
-          description: 'Private source DNS zone. For example: example-vcn.oraclevcn.com, corp.example.com.
-
-            '
-          maxLength: 253
-          minLength: 1
-          type: string
-      required:
-      - dnsZone
-    Capacity:
-      description: 'Service instance capacity metadata (for example, OLPU count, number of users, and so on).
-
-        '
-      properties:
-        capacityType:
-          description: 'The capacity model to use.
-
-            Accepted values are:
-
-            OLPU_COUNT, USER_COUNT
-
-            '
-          enum:
-          - OLPU_COUNT
-          - USER_COUNT
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/CapacityType'
-        capacityValue:
-          description: 'The capacity value selected, either the number of OCPUs (OLPU_COUNT) or the number of users (USER_COUNT).
-
-            This parameter affects the number of OCPUs, amount of memory, and other resources allocated to the Analytics instance.
-
-            '
-          minimum: 1
-          type: integer
-      required:
-      - capacityType
-      - capacityValue
-      type: object
-    InstanceResourceGroup:
-      description: 'Resource Groups for Instance
+    CreateResourceGroupDetails:
+      description: 'Input payload to create resource group.
 
         '
       properties:
@@ -2928,77 +3382,14 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-        id:
-          description: Unique identifier and name of resource group.  Must be unique within the instance
-          maxLength: 255
-          minLength: 1
-          type: string
         resourceName:
           description: Meaningful name of resource group for end user
           maxLength: 255
           minLength: 1
           type: string
       required:
-      - id
       - resourceName
       - capacity
-      type: object
-    WorkRequestResource:
-      properties:
-        actionResult:
-          description: 'The way this resource was affected by this work request.
-
-            '
-          enum:
-          - COMPARTMENT_CHANGED
-          - CREATED
-          - DELETED
-          - STARTED
-          - STOPPED
-          - SCALED
-          - NETWORK_ENDPOINT_CHANGED
-          - VANITY_URL_CREATED
-          - VANITY_URL_UPDATED
-          - VANITY_URL_DELETED
-          - PRIVATE_ACCESS_CHANNEL_CREATED
-          - PRIVATE_ACCESS_CHANNEL_UPDATED
-          - PRIVATE_ACCESS_CHANNEL_DELETED
-          - NONE
-          - RESOURCE_GROUP_CREATED
-          - RESOURCE_GROUP_UPDATED
-          - RESOURCE_GROUP_DELETED
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/WorkRequestActionResult'
-        identifier:
-          description: The OCID of the resource the work request is affecting.
-          maxLength: 255
-          minLength: 1
-          type: string
-        metadata:
-          additionalProperties:
-            type: string
-          description: 'Additional metadata of the resource.
-
-            '
-          type: object
-        resourceType:
-          description: 'The type of the resource the work request is affecting.
-
-            '
-          enum:
-          - ANALYTICS_INSTANCE
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/WorkRequestResourceType'
-        resourceUri:
-          description: 'The URI of the affected resource.
-
-            '
-          type: string
-      required:
-      - actionResult
-      - resourceType
-      - identifier
-      - resourceUri
     VanityUrlDetails:
       description: 'Vanity URL configuration details.
 
@@ -3046,235 +3437,6 @@ components:
           maxItems: 3
           minItems: 1
           type: array
-      type: object
-    AnalyticsInstanceSummary:
-      description: 'Analytics Instance metadata (summary view).
-
-        '
-      properties:
-        capacity:
-          $ref: '#/components/schemas/Capacity'
-        compartmentId:
-          description: 'The OCID of the compartment.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only the String type is supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing a defined tag key and value, scoped to a namespace.
-
-
-              Example: `{"CostCenter": "42"}`
-
-              '
-            type: object
-          description: 'Defined tags for this resource. Each key is predefined and scoped to a
-
-            namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Operations": {"CostCenter": "42"}}`
-
-            '
-          type: object
-        description:
-          description: 'Optional description.
-
-            '
-          maxLength: 512
-          minLength: 0
-          type: string
-        emailNotification:
-          description: 'Email address receiving notifications.
-
-            '
-          maxLength: 512
-          minLength: 0
-          type: string
-        featureSet:
-          description: 'The feature set. Either `SELF_SERVICE_ANALYTICS` (Professional Edition) or `ENTERPRISE_ANALYTICS` (Enterprise Edition).
-
-            '
-          enum:
-          - SELF_SERVICE_ANALYTICS
-          - ENTERPRISE_ANALYTICS
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/FeatureSet'
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Free-form tags for this resource. Each tag is a simple key-value pair with no
-
-            predefined name, type, or namespace. For more information, see [Resource Tags](/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Department": "Finance"}`
-
-            '
-          type: object
-        id:
-          description: 'The resource OCID.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-        licenseType:
-          description: 'The license used for the service.
-
-            '
-          enum:
-          - LICENSE_INCLUDED
-          - BRING_YOUR_OWN_LICENSE
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/LicenseType'
-        lifecycleState:
-          description: 'The current state of the Analytics instance.
-
-            '
-          enum:
-          - ACTIVE
-          - CREATING
-          - DELETED
-          - DELETING
-          - FAILED
-          - INACTIVE
-          - UPDATING
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/AnalyticsInstanceLifecycleState'
-        name:
-          description: 'The name of the Analytics instance. This name must be unique in the tenancy and can''t be changed.
-
-            The name must start with a letter and can contain only letters, numbers and dash (-).
-
-            '
-          maxLength: 25
-          minLength: 1
-          pattern: ^[a-zA-Z](-?[a-zA-Z0-9])*$
-          type: string
-        networkEndpointDetails:
-          $ref: '#/components/schemas/NetworkEndpointDetails'
-        serviceUrl:
-          description: 'URL of the Analytics instance.
-
-            '
-          maxLength: 1024
-          minLength: 0
-          type: string
-        systemTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only string, integer and boolean types are supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing system tags'' keys and values scoped to a namespace.
-
-              Example: `{"key": "value"}`
-
-              '
-            type: object
-          description: 'System tags for this resource. These predefined keys are scoped to namespaces.
-
-            Example: `{"orcl-cloud": {"key": "value"}}`
-
-            '
-          type: object
-        timeCreated:
-          description: 'The date and time the Analytics instance was created, in the format defined by RFC3339.
-
-
-            Example: `2016-08-25T21:10:29.600Z`
-
-            '
-          format: date-time
-          type: string
-        timeUpdated:
-          description: 'The date and time the Analytics instance was last updated (in the format defined by RFC3339).
-
-            This timestamp represents updates made through this API. External events don''t
-
-            affect it.
-
-            '
-          format: date-time
-          type: string
-      required:
-      - id
-      - name
-      - compartmentId
-      - lifecycleState
-      - capacity
-      - networkEndpointDetails
-      - featureSet
-      - timeCreated
-    UpdateVanityUrlDetails:
-      description: 'Input payload to update a vanity URL.
-
-        '
-      properties:
-        caCertificate:
-          description: 'PEM CA certificates for HTTPS connections. This may include multiple PEM certificates.
-
-            '
-          minLength: 1
-          type: string
-        passphrase:
-          description: 'Passphrase for the PEM private key (if any).
-
-            '
-          type: string
-        privateKey:
-          description: 'PEM private key for HTTPS connections.
-
-            '
-          minLength: 1
-          type: string
-        publicCertificate:
-          description: 'PEM certificate for HTTPS connections.
-
-            '
-          minLength: 1
-          type: string
-      required:
-      - caCertificate
-      - privateKey
-      - publicCertificate
-    WorkRequestError:
-      description: 'Error encountered during the execution of a work request.
-
-        '
-      properties:
-        code:
-          description: 'A short error code that defines the error, for programmatic parsing.
-
-            '
-          type: string
-        message:
-          description: 'Error message.
-
-            '
-          type: string
-        timestamp:
-          description: 'The date and time the error occurred, in the format defined by RFC3339.
-
-
-            Example: `2016-08-25T21:10:29.600Z`
-
-            '
-          format: date-time
-          type: string
-      required:
-      - code
-      - message
-      - timestamp
       type: object
     CreatePrivateAccessChannelDetails:
       description: 'Input payload to create a private access channel.
@@ -3334,313 +3496,151 @@ components:
       - subnetId
       - privateSourceDnsZones
       type: object
-  parameters:
-    PaginationTokenQueryParam:
-      description: 'For list pagination. The value of the `opc-next-page` response header from the previous "List"
-
-        call. For important details about how pagination works, see
-
-        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
+    UpdateResourceGroupDetails:
+      description: 'Input payload to update a resource group.
 
         '
-      in: query
-      name: page
-      required: false
-      schema:
-        type: string
-        maxLength: 512
-        minLength: 1
-    PrivateAccessChannelKeyPathParam:
-      description: 'The unique identifier key of the private access channel.
-
-        '
-      in: path
-      name: privateAccessChannelKey
-      required: true
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    WorkRequestIdPathParam:
-      description: 'The OCID of the work request.
-
-        '
-      in: path
-      name: workRequestId
-      required: true
-      schema:
-        type: string
-    RetryTokenHeader:
-      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
-
-        server error without risk of executing that same action again. Retry tokens expire after 24
-
-        hours, but can be invalidated before then due to conflicting operations (for example, if a resource
-
-        has been deleted and purged from the system, then a retry of the original creation request
-
-        may be rejected).
-
-        '
-      in: header
-      name: opc-retry-token
-      required: false
-      schema:
-        type: string
-        maxLength: 64
-        minLength: 1
-    WorkRequestStatusQueryParam:
-      description: 'One or more work request status values to filter on.
-
-        '
-      in: query
-      name: status
-      required: false
-      style: form
-      explode: true
-      schema:
-        type: array
-        items:
-          enum:
-          - ACCEPTED
-          - IN_PROGRESS
-          - FAILED
-          - SUCCEEDED
-          - CANCELING
-          - CANCELED
+      properties:
+        capacity:
+          description: The capacity (in OCPU's) to be allocated for this resource.
+          minimum: 1
+          type: integer
+        description:
+          description: Optional description of the resource group
+          maxLength: 512
+          minLength: 0
           type: string
-          x-obmcs-top-level-enum: '#/definitions/WorkRequestStatus'
-    SortOrderQueryParam:
-      description: 'The sort order to use, either ascending (`ASC`) or descending (`DESC`).
+        displayName:
+          description: Meaningful name of resource group for end user
+          maxLength: 255
+          minLength: 1
+          type: string
+        resourceName:
+          description: Meaningful name of resource group for end user
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - resourceName
+      - capacity
+    ChangeAnalyticsInstanceNetworkEndpointDetails:
+      description: 'Input payload to update endpoint details for an Analytics instance.
 
         '
-      in: query
-      name: sortOrder
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/SortOrder'
-      schema:
-        type: string
-        enum:
-        - ASC
-        - DESC
-    CapacityTypeQueryParam:
-      description: 'A filter to only return resources matching the capacity type enum. Values are
+      properties:
+        networkEndpointDetails:
+          $ref: '#/components/schemas/NetworkEndpointDetails'
+      required:
+      - networkEndpointDetails
+    WorkRequestResource:
+      properties:
+        actionResult:
+          description: 'The way this resource was affected by this work request.
 
-        case-insensitive.
+            '
+          enum:
+          - COMPARTMENT_CHANGED
+          - CREATED
+          - DELETED
+          - STARTED
+          - STOPPED
+          - SCALED
+          - NETWORK_ENDPOINT_CHANGED
+          - VANITY_URL_CREATED
+          - VANITY_URL_UPDATED
+          - VANITY_URL_DELETED
+          - PRIVATE_ACCESS_CHANNEL_CREATED
+          - PRIVATE_ACCESS_CHANNEL_UPDATED
+          - PRIVATE_ACCESS_CHANNEL_DELETED
+          - NONE
+          - RESOURCE_GROUP_CREATED
+          - RESOURCE_GROUP_UPDATED
+          - RESOURCE_GROUP_DELETED
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/WorkRequestActionResult'
+        identifier:
+          description: The OCID of the resource the work request is affecting.
+          maxLength: 255
+          minLength: 1
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: 'Additional metadata of the resource.
 
-        '
-      in: query
-      name: capacityType
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/CapacityType'
-      schema:
-        type: string
-        enum:
-        - OLPU_COUNT
-        - USER_COUNT
-    PaginationLimitQueryParam:
-      description: 'For list pagination. The maximum number of results per page, or items to return in a paginated
+            '
+          type: object
+        resourceType:
+          description: 'The type of the resource the work request is affecting.
 
-        "List" call. For important details about how pagination works, see
+            '
+          enum:
+          - ANALYTICS_INSTANCE
+          type: string
+          x-obmcs-top-level-enum: '#/definitions/WorkRequestResourceType'
+        resourceUri:
+          description: 'The URI of the affected resource.
 
-        [List Pagination](/iaas/Content/API/Concepts/usingapi.htm#nine).
-
-
-        Example: `50`
-
-        '
-      in: query
-      name: limit
-      required: false
-      schema:
-        type: integer
-        maximum: 1000
-        minimum: 1
-    WorkRequestResourceIdQueryParam:
-      description: 'The OCID of the resource associated with a work request.
-
-        '
-      in: query
-      name: resourceId
-      required: false
-      schema:
-        type: string
-    SortByQueryParam:
-      description: 'The field to sort by (one column only). Default sort order is
-
-        ascending exception of `timeCreated` column (descending).
-
-        '
-      in: query
-      name: sortBy
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/SortBy'
-      schema:
-        type: string
-        enum:
-        - capacityType
-        - capacityValue
-        - featureSet
-        - lifecycleState
-        - name
-        - timeCreated
-    WorkRequestResourceTypeQueryParam:
-      description: 'Type of the resource associated with a work request.
+            '
+          type: string
+      required:
+      - actionResult
+      - resourceType
+      - identifier
+      - resourceUri
+    UpdateVanityUrlDetails:
+      description: 'Input payload to update a vanity URL.
 
         '
-      in: query
-      name: resourceType
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/WorkRequestResourceType'
-      schema:
-        type: string
-        enum:
-        - ANALYTICS_INSTANCE
-    AnalyticsInstanceIdPathParam:
-      description: 'The OCID of the Analytics instance.
+      properties:
+        caCertificate:
+          description: 'PEM CA certificates for HTTPS connections. This may include multiple PEM certificates.
+
+            '
+          minLength: 1
+          type: string
+        passphrase:
+          description: 'Passphrase for the PEM private key (if any).
+
+            '
+          type: string
+        privateKey:
+          description: 'PEM private key for HTTPS connections.
+
+            '
+          minLength: 1
+          type: string
+        publicCertificate:
+          description: 'PEM certificate for HTTPS connections.
+
+            '
+          minLength: 1
+          type: string
+      required:
+      - caCertificate
+      - privateKey
+      - publicCertificate
+    PrivateSourceDnsZone:
+      description: 'Private source DNS zone model.
 
         '
-      in: path
-      name: analyticsInstanceId
-      required: true
-      schema:
-        type: string
-    FeatureSetQueryParam:
-      description: 'A filter to only return resources matching the feature set. Values are
+      properties:
+        description:
+          description: 'Description of the private source DNS zone.
 
-        case-insensitive.
+            '
+          maxLength: 255
+          minLength: 0
+          type: string
+        dnsZone:
+          description: 'Private source DNS zone. For example: example-vcn.oraclevcn.com, corp.example.com.
 
-        '
-      in: query
-      name: featureSet
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/FeatureSet'
-      schema:
-        type: string
-        enum:
-        - SELF_SERVICE_ANALYTICS
-        - ENTERPRISE_ANALYTICS
-    CompartmentIdQueryParam:
-      description: 'The OCID of the compartment.
-
-        '
-      in: query
-      name: compartmentId
-      required: true
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    VanityUrlKeyPathParam:
-      description: 'Specify unique identifier key of a vanity URL to update or delete.
-
-        '
-      in: path
-      name: vanityUrlKey
-      required: true
-      schema:
-        type: string
-    WorkRequestSortByQueryParam:
-      description: 'The field used for sorting work request results.
-
-        '
-      in: query
-      name: sortBy
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/WorkRequestSortBy'
-      schema:
-        type: string
-        enum:
-        - id
-        - operationType
-        - status
-        - timeAccepted
-        - timeStarted
-        - timeFinished
-    RequestIdHeader:
-      description: 'Unique identifier for the request.
-
-        If you need to contact Oracle about a particular request, please provide the request ID.
-
-        '
-      in: header
-      name: opc-request-id
-      required: false
-      schema:
-        type: string
-        pattern: ^[a-zA-Z0-9_./-]+$
-    LifecycleStateQueryParam:
-      description: 'A filter to only return resources matching the lifecycle state. The state
-
-        value is case-insensitive.
-
-        '
-      in: query
-      name: lifecycleState
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/AnalyticsInstanceLifecycleState'
-      schema:
-        type: string
-        enum:
-        - ACTIVE
-        - CREATING
-        - DELETED
-        - DELETING
-        - FAILED
-        - INACTIVE
-        - UPDATING
-    ResourceNameQueryParam:
-      description: 'A filter to return only resources that match the given name exactly.
-
-        '
-      in: query
-      name: name
-      required: false
-      schema:
-        type: string
-        maxLength: 255
-        minLength: 1
-    ResourceGroupSortByQueryParam:
-      description: 'The field to sort by (one column only). Default sort order is
-
-        default group first, then sort by resource name, ascending.
-
-        '
-      in: query
-      name: sortBy
-      required: false
-      x-obmcs-top-level-enum: '#/definitions/ResourceGroupSortBy'
-      schema:
-        type: string
-        enum:
-        - id
-        - resourceName
-        - displayName
-        - description
-        - capacity
-        - status
-    AnalyticsInstanceResourceGroupIdPathParam:
-      description: 'Specify unique id of a resource group within an Analytics instance.
-
-        '
-      in: path
-      name: analyticsInstanceResourceGroupId
-      required: true
-      schema:
-        type: string
-    IfMatchHeader:
-      description: 'For optimistic concurrency control. In the PUT or DELETE call for a resource, set the `if-match`
-
-        parameter to the value of the etag from a previous GET or POST response for that resource.  The resource
-
-        will be updated or deleted only if the etag you provide matches the resource''s current etag value.
-
-        '
-      in: header
-      name: if-match
-      required: false
-      schema:
-        type: string
+            '
+          maxLength: 253
+          minLength: 1
+          type: string
+      required:
+      - dnsZone
   responses:
     DefaultError:
       description: An error has occurred.
