@@ -78,6 +78,8 @@ apis:
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
   tags:
+  - Analytics
+  tags_raw:
   - analytics
   properties:
   - type: OpenAPI
@@ -122,6 +124,8 @@ apis:
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
   tags:
+  - Block Storage
+  tags_raw:
   - blockstorage
   properties:
   - type: OpenAPI
@@ -166,6 +170,8 @@ apis:
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
   tags:
+  - Compute
+  tags_raw:
   - compute
   properties:
   - type: OpenAPI
@@ -209,7 +215,8 @@ apis:
   description: The computeManagement API from Oracle Platforms — 23 operation(s) for computemanagement.
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
-  tags:
+  tags: []
+  tags_raw:
   - computeManagement
   properties:
   - type: OpenAPI
@@ -254,6 +261,8 @@ apis:
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
   tags:
+  - Database
+  tags_raw:
   - database
   properties:
   - type: OpenAPI
@@ -298,6 +307,8 @@ apis:
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
   tags:
+  - Data Science
+  tags_raw:
   - dataScience
   properties:
   - type: OpenAPI
@@ -342,7 +353,8 @@ apis:
     The integrationInstance API from Oracle Platforms — 19 operation(s) for integrationinstance.
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
-  tags:
+  tags: []
+  tags_raw:
   - integrationInstance
   properties:
   - type: OpenAPI
@@ -386,7 +398,8 @@ apis:
   description: The oceInstance API from Oracle Platforms — 7 operation(s) for oceinstance.
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
-  tags:
+  tags: []
+  tags_raw:
   - oceInstance
   properties:
   - type: OpenAPI
@@ -431,6 +444,8 @@ apis:
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
   tags:
+  - Virtual Network
+  tags_raw:
   - virtualNetwork
   properties:
   - type: OpenAPI
@@ -477,11 +492,10 @@ maintainers:
   email: kin@apievangelist.com
 tags:
 - Analytics
-- Artificial Intelligence
 - Cloud Computing
 - Database
 - Enterprise Software
-- Infrastructure-as-a-Service
+- Infrastructure as a Service
 - Integration
 - Machine-Learning
 - Platform-as-a-Service
