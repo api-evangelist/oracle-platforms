@@ -2,29 +2,41 @@
 kin_checks:
   slug: oracle-platforms
   schema_version: 0.15.1
-  scored_at: '2026-08-27'
-  run_ts: 2026-08-27T140727
+  scored_at: '2026-08-28'
+  run_ts: 2026-08-28T221322
   note: Actionable checks only (missed + partial). earned/na are every other check
     in rubric/scoring-0.15.1.yml; counts below let you verify that.
   counts:
     total: 130
-    earned: 21
-    partial: 7
-    missed: 60
-    na: 42
+    earned: 61
+    partial: 11
+    missed: 34
+    na: 24
   checks:
-  - id: description_substantive
-    status: missed
   - id: llms_txt_published
     status: missed
   - id: apis_json_self_hosted
     status: missed
+  - id: openapi_3_1
+    status: missed
+    detail: 0 of 9 openapi documents pass
+  - id: openapi_3_0
+    status: missed
+    detail: 0 of 9 openapi documents pass
+  - id: info_complete
+    status: missed
+    detail: 0 of 9 openapi documents pass
   - id: servers_resolvable
     status: missed
-  - id: examples_present
+  - id: security_schemes_defined
     status: missed
-  - id: asyncapi_present
+    detail: 0 of 9 openapi documents pass
+  - id: security_applied
     status: missed
+    detail: 0 of 9 openapi documents pass
+  - id: webhooks_or_callbacks
+    status: missed
+    detail: 0 of 9 openapi documents pass
   - id: json_schema_present
     status: missed
   - id: json_schema_per_resource
@@ -47,77 +59,19 @@ kin_checks:
     status: missed
   - id: vocabulary_published
     status: missed
-  - id: change_log_present
-    status: missed
-  - id: status_page_present
-    status: missed
-  - id: deprecation_policy
-    status: missed
-  - id: security_disclosure
-    status: missed
-  - id: webhooks_advertised
-    status: missed
-  - id: github_org_present
-    status: missed
   - id: roadmap_present
     status: missed
   - id: examples_published
     status: missed
-  - id: portal_present
-    status: missed
-  - id: api_reference_present
-    status: missed
-  - id: getting_started_present
-    status: missed
-  - id: sdk_count_3
-    status: missed
-  - id: cli_present
-    status: missed
-  - id: console_or_sandbox
-    status: missed
   - id: postman_present
-    status: missed
-  - id: agent_skill_present
-    status: missed
-  - id: support_channel
     status: missed
   - id: blog_present
     status: missed
-  - id: sign_up_present
-    status: missed
-  - id: terms_of_service
-    status: missed
-  - id: privacy_policy
-    status: missed
-  - id: compliance_published
-    status: missed
-  - id: trust_center
-    status: missed
   - id: reg_oauth_scopes
-    status: missed
-  - id: reg_vulnerability_disclosure
-    status: missed
-  - id: reg_terms_of_service
-    status: missed
-  - id: reg_privacy_policy
-    status: missed
-  - id: reg_compliance_published
-    status: missed
-  - id: reg_standards_conformance
     status: missed
   - id: agentic_access
     status: missed
   - id: reversibility_documented
-    status: missed
-  - id: idempotency
-    status: missed
-  - id: error_semantics
-    status: missed
-  - id: openapi_examples
-    status: missed
-  - id: event_surface_described
-    status: missed
-  - id: agent_skills
     status: missed
   - id: consent_identity
     status: missed
@@ -133,6 +87,13 @@ kin_checks:
     status: missed
   - id: agentic_commerce
     status: missed
+  - id: servers_defined
+    status: partial
+    earned: 2.67
+    detail: 8 of 9 openapi documents pass
+  - id: examples_present
+    status: partial
+    earned: 0.0
   - id: rate_limits_documented
     status: partial
     earned: 2.0
@@ -153,7 +114,15 @@ kin_checks:
     status: partial
     earned: 3.5
     detail: 'grade: bearer'
-  - id: rate_limit_signal
+  - id: idempotency
+    status: partial
+    earned: 4.5
+    detail: 'grade: documented'
+  - id: error_semantics
+    status: partial
+    earned: 4.0
+    detail: 'grade: documented'
+  - id: openapi_examples
     status: partial
     earned: 3.5
-    detail: 'grade: documented'
+    detail: 'grade: partial'
