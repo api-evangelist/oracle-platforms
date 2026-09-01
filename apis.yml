@@ -443,8 +443,7 @@ apis:
   description: The virtualNetwork API from Oracle Platforms — 176 operation(s) for virtualnetwork.
   humanURL: https://docs.oracle.com/en-us/iaas/api/
   baseURL: https://iaas.{region}.oraclecloud.com
-  tags:
-  - Virtual Network
+  tags: []
   tags_raw:
   - virtualNetwork
   properties:
@@ -495,7 +494,7 @@ tags:
 - Cloud Computing
 - Database
 - Enterprise Software
-- Infrastructure as a Service
+- Infrastructure-as-a-Service
 - Integration
 - Machine-Learning
 - Platform-as-a-Service
