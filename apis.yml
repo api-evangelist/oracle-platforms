@@ -1,5 +1,10 @@
 aid: oracle-platforms
 name: Oracle Platforms
+# x-type: index -- an API Evangelist INDEX, not a company (roadmap#402). This record is
+# this catalog's own aggregation of other people's APIs. score.rb's NON_PROVIDER_X_TYPES
+# excludes it from rating and from provider lists; the page stays, because it is a real
+# piece of curation someone may link to.
+x-type: index
 description: 'Oracle Platforms is the API Evangelist index of Oracle''s cloud and enterprise platform
   APIs: the Oracle Cloud Infrastructure (OCI) control plane for compute, storage, networking and databases,
   plus the PaaS and SaaS services layered on it — Autonomous Database, Integration Cloud, Content Management,
