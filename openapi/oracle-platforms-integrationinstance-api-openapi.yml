@@ -22,9 +22,7 @@ tags:
 paths:
   /integrationInstances:
     get:
-      description: 'Returns a list of Integration Instances.
-
-        '
+      description: Returns a list of Integration Instances.
       operationId: ListIntegrationInstances
       parameters:
       - $ref: '#/components/parameters/CompartmentIdQueryParam'
@@ -83,9 +81,7 @@ paths:
       tags:
       - integrationInstance
     post:
-      description: 'Creates a new Integration Instance.
-
-        '
+      description: Creates a new Integration Instance.
       operationId: CreateIntegrationInstance
       parameters:
       - $ref: '#/components/parameters/RetryTokenHeader'
@@ -285,7 +281,9 @@ paths:
         required: true
   /integrationInstances/{integrationInstanceId}/actions/addLogAnalyticsLogGroup:
     post:
-      description: "Add LogGroup with specified ocid for Integration Instance to enable sending OIC Activity \nStream to OCI Logging Analytics.\n"
+      description: 'Add LogGroup with specified ocid for Integration Instance to enable sending OIC Activity
+
+        Stream to OCI Logging Analytics.'
       operationId: AddLogAnalyticsLogGroup
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -346,9 +344,7 @@ paths:
         required: true
   /integrationInstances/{integrationInstanceId}/actions/addOracleManagedCustomEndpoint:
     post:
-      description: 'Enable Oracle Managed Custom Endpoint for given integration instance.
-
-        '
+      description: Enable Oracle Managed Custom Endpoint for given integration instance.
       operationId: AddOracleManagedCustomEndpoint
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -393,9 +389,7 @@ paths:
           $ref: '#/components/responses/500'
         default:
           $ref: '#/components/responses/default'
-      summary: 'Enable Oracle Managed Custom Endpoint for integration instance
-
-        '
+      summary: Enable Oracle Managed Custom Endpoint for integration instance
       tags:
       - integrationInstance
       x-obmcs-client-retries-enabled: true
@@ -411,9 +405,6 @@ paths:
         required: true
   /integrationInstances/{integrationInstanceId}/actions/changeCompartment:
     post:
-      description: 'Change the compartment for an integration instance
-
-        '
       operationId: ChangeIntegrationInstanceCompartment
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -473,9 +464,7 @@ paths:
     post:
       description: 'Change an Integration instance network endpoint. The operation is long-running
 
-        and creates a new WorkRequest.
-
-        '
+        and creates a new WorkRequest.'
       operationId: ChangeIntegrationInstanceNetworkEndpoint
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -520,7 +509,7 @@ paths:
           $ref: '#/components/responses/500'
         default:
           $ref: '#/components/responses/default'
-      summary: Change an Integration instance network endpoint.
+      summary: Change an Integration instance network endpoint
       tags:
       - integrationInstance
       x-related-resource: '#/definitions/IntegrationInstance'
@@ -535,9 +524,7 @@ paths:
     post:
       description: 'Change private endpoint outbound connection for given Integration instance. The operation is long-running
 
-        and creates a new WorkRequest.
-
-        '
+        and creates a new WorkRequest.'
       operationId: ChangePrivateEndpointOutboundConnection
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -582,7 +569,7 @@ paths:
           $ref: '#/components/responses/500'
         default:
           $ref: '#/components/responses/default'
-      summary: Create Integration instance private endpoint outbound connection.
+      summary: Create Integration instance private endpoint outbound connection
       tags:
       - integrationInstance
       x-related-resource: '#/definitions/IntegrationInstance'
@@ -595,9 +582,6 @@ paths:
         required: true
   /integrationInstances/{integrationInstanceId}/actions/disableProcessAutomation:
     post:
-      description: 'Disable Process Automation for given Integration Instance
-
-        '
       operationId: DisableProcessAutomation
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -651,9 +635,6 @@ paths:
       x-related-resource: '#/definitions/IntegrationInstance'
   /integrationInstances/{integrationInstanceId}/actions/enableProcessAutomation:
     post:
-      description: 'Enable Process Automation for given Integration Instance
-
-        '
       operationId: EnableProcessAutomation
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -706,9 +687,6 @@ paths:
       x-related-resource: '#/definitions/IntegrationInstance'
   /integrationInstances/{integrationInstanceId}/actions/extendDataRetention:
     post:
-      description: 'Extend Data Retention period for given Integration Instance
-
-        '
       operationId: ExtendDataRetention
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -769,7 +747,13 @@ paths:
         required: true
   /integrationInstances/{integrationInstanceId}/actions/failover:
     post:
-      description: "Allows failover for disaster recovery. Called in the context of integration instance in that region.\nUpon calling the failover api in the region where given instance was created, \nthe intigration instance if primary will be switched to standby and crossRegion integration instance \nwill be switched to primary and vice-versa.\n"
+      description: 'Allows failover for disaster recovery. Called in the context of integration instance in that region.
+
+        Upon calling the failover api in the region where given instance was created,
+
+        the intigration instance if primary will be switched to standby and crossRegion integration instance
+
+        will be switched to primary and vice-versa.'
       operationId: DisasterRecoveryFailover
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -814,9 +798,7 @@ paths:
           $ref: '#/components/responses/500'
         default:
           $ref: '#/components/responses/default'
-      summary: 'Failover of integration instance for the purpose of disaster recovery.
-
-        '
+      summary: Failover of integration instance for the purpose of disaster recovery
       tags:
       - integrationInstance
       x-obmcs-client-retries-enabled: true
@@ -827,9 +809,7 @@ paths:
     post:
       description: 'Removes Log Analytics logGroup, if enabled for given integrationInstance. Since only single LogGroup can be enabled
 
-        for integration instance, no additional details are required to be includes in the request.
-
-        '
+        for integration instance, no additional details are required to be includes in the request.'
       operationId: RemoveLogAnalyticsLogGroup
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -883,9 +863,7 @@ paths:
       x-related-resource: '#/definitions/IntegrationInstance'
   /integrationInstances/{integrationInstanceId}/actions/removeOracleManagedCustomEndpoint:
     post:
-      description: 'Remove Oracle Managed Custom Endpoint for given integration instance that was previously enabled.
-
-        '
+      description: Remove Oracle Managed Custom Endpoint for given integration instance that was previously enabled.
       operationId: RemoveOracleManagedCustomEndpoint
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -930,9 +908,7 @@ paths:
           $ref: '#/components/responses/500'
         default:
           $ref: '#/components/responses/default'
-      summary: 'Remove Oracle Managed Custom Endpoint for integration instance.
-
-        '
+      summary: Remove Oracle Managed Custom Endpoint for integration instance
       tags:
       - integrationInstance
       x-obmcs-client-retries-enabled: true
@@ -941,9 +917,6 @@ paths:
       x-related-resource: '#/definitions/IntegrationInstance'
   /integrationInstances/{integrationInstanceId}/actions/start:
     post:
-      description: 'Start an integration instance that was previously in an INACTIVE state
-
-        '
       operationId: StartIntegrationInstance
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -994,9 +967,6 @@ paths:
       x-related-resource: '#/definitions/IntegrationInstance'
   /integrationInstances/{integrationInstanceId}/actions/stop:
     post:
-      description: 'Stop an integration instance that was previously in an ACTIVE state
-
-        '
       operationId: StopIntegrationInstance
       parameters:
       - $ref: '#/components/parameters/IntegrationInstanceIdentifierPathParam'
@@ -1047,9 +1017,7 @@ paths:
       x-related-resource: '#/definitions/IntegrationInstance'
   /workRequests:
     get:
-      description: 'Lists the work requests in a compartment.
-
-        '
+      description: Lists the work requests in a compartment.
       operationId: ListWorkRequests
       parameters:
       - $ref: '#/components/parameters/CompartmentIdQueryParam'
@@ -1203,7 +1171,7 @@ paths:
           $ref: '#/components/responses/500'
         default:
           $ref: '#/components/responses/default'
-      summary: Get work request errors.
+      summary: Get work request errors
       tags:
       - integrationInstance
   /workRequests/{workRequestId}/logs:
@@ -1256,11 +1224,147 @@ paths:
           $ref: '#/components/responses/500'
         default:
           $ref: '#/components/responses/default'
-      summary: Get work request logs.
+      summary: Get work request logs
       tags:
       - integrationInstance
 components:
   schemas:
+    WorkRequestSummary:
+      description: A description of work request status.
+      properties:
+        compartmentId:
+          description: 'The ocid of the compartment that contains the work request. Work
+
+            requests should be scoped to the same compartment as the resource the
+
+            work request affects. If the work request affects multiple resources,
+
+            and those resources are not in the same compartment, it is up to the
+
+            service team to pick the primary resource whose compartment should be
+
+            used.
+
+            '
+          type: string
+        id:
+          description: The id of the work request.
+          type: string
+        operationType:
+          description: Type of the work request.
+          enum:
+          - CREATE_INTEGRATION_INSTANCE
+          - UPDATE_INTEGRATION_INSTANCE
+          - STOP_INTEGRATION_INSTANCE
+          - START_INTEGRATION_INSTANCE
+          - DELETE_INTEGRATION_INSTANCE
+          - CHANGE_PRIVATE_ENDPOINT_OUTBOUND_CONNECTION
+          - ENABLE_PROCESS_AUTOMATION
+          - DISABLE_PROCESS_AUTOMATION
+          - ADD_LOG_ANALYTICS_LOG_GROUP
+          - DELETE_LOG_ANALYTICS_LOG_GROUP
+          - CONVERT_INSTANCE
+          - EXTEND_DATA_RETENTION
+          - DISASTER_RECOVERY_FAILOVER
+          - CREATE_CUSTOM_ENDPOINT
+          - DELETE_CUSTOM_ENDPOINT
+          type: string
+        percentComplete:
+          description: Percentage of the request completed.
+          format: float
+          type: number
+        resources:
+          description: The resources affected by this work request.
+          items:
+            $ref: '#/components/schemas/WorkRequestResource'
+          type: array
+        status:
+          description: Status of current work request.
+          enum:
+          - ACCEPTED
+          - IN_PROGRESS
+          - FAILED
+          - SUCCEEDED
+          - CANCELING
+          - CANCELED
+          type: string
+        timeAccepted:
+          description: 'The date and time the request was created, as described in
+
+            [RFC 3339](https://tools.ietf.org/rfc/rfc3339), section 14.29.
+
+            '
+          format: date-time
+          type: string
+        timeFinished:
+          description: 'The date and time the object was finished, as described in
+
+            [RFC 3339](https://tools.ietf.org/rfc/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        timeStarted:
+          description: 'The date and time the request was started, as described in
+
+            [RFC 3339](https://tools.ietf.org/rfc/rfc3339),
+
+            section 14.29.
+
+            '
+          format: date-time
+          type: string
+      required:
+      - operationType
+      - status
+      - id
+      - compartmentId
+      - resources
+      - percentComplete
+      - timeAccepted
+    DisasterRecoveryDetails:
+      description: 'Disaster recovery details for the integration instance created in the region.
+
+        '
+      properties:
+        crossRegionIntegrationInstanceDetails:
+          $ref: '#/components/schemas/CrossRegionIntegrationInstanceDetails'
+        regionalInstanceUrl:
+          description: Region specific instance url for the integration instance in the region
+          type: string
+        role:
+          description: Role of the integration instance in the region
+          enum:
+          - PRIMARY
+          - SECONDARY
+          - UNKNOWN
+          type: string
+      required:
+      - role
+      - regionalInstanceUrl
+      - crossRegionIntegrationInstanceDetails
+      type: object
+    WorkRequestError:
+      description: Errors related to a specific work request.
+      properties:
+        code:
+          description: A short error code that defines the error, meant for programmatic parsing
+          example: UnknownError
+          type: string
+        message:
+          description: A human-readable error string.
+          example: error validating payload
+          type: string
+        timestamp:
+          description: The date and time the error occurred.
+          example: '2017-07-21T16:11:29Z'
+          format: date-time
+          type: string
+      required:
+      - code
+      - message
+      - timestamp
+      type: object
     IntegrationInstance:
       description: Description of Integration Instance.
       properties:
@@ -1468,6 +1572,233 @@ components:
       - instanceUrl
       - messagePacks
       type: object
+    WorkRequest:
+      description: A description of work request status.
+      properties:
+        compartmentId:
+          description: 'The ocid of the compartment that contains the work request. Work
+
+            requests should be scoped to the same compartment as the resource the
+
+            work request affects. If the work request affects multiple resources,
+
+            and those resources are not in the same compartment, it is up to the
+
+            service team to pick the primary resource whose compartment should be
+
+            used.
+
+            '
+          type: string
+        id:
+          description: The id of the work request.
+          type: string
+        operationType:
+          description: Type of the work request.
+          enum:
+          - CREATE_INTEGRATION_INSTANCE
+          - UPDATE_INTEGRATION_INSTANCE
+          - STOP_INTEGRATION_INSTANCE
+          - START_INTEGRATION_INSTANCE
+          - DELETE_INTEGRATION_INSTANCE
+          - CHANGE_PRIVATE_ENDPOINT_OUTBOUND_CONNECTION
+          - ENABLE_PROCESS_AUTOMATION
+          - DISABLE_PROCESS_AUTOMATION
+          - ADD_LOG_ANALYTICS_LOG_GROUP
+          - DELETE_LOG_ANALYTICS_LOG_GROUP
+          - CONVERT_INSTANCE
+          - EXTEND_DATA_RETENTION
+          - DISASTER_RECOVERY_FAILOVER
+          - CREATE_CUSTOM_ENDPOINT
+          - DELETE_CUSTOM_ENDPOINT
+          type: string
+        percentComplete:
+          description: Percentage of the request completed.
+          format: float
+          type: number
+        resources:
+          description: The resources affected by this work request.
+          items:
+            $ref: '#/components/schemas/WorkRequestResource'
+          type: array
+        status:
+          description: Status of current work request.
+          enum:
+          - ACCEPTED
+          - IN_PROGRESS
+          - FAILED
+          - SUCCEEDED
+          - CANCELING
+          - CANCELED
+          type: string
+        timeAccepted:
+          description: 'The date and time the request was created, as described in
+
+            [RFC 3339](https://tools.ietf.org/rfc/rfc3339), section 14.29.
+
+            '
+          format: date-time
+          type: string
+        timeFinished:
+          description: 'The date and time the object was finished, as described in
+
+            [RFC 3339](https://tools.ietf.org/rfc/rfc3339).
+
+            '
+          format: date-time
+          type: string
+        timeStarted:
+          description: 'The date and time the request was started, as described in
+
+            [RFC 3339](https://tools.ietf.org/rfc/rfc3339),
+
+            section 14.29.
+
+            '
+          format: date-time
+          type: string
+      required:
+      - operationType
+      - status
+      - id
+      - compartmentId
+      - resources
+      - percentComplete
+      - timeAccepted
+    UpdateIntegrationInstanceDetails:
+      description: 'The information to be updated.
+
+
+        Some properties may not be applicable to specific integration types,
+
+        see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
+
+        for details.
+
+        '
+      properties:
+        alternateCustomEndpoints:
+          description: 'A list of alternate custom endpoints to be used for the integration instance URL
+
+            (contact Oracle for alternateCustomEndpoints availability for a specific instance).
+
+            '
+          items:
+            $ref: '#/components/schemas/UpdateCustomEndpointDetails'
+          type: array
+        customEndpoint:
+          $ref: '#/components/schemas/UpdateCustomEndpointDetails'
+        definedTags:
+          additionalProperties:
+            additionalProperties:
+              description: 'The value of the tag. Only string, integer and boolean types are
+
+                supported.
+
+                '
+              type: object
+            description: 'Key-value pair representing predefined tags'' keys and values scoped
+
+              to a namespace.
+
+              Example: `{"bar-key": "value"}`
+
+              '
+            type: object
+          description: 'Usage of predefined tag keys. These predefined keys are scoped to
+
+            namespaces.
+
+            Example: `{"foo-namespace": {"bar-key": "value"}}`
+
+            '
+          type: object
+        displayName:
+          description: Integration Instance Identifier.
+          type: string
+        freeformTags:
+          additionalProperties:
+            type: string
+          description: 'Simple key-value pair that is applied without any predefined name,
+
+            type or scope. Exists for cross-compatibility only.
+
+            Example: `{"bar-key": "value"}`
+
+            '
+          type: object
+        integrationInstanceType:
+          description: 'Standard or Enterprise type,
+
+            Oracle Integration Generation 2 uses ENTERPRISE and STANDARD,
+
+            Oracle Integration 3 uses ENTERPRISEX and STANDARDX
+
+            '
+          enum:
+          - STANDARD
+          - ENTERPRISE
+          - STANDARDX
+          - ENTERPRISEX
+          - HEALTHCARE
+          type: string
+        isByol:
+          description: Bring your own license.
+          type: boolean
+        isFileServerEnabled:
+          default: false
+          description: The file server is enabled or not.
+          type: boolean
+        isVisualBuilderEnabled:
+          description: Visual Builder is enabled or not.
+          type: boolean
+        messagePacks:
+          default: 1
+          description: The number of configured message packs
+          type: integer
+        securityAttributes:
+          additionalProperties:
+            additionalProperties:
+              description: 'Attribute value and mode. Only the String type is supported for value. Mode is currently always "enforce".
+
+                '
+              type: object
+            description: 'Key-value pair representing a security attribute key and value, scoped to a namespace.
+
+
+              Example: `{"MaxEgressCount": {"value": "42", "mode": "enforce"}}`
+
+              '
+            type: object
+          description: 'Security attributes for this resource. Each key is predefined and scoped to a namespace.
+
+            For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
+
+
+            Example: `{"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}`
+
+            '
+          type: object
+      type: object
+    CreateCustomEndpointDetails:
+      description: Details for a custom endpoint for the integration instance (update).
+      properties:
+        certificateSecretId:
+          description: 'Optional OCID of a vault/secret containing a private SSL certificate bundle to be used for the custom hostname.
+
+            All certificates should be stored in a single base64 encoded secret
+
+            Note the update will fail if this is not a valid certificate.
+
+            '
+          type: string
+        hostname:
+          description: A custom hostname to be used for the integration instance URL, in FQDN format.
+          format: hostname
+          type: string
+      required:
+      - hostname
+      type: object
     CreateIntegrationInstanceDetails:
       description: 'The information about new IntegrationInstance.
 
@@ -1626,22 +1957,36 @@ components:
       - isByol
       - messagePacks
       type: object
-    AddOracleManagedCustomEndpointDetails:
-      description: Details for enabling Oracle Managed custom endpoint
+    NetworkEndpointDetails:
+      description: 'Base representation of a network endpoint.
+
+        '
+      discriminator:
+        propertyName: networkEndpointType
       properties:
-        dnsType:
-          description: Type of DNS.
+        networkEndpointType:
+          description: 'The type of network endpoint.
+
+            '
           enum:
-          - OCI
+          - PUBLIC
           type: string
-        dnsZoneName:
-          description: DNS Zone name
-          type: string
-        hostname:
-          description: Oracle managed custom hostname
+          x-obmcs-top-level-enum: '#/definitions/NetworkEndpointType'
+      required:
+      - networkEndpointType
+      type: object
+    ExtendDataRetentionDetails:
+      description: Details for extending data retention for given integration instance
+      properties:
+        dataRetentionPeriod:
+          description: Data retention period set for given integration instance
+          enum:
+          - MONTHS_1
+          - MONTHS_3
+          - MONTHS_6
           type: string
       required:
-      - hostname
+      - dataRetentionPeriod
       type: object
     IntegrationInstanceSummary:
       description: Summary of the Integration Instance.
@@ -1839,241 +2184,6 @@ components:
       - instanceUrl
       - messagePacks
       type: object
-    WorkRequestError:
-      description: Errors related to a specific work request.
-      properties:
-        code:
-          description: A short error code that defines the error, meant for programmatic parsing
-          example: UnknownError
-          type: string
-        message:
-          description: A human-readable error string.
-          example: error validating payload
-          type: string
-        timestamp:
-          description: The date and time the error occurred.
-          example: '2017-07-21T16:11:29Z'
-          format: date-time
-          type: string
-      required:
-      - code
-      - message
-      - timestamp
-      type: object
-    WorkRequestSummary:
-      description: A description of work request status.
-      properties:
-        compartmentId:
-          description: 'The ocid of the compartment that contains the work request. Work
-
-            requests should be scoped to the same compartment as the resource the
-
-            work request affects. If the work request affects multiple resources,
-
-            and those resources are not in the same compartment, it is up to the
-
-            service team to pick the primary resource whose compartment should be
-
-            used.
-
-            '
-          type: string
-        id:
-          description: The id of the work request.
-          type: string
-        operationType:
-          description: Type of the work request.
-          enum:
-          - CREATE_INTEGRATION_INSTANCE
-          - UPDATE_INTEGRATION_INSTANCE
-          - STOP_INTEGRATION_INSTANCE
-          - START_INTEGRATION_INSTANCE
-          - DELETE_INTEGRATION_INSTANCE
-          - CHANGE_PRIVATE_ENDPOINT_OUTBOUND_CONNECTION
-          - ENABLE_PROCESS_AUTOMATION
-          - DISABLE_PROCESS_AUTOMATION
-          - ADD_LOG_ANALYTICS_LOG_GROUP
-          - DELETE_LOG_ANALYTICS_LOG_GROUP
-          - CONVERT_INSTANCE
-          - EXTEND_DATA_RETENTION
-          - DISASTER_RECOVERY_FAILOVER
-          - CREATE_CUSTOM_ENDPOINT
-          - DELETE_CUSTOM_ENDPOINT
-          type: string
-        percentComplete:
-          description: Percentage of the request completed.
-          format: float
-          type: number
-        resources:
-          description: The resources affected by this work request.
-          items:
-            $ref: '#/components/schemas/WorkRequestResource'
-          type: array
-        status:
-          description: Status of current work request.
-          enum:
-          - ACCEPTED
-          - IN_PROGRESS
-          - FAILED
-          - SUCCEEDED
-          - CANCELING
-          - CANCELED
-          type: string
-        timeAccepted:
-          description: 'The date and time the request was created, as described in
-
-            [RFC 3339](https://tools.ietf.org/rfc/rfc3339), section 14.29.
-
-            '
-          format: date-time
-          type: string
-        timeFinished:
-          description: 'The date and time the object was finished, as described in
-
-            [RFC 3339](https://tools.ietf.org/rfc/rfc3339).
-
-            '
-          format: date-time
-          type: string
-        timeStarted:
-          description: 'The date and time the request was started, as described in
-
-            [RFC 3339](https://tools.ietf.org/rfc/rfc3339),
-
-            section 14.29.
-
-            '
-          format: date-time
-          type: string
-      required:
-      - operationType
-      - status
-      - id
-      - compartmentId
-      - resources
-      - percentComplete
-      - timeAccepted
-    WorkRequest:
-      description: A description of work request status.
-      properties:
-        compartmentId:
-          description: 'The ocid of the compartment that contains the work request. Work
-
-            requests should be scoped to the same compartment as the resource the
-
-            work request affects. If the work request affects multiple resources,
-
-            and those resources are not in the same compartment, it is up to the
-
-            service team to pick the primary resource whose compartment should be
-
-            used.
-
-            '
-          type: string
-        id:
-          description: The id of the work request.
-          type: string
-        operationType:
-          description: Type of the work request.
-          enum:
-          - CREATE_INTEGRATION_INSTANCE
-          - UPDATE_INTEGRATION_INSTANCE
-          - STOP_INTEGRATION_INSTANCE
-          - START_INTEGRATION_INSTANCE
-          - DELETE_INTEGRATION_INSTANCE
-          - CHANGE_PRIVATE_ENDPOINT_OUTBOUND_CONNECTION
-          - ENABLE_PROCESS_AUTOMATION
-          - DISABLE_PROCESS_AUTOMATION
-          - ADD_LOG_ANALYTICS_LOG_GROUP
-          - DELETE_LOG_ANALYTICS_LOG_GROUP
-          - CONVERT_INSTANCE
-          - EXTEND_DATA_RETENTION
-          - DISASTER_RECOVERY_FAILOVER
-          - CREATE_CUSTOM_ENDPOINT
-          - DELETE_CUSTOM_ENDPOINT
-          type: string
-        percentComplete:
-          description: Percentage of the request completed.
-          format: float
-          type: number
-        resources:
-          description: The resources affected by this work request.
-          items:
-            $ref: '#/components/schemas/WorkRequestResource'
-          type: array
-        status:
-          description: Status of current work request.
-          enum:
-          - ACCEPTED
-          - IN_PROGRESS
-          - FAILED
-          - SUCCEEDED
-          - CANCELING
-          - CANCELED
-          type: string
-        timeAccepted:
-          description: 'The date and time the request was created, as described in
-
-            [RFC 3339](https://tools.ietf.org/rfc/rfc3339), section 14.29.
-
-            '
-          format: date-time
-          type: string
-        timeFinished:
-          description: 'The date and time the object was finished, as described in
-
-            [RFC 3339](https://tools.ietf.org/rfc/rfc3339).
-
-            '
-          format: date-time
-          type: string
-        timeStarted:
-          description: 'The date and time the request was started, as described in
-
-            [RFC 3339](https://tools.ietf.org/rfc/rfc3339),
-
-            section 14.29.
-
-            '
-          format: date-time
-          type: string
-      required:
-      - operationType
-      - status
-      - id
-      - compartmentId
-      - resources
-      - percentComplete
-      - timeAccepted
-    ChangeIntegrationInstanceCompartmentDetails:
-      description: The information to be updated.
-      properties:
-        compartmentId:
-          description: Compartment Identifier.
-          maxLength: 255
-          minLength: 1
-          type: string
-      type: object
-    CreateCustomEndpointDetails:
-      description: Details for a custom endpoint for the integration instance (update).
-      properties:
-        certificateSecretId:
-          description: 'Optional OCID of a vault/secret containing a private SSL certificate bundle to be used for the custom hostname.
-
-            All certificates should be stored in a single base64 encoded secret
-
-            Note the update will fail if this is not a valid certificate.
-
-            '
-          type: string
-        hostname:
-          description: A custom hostname to be used for the integration instance URL, in FQDN format.
-          format: hostname
-          type: string
-      required:
-      - hostname
-      type: object
     UpdateCustomEndpointDetails:
       description: Details for a custom endpoint for the integration instance (update).
       properties:
@@ -2093,37 +2203,120 @@ components:
       required:
       - hostname
       type: object
-    ExtendDataRetentionDetails:
-      description: Details for extending data retention for given integration instance
+    Error:
+      description: Error Information.
       properties:
-        dataRetentionPeriod:
-          description: Data retention period set for given integration instance
-          enum:
-          - MONTHS_1
-          - MONTHS_3
-          - MONTHS_6
+        code:
+          description: A short error code that defines the error, meant for programmatic parsing.
+          type: string
+        message:
+          description: A human-readable error string.
           type: string
       required:
-      - dataRetentionPeriod
-      type: object
-    OutboundConnection:
-      description: 'Base representation for Outbound Connection (Reverse Connection).
+      - code
+      - message
+    ChangeIntegrationInstanceNetworkEndpointDetails:
+      description: 'Input payload to update an Integration instance endpoint details. An empty payload will clear out any existing configuration.
+
+
+        Some actions may not be applicable to specific integration types,
+
+        see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
+
+        for details.
 
         '
-      discriminator:
-        propertyName: outboundConnectionType
       properties:
-        outboundConnectionType:
-          description: 'The type of Outbound Connection.
+        networkEndpointDetails:
+          $ref: '#/components/schemas/NetworkEndpointDetails'
+    IdcsInfoDetails:
+      description: Information for IDCS access
+      properties:
+        idcsAppDisplayName:
+          description: The IDCS application display name associated with the instance
+          type: string
+        idcsAppId:
+          description: The IDCS application ID associated with the instance
+          type: string
+        idcsAppLocationUrl:
+          description: URL for the location of the IDCS Application (used by IDCS APIs)
+          type: string
+        idcsAppName:
+          description: The IDCS application name associated with the instance
+          type: string
+        instancePrimaryAudienceUrl:
+          description: 'The URL used as the primary audience for integration flows in this instance
+
+            type: string
 
             '
-          enum:
-          - PRIVATE_ENDPOINT
-          - NONE
           type: string
       required:
-      - outboundConnectionType
+      - idcsAppLocationUrl
+      - idcsAppDisplayName
+      - idcsAppId
+      - idcsAppName
+      - instancePrimaryAudienceUrl
       type: object
+    CrossRegionIntegrationInstanceDetails:
+      description: 'Details of integration instance created in cross region for disaster recovery.
+
+        '
+      properties:
+        id:
+          description: Cross region integration instance identifier
+          type: string
+        region:
+          description: Cross region where integration instance is created
+          type: string
+        role:
+          description: Role of the integration instance in the region
+          enum:
+          - PRIMARY
+          - SECONDARY
+          - UNKNOWN
+          type: string
+        timeRoleChanged:
+          description: Time when cross region integration instance role was changed
+          format: date-time
+          type: string
+      type: object
+    ChangeIntegrationInstanceCompartmentDetails:
+      description: The information to be updated.
+      properties:
+        compartmentId:
+          description: Compartment Identifier.
+          maxLength: 255
+          minLength: 1
+          type: string
+      type: object
+    AddLogAnalyticsLogGroupDetails:
+      description: 'Input payload to ADD Log Analytics Log Group for given IntegrationInstance.
+
+        Some actions may not be applicable to specific integration types.
+
+        '
+      properties:
+        logGroupId:
+          description: Log Group ocid.
+          type: string
+      required:
+      - logGroupId
+      type: object
+    ChangePrivateEndpointOutboundConnectionDetails:
+      description: 'Input payload to ADD/REMOVE Private Endpoint Outbound Connection for given IntegrationInstance.
+
+
+        Some actions may not be applicable to specific integration types,
+
+        see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
+
+        for details.
+
+        '
+      properties:
+        privateEndpointOutboundConnection:
+          $ref: '#/components/schemas/OutboundConnection'
     AttachmentDetails:
       description: Description of an attachments for this instance
       properties:
@@ -2156,82 +2349,22 @@ components:
       - targetInstanceUrl
       - targetServiceType
       type: object
-    DisasterRecoveryDetails:
-      description: 'Disaster recovery details for the integration instance created in the region.
-
-        '
+    WorkRequestLogEntry:
+      description: Log entries related to a specific work request.
       properties:
-        crossRegionIntegrationInstanceDetails:
-          $ref: '#/components/schemas/CrossRegionIntegrationInstanceDetails'
-        regionalInstanceUrl:
-          description: Region specific instance url for the integration instance in the region
-          type: string
-        role:
-          description: Role of the integration instance in the region
-          enum:
-          - PRIMARY
-          - SECONDARY
-          - UNKNOWN
-          type: string
-      required:
-      - role
-      - regionalInstanceUrl
-      - crossRegionIntegrationInstanceDetails
-      type: object
-    IdcsInfoDetails:
-      description: Information for IDCS access
-      properties:
-        idcsAppDisplayName:
-          description: The IDCS application display name associated with the instance
-          type: string
-        idcsAppId:
-          description: The IDCS application ID associated with the instance
-          type: string
-        idcsAppLocationUrl:
-          description: URL for the location of the IDCS Application (used by IDCS APIs)
-          type: string
-        idcsAppName:
-          description: The IDCS application name associated with the instance
-          type: string
-        instancePrimaryAudienceUrl:
-          description: 'The URL used as the primary audience for integration flows in this instance
-
-            type: string
-
-            '
-          type: string
-      required:
-      - idcsAppLocationUrl
-      - idcsAppDisplayName
-      - idcsAppId
-      - idcsAppName
-      - instancePrimaryAudienceUrl
-      type: object
-    AddLogAnalyticsLogGroupDetails:
-      description: 'Input payload to ADD Log Analytics Log Group for given IntegrationInstance.
-
-        Some actions may not be applicable to specific integration types.
-
-        '
-      properties:
-        logGroupId:
-          description: Log Group ocid.
-          type: string
-      required:
-      - logGroupId
-      type: object
-    Error:
-      description: Error Information.
-      properties:
-        code:
-          description: A short error code that defines the error, meant for programmatic parsing.
-          type: string
         message:
-          description: A human-readable error string.
+          description: The description of an action that occurred.
+          example: error validating payload
+          type: string
+        timestamp:
+          description: The date and time the log entry occurred.
+          example: '2017-07-21T16:11:29Z'
+          format: date-time
           type: string
       required:
-      - code
       - message
+      - timestamp
+      type: object
     CustomEndpointDetails:
       description: Details for a custom endpoint for the integration instance.
       properties:
@@ -2272,76 +2405,40 @@ components:
       required:
       - hostname
       type: object
-    ChangePrivateEndpointOutboundConnectionDetails:
-      description: 'Input payload to ADD/REMOVE Private Endpoint Outbound Connection for given IntegrationInstance.
-
-
-        Some actions may not be applicable to specific integration types,
-
-        see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
-
-        for details.
-
-        '
-      properties:
-        privateEndpointOutboundConnection:
-          $ref: '#/components/schemas/OutboundConnection'
-    NetworkEndpointDetails:
-      description: 'Base representation of a network endpoint.
+    OutboundConnection:
+      description: 'Base representation for Outbound Connection (Reverse Connection).
 
         '
       discriminator:
-        propertyName: networkEndpointType
+        propertyName: outboundConnectionType
       properties:
-        networkEndpointType:
-          description: 'The type of network endpoint.
+        outboundConnectionType:
+          description: 'The type of Outbound Connection.
 
             '
           enum:
-          - PUBLIC
-          type: string
-          x-obmcs-top-level-enum: '#/definitions/NetworkEndpointType'
-      required:
-      - networkEndpointType
-      type: object
-    WorkRequestLogEntry:
-      description: Log entries related to a specific work request.
-      properties:
-        message:
-          description: The description of an action that occurred.
-          example: error validating payload
-          type: string
-        timestamp:
-          description: The date and time the log entry occurred.
-          example: '2017-07-21T16:11:29Z'
-          format: date-time
+          - PRIVATE_ENDPOINT
+          - NONE
           type: string
       required:
-      - message
-      - timestamp
+      - outboundConnectionType
       type: object
-    CrossRegionIntegrationInstanceDetails:
-      description: 'Details of integration instance created in cross region for disaster recovery.
-
-        '
+    AddOracleManagedCustomEndpointDetails:
+      description: Details for enabling Oracle Managed custom endpoint
       properties:
-        id:
-          description: Cross region integration instance identifier
-          type: string
-        region:
-          description: Cross region where integration instance is created
-          type: string
-        role:
-          description: Role of the integration instance in the region
+        dnsType:
+          description: Type of DNS.
           enum:
-          - PRIMARY
-          - SECONDARY
-          - UNKNOWN
+          - OCI
           type: string
-        timeRoleChanged:
-          description: Time when cross region integration instance role was changed
-          format: date-time
+        dnsZoneName:
+          description: DNS Zone name
           type: string
+        hostname:
+          description: Oracle managed custom hostname
+          type: string
+      required:
+      - hostname
       type: object
     WorkRequestResource:
       description: A resource created or operated on by a work request.
@@ -2379,152 +2476,16 @@ components:
       - actionType
       - entityType
       - identifier
-    ChangeIntegrationInstanceNetworkEndpointDetails:
-      description: 'Input payload to update an Integration instance endpoint details. An empty payload will clear out any existing configuration.
-
-
-        Some actions may not be applicable to specific integration types,
-
-        see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
-
-        for details.
-
-        '
-      properties:
-        networkEndpointDetails:
-          $ref: '#/components/schemas/NetworkEndpointDetails'
-    UpdateIntegrationInstanceDetails:
-      description: 'The information to be updated.
-
-
-        Some properties may not be applicable to specific integration types,
-
-        see [Differences in Instance Management](https://www.oracle.com/pls/topic/lookup?ctx=en/cloud/paas/application-integration&id=INTOO-GUID-931B5E33-4FE6-4997-93E5-8748516F46AA__GUID-176E43D5-4116-4828-8120-B929DF2A6B5E)
-
-        for details.
-
-        '
-      properties:
-        alternateCustomEndpoints:
-          description: 'A list of alternate custom endpoints to be used for the integration instance URL
-
-            (contact Oracle for alternateCustomEndpoints availability for a specific instance).
-
-            '
-          items:
-            $ref: '#/components/schemas/UpdateCustomEndpointDetails'
-          type: array
-        customEndpoint:
-          $ref: '#/components/schemas/UpdateCustomEndpointDetails'
-        definedTags:
-          additionalProperties:
-            additionalProperties:
-              description: 'The value of the tag. Only string, integer and boolean types are
-
-                supported.
-
-                '
-              type: object
-            description: 'Key-value pair representing predefined tags'' keys and values scoped
-
-              to a namespace.
-
-              Example: `{"bar-key": "value"}`
-
-              '
-            type: object
-          description: 'Usage of predefined tag keys. These predefined keys are scoped to
-
-            namespaces.
-
-            Example: `{"foo-namespace": {"bar-key": "value"}}`
-
-            '
-          type: object
-        displayName:
-          description: Integration Instance Identifier.
-          type: string
-        freeformTags:
-          additionalProperties:
-            type: string
-          description: 'Simple key-value pair that is applied without any predefined name,
-
-            type or scope. Exists for cross-compatibility only.
-
-            Example: `{"bar-key": "value"}`
-
-            '
-          type: object
-        integrationInstanceType:
-          description: 'Standard or Enterprise type,
-
-            Oracle Integration Generation 2 uses ENTERPRISE and STANDARD,
-
-            Oracle Integration 3 uses ENTERPRISEX and STANDARDX
-
-            '
-          enum:
-          - STANDARD
-          - ENTERPRISE
-          - STANDARDX
-          - ENTERPRISEX
-          - HEALTHCARE
-          type: string
-        isByol:
-          description: Bring your own license.
-          type: boolean
-        isFileServerEnabled:
-          default: false
-          description: The file server is enabled or not.
-          type: boolean
-        isVisualBuilderEnabled:
-          description: Visual Builder is enabled or not.
-          type: boolean
-        messagePacks:
-          default: 1
-          description: The number of configured message packs
-          type: integer
-        securityAttributes:
-          additionalProperties:
-            additionalProperties:
-              description: 'Attribute value and mode. Only the String type is supported for value. Mode is currently always "enforce".
-
-                '
-              type: object
-            description: 'Key-value pair representing a security attribute key and value, scoped to a namespace.
-
-
-              Example: `{"MaxEgressCount": {"value": "42", "mode": "enforce"}}`
-
-              '
-            type: object
-          description: 'Security attributes for this resource. Each key is predefined and scoped to a namespace.
-
-            For more information, see [Resource Tags](/iaas/Content/General/Concepts/resourcetags.htm).
-
-
-            Example: `{"Oracle-ZPR": {"MaxEgressCount": {"value": "42", "mode": "enforce"}}}`
-
-            '
-          type: object
-      type: object
   parameters:
-    SortByQueryParam:
-      description: 'The field to sort by. Only one sort order may be provided. Default order
-
-        for TIMECREATED is descending. Default order for DISPLAYNAME is
-
-        ascending. If no value is specified TIMECREATED is default.
-
-        '
+    PaginationLimitQueryParam:
+      description: The maximum number of items to return.
       in: query
-      name: sortBy
+      name: limit
       schema:
-        type: string
-        enum:
-        - TIMECREATED
-        - DISPLAYNAME
-        default: TIMECREATED
+        type: integer
+        default: 10
+        maximum: 1000
+        minimum: 1
     LifecycleStateQueryParam:
       description: Life cycle state to query on.
       in: query
@@ -2539,6 +2500,13 @@ components:
         - DELETING
         - DELETED
         - FAILED
+    CompartmentIdQueryParam:
+      description: The ID of the compartment in which to list resources.
+      in: query
+      name: compartmentId
+      required: true
+      schema:
+        type: string
     IntegrationInstanceIdentifierQueryParam:
       description: The Integration Instance identifier to use to filter results
       in: query
@@ -2555,26 +2523,6 @@ components:
         - ASC
         - DESC
         default: ASC
-    IntegrationInstanceIdentifierPathParam:
-      description: Unique Integration Instance identifier.
-      in: path
-      name: integrationInstanceId
-      required: true
-      schema:
-        type: string
-    WorkRequestIdPathParam:
-      description: The ID of the asynchronous request.
-      in: path
-      name: workRequestId
-      required: true
-      schema:
-        type: string
-    RequestIdHeader:
-      description: The client request ID for tracing.
-      in: header
-      name: opc-request-id
-      schema:
-        type: string
     PaginationTokenQueryParam:
       description: The page token representing the page at which to start retrieving results. This is usually retrieved from a previous list call.
       in: query
@@ -2583,19 +2531,22 @@ components:
         type: string
         maxLength: 1024
         minLength: 1
-    DisplayNameQueryParam:
-      description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+    SortByQueryParam:
+      description: 'The field to sort by. Only one sort order may be provided. Default order
 
+        for TIMECREATED is descending. Default order for DISPLAYNAME is
 
-        Example: `My new resource`
+        ascending. If no value is specified TIMECREATED is default.
 
         '
       in: query
-      name: displayName
+      name: sortBy
       schema:
         type: string
-        maxLength: 255
-        minLength: 1
+        enum:
+        - TIMECREATED
+        - DISPLAYNAME
+        default: TIMECREATED
     RetryTokenHeader:
       description: 'A token that uniquely identifies a request so it can be retried in case
 
@@ -2617,22 +2568,6 @@ components:
         type: string
         maxLength: 64
         minLength: 1
-    PaginationLimitQueryParam:
-      description: The maximum number of items to return.
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 10
-        maximum: 1000
-        minimum: 1
-    CompartmentIdQueryParam:
-      description: The ID of the compartment in which to list resources.
-      in: query
-      name: compartmentId
-      required: true
-      schema:
-        type: string
     IfMatchHeader:
       description: 'For optimistic concurrency control. In the PUT or DELETE call
 
@@ -2650,6 +2585,39 @@ components:
       required: false
       schema:
         type: string
+    IntegrationInstanceIdentifierPathParam:
+      description: Unique Integration Instance identifier.
+      in: path
+      name: integrationInstanceId
+      required: true
+      schema:
+        type: string
+    RequestIdHeader:
+      description: The client request ID for tracing.
+      in: header
+      name: opc-request-id
+      schema:
+        type: string
+    WorkRequestIdPathParam:
+      description: The ID of the asynchronous request.
+      in: path
+      name: workRequestId
+      required: true
+      schema:
+        type: string
+    DisplayNameQueryParam:
+      description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
+
+
+        Example: `My new resource`
+
+        '
+      in: query
+      name: displayName
+      schema:
+        type: string
+        maxLength: 255
+        minLength: 1
   responses:
     default:
       description: Unknown Error

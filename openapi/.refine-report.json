@@ -86,7 +86,8 @@
     "oracle-platforms-database-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
     "oracle-platforms-database-openapi.yml: declared missing tag: database",
     "oracle-platforms-integration-openapi.yml: upgraded swagger 2.0 -> OpenAPI 3.2.0",
-    "oracle-platforms-integration-openapi.yml: declared missing tag: integrationInstance"
+    "oracle-platforms-integration-openapi.yml: declared missing tag: integrationInstance",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "oracle-platforms-analytics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
