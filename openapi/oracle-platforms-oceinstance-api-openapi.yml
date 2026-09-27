@@ -800,89 +800,6 @@ components:
       - idcsTenancy
       - adminEmail
       type: object
-    ChangeOceInstanceCompartmentDetails:
-      description: The information about compartment details.
-      properties:
-        compartmentId:
-          description: 'The [OCID](/Content/General/Concepts/identifiers.htm) of the compartment
-
-            into which the OceInstance should be moved.
-
-            '
-          maxLength: 255
-          minLength: 1
-          type: string
-      required:
-      - compartmentId
-      type: object
-    Error:
-      description: Error Information.
-      properties:
-        code:
-          description: A short error code that defines the error, meant for programmatic parsing.
-          type: string
-        message:
-          description: A human-readable error string.
-          type: string
-      required:
-      - code
-      - message
-    IdentityStripeDetails:
-      description: Details of the identity stripe used for OceInstance
-      properties:
-        serviceName:
-          description: 'Name of the Identity Cloud Service instance in My Services to be used.
-
-            Example: `secondstripe`
-
-            '
-          type: string
-        tenancy:
-          description: 'Value of the Identity Cloud Service tenancy.
-
-            Example: `idcs-8416ebdd0d674f84803f4193cce026e9`
-
-            '
-          type: string
-      required:
-      - serviceName
-      - tenancy
-    WorkflowStep:
-      description: Workflow step of workflow monitor.
-      properties:
-        status:
-          description: workflow step status
-          type: string
-        stepName:
-          description: workflow step name
-          type: string
-    WorkflowMonitor:
-      description: The workflow monitor for this work request.
-      properties:
-        resourceName:
-          description: resource name for this work request
-          type: string
-        workflowName:
-          description: workflow name for this work request
-          type: string
-        workflowSteps:
-          description: Workflow step of workflow monitor.
-          items:
-            $ref: '#/components/schemas/WorkflowStep'
-          type: array
-    WorkRequestLogEntry:
-      description: A log message from the execution of a work request.
-      properties:
-        message:
-          description: Human-readable log message.
-          type: string
-        timestamp:
-          description: The time the log message was written. An RFC3339 formatted datetime string
-          format: date-time
-          type: string
-      required:
-      - message
-      - timestamp
     CreateOceInstanceDetails:
       description: The information about new OceInstance.
       properties:
@@ -981,6 +898,39 @@ components:
       - objectStorageNamespace
       - adminEmail
       type: object
+    WorkRequestResource:
+      description: A resource created or operated on by a work request.
+      properties:
+        actionType:
+          description: 'The way in which this resource is affected by the work tracked in the work request.
+
+            A resource being created, updated, or deleted will remain in the IN_PROGRESS state until
+
+            work is complete for that resource at which point it will transition to CREATED, UPDATED,
+
+            or DELETED, respectively.
+
+            '
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          - IN_PROGRESS
+          - FAILED
+          type: string
+        entityType:
+          description: The resource type the work request is affects.
+          type: string
+        entityUri:
+          description: The URI path that the user can do a GET on to access the resource metadata
+          type: string
+        identifier:
+          description: The identifier of the resource the work request affects.
+          type: string
+      required:
+      - actionType
+      - entityType
+      - identifier
     UpdateOceInstanceDetails:
       description: The information to be updated.
       properties:
@@ -1033,6 +983,55 @@ components:
         wafPrimaryDomain:
           description: Web Application Firewall(WAF) primary domain
           type: string
+      type: object
+    Error:
+      description: Error Information.
+      properties:
+        code:
+          description: A short error code that defines the error, meant for programmatic parsing.
+          type: string
+        message:
+          description: A human-readable error string.
+          type: string
+      required:
+      - code
+      - message
+    WorkflowStep:
+      description: Workflow step of workflow monitor.
+      properties:
+        status:
+          description: workflow step status
+          type: string
+        stepName:
+          description: workflow step name
+          type: string
+    WorkRequestLogEntry:
+      description: A log message from the execution of a work request.
+      properties:
+        message:
+          description: Human-readable log message.
+          type: string
+        timestamp:
+          description: The time the log message was written. An RFC3339 formatted datetime string
+          format: date-time
+          type: string
+      required:
+      - message
+      - timestamp
+    ChangeOceInstanceCompartmentDetails:
+      description: The information about compartment details.
+      properties:
+        compartmentId:
+          description: 'The [OCID](/Content/General/Concepts/identifiers.htm) of the compartment
+
+            into which the OceInstance should be moved.
+
+            '
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - compartmentId
       type: object
     OceInstanceSummary:
       description: Summary of the OceInstance.
@@ -1192,92 +1191,45 @@ components:
       - objectStorageNamespace
       - adminEmail
       type: object
-    WorkRequestResource:
-      description: A resource created or operated on by a work request.
+    WorkflowMonitor:
+      description: The workflow monitor for this work request.
       properties:
-        actionType:
-          description: 'The way in which this resource is affected by the work tracked in the work request.
+        resourceName:
+          description: resource name for this work request
+          type: string
+        workflowName:
+          description: workflow name for this work request
+          type: string
+        workflowSteps:
+          description: Workflow step of workflow monitor.
+          items:
+            $ref: '#/components/schemas/WorkflowStep'
+          type: array
+    IdentityStripeDetails:
+      description: Details of the identity stripe used for OceInstance
+      properties:
+        serviceName:
+          description: 'Name of the Identity Cloud Service instance in My Services to be used.
 
-            A resource being created, updated, or deleted will remain in the IN_PROGRESS state until
-
-            work is complete for that resource at which point it will transition to CREATED, UPDATED,
-
-            or DELETED, respectively.
+            Example: `secondstripe`
 
             '
-          enum:
-          - CREATED
-          - UPDATED
-          - DELETED
-          - IN_PROGRESS
-          - FAILED
           type: string
-        entityType:
-          description: The resource type the work request is affects.
-          type: string
-        entityUri:
-          description: The URI path that the user can do a GET on to access the resource metadata
-          type: string
-        identifier:
-          description: The identifier of the resource the work request affects.
+        tenancy:
+          description: 'Value of the Identity Cloud Service tenancy.
+
+            Example: `idcs-8416ebdd0d674f84803f4193cce026e9`
+
+            '
           type: string
       required:
-      - actionType
-      - entityType
-      - identifier
+      - serviceName
+      - tenancy
   parameters:
-    TenancyIdQueryParam:
-      description: The ID of the tenancy in which to list resources.
-      in: query
-      name: tenancyId
-      required: false
-      schema:
-        type: string
-    PaginationLimitQueryParam:
-      description: The maximum number of items to return.
-      in: query
-      name: limit
-      schema:
-        type: integer
-        default: 50
-        maximum: 1000
-        minimum: 1
-    LifecycleStateQueryParam:
-      description: Filter results on lifecycleState.
-      in: query
-      name: lifecycleState
-      schema:
-        type: string
-        enum:
-        - CREATING
-        - UPDATING
-        - ACTIVE
-        - DELETING
-        - DELETED
-        - FAILED
-        default: ACTIVE
-    CompartmentIdQueryParam:
-      description: The ID of the compartment in which to list resources.
-      in: query
-      name: compartmentId
-      required: true
-      schema:
-        type: string
-    SortOrderQueryParam:
-      description: The sort order to use, either 'asc' or 'desc'.
-      in: query
-      name: sortOrder
-      schema:
-        type: string
-        enum:
-        - ASC
-        - DESC
-        default: ASC
-    OceInstanceIdentifierPathParam:
-      description: unique OceInstance identifier
-      in: path
-      name: oceInstanceId
-      required: true
+    RequestIdHeader:
+      description: The client request ID for tracing.
+      in: header
+      name: opc-request-id
       schema:
         type: string
     PaginationTokenQueryParam:
@@ -1289,37 +1241,13 @@ components:
         default: 'null'
         maxLength: 1024
         minLength: 1
-    SortByQueryParam:
-      description: 'The field to sort by. Only one sort order may be provided. Default order for timeCreated is descending. Default order for displayName is ascending. If no value is specified timeCreated is default.
-
-        '
-      in: query
-      name: sortBy
+    OceInstanceIdentifierPathParam:
+      description: unique OceInstance identifier
+      in: path
+      name: oceInstanceId
+      required: true
       schema:
         type: string
-        enum:
-        - timeCreated
-        - displayName
-        default: timeCreated
-    RetryTokenHeader:
-      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
-
-        server error without risk of executing that same action again. Retry tokens expire after 24
-
-        hours, but can be invalidated before then due to conflicting operations. For example, if a resource
-
-        has been deleted and purged from the system, then a retry of the original creation request
-
-        might be rejected.
-
-        '
-      in: header
-      name: opc-retry-token
-      required: false
-      schema:
-        type: string
-        maxLength: 64
-        minLength: 1
     ResourceIdQueryParam:
       description: The resource Identifier for which to list resources.
       in: query
@@ -1345,19 +1273,51 @@ components:
       required: false
       schema:
         type: string
-    RequestIdHeader:
-      description: The client request ID for tracing.
-      in: header
-      name: opc-request-id
+    SortOrderQueryParam:
+      description: The sort order to use, either 'asc' or 'desc'.
+      in: query
+      name: sortOrder
       schema:
         type: string
-    WorkRequestIdPathParam:
-      description: The ID of the asynchronous request.
-      in: path
-      name: workRequestId
-      required: true
+        enum:
+        - ASC
+        - DESC
+        default: ASC
+    LifecycleStateQueryParam:
+      description: Filter results on lifecycleState.
+      in: query
+      name: lifecycleState
       schema:
         type: string
+        enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - DELETING
+        - DELETED
+        - FAILED
+        default: ACTIVE
+    SortByQueryParam:
+      description: 'The field to sort by. Only one sort order may be provided. Default order for timeCreated is descending. Default order for displayName is ascending. If no value is specified timeCreated is default.
+
+        '
+      in: query
+      name: sortBy
+      schema:
+        type: string
+        enum:
+        - timeCreated
+        - displayName
+        default: timeCreated
+    PaginationLimitQueryParam:
+      description: The maximum number of items to return.
+      in: query
+      name: limit
+      schema:
+        type: integer
+        default: 50
+        maximum: 1000
+        minimum: 1
     DisplayNameQueryParam:
       description: 'A user-friendly name. Does not have to be unique, and it''s changeable.
 
@@ -1372,6 +1332,46 @@ components:
         type: string
         maxLength: 255
         minLength: 1
+    RetryTokenHeader:
+      description: 'A token that uniquely identifies a request so it can be retried in case of a timeout or
+
+        server error without risk of executing that same action again. Retry tokens expire after 24
+
+        hours, but can be invalidated before then due to conflicting operations. For example, if a resource
+
+        has been deleted and purged from the system, then a retry of the original creation request
+
+        might be rejected.
+
+        '
+      in: header
+      name: opc-retry-token
+      required: false
+      schema:
+        type: string
+        maxLength: 64
+        minLength: 1
+    CompartmentIdQueryParam:
+      description: The ID of the compartment in which to list resources.
+      in: query
+      name: compartmentId
+      required: true
+      schema:
+        type: string
+    WorkRequestIdPathParam:
+      description: The ID of the asynchronous request.
+      in: path
+      name: workRequestId
+      required: true
+      schema:
+        type: string
+    TenancyIdQueryParam:
+      description: The ID of the tenancy in which to list resources.
+      in: query
+      name: tenancyId
+      required: false
+      schema:
+        type: string
   responses:
     default:
       description: Unknown Error

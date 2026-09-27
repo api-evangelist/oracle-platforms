@@ -1,5 +1,6 @@
 aid: oracle-platforms
 name: Oracle Platforms
+kind: topic
 # x-type: index -- an API Evangelist INDEX, not a company (roadmap#402). This record is
 # this catalog's own aggregation of other people's APIs. score.rb's NON_PROVIDER_X_TYPES
 # excludes it from rating and from provider lists; the page stays, because it is a real
@@ -501,7 +502,7 @@ tags:
 - Enterprise Software
 - Infrastructure-as-a-Service
 - Integration
-- Machine-Learning
+- Machine Learning
 - Platform-as-a-Service
 - Software-as-a-Service
 tags_raw:
@@ -514,6 +515,7 @@ tags_raw:
 - Machine Learning
 - Platform as a Service
 - SaaS
+- Machine-Learning
 common:
 - type: CapabilityMap
   url: capabilities/oracle-platforms-capability-edges.yml
