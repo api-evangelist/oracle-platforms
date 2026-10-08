@@ -517,6 +517,8 @@ tags_raw:
 - SaaS
 - Machine-Learning
 common:
+- type: FinOps
+  url: finops/oracle-platforms-finops.yml
 - type: CapabilityMap
   url: capabilities/oracle-platforms-capability-edges.yml
   name: Oracle Platforms Business Capability Map
