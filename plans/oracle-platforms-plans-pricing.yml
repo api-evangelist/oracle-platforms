@@ -75,3 +75,36 @@ plan_count: 4
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - metered
+  - negotiated
+  units: []
+  plans:
+  - name: Oracle Cloud Free Tier
+    access: freemium
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Pay As You Go
+    access: other
+    model: metered
+    model_how: stated
+    units: []
+    periods: []
+  - name: Annual Universal Credits
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Bring Your Own License
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
