@@ -1,4 +1,4 @@
-# Oracle Platforms (oracle-platforms)
+# oracle-platforms
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,101 +64,32 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-A collection of APIs and services provided by Oracle's cloud and enterprise platforms.
+## oracle-platforms on APIs.io
 
-**APIs.json:** [apis.yml](https://raw.githubusercontent.com/api-evangelist/oracle-platforms/refs/heads/main/apis.yml)
+Everything profiled for oracle-platforms is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/oracle-platforms/](https://apis.io/providers/oracle-platforms/)** — or go straight to one of the APIs or properties below.
 
-## Scope
+### Published properties
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Tags
+#### MCP servers (1)
 
-- Analytics
-- Cloud Computing
-- Database
-- Enterprise Software
-- Infrastructure as a Service
-- Integration
-- Machine Learning
-- Platform as a Service
-- SaaS
+Model Context Protocol servers that expose the API to agents.
 
-## Timestamps
+- [oracle-platforms-mcp.yml](https://apis.io/servers/oracle-platforms/oracle-platforms-mcp-yml/)
 
-- **Created:** 2024-01-15
-- **Modified:** 2026-03-16
+## API Evangelist rating
 
-## APIs
+Not yet rated. See [apis.io/providers/oracle-platforms/](https://apis.io/providers/oracle-platforms/).
 
-### Oracle Cloud Infrastructure (OCI) REST API
+## How this profile is made
 
-Comprehensive REST API for managing Oracle Cloud Infrastructure resources including compute, storage, networking, and databases.
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-**Human URL:** https://docs.oracle.com/en-us/iaas/api/
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for oracle-platforms: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-**Base URL:** https://iaas.{region}.oraclecloud.com
+## Open an issue
 
-### Oracle Autonomous Database API
-
-API for managing Oracle Autonomous Database instances with self-driving, self-securing, and self-repairing capabilities.
-
-**Human URL:** https://docs.oracle.com/en/cloud/paas/autonomous-database/
-
-**Base URL:** https://database.{region}.oraclecloud.com
-
-### Oracle Integration Cloud API
-
-REST API for Oracle Integration Cloud enabling application integration, process automation, and API management.
-
-**Human URL:** https://docs.oracle.com/en/cloud/paas/integration-cloud/
-
-**Base URL:** https://integration.ocp.oraclecloud.com
-
-### Oracle Content Management API
-
-RESTful API for Oracle Content Management providing digital asset management and content collaboration.
-
-**Human URL:** https://docs.oracle.com/en/cloud/paas/content-cloud/
-
-**Base URL:** https://www.oraclecloud.com/content/api
-
-### Oracle Fusion Cloud ERP API
-
-REST API for Oracle Fusion Cloud ERP providing access to financial management, procurement, and project management capabilities.
-
-**Human URL:** https://docs.oracle.com/en/cloud/saas/financials/
-
-**Base URL:** https://servername.fa.us2.oraclecloud.com
-
-### Oracle Analytics Cloud API
-
-RESTful API for Oracle Analytics Cloud enabling data visualization, analytics, and business intelligence operations.
-
-**Human URL:** https://docs.oracle.com/en/cloud/paas/analytics-cloud/
-
-**Base URL:** https://{instanceName}.analytics.ocp.oraclecloud.com
-
-### Oracle Cloud Infrastructure Data Science API
-
-API for managing machine learning models, notebook sessions, and data science projects.
-
-**Human URL:** https://docs.oracle.com/en-us/iaas/data-science/
-
-**Base URL:** https://datascience.{region}.oraclecloud.com
-
-### Oracle APEX REST APIs
-
-RESTful services for Oracle Application Express enabling low-code application development.
-
-**Human URL:** https://apex.oracle.com/api
-
-**Base URL:** https://{instance}.adb.{region}.oraclecloudapps.com
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/oracle-platforms/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
