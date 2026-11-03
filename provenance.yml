@@ -338,6 +338,9 @@ artifacts:
   skills/oracle-platforms-track-work-requests.md:
     method: generated
     evidence: declared in the artifact
+  sla/oracle-platforms-sla.yml:
+    method: generated
+    evidence: declared in the artifact
   well-known/oracle-platforms-well-known.yml:
     method: unknown
     evidence: no authorship recorded
