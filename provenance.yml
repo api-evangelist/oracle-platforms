@@ -11,6 +11,12 @@ artifacts:
   capabilities/oracle-platforms-capability-edges.yml:
     method: unknown
     evidence: no authorship recorded
+  certification/observations-2026-11-11.jsonl:
+    method: unknown
+    evidence: no authorship recorded
+  certification/status.yml:
+    method: unknown
+    evidence: no authorship recorded
   changelog/oracle-platforms-changelog.yml:
     method: searched
     evidence: declared in the artifact
@@ -23,8 +29,17 @@ artifacts:
   conventions/oracle-platforms-conventions.yml:
     method: derived
     evidence: declared in the artifact
+  data-license/oracle-platforms-data-license.yml:
+    method: harvested
+    evidence: declared in the artifact
   data-model/oracle-platforms-data-model.yml:
     method: derived
+    evidence: declared in the artifact
+  deprecation/oracle-platforms-deprecation-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
+  eligibility/oracle-platforms-eligibility.yml:
+    method: harvested
     evidence: declared in the artifact
   errors/oracle-platforms-problem-types.yml:
     method: searched
@@ -305,6 +320,9 @@ artifacts:
   plans/oracle-platforms-plans-pricing.yml:
     method: searched
     evidence: declared in the artifact
+  privacy/oracle-platforms-privacy-policy.yml:
+    method: harvested
+    evidence: declared in the artifact
   rate-limits/oracle-platforms-rate-limits.yml:
     method: searched
     evidence: declared in the artifact
@@ -340,6 +358,9 @@ artifacts:
     evidence: declared in the artifact
   sla/oracle-platforms-sla.yml:
     method: generated
+    evidence: declared in the artifact
+  terms/oracle-platforms-terms-of-service.yml:
+    method: harvested
     evidence: declared in the artifact
   well-known/oracle-platforms-well-known.yml:
     method: unknown
