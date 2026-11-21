@@ -356,9 +356,6 @@ artifacts:
   skills/oracle-platforms-track-work-requests.md:
     method: generated
     evidence: declared in the artifact
-  sla/oracle-platforms-sla.yml:
-    method: generated
-    evidence: declared in the artifact
   terms/oracle-platforms-terms-of-service.yml:
     method: harvested
     evidence: declared in the artifact
